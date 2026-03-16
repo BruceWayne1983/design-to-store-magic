@@ -18,51 +18,51 @@ const ProductHero = () => {
   const savings: Record<string, string> = { "1": "10%", "4": "15%", "6": "20%" };
 
   return (
-    <section className="w-full bg-background py-16 px-16">
-      <div className="max-w-[1280px] mx-auto flex gap-16">
+    <section className="w-full bg-background py-8 px-4 md:py-16 md:px-8 lg:px-16">
+      <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16">
         {/* Image Gallery */}
-        <div className="flex flex-col gap-4 w-1/2">
-          <div className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-8">
+        <div className="flex flex-col gap-4 w-full lg:w-1/2">
+          <div className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-4 md:p-8">
             <img src={images[selectedImage]} alt="GLYCO8" className="w-full h-full object-contain" />
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2 md:gap-3 overflow-x-auto">
             {images.map((img, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(i)}
-                className={`w-20 h-20 rounded border-2 overflow-hidden bg-secondary flex items-center justify-center p-2 transition-colors ${
+                className={`w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden bg-secondary flex items-center justify-center p-1.5 md:p-2 transition-colors flex-shrink-0 ${
                   selectedImage === i ? "border-primary" : "border-border"
                 }`}
               >
                 <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain" />
               </button>
             ))}
-            <button className="w-20 h-20 rounded border-2 border-border flex items-center justify-center text-muted-foreground hover:border-primary transition-colors">
+            <button className="w-16 h-16 md:w-20 md:h-20 rounded border-2 border-border flex items-center justify-center text-muted-foreground hover:border-primary transition-colors flex-shrink-0">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
 
         {/* Product Info */}
-        <div className="flex flex-col gap-6 w-1/2">
+        <div className="flex flex-col gap-5 md:gap-6 w-full lg:w-1/2">
           <div>
-            <h1 className="text-4xl font-black text-foreground uppercase tracking-tight">GLYCO8™</h1>
-            <p className="text-xl text-muted-foreground mt-1">Advanced Fast-Acting Glucose Disposal Agent</p>
+            <h1 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight">GLYCO8™</h1>
+            <p className="text-lg md:text-xl text-muted-foreground mt-1">Advanced Fast-Acting Glucose Disposal Agent</p>
           </div>
 
           <ul className="flex flex-col gap-2">
             <li className="flex items-center gap-2 text-foreground text-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-foreground" /> Accelerates Glucose Clearance
+              <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" /> Accelerates Glucose Clearance
             </li>
             <li className="flex items-center gap-2 text-foreground text-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-foreground" /> Enhances Carb Partitioning
+              <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" /> Enhances Carb Partitioning
             </li>
             <li className="flex items-center gap-2 text-foreground text-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-foreground" /> Supports Superior Muscle Fullness
+              <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" /> Supports Superior Muscle Fullness
             </li>
           </ul>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="text-2xl font-black text-foreground">
               {purchaseType === "subscribe" ? prices[frequency] : "£39.99"}
             </span>
@@ -76,14 +76,9 @@ const ProductHero = () => {
           </div>
 
           {/* Subscribe & Save */}
-          <div className="border border-border rounded-lg p-5 flex flex-col gap-4">
+          <div className="border border-border rounded-lg p-4 md:p-5 flex flex-col gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                checked={purchaseType === "subscribe"}
-                onChange={() => setPurchaseType("subscribe")}
-                className="accent-primary"
-              />
+              <input type="radio" checked={purchaseType === "subscribe"} onChange={() => setPurchaseType("subscribe")} className="accent-primary" />
               <div>
                 <span className="text-sm font-semibold text-foreground">Subscribe & Save</span>
                 <span className="text-xs text-muted-foreground ml-2">Save up to 20%</span>
@@ -101,9 +96,7 @@ const ProductHero = () => {
                       key={f}
                       onClick={() => setFrequency(f)}
                       className={`flex-1 py-2 text-center text-xs font-medium rounded transition-colors ${
-                        frequency === f
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-secondary text-foreground hover:bg-secondary/80"
+                        frequency === f ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"
                       }`}
                     >
                       {f} week{f !== "1" ? "s" : ""}
@@ -116,12 +109,7 @@ const ProductHero = () => {
             )}
 
             <label className="flex items-center gap-2 cursor-pointer border-t border-border pt-4">
-              <input
-                type="radio"
-                checked={purchaseType === "onetime"}
-                onChange={() => setPurchaseType("onetime")}
-                className="accent-primary"
-              />
+              <input type="radio" checked={purchaseType === "onetime"} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
               <div>
                 <span className="text-sm font-semibold text-foreground">One-time</span>
                 <span className="text-sm text-muted-foreground ml-2">£39.99</span>
@@ -140,10 +128,7 @@ const ProductHero = () => {
 
           {/* Accordions */}
           <div className="flex flex-col border-t border-border">
-            <button
-              className="flex items-center justify-between py-4 border-b border-border"
-              onClick={() => setSuggestedUseOpen(!suggestedUseOpen)}
-            >
+            <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuggestedUseOpen(!suggestedUseOpen)}>
               <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Suggested Use</span>
               <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${suggestedUseOpen ? "rotate-180" : ""}`} />
             </button>
@@ -152,10 +137,7 @@ const ProductHero = () => {
                 Take 2 capsules with your highest carbohydrate meal of the day. For enhanced results, take an additional 2 capsules with a second high-carb meal. Do not exceed 4 capsules per day.
               </p>
             )}
-            <button
-              className="flex items-center justify-between py-4 border-b border-border"
-              onClick={() => setSuppFactsOpen(!suppFactsOpen)}
-            >
+            <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuppFactsOpen(!suppFactsOpen)}>
               <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Supplement Facts</span>
               <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${suppFactsOpen ? "rotate-180" : ""}`} />
             </button>

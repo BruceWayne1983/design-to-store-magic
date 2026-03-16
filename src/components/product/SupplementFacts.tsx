@@ -11,17 +11,17 @@ const rows = [
 ];
 
 const SupplementFacts = () => (
-  <section className="w-full bg-secondary py-28 px-16">
-    <div className="max-w-[1000px] mx-auto flex flex-col gap-12">
+  <section className="w-full bg-secondary py-16 px-4 md:py-28 md:px-8 lg:px-16">
+    <div className="max-w-[1000px] mx-auto flex flex-col gap-8 md:gap-12">
       <SectionHeader heading="Clinically dosed formula" />
       <div className="bg-background border border-border rounded-lg overflow-hidden">
-        <div className="p-6 border-b border-border flex items-center justify-between">
-          <div>
-            <h3 className="text-xl font-black text-foreground uppercase">GLYCO8™ <span className="font-normal text-base text-muted-foreground">Supplement Facts</span></h3>
-          </div>
+        <div className="p-4 md:p-6 border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <h3 className="text-lg md:text-xl font-black text-foreground uppercase">GLYCO8™ <span className="font-normal text-sm md:text-base text-muted-foreground">Supplement Facts</span></h3>
           <span className="text-xs text-muted-foreground">Manufactured in a GMP Certified Facility</span>
         </div>
-        <div className="overflow-x-auto">
+
+        {/* Desktop table */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border bg-secondary/50">
@@ -46,6 +46,24 @@ const SupplementFacts = () => (
             </tbody>
           </table>
         </div>
+
+        {/* Mobile card list */}
+        <div className="md:hidden divide-y divide-border">
+          {rows.map((r) => (
+            <div key={r.ingredient} className="p-4 flex flex-col gap-1.5">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="font-semibold text-foreground text-sm">{r.ingredient}</span>
+                  {r.spec && <span className="text-muted-foreground text-xs ml-1">{r.spec}</span>}
+                </div>
+                <span className="text-sm font-semibold text-foreground flex-shrink-0">{r.dose}</span>
+              </div>
+              <p className="text-xs text-muted-foreground">{r.purpose}</p>
+              {r.flag && <span className="text-xs text-primary font-semibold">{r.flag}</span>}
+            </div>
+          ))}
+        </div>
+
         <div className="p-4 border-t border-border">
           <p className="text-xs text-muted-foreground">
             <strong>Other ingredients:</strong> Polyethylene Glycol, Microcrystalline Cellulose, Magnesium Stearate, Silicon Dioxide, Vegetable Capsule.
