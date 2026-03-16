@@ -115,9 +115,9 @@ const Shop = () => {
       <section className="w-full bg-background py-28 px-16">
         <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
           <SectionHeader tagline="Bestsellers" heading="Products" text="Our most popular science-backed formulas" />
-          <div className="grid grid-cols-3 gap-8">
-            {products.map((p, i) => (
-              <div key={`${p.name}-${i}`} className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+          <div className="grid grid-cols-4 gap-8">
+            {products.map((p) => (
+              <Link to={`/product/${p.slug}`} key={p.slug} className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="w-full aspect-square bg-secondary flex items-center justify-center p-8">
                   <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
                 </div>
@@ -126,7 +126,7 @@ const Shop = () => {
                   <p className="text-sm text-muted-foreground">{p.desc}</p>
                   <span className="text-lg font-bold text-foreground mt-1">{p.price}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
