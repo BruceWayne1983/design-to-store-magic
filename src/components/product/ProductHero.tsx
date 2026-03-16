@@ -2,27 +2,18 @@ import { useState } from "react";
 import { ChevronDown, ChevronRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
-import glyco8Hero from "@/assets/glyco8-hero.png";
-import glyco8Capsules from "@/assets/glyco8-capsules.png";
-import glyco8Label from "@/assets/glyco8-label.png";
-import glyco8 from "@/assets/glyco8.png";
+import type { ProductData } from "@/data/products";
 
-const images = [glyco8Hero, glyco8Capsules, glyco8Label, glyco8];
-
-const ProductHero = () => {
+const ProductHero = ({ product }: { product: ProductData }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("subscribe");
   const [frequency, setFrequency] = useState<"1" | "4" | "6">("6");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
 
-  const prices: Record<string, string> = { "1": "£35.99", "4": "£33.99", "6": "£31.99" };
-  const savings: Record<string, string> = { "1": "10%", "4": "15%", "6": "20%" };
-
   return (
     <section className="w-full bg-background py-8 px-4 md:py-16 md:px-8 lg:px-16">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16">
-        {/* Image Gallery */}
         <ScrollReveal className="flex flex-col gap-4 w-full lg:w-1/2" variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } }}>
           <motion.div
             className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-4 md:p-8 overflow-hidden"
@@ -31,19 +22,12 @@ const ProductHero = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.35 }}
           >
-            <img src={images[selectedImage]} alt="GLYCO8" className="w-full h-full object-contain" />
+            <img src={product.images[selectedImage]} alt={product.name} className="w-full h-full object-contain" />
           </motion.div>
           <div className="flex gap-2 md:gap-3 overflow-x-auto">
-            {images.map((img, i) => (
-              <motion.button
-                key={i}
-                onClick={() => setSelectedImage(i)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden bg-secondary flex items-center justify-center p-1.5 md:p-2 transition-colors flex-shrink-0 ${
-                  selectedImage === i ? "border-primary" : "border-border"
-                }`}
-              >
+            {product.images.map((img, i) => (
+              <motion.button key={i} onClick={() => setSelectedImage(i)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                className={`w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden bg-secondary flex items-center justify-center p-1.5 md:p-2 transition-colors flex-shrink-0 ${selectedImage === i ? "border-primary" : "border-border"}`}>
                 <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain" />
               </motion.button>
             ))}
@@ -53,36 +37,28 @@ const ProductHero = () => {
           </div>
         </ScrollReveal>
 
-        {/* Product Info */}
         <ScrollReveal className="flex flex-col gap-5 md:gap-6 w-full lg:w-1/2" variants={{ hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } }} delay={0.15}>
           <div>
-            <h1 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight">GLYCO8™</h1>
-            <p className="text-lg md:text-xl text-muted-foreground mt-1">Advanced Fast-Acting Glucose Disposal Agent</p>
+            <h1 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight">{product.name}</h1>
+            <p className="text-lg md:text-xl text-muted-foreground mt-1">{product.tagline}</p>
           </div>
 
           <ul className="flex flex-col gap-2">
-            <li className="flex items-center gap-2 text-foreground text-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" /> Accelerates Glucose Clearance
-            </li>
-            <li className="flex items-center gap-2 text-foreground text-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" /> Enhances Carb Partitioning
-            </li>
-            <li className="flex items-center gap-2 text-foreground text-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" /> Supports Superior Muscle Fullness
-            </li>
+            {product.benefits.map((b) => (
+              <li key={b} className="flex items-center gap-2 text-foreground text-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" /> {b}
+              </li>
+            ))}
           </ul>
 
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-2xl font-black text-foreground">
-              {purchaseType === "subscribe" ? prices[frequency] : "£39.99"}
+              {purchaseType === "subscribe" ? product.prices[frequency] : product.price}
             </span>
             <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-primary text-primary" />)}
             </div>
-            <span className="text-sm text-primary font-semibold">16</span>
-            <span className="text-sm text-muted-foreground">· 18 Reviews</span>
+            <span className="text-sm text-muted-foreground">· Reviews</span>
           </div>
 
           <div className="border border-border rounded-lg p-4 md:p-5 flex flex-col gap-4">
@@ -93,81 +69,44 @@ const ProductHero = () => {
                 <span className="text-xs text-muted-foreground ml-2">Save up to 20%</span>
               </div>
             </label>
-
             {purchaseType === "subscribe" && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="flex flex-col gap-3 pl-6"
-              >
-                <p className="text-xs text-muted-foreground">
-                  Save up to {savings[frequency]}. New customers 60+ 1. Deliver automatically. Pause or cancel anytime.
-                </p>
+              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="flex flex-col gap-3 pl-6">
+                <p className="text-xs text-muted-foreground">Save up to {product.savings[frequency]}. Deliver automatically. Pause or cancel anytime.</p>
                 <div className="flex gap-2">
                   {(["1", "4", "6"] as const).map((f) => (
-                    <button
-                      key={f}
-                      onClick={() => setFrequency(f)}
-                      className={`flex-1 py-2 text-center text-xs font-medium rounded transition-colors ${
-                        frequency === f ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"
-                      }`}
-                    >
-                      {f} week{f !== "1" ? "s" : ""}
-                      <br />
-                      <span className="text-[10px]">Save {savings[f]}</span>
+                    <button key={f} onClick={() => setFrequency(f)}
+                      className={`flex-1 py-2 text-center text-xs font-medium rounded transition-colors ${frequency === f ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"}`}>
+                      {f} week{f !== "1" ? "s" : ""}<br /><span className="text-[10px]">Save {product.savings[f]}</span>
                     </button>
                   ))}
                 </div>
               </motion.div>
             )}
-
             <label className="flex items-center gap-2 cursor-pointer border-t border-border pt-4">
               <input type="radio" checked={purchaseType === "onetime"} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
               <div>
                 <span className="text-sm font-semibold text-foreground">One-time</span>
-                <span className="text-sm text-muted-foreground ml-2">£39.99</span>
+                <span className="text-sm text-muted-foreground ml-2">{product.price}</span>
               </div>
             </label>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded"
-          >
+          <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+            className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded">
             Add to basket
           </motion.button>
-
-          <p className="text-xs text-muted-foreground text-center">
-            Pay in 4 interest-free instalments of £10.19 with <span className="underline text-foreground">Klarna</span>{" "}
-            <span className="underline text-primary">learn more</span>
-          </p>
 
           <div className="flex flex-col border-t border-border">
             <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuggestedUseOpen(!suggestedUseOpen)}>
               <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Suggested Use</span>
-              <motion.div animate={{ rotate: suggestedUseOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
-                <ChevronDown className="w-4 h-4 text-muted-foreground" />
-              </motion.div>
+              <motion.div animate={{ rotate: suggestedUseOpen ? 180 : 0 }} transition={{ duration: 0.25 }}><ChevronDown className="w-4 h-4 text-muted-foreground" /></motion.div>
             </button>
-            {suggestedUseOpen && (
-              <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4">
-                Take 2 capsules with your highest carbohydrate meal of the day. For enhanced results, take an additional 2 capsules with a second high-carb meal. Do not exceed 4 capsules per day.
-              </motion.p>
-            )}
+            {suggestedUseOpen && <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4">{product.suggestedUse}</motion.p>}
             <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuppFactsOpen(!suppFactsOpen)}>
               <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Supplement Facts</span>
-              <motion.div animate={{ rotate: suppFactsOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
-                <ChevronDown className="w-4 h-4 text-muted-foreground" />
-              </motion.div>
+              <motion.div animate={{ rotate: suppFactsOpen ? 180 : 0 }} transition={{ duration: 0.25 }}><ChevronDown className="w-4 h-4 text-muted-foreground" /></motion.div>
             </button>
-            {suppFactsOpen && (
-              <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4">
-                <p>Serving Size: 2 Capsules · Servings Per Container: 30</p>
-                <p className="mt-2">Dihydroberberine 400mg · Na-R-Alpha Lipoic Acid 300mg · Cinnamon Bark Extract 300mg · Banaba Extract 330mg · Bitter Melon Extract 300mg · GYCo6o 300mg · Chromium 300mcg · VanaBerry 2mg</p>
-              </motion.div>
-            )}
+            {suppFactsOpen && <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4"><p>{product.supplementSummary}</p></motion.div>}
           </div>
         </ScrollReveal>
       </div>
