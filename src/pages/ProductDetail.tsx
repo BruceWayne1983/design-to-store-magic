@@ -18,6 +18,7 @@ const ProductDetail = () => (
     <WhyDifferent />
     <HowItWorks />
     <IngredientBreakdown />
+    <IngredientMechanisms />
     <SupplementFacts />
     <MechanismSection />
     <ProductTestimonials />
