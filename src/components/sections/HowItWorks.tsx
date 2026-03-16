@@ -1,26 +1,24 @@
 import SectionHeader from "../SectionHeader";
+import { Beaker, Shield, TrendingUp } from "lucide-react";
 
-const steps = [
-  { step: "Step 1", title: "Assess your nutrition", desc: "Take our quick assessment to understand your performance needs" },
-  { step: "Step 2", title: "Select your protocol", desc: "Choose a science-backed protocol tailored to your goals" },
-  { step: "Step 3", title: "Optimize & perform", desc: "Track progress and optimize your nutrition over time" },
+const features = [
+  { icon: Beaker, title: "Clinical Dosing", desc: "Clinically proven protocols with evidence-backed ingredients." },
+  { icon: Shield, title: "Trademarked Ingredients", desc: "Premium performance compounds for optimal bioavailability." },
+  { icon: TrendingUp, title: "UK Regulatory Compliance", desc: "Stringent quality assurance and testing standards." },
 ];
 
 const HowItWorks = () => (
-  <section className="w-full bg-background py-28 px-16">
-    <div className="max-w-[1280px] mx-auto flex flex-col gap-20">
-      <SectionHeader tagline="Process" heading="How it works" text="Simple steps to peak performance nutrition" />
-      <div className="grid grid-cols-3 gap-8">
-        {steps.map((s) => (
-          <div key={s.step} className="flex flex-col gap-6">
-            <div className="text-sm font-semibold text-muted-foreground">{s.step}</div>
-            <div className="w-full h-[200px] bg-muted flex items-center justify-center">
-              <div className="w-10 h-10 bg-muted-foreground/20 rounded" />
+  <section className="w-full bg-secondary py-28 px-16">
+    <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
+      <SectionHeader heading="Formulated From Mechanism, Not Marketing." />
+      <div className="grid grid-cols-3 gap-12">
+        {features.map((f) => (
+          <div key={f.title} className="flex flex-col items-center text-center gap-4">
+            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+              <f.icon className="w-7 h-7 text-primary" />
             </div>
-            <div>
-              <h5 className="text-xl font-bold text-foreground">{s.title}</h5>
-              <p className="text-base text-muted-foreground mt-2">{s.desc}</p>
-            </div>
+            <h4 className="text-lg font-bold text-primary">{f.title}</h4>
+            <p className="text-sm text-muted-foreground max-w-[260px]">{f.desc}</p>
           </div>
         ))}
       </div>

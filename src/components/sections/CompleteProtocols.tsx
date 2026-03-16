@@ -1,30 +1,34 @@
 import SectionHeader from "../SectionHeader";
-import { ChevronRight } from "lucide-react";
+import glyco8 from "@/assets/glyco8.png";
+import fusionBlack from "@/assets/fusion-black.png";
+import vascul8 from "@/assets/vascul8.png";
 
 const protocols = [
-  { name: "Pre-workout stack", desc: "Everything you need before training" },
-  { name: "Athletic recovery", desc: "Comprehensive post-training protocol" },
-  { name: "Daily performance", desc: "Foundation protocol for every day" },
+  { name: "Performance Stack", desc: "Protocol metaboost for clinical proportion results.", price: "£39.99", image: glyco8 },
+  { name: "Metabolic Stack", desc: "Protocol supports biace alarmed ingredients.", price: "£29.99", image: fusionBlack },
+  { name: "Recovery Stack", desc: "Protocols support throughout all blueprint health.", price: "£36.99", image: vascul8 },
 ];
 
 const CompleteProtocols = () => (
   <section className="w-full bg-background py-28 px-16">
-    <div className="max-w-[1280px] mx-auto flex flex-col gap-20">
-      <SectionHeader tagline="Protocols" heading="Complete protocols" text="Curated stacks designed for specific goals" />
+    <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
+      <SectionHeader heading="Built Protocols" />
       <div className="grid grid-cols-3 gap-8">
         {protocols.map((p) => (
-          <div key={p.name} className="flex flex-col border border-foreground">
-            <div className="w-full h-[240px] bg-muted flex items-center justify-center">
-              <div className="w-10 h-10 bg-muted-foreground/20 rounded" />
+          <div key={p.name} className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <div className="relative w-full h-[280px] bg-secondary flex items-center justify-center p-6">
+              <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+              <span className="absolute top-4 right-4 px-2 py-1 bg-primary text-primary-foreground text-xs font-bold uppercase">
+                Save Tips
+              </span>
             </div>
-            <div className="p-6 flex flex-col gap-4">
-              <div>
-                <h5 className="text-xl font-bold text-foreground">{p.name}</h5>
-                <p className="text-base text-muted-foreground">{p.desc}</p>
-              </div>
-              <a href="#" className="flex items-center gap-2 text-base text-foreground hover:opacity-70">
-                Learn more <ChevronRight className="w-4 h-4" />
-              </a>
+            <div className="p-6 flex flex-col gap-2 text-center">
+              <h5 className="text-lg font-bold text-primary">{p.name}</h5>
+              <p className="text-sm text-muted-foreground">{p.desc}</p>
+              <span className="text-xl font-bold text-foreground border border-border inline-block mx-auto px-4 py-1 mt-2">{p.price}</span>
+              <button className="mt-3 px-4 py-2 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">
+                View Product
+              </button>
             </div>
           </div>
         ))}
