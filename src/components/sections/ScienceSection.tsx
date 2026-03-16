@@ -8,24 +8,24 @@ const features = [
 
 const ScienceSection = () => (
   <section className="w-full bg-[hsl(215,50%,8%)] py-0">
-    <div className="max-w-[1440px] mx-auto flex items-stretch">
-      <div className="w-[45%] relative flex items-center justify-center p-12 overflow-hidden">
+    <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-stretch">
+      <div className="w-full md:w-[45%] relative flex items-center justify-center p-8 md:p-12 overflow-hidden min-h-[250px] md:min-h-0">
         <div className="absolute inset-0 bg-gradient-to-r from-[hsl(207,90%,54%)/0.1] to-transparent" />
-        <img src={glyco8} alt="Product showcase" className="relative z-10 w-full max-w-[350px] object-contain" />
+        <img src={glyco8} alt="Product showcase" className="relative z-10 w-full max-w-[250px] md:max-w-[350px] object-contain" />
       </div>
-      <div className="w-[55%] flex flex-col justify-center px-16 py-20">
-        <h2 className="text-4xl font-black text-white uppercase tracking-tight leading-tight">
+      <div className="w-full md:w-[55%] flex flex-col justify-center px-4 md:px-8 lg:px-16 py-12 md:py-20">
+        <h2 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight">
           Formulated for<br />Mechanism — Not Marketing
         </h2>
-        <div className="grid grid-cols-2 gap-8 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mt-8 md:mt-10">
           {features.map((f) => (
             <div key={f.title} className="flex flex-col gap-2">
-              <h4 className="text-base font-bold text-white">{f.title}</h4>
-              <p className="text-sm text-white/60">{f.desc}</p>
+              <h4 className="text-sm md:text-base font-bold text-white">{f.title}</h4>
+              <p className="text-xs md:text-sm text-white/60">{f.desc}</p>
             </div>
           ))}
         </div>
-        <button className="mt-10 self-start px-6 py-3 border border-white text-white text-sm font-medium uppercase tracking-wider hover:bg-white hover:text-foreground transition-colors">
+        <button className="mt-8 md:mt-10 self-start px-6 py-3 border border-white text-white text-xs md:text-sm font-medium uppercase tracking-wider hover:bg-white hover:text-foreground transition-colors">
           Read the Science
         </button>
       </div>
