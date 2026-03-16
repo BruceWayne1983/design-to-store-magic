@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { ScrollReveal } from "@/components/ui/scroll-animations";
 import glyco8Hero from "@/assets/glyco8-hero.png";
 import glyco8Capsules from "@/assets/glyco8-capsules.png";
 import glyco8Label from "@/assets/glyco8-label.png";
@@ -21,30 +23,38 @@ const ProductHero = () => {
     <section className="w-full bg-background py-8 px-4 md:py-16 md:px-8 lg:px-16">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16">
         {/* Image Gallery */}
-        <div className="flex flex-col gap-4 w-full lg:w-1/2">
-          <div className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-4 md:p-8">
+        <ScrollReveal className="flex flex-col gap-4 w-full lg:w-1/2" variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } }}>
+          <motion.div
+            className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-4 md:p-8 overflow-hidden"
+            key={selectedImage}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.35 }}
+          >
             <img src={images[selectedImage]} alt="GLYCO8" className="w-full h-full object-contain" />
-          </div>
+          </motion.div>
           <div className="flex gap-2 md:gap-3 overflow-x-auto">
             {images.map((img, i) => (
-              <button
+              <motion.button
                 key={i}
                 onClick={() => setSelectedImage(i)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className={`w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden bg-secondary flex items-center justify-center p-1.5 md:p-2 transition-colors flex-shrink-0 ${
                   selectedImage === i ? "border-primary" : "border-border"
                 }`}
               >
                 <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain" />
-              </button>
+              </motion.button>
             ))}
             <button className="w-16 h-16 md:w-20 md:h-20 rounded border-2 border-border flex items-center justify-center text-muted-foreground hover:border-primary transition-colors flex-shrink-0">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Product Info */}
-        <div className="flex flex-col gap-5 md:gap-6 w-full lg:w-1/2">
+        <ScrollReveal className="flex flex-col gap-5 md:gap-6 w-full lg:w-1/2" variants={{ hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } }} delay={0.15}>
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight">GLYCO8™</h1>
             <p className="text-lg md:text-xl text-muted-foreground mt-1">Advanced Fast-Acting Glucose Disposal Agent</p>
@@ -75,7 +85,6 @@ const ProductHero = () => {
             <span className="text-sm text-muted-foreground">· 18 Reviews</span>
           </div>
 
-          {/* Subscribe & Save */}
           <div className="border border-border rounded-lg p-4 md:p-5 flex flex-col gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="radio" checked={purchaseType === "subscribe"} onChange={() => setPurchaseType("subscribe")} className="accent-primary" />
@@ -86,7 +95,12 @@ const ProductHero = () => {
             </label>
 
             {purchaseType === "subscribe" && (
-              <div className="flex flex-col gap-3 pl-6">
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="flex flex-col gap-3 pl-6"
+              >
                 <p className="text-xs text-muted-foreground">
                   Save up to {savings[frequency]}. New customers 60+ 1. Deliver automatically. Pause or cancel anytime.
                 </p>
@@ -105,7 +119,7 @@ const ProductHero = () => {
                     </button>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             )}
 
             <label className="flex items-center gap-2 cursor-pointer border-t border-border pt-4">
@@ -117,38 +131,45 @@ const ProductHero = () => {
             </label>
           </div>
 
-          <button className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded"
+          >
             Add to basket
-          </button>
+          </motion.button>
 
           <p className="text-xs text-muted-foreground text-center">
             Pay in 4 interest-free instalments of £10.19 with <span className="underline text-foreground">Klarna</span>{" "}
             <span className="underline text-primary">learn more</span>
           </p>
 
-          {/* Accordions */}
           <div className="flex flex-col border-t border-border">
             <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuggestedUseOpen(!suggestedUseOpen)}>
               <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Suggested Use</span>
-              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${suggestedUseOpen ? "rotate-180" : ""}`} />
+              <motion.div animate={{ rotate: suggestedUseOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              </motion.div>
             </button>
             {suggestedUseOpen && (
-              <p className="text-sm text-muted-foreground pb-4">
+              <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4">
                 Take 2 capsules with your highest carbohydrate meal of the day. For enhanced results, take an additional 2 capsules with a second high-carb meal. Do not exceed 4 capsules per day.
-              </p>
+              </motion.p>
             )}
             <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuppFactsOpen(!suppFactsOpen)}>
               <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Supplement Facts</span>
-              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${suppFactsOpen ? "rotate-180" : ""}`} />
+              <motion.div animate={{ rotate: suppFactsOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              </motion.div>
             </button>
             {suppFactsOpen && (
-              <div className="text-sm text-muted-foreground pb-4">
+              <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4">
                 <p>Serving Size: 2 Capsules · Servings Per Container: 30</p>
                 <p className="mt-2">Dihydroberberine 400mg · Na-R-Alpha Lipoic Acid 300mg · Cinnamon Bark Extract 300mg · Banaba Extract 330mg · Bitter Melon Extract 300mg · GYCo6o 300mg · Chromium 300mcg · VanaBerry 2mg</p>
-              </div>
+              </motion.div>
             )}
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
