@@ -35,17 +35,16 @@ const Navbar = () => {
   const [megaOpen, setMegaOpen] = useState(false);
 
   return (
-    <nav className="w-full border-b border-foreground bg-background">
-      {/* Header bar */}
+    <nav className="w-full border-b border-border bg-background sticky top-0 z-50">
       <div className="flex items-center justify-between px-16 h-[72px]">
         <div className="flex items-center gap-6">
-          <span className="text-xl font-bold tracking-tight text-foreground">Baseline</span>
+          <span className="text-xl font-black tracking-tight text-foreground uppercase">Baseline</span>
           <div className="flex items-center gap-8">
-            <a href="#" className="text-base text-foreground hover:opacity-70">Shop</a>
-            <a href="#" className="text-base text-foreground hover:opacity-70">Protocols</a>
-            <a href="#" className="text-base text-foreground hover:opacity-70">Science</a>
+            <a href="#" className="text-base text-foreground hover:text-primary transition-colors">Shop</a>
+            <a href="#" className="text-base text-foreground hover:text-primary transition-colors">Protocols</a>
+            <a href="#" className="text-base text-foreground hover:text-primary transition-colors">Science</a>
             <button
-              className="flex items-center gap-1 text-base text-foreground hover:opacity-70"
+              className="flex items-center gap-1 text-base text-foreground hover:text-primary transition-colors"
               onClick={() => setMegaOpen(!megaOpen)}
             >
               More <ChevronDown className="w-4 h-4" />
@@ -53,18 +52,17 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <button className="px-5 py-2 border border-foreground text-foreground text-base hover:bg-foreground hover:text-background transition-colors">
+          <button className="px-5 py-2 border border-border text-foreground text-base hover:border-primary hover:text-primary transition-colors">
             Log in
           </button>
-          <button className="px-5 py-2 bg-foreground text-background border border-foreground text-base hover:opacity-90 transition-opacity">
+          <button className="px-5 py-2 bg-primary text-primary-foreground border border-primary text-base hover:opacity-90 transition-opacity">
             Sign up
           </button>
         </div>
       </div>
 
-      {/* Mega menu */}
       {megaOpen && (
-        <div className="flex border-t border-foreground">
+        <div className="flex border-t border-border">
           <div className="flex flex-1 gap-8 px-16 py-8">
             {menuGroups.map((group) => (
               <div key={group.title} className="flex-1 flex flex-col gap-4">
@@ -72,9 +70,9 @@ const Navbar = () => {
                 <div className="flex flex-col gap-4">
                   {group.items.map((item) => (
                     <a key={item.name} href="#" className="flex gap-3 py-2 group">
-                      <div className="w-6 h-6 bg-foreground/10 rounded flex-shrink-0 mt-0.5" />
+                      <div className="w-6 h-6 bg-primary/10 rounded flex-shrink-0 mt-0.5" />
                       <div>
-                        <div className="text-base font-semibold text-foreground group-hover:underline">{item.name}</div>
+                        <div className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">{item.name}</div>
                         <div className="text-sm text-muted-foreground">{item.desc}</div>
                       </div>
                     </a>
@@ -83,17 +81,17 @@ const Navbar = () => {
               </div>
             ))}
           </div>
-          <div className="w-[416px] border-l border-foreground/10 p-8 flex flex-col gap-4">
+          <div className="w-[416px] border-l border-border p-8 flex flex-col gap-4">
             <span className="text-sm font-semibold text-foreground">Featured from Blog</span>
             <div className="flex flex-col gap-4 py-2">
-              <div className="w-40 h-[107px] bg-muted" />
+              <div className="w-40 h-[107px] bg-muted rounded" />
               <div>
                 <div className="text-base font-semibold text-foreground">Article Title</div>
                 <div className="text-sm text-muted-foreground">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
               </div>
-              <a href="#" className="text-sm underline text-foreground">Read more</a>
+              <a href="#" className="text-sm underline text-primary">Read more</a>
             </div>
-            <a href="#" className="flex items-center gap-2 text-base text-foreground hover:opacity-70">
+            <a href="#" className="flex items-center gap-2 text-base text-foreground hover:text-primary transition-colors">
               See all <ChevronRight className="w-4 h-4" />
             </a>
           </div>
