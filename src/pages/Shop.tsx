@@ -10,12 +10,10 @@ import vascul8 from "@/assets/vascul8.png";
 import glycoshift from "@/assets/glycoshift.png";
 
 const products = [
-  { name: "GLYCO8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8 },
-  { name: "FUSION BLACK", desc: "Premium Performance PreWorkout", price: "£36.99", image: fusionBlack },
-  { name: "VASCUL8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8 },
-  { name: "GLYCOSHIFT", desc: "Rapid Carb++ Hydration Fuel", price: "£29.99", image: glycoshift },
-  { name: "FUSION BLACK", desc: "Premium Performance PreWorkout", price: "£36.99", image: fusionBlack },
-  { name: "GLYCO8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8 },
+  { name: "GLYCO8", slug: "glyco8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8 },
+  { name: "FUSION BLACK", slug: "fusion-black", desc: "Premium Performance PreWorkout", price: "£36.99", image: fusionBlack },
+  { name: "VASCUL8", slug: "vascul8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8 },
+  { name: "GLYCOSHIFT", slug: "glycoshift", desc: "Rapid Carb++ Hydration Fuel", price: "£29.99", image: glycoshift },
 ];
 
 const categories = [
