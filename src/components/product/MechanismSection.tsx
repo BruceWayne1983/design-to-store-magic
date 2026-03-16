@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
+import { ScrollReveal, slideLeft, slideRight } from "@/components/ui/scroll-animations";
 import mechanismAmpk from "@/assets/mechanism-ampk.jpg";
 import mechanismGlut4 from "@/assets/mechanism-glut4.jpg";
 
@@ -35,10 +36,12 @@ const mechanisms = [
 const MechanismSection = () => (
   <section className="w-full bg-background py-16 px-4 md:py-28 md:px-8 lg:px-16">
     <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
-      <SectionHeader heading="Clinically dosed formula" />
-      {mechanisms.map((m) => (
+      <ScrollReveal>
+        <SectionHeader heading="Clinically dosed formula" />
+      </ScrollReveal>
+      {mechanisms.map((m, i) => (
         <div key={m.title} className="flex flex-col md:flex-row items-stretch gap-0 border border-border rounded-lg overflow-hidden">
-          <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center gap-4 md:gap-6">
+          <ScrollReveal className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center gap-4 md:gap-6" variants={slideLeft}>
             <h3 className="text-xl md:text-2xl font-black text-foreground uppercase">{m.title}</h3>
             <p className="text-sm text-muted-foreground">{m.subtitle}</p>
             <div className="flex flex-wrap gap-4">
@@ -60,10 +63,10 @@ const MechanismSection = () => (
                 </div>
               ))}
             </div>
-          </div>
-          <div className="w-full md:w-1/2 min-h-[240px]">
+          </ScrollReveal>
+          <ScrollReveal className="w-full md:w-1/2 min-h-[240px]" variants={slideRight} delay={0.1}>
             <img src={m.image} alt={m.title} className="w-full h-full object-cover" />
-          </div>
+          </ScrollReveal>
         </div>
       ))}
     </div>
