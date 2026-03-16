@@ -1,16 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import FindWhatYouNeed from "@/components/sections/FindWhatYouNeed";
+import TrustedFormulas from "@/components/sections/TrustedFormulas";
+import CompleteProtocols from "@/components/sections/CompleteProtocols";
+import HowItWorks from "@/components/sections/HowItWorks";
+import ScienceSection from "@/components/sections/ScienceSection";
+import ReadyToPerform from "@/components/sections/ReadyToPerform";
+import Newsletter from "@/components/sections/Newsletter";
+import FAQ from "@/components/sections/FAQ";
+import Testimonials from "@/components/sections/Testimonials";
+import Team from "@/components/sections/Team";
+import Footer from "@/components/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
-  );
-};
-
-const Index = PlaceholderIndex;
+const Index = () => (
+  <div className="flex flex-col items-start w-full">
+    <Navbar />
+    <HeroSection />
+    <FindWhatYouNeed />
+    <TrustedFormulas />
+    <CompleteProtocols />
+    <HowItWorks />
+    <ScienceSection />
+    <ReadyToPerform />
+    <Newsletter />
+    <FAQ />
+    <Testimonials />
+    <Team />
+    <Footer />
+  </div>
+);
 
 export default Index;
