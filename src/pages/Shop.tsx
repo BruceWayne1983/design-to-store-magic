@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
@@ -9,12 +10,10 @@ import vascul8 from "@/assets/vascul8.png";
 import glycoshift from "@/assets/glycoshift.png";
 
 const products = [
-  { name: "GLYCO8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8 },
-  { name: "FUSION BLACK", desc: "Premium Performance PreWorkout", price: "£36.99", image: fusionBlack },
-  { name: "VASCUL8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8 },
-  { name: "GLYCOSHIFT", desc: "Rapid Carb++ Hydration Fuel", price: "£29.99", image: glycoshift },
-  { name: "FUSION BLACK", desc: "Premium Performance PreWorkout", price: "£36.99", image: fusionBlack },
-  { name: "GLYCO8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8 },
+  { name: "GLYCO8", slug: "glyco8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8 },
+  { name: "FUSION BLACK", slug: "fusion-black", desc: "Premium Performance PreWorkout", price: "£36.99", image: fusionBlack },
+  { name: "VASCUL8", slug: "vascul8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8 },
+  { name: "GLYCOSHIFT", slug: "glycoshift", desc: "Rapid Carb++ Hydration Fuel", price: "£29.99", image: glycoshift },
 ];
 
 const categories = [
@@ -116,9 +115,9 @@ const Shop = () => {
       <section className="w-full bg-background py-28 px-16">
         <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
           <SectionHeader tagline="Bestsellers" heading="Products" text="Our most popular science-backed formulas" />
-          <div className="grid grid-cols-3 gap-8">
-            {products.map((p, i) => (
-              <div key={`${p.name}-${i}`} className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+          <div className="grid grid-cols-4 gap-8">
+            {products.map((p) => (
+              <Link to={`/product/${p.slug}`} key={p.slug} className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="w-full aspect-square bg-secondary flex items-center justify-center p-8">
                   <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
                 </div>
@@ -127,7 +126,7 @@ const Shop = () => {
                   <p className="text-sm text-muted-foreground">{p.desc}</p>
                   <span className="text-lg font-bold text-foreground mt-1">{p.price}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
