@@ -33,15 +33,15 @@ const mechanisms = [
 ];
 
 const MechanismSection = () => (
-  <section className="w-full bg-background py-28 px-16">
-    <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
+  <section className="w-full bg-background py-16 px-4 md:py-28 md:px-8 lg:px-16">
+    <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
       <SectionHeader heading="Clinically dosed formula" />
       {mechanisms.map((m) => (
-        <div key={m.title} className="flex items-stretch gap-0 border border-border rounded-lg overflow-hidden">
-          <div className="w-1/2 p-10 flex flex-col justify-center gap-6">
-            <h3 className="text-2xl font-black text-foreground uppercase">{m.title}</h3>
+        <div key={m.title} className="flex flex-col md:flex-row items-stretch gap-0 border border-border rounded-lg overflow-hidden">
+          <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center gap-4 md:gap-6">
+            <h3 className="text-xl md:text-2xl font-black text-foreground uppercase">{m.title}</h3>
             <p className="text-sm text-muted-foreground">{m.subtitle}</p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               {m.badges.map((b) => (
                 <div key={b.name} className="flex items-center gap-2">
                   <span className="text-xs font-black text-primary bg-primary/10 px-2 py-1 rounded">{b.dose}</span>
@@ -61,7 +61,7 @@ const MechanismSection = () => (
               ))}
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2 min-h-[240px]">
             <img src={m.image} alt={m.title} className="w-full h-full object-cover" />
           </div>
         </div>

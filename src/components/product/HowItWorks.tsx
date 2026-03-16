@@ -8,12 +8,12 @@ const steps = [
 ];
 
 const HowItWorks = () => (
-  <section className="w-full bg-secondary py-28 px-16">
-    <div className="max-w-[1280px] mx-auto flex flex-col gap-12">
+  <section className="w-full bg-secondary py-16 px-4 md:py-28 md:px-8 lg:px-16">
+    <div className="max-w-[1280px] mx-auto flex flex-col gap-8 md:gap-12">
       <SectionHeader tagline="Mechanism" heading="How it works" text="Three-stage glucose management system" />
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
         {steps.map((s) => (
-          <div key={s.title} className="flex flex-col gap-4 bg-background border border-border rounded-lg p-8">
+          <div key={s.title} className="flex flex-col gap-4 bg-background border border-border rounded-lg p-6 md:p-8">
             <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center">
               <s.icon className="w-5 h-5 text-primary" />
             </div>
