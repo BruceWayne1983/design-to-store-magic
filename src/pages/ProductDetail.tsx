@@ -4,6 +4,7 @@ import ProductHero from "@/components/product/ProductHero";
 import WhyDifferent from "@/components/product/WhyDifferent";
 import HowItWorks from "@/components/product/HowItWorks";
 import IngredientBreakdown from "@/components/product/IngredientBreakdown";
+import IngredientMechanisms from "@/components/product/IngredientMechanisms";
 import SupplementFacts from "@/components/product/SupplementFacts";
 import MechanismSection from "@/components/product/MechanismSection";
 import ProductTestimonials from "@/components/product/ProductTestimonials";
