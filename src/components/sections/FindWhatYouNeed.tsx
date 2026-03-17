@@ -1,30 +1,33 @@
 import { Link } from "react-router-dom";
 import SectionHeader from "../SectionHeader";
-import { Zap, HeartPulse, Moon, Activity } from "lucide-react";
+import categoryPerformance from "@/assets/category-performance.jpg";
+import categoryMetabolic from "@/assets/category-metabolic.jpg";
+import categoryRecovery from "@/assets/category-recovery.jpg";
+import categoryHealth from "@/assets/category-health.jpg";
 
 const categories = [
   {
-    title: "Performance Supplements",
+    title: "Performance",
     desc: "Pre-workout, intra-workout and performance enhancers for maximum training output.",
-    icon: Zap,
+    image: categoryPerformance,
     link: "/category/performance",
   },
   {
     title: "Metabolic Support",
     desc: "Glucose disposal agents and metabolic optimisers built on clinical mechanisms.",
-    icon: Activity,
+    image: categoryMetabolic,
     link: "/shop",
   },
   {
     title: "Recovery & Sleep",
     desc: "Advanced recovery formulas targeting inflammation, sleep quality and muscle repair.",
-    icon: Moon,
+    image: categoryRecovery,
     link: "/shop",
   },
   {
     title: "Health Optimisation",
     desc: "Foundational health supplements for immune function, gut health and longevity.",
-    icon: HeartPulse,
+    image: categoryHealth,
     link: "/shop",
   },
 ];
@@ -38,16 +41,24 @@ const FindWhatYouNeed = () => (
           <Link
             to={c.link}
             key={c.title}
-            className="flex flex-col gap-4 p-6 md:p-8 bg-background rounded-lg border border-border shadow-sm hover:shadow-md hover:border-primary/30 transition-all group"
+            className="relative flex flex-col justify-end min-h-[320px] md:min-h-[380px] rounded-lg overflow-hidden group"
           >
-            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-              <c.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+            {/* Background image */}
+            <img
+              src={c.image}
+              alt={c.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10 group-hover:from-black/95 transition-colors duration-300" />
+            {/* Content */}
+            <div className="relative z-10 p-6 md:p-8 flex flex-col gap-2">
+              <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-wide">{c.title}</h3>
+              <p className="text-xs md:text-sm text-white/70 leading-relaxed">{c.desc}</p>
+              <span className="text-xs font-medium text-primary uppercase tracking-wider mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Shop Collection →
+              </span>
             </div>
-            <h3 className="text-base md:text-lg font-bold text-foreground uppercase tracking-wide">{c.title}</h3>
-            <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-            <span className="text-xs font-medium text-primary uppercase tracking-wider mt-auto opacity-0 group-hover:opacity-100 transition-opacity">
-              Shop Collection →
-            </span>
           </Link>
         ))}
       </div>
