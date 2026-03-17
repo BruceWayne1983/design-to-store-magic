@@ -98,6 +98,9 @@ const Deck = () => {
           <span className="text-xs text-white/40 mr-4">
             {current + 1} / {slides.length}
           </span>
+          <button onClick={() => window.print()} className="p-2 text-white/50 hover:text-white transition-colors" title="Download as PDF">
+            <Download className="w-4 h-4" />
+          </button>
           <button onClick={() => setIsGrid(true)} className="p-2 text-white/50 hover:text-white transition-colors" title="Grid view (G)">
             <Grid className="w-4 h-4" />
           </button>
