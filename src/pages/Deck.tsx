@@ -12,6 +12,7 @@ const Deck = () => {
   const [isGrid, setIsGrid] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [exportProgress, setExportProgress] = useState("");
   const [showSafariPrompt, setShowSafariPrompt] = useState(false);
 
   const exportDeck = useCallback(async (mode: ExportMode = "download", preferPopup = true, triggeredByQuery = false) => {
