@@ -26,6 +26,19 @@ const slideRight: Variants = {
   visible: { opacity: 1, x: 0 },
 };
 
+const shouldDisableScrollReveal = () => {
+  if (typeof window === "undefined") return false;
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("deckCapture") === "true") return true;
+
+  try {
+    return window.self !== window.top;
+  } catch {
+    return false;
+  }
+};
+
 interface ScrollRevealProps {
   children: ReactNode;
   variants?: Variants;
@@ -35,8 +48,9 @@ interface ScrollRevealProps {
 
 export const ScrollReveal = ({ children, variants = fadeUp, className, delay = 0 }: ScrollRevealProps) => (
   <motion.div
-    initial="hidden"
-    whileInView="visible"
+    initial={shouldDisableScrollReveal() ? "visible" : "hidden"}
+    whileInView={shouldDisableScrollReveal() ? undefined : "visible"}
+    animate={shouldDisableScrollReveal() ? "visible" : undefined}
     viewport={{ once: true, margin: "-80px" }}
     variants={variants}
     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
@@ -48,8 +62,9 @@ export const ScrollReveal = ({ children, variants = fadeUp, className, delay = 0
 
 export const StaggerContainer = ({ children, className }: { children: ReactNode; className?: string }) => (
   <motion.div
-    initial="hidden"
-    whileInView="visible"
+    initial={shouldDisableScrollReveal() ? "visible" : "hidden"}
+    whileInView={shouldDisableScrollReveal() ? undefined : "visible"}
+    animate={shouldDisableScrollReveal() ? "visible" : undefined}
     viewport={{ once: true, margin: "-60px" }}
     variants={stagger}
     className={className}
@@ -61,6 +76,8 @@ export const StaggerContainer = ({ children, className }: { children: ReactNode;
 export const StaggerItem = ({ children, className }: { children: ReactNode; className?: string }) => (
   <motion.div
     variants={fadeUp}
+    initial={shouldDisableScrollReveal() ? "visible" : undefined}
+    animate={shouldDisableScrollReveal() ? "visible" : undefined}
     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     className={className}
   >

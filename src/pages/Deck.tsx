@@ -6,6 +6,12 @@ import { createDeckPdf, deckSlides, downloadPdfFile, isSafariBrowser, openPdfPre
 
 type ExportMode = "download" | "preview";
 
+const getDeckSlideSrc = (path: string) => {
+  const captureUrl = new URL(path, window.location.origin);
+  captureUrl.searchParams.set("deckCapture", "true");
+  return captureUrl.toString();
+};
+
 const Deck = () => {
   const slides = deckSlides;
   const [current, setCurrent] = useState(0);
@@ -114,7 +120,7 @@ const Deck = () => {
             >
               <div className="relative aspect-video w-full overflow-hidden bg-card">
                 <iframe
-                  src={slide.path}
+                  src={getDeckSlideSrc(slide.path)}
                   className="pointer-events-none h-[1080px] w-[1920px] origin-top-left"
                   style={{ transform: "scale(0.225)", transformOrigin: "top left" }}
                   title={slide.title}
@@ -183,7 +189,7 @@ const Deck = () => {
           >
             <div className="deck-print-area relative flex-1 overflow-hidden rounded-lg border border-border/60 bg-card">
               <iframe
-                src={slide.path}
+                src={getDeckSlideSrc(slide.path)}
                 className="h-full w-full border-0"
                 title={slide.title}
               />
