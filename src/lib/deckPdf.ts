@@ -13,63 +13,7 @@ export const deckSlides: DeckSlide[] = [
     title: "Homepage",
     path: "/",
     description: "Main landing page with hero, trust bar, product showcase, and full brand experience",
-    commentary: [
-      "Full-width cinematic hero with product family imagery and dual CTA",
-      "Trust bar featuring four credibility pillars: Clinically Dosed, Trademarked Ingredients, UK Manufactured, Transparent Formulas",
-      "Product showcase grid with Quick Add, pricing, and Best Seller tags",
-      "Category navigation cards with hover-zoom effects",
-      "Science education section and newsletter capture",
-      "Complete footer with sitemap, social links, and legal",
-    ],
-  },
-  {
-    title: "Shop All",
-    path: "/shop",
-    description: "Complete product catalogue with filtering and quick-add functionality",
-    commentary: [
-      "Hero banner with brand messaging and dual navigation CTAs",
-      "Sticky filter/sort bar for category browsing",
-      "Product grid with consistent card layout and hover interactions",
-      "Quick Add buttons for frictionless cart additions",
-      "Status tags (Best Seller, New) for social proof",
-      "Stack Systems section for bundled protocols",
-    ],
-  },
-  {
-    title: "Product Detail - Glyco8",
-    path: "/product/glyco8",
-    description: "Full PDP with subscribe & save, ingredient breakdown, mechanisms, and FAQs",
-    commentary: [
-      "Product hero with large imagery, pricing, and Subscribe & Save toggle",
-      "Detailed supplement facts panel with full label transparency",
-      "Ingredient breakdown with dosage and clinical references",
-      "Mechanism of action infographics (AMPK, GLUT4, Glycogen pathways)",
-      "Customer testimonials and social proof",
-      "FAQ accordion and related stack recommendations",
-    ],
-  },
-  {
-    title: "Performance Category",
-    path: "/category/performance",
-    description: "Category landing page for the performance supplement range",
-    commentary: [
-      "Category-specific hero with targeted messaging",
-      "Filtered product grid showing performance range only",
-      "Educational content tailored to performance goals",
-      "Cross-sell into related categories and stack protocols",
-    ],
-  },
-  {
-    title: "Pre-Launch",
-    path: "/launch",
-    description: "VIP early-access holding page with email signup and 20% launch discount",
-    commentary: [
-      "Full-screen cinematic product family hero with dramatic blue lighting",
-      "Email capture form with clear value proposition",
-      "20% launch discount incentive badge with pulse animation",
-      "Three VIP perk cards: Launch Discount, Early Access, Free UK Shipping",
-      "Social media links for pre-launch community building",
-    ],
+    commentary: [],
   },
 ];
 
@@ -78,7 +22,7 @@ const CAPTURE_WIDTH = 1440;
 const FULL_PAGE_MAX_HEIGHT = 12000;
 const PDF_PAGE_WIDTH_MM = 297; // A4 landscape width
 const PDF_MARGIN = 10;
-const HEADER_HEIGHT = 45; // mm reserved for title/commentary header
+const HEADER_HEIGHT = 20; // mm reserved for title header (no commentary)
 
 const waitForImages = async (doc: Document) => {
   const imageElements = Array.from(doc.images);
@@ -211,31 +155,14 @@ const drawSlidePage = (
 
   cursorY += 18;
 
-  // Description
-  pdf.setFont("helvetica", "italic");
-  pdf.setFontSize(8);
-  pdf.setTextColor(160, 175, 200);
-  const descLines = pdf.splitTextToSize(normalizePdfText(slide.description), W - PDF_MARGIN * 2);
-  pdf.text(descLines, PDF_MARGIN, cursorY);
-  cursorY += descLines.length * 3.5 + 3;
-
-  // Commentary bullets in a compact horizontal row
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(7);
-  pdf.setTextColor(180, 190, 210);
-
-  const bulletWidth = (W - PDF_MARGIN * 2) / 3;
-  slide.commentary.slice(0, 6).forEach((point, bi) => {
-    const col = bi % 3;
-    const row = Math.floor(bi / 3);
-    const bx = PDF_MARGIN + col * bulletWidth;
-    const by = cursorY + row * 8;
-
-    pdf.setFillColor(37, 145, 251);
-    pdf.circle(bx + 1, by - 0.8, 0.6, "F");
-    const lines = pdf.splitTextToSize(normalizePdfText(point), bulletWidth - 8);
-    pdf.text(lines[0], bx + 4, by);
-  });
+  // Description (skip if no commentary to keep it minimal)
+  if (slide.description) {
+    pdf.setFont("helvetica", "italic");
+    pdf.setFontSize(8);
+    pdf.setTextColor(160, 175, 200);
+    const descLines = pdf.splitTextToSize(normalizePdfText(slide.description), W - PDF_MARGIN * 2);
+    pdf.text(descLines, PDF_MARGIN, cursorY);
+  }
 
   // --- Screenshot section ---
   const imgY = HEADER_HEIGHT;
