@@ -1,6 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight, Maximize, Grid, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const slides = [
   { title: "Homepage", path: "/", description: "Main landing page with hero, trust bar, product showcase, and full brand experience" },
@@ -15,6 +17,26 @@ const Deck = () => {
   const [current, setCurrent] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const slideRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const downloadSlide = useCallback(async () => {
+    if (!slideRef.current || isDownloading) return;
+    setIsDownloading(true);
+    try {
+      const canvas = await html2canvas(slideRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#0a1628",
+      });
+      const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [canvas.width, canvas.height] });
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`baseline-${slides[current].title.toLowerCase().replace(/\s+/g, "-")}.pdf`);
+    } catch (e) {
+      console.error("Download failed:", e);
+    }
+    setIsDownloading(false);
+  }, [current, isDownloading]);
 
   const next = useCallback(() => setCurrent((c) => Math.min(c + 1, slides.length - 1)), []);
   const prev = useCallback(() => setCurrent((c) => Math.max(c - 1, 0)), []);
@@ -98,8 +120,8 @@ const Deck = () => {
           <span className="text-xs text-white/40 mr-4">
             {current + 1} / {slides.length}
           </span>
-          <button onClick={() => window.print()} className="p-2 text-white/50 hover:text-white transition-colors" title="Download as PDF">
-            <Download className="w-4 h-4" />
+          <button onClick={downloadSlide} disabled={isDownloading} className="p-2 text-white/50 hover:text-white disabled:opacity-30 transition-colors" title="Download as PDF">
+            <Download className={`w-4 h-4 ${isDownloading ? "animate-pulse" : ""}`} />
           </button>
           <button onClick={() => setIsGrid(true)} className="p-2 text-white/50 hover:text-white transition-colors" title="Grid view (G)">
             <Grid className="w-4 h-4" />
@@ -129,7 +151,7 @@ const Deck = () => {
             transition={{ duration: 0.3 }}
             className="w-full h-full max-w-[1400px] flex flex-col gap-4"
           >
-            <div className="deck-print-area flex-1 relative rounded-lg overflow-hidden border border-white/10 bg-[hsl(215,50%,8%)]">
+            <div ref={slideRef} className="deck-print-area flex-1 relative rounded-lg overflow-hidden border border-white/10 bg-[hsl(215,50%,8%)]">
               <iframe
                 src={slide.path}
                 className="w-full h-full border-0"
