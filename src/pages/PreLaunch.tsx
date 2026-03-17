@@ -83,9 +83,9 @@ const PreLaunch = () => {
         {/* Extra perks */}
         <div className="grid grid-cols-3 gap-4 md:gap-6 w-full max-w-[560px] mt-4">
           {[
-            { value: "20%", label: "Launch Discount", icon: "🔥" },
-            { value: "VIP", label: "Early Access", icon: "⚡" },
-            { value: "Free", label: "UK Shipping", icon: "🚀" },
+            { value: "20%", label: "Launch Discount" },
+            { value: "VIP", label: "Early Access" },
+            { value: "Free", label: "UK Shipping" },
           ].map((perk) => (
             <div
               key={perk.label}
