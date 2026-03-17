@@ -11,6 +11,17 @@ const ProductHero = ({ product }: { product: ProductData }) => {
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
 
+  const isStaticDeckRender = (() => {
+    if (typeof window === "undefined") return false;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("deckCapture") === "true") return true;
+    try {
+      return window.self !== window.top;
+    } catch {
+      return false;
+    }
+  })();
+
   return (
     <section className="w-full bg-background py-8 px-4 md:py-16 md:px-8 lg:px-16">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16">
@@ -18,17 +29,28 @@ const ProductHero = ({ product }: { product: ProductData }) => {
           <motion.div
             className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-4 md:p-8 overflow-hidden"
             key={selectedImage}
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={isStaticDeckRender ? false : { opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.35 }}
+            transition={isStaticDeckRender ? { duration: 0 } : { duration: 0.35 }}
           >
-            <img src={product.images[selectedImage]} alt={product.name} className="w-full h-full object-contain" />
+            <img
+              src={product.images[selectedImage]}
+              alt={product.name}
+              className="w-full h-full object-contain"
+              loading="eager"
+              decoding="sync"
+            />
           </motion.div>
           <div className="flex gap-2 md:gap-3 overflow-x-auto">
             {product.images.map((img, i) => (
-              <motion.button key={i} onClick={() => setSelectedImage(i)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                className={`w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden bg-secondary flex items-center justify-center p-1.5 md:p-2 transition-colors flex-shrink-0 ${selectedImage === i ? "border-primary" : "border-border"}`}>
-                <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain" />
+              <motion.button
+                key={i}
+                onClick={() => setSelectedImage(i)}
+                whileHover={isStaticDeckRender ? undefined : { scale: 1.05 }}
+                whileTap={isStaticDeckRender ? undefined : { scale: 0.95 }}
+                className={`w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden bg-secondary flex items-center justify-center p-1.5 md:p-2 transition-colors flex-shrink-0 ${selectedImage === i ? "border-primary" : "border-border"}`}
+              >
+                <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain" loading="eager" decoding="sync" />
               </motion.button>
             ))}
             <button className="w-16 h-16 md:w-20 md:h-20 rounded border-2 border-border flex items-center justify-center text-muted-foreground hover:border-primary transition-colors flex-shrink-0">
@@ -91,7 +113,7 @@ const ProductHero = ({ product }: { product: ProductData }) => {
             </label>
           </div>
 
-          <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+          <motion.button whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }} whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
             className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded">
             Add to basket
           </motion.button>

@@ -189,7 +189,7 @@ const Deck = () => {
           >
             <div className="deck-print-area relative flex-1 overflow-hidden rounded-lg border border-border/60 bg-card">
               <iframe
-                src={slide.path}
+                src={getDeckSlideSrc(slide.path)}
                 className="h-full w-full border-0"
                 title={slide.title}
               />
