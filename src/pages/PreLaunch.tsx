@@ -81,15 +81,20 @@ const PreLaunch = () => {
         )}
 
         {/* Extra perks */}
-        <div className="grid grid-cols-3 gap-4 md:gap-8 w-full max-w-[500px] mt-4">
+        <div className="grid grid-cols-3 gap-4 md:gap-6 w-full max-w-[560px] mt-4">
           {[
-            { value: "20%", label: "Launch Discount" },
-            { value: "VIP", label: "Early Access" },
-            { value: "Free", label: "UK Shipping" },
+            { value: "20%", label: "Launch Discount", icon: "🔥" },
+            { value: "VIP", label: "Early Access", icon: "⚡" },
+            { value: "Free", label: "UK Shipping", icon: "🚀" },
           ].map((perk) => (
-            <div key={perk.label} className="flex flex-col items-center gap-1">
-              <span className="text-2xl md:text-3xl font-black text-primary">{perk.value}</span>
-              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-wider">{perk.label}</span>
+            <div
+              key={perk.label}
+              className="relative flex flex-col items-center gap-2 py-5 px-3 rounded-xl border border-primary/20 bg-primary/[0.06] backdrop-blur-md overflow-hidden group hover:border-primary/40 transition-all duration-300"
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="text-lg">{perk.icon}</span>
+              <span className="text-3xl md:text-4xl font-black text-primary drop-shadow-[0_0_12px_hsl(var(--primary)/0.4)]">{perk.value}</span>
+              <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-[0.15em] font-semibold">{perk.label}</span>
             </div>
           ))}
         </div>
