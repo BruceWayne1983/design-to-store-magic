@@ -22,7 +22,7 @@ const Deck = () => {
     setIsDownloading(true);
 
     try {
-      const pdf = createDeckPdf(slides);
+      const pdf = await createDeckPdf(slides);
 
       if (mode === "preview") {
         openPdfPreview(pdf, preferPopup);

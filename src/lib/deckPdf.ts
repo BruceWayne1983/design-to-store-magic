@@ -1,3 +1,4 @@
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 export type DeckSlide = {
@@ -16,49 +17,144 @@ export const deckSlides: DeckSlide[] = [
 ];
 
 const normalizePdfText = (value: string) => value.replace(/[—–]/g, "-");
+const CAPTURE_WIDTH = 1440;
+const CAPTURE_HEIGHT = 900;
+const PDF_WIDTH = 297;
+const PDF_HEIGHT = 210;
+const PDF_MARGIN = 10;
+const META_HEIGHT = 24;
 
-export const createDeckPdf = (slides: DeckSlide[]) => {
+const waitForImages = async (doc: Document) => {
+  const imageElements = Array.from(doc.images);
+  await Promise.all(
+    imageElements.map((image) => {
+      if (image.complete) return Promise.resolve();
+
+      return new Promise<void>((resolve) => {
+        image.addEventListener("load", () => resolve(), { once: true });
+        image.addEventListener("error", () => resolve(), { once: true });
+      });
+    }),
+  );
+};
+
+const waitForRouteReady = async (iframe: HTMLIFrameElement) => {
+  await new Promise<void>((resolve, reject) => {
+    const cleanup = () => {
+      iframe.removeEventListener("load", handleLoad);
+      iframe.removeEventListener("error", handleError);
+    };
+
+    const handleLoad = () => {
+      cleanup();
+      resolve();
+    };
+
+    const handleError = () => {
+      cleanup();
+      reject(new Error(`Failed to load ${iframe.src}`));
+    };
+
+    iframe.addEventListener("load", handleLoad, { once: true });
+    iframe.addEventListener("error", handleError, { once: true });
+  });
+
+  const doc = iframe.contentDocument;
+  if (!doc) {
+    throw new Error("Could not access route document for PDF capture.");
+  }
+
+  if (doc.fonts?.ready) {
+    await doc.fonts.ready;
+  }
+
+  await waitForImages(doc);
+  await new Promise((resolve) => window.setTimeout(resolve, 350));
+};
+
+const captureSlideImage = async (slide: DeckSlide) => {
+  const iframe = document.createElement("iframe");
+  const captureUrl = new URL(slide.path, window.location.origin);
+  captureUrl.searchParams.set("deckCapture", "true");
+
+  iframe.src = captureUrl.toString();
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.style.position = "fixed";
+  iframe.style.left = "-10000px";
+  iframe.style.top = "0";
+  iframe.style.width = `${CAPTURE_WIDTH}px`;
+  iframe.style.height = `${CAPTURE_HEIGHT}px`;
+  iframe.style.opacity = "0";
+  iframe.style.pointerEvents = "none";
+  iframe.style.border = "0";
+  iframe.style.background = "transparent";
+  iframe.style.zIndex = "-1";
+
+  document.body.appendChild(iframe);
+
+  try {
+    await waitForRouteReady(iframe);
+
+    const doc = iframe.contentDocument;
+    const body = doc?.body;
+    if (!doc || !body) {
+      throw new Error(`Unable to capture ${slide.path}`);
+    }
+
+    const canvas = await html2canvas(body, {
+      backgroundColor: null,
+      scale: 2,
+      useCORS: true,
+      width: CAPTURE_WIDTH,
+      height: CAPTURE_HEIGHT,
+      windowWidth: CAPTURE_WIDTH,
+      windowHeight: CAPTURE_HEIGHT,
+      x: 0,
+      y: 0,
+      scrollX: 0,
+      scrollY: 0,
+    });
+
+    return canvas.toDataURL("image/jpeg", 0.92);
+  } finally {
+    iframe.remove();
+  }
+};
+
+export const createDeckPdf = async (slides: DeckSlide[]) => {
   const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-  const width = 297;
-  const height = 210;
 
-  slides.forEach((slide, index) => {
+  for (const [index, slide] of slides.entries()) {
     if (index > 0) pdf.addPage();
 
     const title = normalizePdfText(slide.title);
-    const description = normalizePdfText(slide.description);
     const routeLabel = normalizePdfText(slide.path === "/" ? "Route: homepage" : `Route: ${slide.path}`);
+    const imageData = await captureSlideImage(slide);
 
     pdf.setFillColor(10, 22, 40);
-    pdf.rect(0, 0, width, height, "F");
+    pdf.rect(0, 0, PDF_WIDTH, PDF_HEIGHT, "F");
 
     pdf.setFillColor(37, 145, 251);
-    pdf.rect(0, 0, 4, height, "F");
+    pdf.rect(0, 0, 4, PDF_HEIGHT, "F");
 
+    const imageWidth = PDF_WIDTH - PDF_MARGIN * 2;
+    const imageHeight = PDF_HEIGHT - PDF_MARGIN * 2 - META_HEIGHT;
+    pdf.addImage(imageData, "JPEG", PDF_MARGIN, PDF_MARGIN, imageWidth, imageHeight, undefined, "FAST");
+
+    const metaY = PDF_HEIGHT - PDF_MARGIN - 9;
     pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(48);
-    pdf.setTextColor(37, 145, 251);
-    pdf.text(String(index + 1).padStart(2, "0"), 20, 50);
-
-    pdf.setFontSize(28);
+    pdf.setFontSize(18);
     pdf.setTextColor(255, 255, 255);
-    pdf.text(title, 20, 70);
+    pdf.text(title, PDF_MARGIN, metaY - 4);
 
     pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(14);
-    pdf.setTextColor(180, 190, 210);
-    const descriptionLines = pdf.splitTextToSize(description, width - 40);
-    pdf.text(descriptionLines, 20, 85);
-
-    pdf.setFontSize(11);
+    pdf.setFontSize(10);
     pdf.setTextColor(37, 145, 251);
-    pdf.text(routeLabel, 20, 105);
+    pdf.text(routeLabel, PDF_MARGIN, metaY + 2);
 
-    pdf.setFontSize(9);
     pdf.setTextColor(100, 115, 140);
-    pdf.text("BASELINE - Site Deck", 20, height - 12);
-    pdf.text(`${index + 1} / ${slides.length}`, width - 20, height - 12, { align: "right" });
-  });
+    pdf.text(`${String(index + 1).padStart(2, "0")} / ${slides.length}`, PDF_WIDTH - PDF_MARGIN, metaY + 2, { align: "right" });
+  }
 
   return pdf;
 };

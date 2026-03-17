@@ -13,25 +13,29 @@ import Deck from "./pages/Deck.tsx";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/product/:slug" element={<ProductDetail />} />
-          <Route path="/category/performance" element={<PerformanceCategory />} />
-          <Route path="/launch" element={<PreLaunch />} />
-          <Route path="/deck" element={<Deck />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const isDeckCapture = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("deckCapture") === "true";
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        {!isDeckCapture && <Toaster />}
+        {!isDeckCapture && <Sonner />}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/product/:slug" element={<ProductDetail />} />
+            <Route path="/category/performance" element={<PerformanceCategory />} />
+            <Route path="/launch" element={<PreLaunch />} />
+            <Route path="/deck" element={<Deck />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
