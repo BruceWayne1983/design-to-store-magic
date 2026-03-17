@@ -213,6 +213,40 @@ const Deck = () => {
           />
         ))}
       </div>
+
+      {showSafariPrompt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-lg border border-border bg-card p-6 shadow-lg">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-primary">PDF ready</p>
+            <h2 className="mt-3 text-2xl font-black uppercase tracking-wide text-foreground">Safari needs one click</h2>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Safari can block automatic file saves, so this deck now gives you a clean one-click fallback without exposing any preview branding.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <button
+                onClick={() => exportDeck("download", false)}
+                disabled={isDownloading}
+                className="rounded-md bg-primary px-4 py-3 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+              >
+                Download PDF
+              </button>
+              <button
+                onClick={() => exportDeck("preview", false)}
+                disabled={isDownloading}
+                className="rounded-md bg-secondary px-4 py-3 text-sm font-bold text-secondary-foreground transition-colors hover:bg-secondary/80 disabled:opacity-40"
+              >
+                Open PDF
+              </button>
+            </div>
+            <button
+              onClick={() => setShowSafariPrompt(false)}
+              className="mt-4 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Continue without downloading
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
