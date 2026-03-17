@@ -155,31 +155,14 @@ const drawSlidePage = (
 
   cursorY += 18;
 
-  // Description
-  pdf.setFont("helvetica", "italic");
-  pdf.setFontSize(8);
-  pdf.setTextColor(160, 175, 200);
-  const descLines = pdf.splitTextToSize(normalizePdfText(slide.description), W - PDF_MARGIN * 2);
-  pdf.text(descLines, PDF_MARGIN, cursorY);
-  cursorY += descLines.length * 3.5 + 3;
-
-  // Commentary bullets in a compact horizontal row
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(7);
-  pdf.setTextColor(180, 190, 210);
-
-  const bulletWidth = (W - PDF_MARGIN * 2) / 3;
-  slide.commentary.slice(0, 6).forEach((point, bi) => {
-    const col = bi % 3;
-    const row = Math.floor(bi / 3);
-    const bx = PDF_MARGIN + col * bulletWidth;
-    const by = cursorY + row * 8;
-
-    pdf.setFillColor(37, 145, 251);
-    pdf.circle(bx + 1, by - 0.8, 0.6, "F");
-    const lines = pdf.splitTextToSize(normalizePdfText(point), bulletWidth - 8);
-    pdf.text(lines[0], bx + 4, by);
-  });
+  // Description (skip if no commentary to keep it minimal)
+  if (slide.description) {
+    pdf.setFont("helvetica", "italic");
+    pdf.setFontSize(8);
+    pdf.setTextColor(160, 175, 200);
+    const descLines = pdf.splitTextToSize(normalizePdfText(slide.description), W - PDF_MARGIN * 2);
+    pdf.text(descLines, PDF_MARGIN, cursorY);
+  }
 
   // --- Screenshot section ---
   const imgY = HEADER_HEIGHT;
