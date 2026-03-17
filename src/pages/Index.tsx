@@ -11,6 +11,7 @@ import Newsletter from "@/components/sections/Newsletter";
 import FAQ from "@/components/sections/FAQ";
 import Testimonials from "@/components/sections/Testimonials";
 import Team from "@/components/sections/Team";
+import Education from "@/components/sections/Education";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -22,6 +23,7 @@ const Index = () => (
     <TrustedFormulas />
     <ScienceSection />
     <CompleteProtocols />
+    <Education />
     <HowItWorks />
     <ReadyToPerform />
     <Newsletter />
