@@ -182,15 +182,32 @@ const drawSlidePage = (
   const imgMaxWidth = screenshotPanelWidth - PDF_MARGIN;
   const imgMaxHeight = PDF_HEIGHT - PDF_MARGIN * 2;
 
-  // We need to figure out the image aspect ratio from the data
-  // For now scale to fit the available area maintaining aspect ratio
-  // Image is tall (full page), so height will be the constraining dimension
-  pdf.addImage(imageData, "JPEG", imgX, imgY, imgMaxWidth, imgMaxHeight, undefined, "FAST");
+  // Calculate aspect-ratio-preserving dimensions (object-fit: contain)
+  const imgProps = pdf.getImageProperties(imageData);
+  const imgAspect = imgProps.width / imgProps.height;
+  const boxAspect = imgMaxWidth / imgMaxHeight;
 
-  // Subtle border around screenshot
+  let drawW: number, drawH: number, drawX: number, drawY: number;
+  if (imgAspect > boxAspect) {
+    // Wider than box — fit to width
+    drawW = imgMaxWidth;
+    drawH = imgMaxWidth / imgAspect;
+    drawX = imgX;
+    drawY = imgY + (imgMaxHeight - drawH) / 2;
+  } else {
+    // Taller than box — fit to height
+    drawH = imgMaxHeight;
+    drawW = imgMaxHeight * imgAspect;
+    drawX = imgX + (imgMaxWidth - drawW) / 2;
+    drawY = imgY;
+  }
+
+  pdf.addImage(imageData, "JPEG", drawX, drawY, drawW, drawH, undefined, "FAST");
+
+  // Subtle border around actual image area
   pdf.setDrawColor(37, 145, 251);
   pdf.setLineWidth(0.3);
-  pdf.rect(imgX, imgY, imgMaxWidth, imgMaxHeight);
+  pdf.rect(drawX, drawY, drawW, drawH);
 
   // --- Right panel: commentary ---
   const commentX = screenshotPanelWidth + 8;
