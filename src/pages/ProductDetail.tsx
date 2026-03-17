@@ -1,4 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductHero from "@/components/product/ProductHero";
@@ -21,6 +22,7 @@ const ProductDetail = () => {
 
   return (
     <div className="flex flex-col items-start w-full">
+      <AnnouncementBar />
       <Navbar />
       <ProductHero product={product} />
       <WhyDifferent product={product} />

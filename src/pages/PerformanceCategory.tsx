@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Search, SlidersHorizontal, ChevronDown, FlaskConical, ShieldCheck, Factory, FileText } from "lucide-react";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import glyco8 from "@/assets/glyco8.png";
@@ -41,6 +42,7 @@ const products = [
 
 const PerformanceCategory = () => (
   <div className="flex flex-col items-start w-full">
+    <AnnouncementBar />
     <Navbar />
 
     {/* HERO */}

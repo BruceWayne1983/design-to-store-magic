@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
@@ -88,6 +89,7 @@ const Shop = () => {
 
   return (
     <div className="flex flex-col items-start w-full">
+      <AnnouncementBar />
       <Navbar />
 
       {/* Hero */}
