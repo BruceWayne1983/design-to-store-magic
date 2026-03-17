@@ -138,7 +138,7 @@ const captureFullPage = async (slide: DeckSlide) => {
 
     const canvas = await html2canvas(body, {
       backgroundColor: null,
-      scale: 1.5,
+      scale: 2,
       useCORS: true,
       width: CAPTURE_WIDTH,
       height: fullHeight,
@@ -150,7 +150,11 @@ const captureFullPage = async (slide: DeckSlide) => {
       scrollY: 0,
     });
 
-    return canvas.toDataURL("image/jpeg", 0.88);
+    return {
+      dataUrl: canvas.toDataURL("image/jpeg", 0.92),
+      width: canvas.width,
+      height: canvas.height,
+    };
   } finally {
     iframe.remove();
   }
