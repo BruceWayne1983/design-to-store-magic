@@ -120,7 +120,7 @@ const Deck = () => {
             >
               <div className="relative aspect-video w-full overflow-hidden bg-card">
                 <iframe
-                  src={slide.path}
+                  src={getDeckSlideSrc(slide.path)}
                   className="pointer-events-none h-[1080px] w-[1920px] origin-top-left"
                   style={{ transform: "scale(0.225)", transformOrigin: "top left" }}
                   title={slide.title}
