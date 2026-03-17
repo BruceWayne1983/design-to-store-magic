@@ -159,7 +159,7 @@ const Deck = () => {
           <span className="text-xs text-white/40 mr-4">
             {current + 1} / {slides.length}
           </span>
-          <button onClick={downloadSlide} disabled={isDownloading} className="p-2 text-white/50 hover:text-white disabled:opacity-30 transition-colors" title="Download as PDF">
+          <button onClick={downloadDeck} disabled={isDownloading} className="p-2 text-white/50 hover:text-white disabled:opacity-30 transition-colors" title="Download as PDF">
             <Download className={`w-4 h-4 ${isDownloading ? "animate-pulse" : ""}`} />
           </button>
           <button onClick={() => setIsGrid(true)} className="p-2 text-white/50 hover:text-white transition-colors" title="Grid view (G)">
