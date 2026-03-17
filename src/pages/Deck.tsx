@@ -54,7 +54,13 @@ const Deck = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("download") === "true") {
-      const timer = setTimeout(() => exportDeck("preview", false), 500);
+      const safariBrowser = isSafariBrowser();
+
+      if (safariBrowser) {
+        setShowSafariPrompt(true);
+      }
+
+      const timer = setTimeout(() => exportDeck("download", false, true), safariBrowser ? 50 : 300);
       return () => clearTimeout(timer);
     }
   }, [exportDeck]);
