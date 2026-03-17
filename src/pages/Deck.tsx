@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Maximize, Grid, X, Download, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createDeckPdf, deckSlides, downloadPdfFile, isSafariBrowser, openPdfPreview } from "@/lib/deckPdf";
