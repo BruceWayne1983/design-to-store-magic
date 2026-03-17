@@ -6,6 +6,12 @@ import { createDeckPdf, deckSlides, downloadPdfFile, isSafariBrowser, openPdfPre
 
 type ExportMode = "download" | "preview";
 
+const getDeckSlideSrc = (path: string) => {
+  const captureUrl = new URL(path, window.location.origin);
+  captureUrl.searchParams.set("deckCapture", "true");
+  return captureUrl.toString();
+};
+
 const Deck = () => {
   const slides = deckSlides;
   const [current, setCurrent] = useState(0);
