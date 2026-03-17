@@ -90,3 +90,39 @@
     font-family: 'Roboto', sans-serif;
   }
 }
+
+@media print {
+  @page {
+    size: landscape;
+    margin: 0;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .deck-print-area,
+  .deck-print-area * {
+    visibility: visible !important;
+  }
+
+  .deck-print-area {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: hsl(215, 50%, 5%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .deck-print-area iframe {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .deck-nav-controls {
+    display: none !important;
+  }
+}
