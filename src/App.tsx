@@ -25,6 +25,7 @@ const App = () => (
           <Route path="/product/:slug" element={<ProductDetail />} />
           <Route path="/category/performance" element={<PerformanceCategory />} />
           <Route path="/launch" element={<PreLaunch />} />
+          <Route path="/deck" element={<Deck />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
