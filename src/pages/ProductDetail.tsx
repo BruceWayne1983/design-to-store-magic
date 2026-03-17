@@ -22,6 +22,7 @@ const ProductDetail = () => {
 
   return (
     <div className="flex flex-col items-start w-full">
+      <AnnouncementBar />
       <Navbar />
       <ProductHero product={product} />
       <WhyDifferent product={product} />

@@ -42,6 +42,7 @@ const products = [
 
 const PerformanceCategory = () => (
   <div className="flex flex-col items-start w-full">
+    <AnnouncementBar />
     <Navbar />
 
     {/* HERO */}
