@@ -24,7 +24,9 @@ const Deck = () => {
     setIsDownloading(true);
 
     try {
-      const pdf = await createDeckPdf(slides);
+      const pdf = await createDeckPdf(slides, (current, total, title) => {
+        setExportProgress(`Capturing ${current}/${total}: ${title}`);
+      });
 
       if (mode === "preview") {
         openPdfPreview(pdf, preferPopup);
