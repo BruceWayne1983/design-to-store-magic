@@ -11,7 +11,7 @@ export const deckSlides: DeckSlide[] = [
   { title: "Homepage", path: "/", description: "Main landing page with hero, trust bar, product showcase, and full brand experience" },
   { title: "Shop All", path: "/shop", description: "Complete product catalogue with filtering and quick-add functionality" },
   { title: "Product Detail — Glyco8", path: "/product/glyco8", description: "Full PDP with subscribe & save, ingredient breakdown, mechanisms, and FAQs" },
-  { title: "Product Detail — Fusion Black", path: "/product/fusion-black", description: "Performance pre-workout PDP showcasing clinical dosing and stack options" },
+  
   { title: "Performance Category", path: "/category/performance", description: "Category landing page for the performance supplement range" },
   { title: "Pre-Launch", path: "/launch", description: "VIP early-access holding page with email signup and 20% launch discount" },
 ];
