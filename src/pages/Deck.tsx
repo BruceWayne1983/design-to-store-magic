@@ -49,6 +49,7 @@ const Deck = () => {
       console.error("Export failed:", e);
     } finally {
       setIsDownloading(false);
+      setExportProgress("");
     }
   }, [isDownloading, slides]);
 
