@@ -16,6 +16,7 @@ const slides = [
 const Deck = () => {
   const [current, setCurrent] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const slideRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
