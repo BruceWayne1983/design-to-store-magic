@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Maximize, Grid, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 const slides = [
@@ -13,30 +12,70 @@ const slides = [
   { title: "Pre-Launch", path: "/launch", description: "VIP early-access holding page with email signup and 20% launch discount" },
 ];
 
+const SITE_URL = window.location.origin;
+
 const Deck = () => {
   const [current, setCurrent] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const slideRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
-  const downloadSlide = useCallback(async () => {
-    if (!slideRef.current || isDownloading) return;
+  const downloadDeck = useCallback(() => {
+    if (isDownloading) return;
     setIsDownloading(true);
     try {
-      const canvas = await html2canvas(slideRef.current, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#0a1628",
+      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+      const W = 297;
+      const H = 210;
+
+      slides.forEach((slide, i) => {
+        if (i > 0) pdf.addPage();
+
+        // Dark background
+        pdf.setFillColor(10, 22, 40);
+        pdf.rect(0, 0, W, H, "F");
+
+        // Accent bar
+        pdf.setFillColor(37, 145, 251);
+        pdf.rect(0, 0, 4, H, "F");
+
+        // Slide number
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(48);
+        pdf.setTextColor(37, 145, 251);
+        pdf.text(String(i + 1).padStart(2, "0"), 20, 50);
+
+        // Title
+        pdf.setFontSize(28);
+        pdf.setTextColor(255, 255, 255);
+        pdf.text(slide.title, 20, 70);
+
+        // Description
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(14);
+        pdf.setTextColor(180, 190, 210);
+        const descLines = pdf.splitTextToSize(slide.description, W - 40);
+        pdf.text(descLines, 20, 85);
+
+        // URL
+        pdf.setFontSize(11);
+        pdf.setTextColor(37, 145, 251);
+        const fullUrl = `${SITE_URL}${slide.path}`;
+        pdf.textWithLink(fullUrl, 20, 105, { url: fullUrl });
+
+        // Footer
+        pdf.setFontSize(9);
+        pdf.setTextColor(100, 115, 140);
+        pdf.text("BASELINE — Site Deck", 20, H - 12);
+        pdf.text(`${i + 1} / ${slides.length}`, W - 20, H - 12, { align: "right" });
       });
-      const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [canvas.width, canvas.height] });
-      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, canvas.width, canvas.height);
-      pdf.save(`baseline-${slides[current].title.toLowerCase().replace(/\s+/g, "-")}.pdf`);
+
+      pdf.save("baseline-site-deck.pdf");
     } catch (e) {
       console.error("Download failed:", e);
     }
     setIsDownloading(false);
-  }, [current, isDownloading]);
+  }, [isDownloading]);
 
   const next = useCallback(() => setCurrent((c) => Math.min(c + 1, slides.length - 1)), []);
   const prev = useCallback(() => setCurrent((c) => Math.max(c - 1, 0)), []);
