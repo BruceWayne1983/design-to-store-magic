@@ -12,7 +12,7 @@ const slides = [
   { title: "Pre-Launch", path: "/launch", description: "VIP early-access holding page with email signup and 20% launch discount" },
 ];
 
-const SITE_URL = window.location.origin;
+const normalizePdfText = (value: string) => value.replace(/[—–]/g, "-");
 
 const Deck = () => {
   const [current, setCurrent] = useState(0);
@@ -22,7 +22,14 @@ const Deck = () => {
 
   const downloadDeck = useCallback(() => {
     if (isDownloading) return;
+
+    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const siteUrl = window.location.origin;
+    const fileName = "baseline-site-deck.pdf";
+    const popup = isIos ? window.open("", "_blank", "noopener,noreferrer") : null;
+
     setIsDownloading(true);
+
     try {
       const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
       const W = 297;
@@ -31,50 +38,58 @@ const Deck = () => {
       slides.forEach((slide, i) => {
         if (i > 0) pdf.addPage();
 
-        // Dark background
+        const title = normalizePdfText(slide.title);
+        const description = normalizePdfText(slide.description);
+        const fullUrl = `${siteUrl}${slide.path}`;
+
         pdf.setFillColor(10, 22, 40);
         pdf.rect(0, 0, W, H, "F");
 
-        // Accent bar
         pdf.setFillColor(37, 145, 251);
         pdf.rect(0, 0, 4, H, "F");
 
-        // Slide number
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(48);
         pdf.setTextColor(37, 145, 251);
         pdf.text(String(i + 1).padStart(2, "0"), 20, 50);
 
-        // Title
         pdf.setFontSize(28);
         pdf.setTextColor(255, 255, 255);
-        pdf.text(slide.title, 20, 70);
+        pdf.text(title, 20, 70);
 
-        // Description
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(14);
         pdf.setTextColor(180, 190, 210);
-        const descLines = pdf.splitTextToSize(slide.description, W - 40);
+        const descLines = pdf.splitTextToSize(description, W - 40);
         pdf.text(descLines, 20, 85);
 
-        // URL
         pdf.setFontSize(11);
         pdf.setTextColor(37, 145, 251);
-        const fullUrl = `${SITE_URL}${slide.path}`;
-        pdf.textWithLink(fullUrl, 20, 105, { url: fullUrl });
+        pdf.text(fullUrl, 20, 105);
+        pdf.link(20, 99, pdf.getTextWidth(fullUrl), 8, { url: fullUrl });
 
-        // Footer
         pdf.setFontSize(9);
         pdf.setTextColor(100, 115, 140);
-        pdf.text("BASELINE — Site Deck", 20, H - 12);
+        pdf.text("BASELINE - Site Deck", 20, H - 12);
         pdf.text(`${i + 1} / ${slides.length}`, W - 20, H - 12, { align: "right" });
       });
 
-      pdf.save("baseline-site-deck.pdf");
+      if (isIos) {
+        const dataUri = pdf.output("datauristring");
+        if (popup) {
+          popup.location.href = dataUri;
+        } else {
+          window.location.href = dataUri;
+        }
+      } else {
+        pdf.save(fileName);
+      }
     } catch (e) {
+      popup?.close();
       console.error("Download failed:", e);
+    } finally {
+      setIsDownloading(false);
     }
-    setIsDownloading(false);
   }, [isDownloading]);
 
   const next = useCallback(() => setCurrent((c) => Math.min(c + 1, slides.length - 1)), []);
