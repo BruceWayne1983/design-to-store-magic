@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Maximize, Grid, X, Download, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createDeckPdf, deckSlides, downloadPdfFile, isSafariBrowser, openPdfPreview } from "@/lib/deckPdf";
@@ -93,7 +94,7 @@ const Deck = () => {
     return (
       <div className="dark min-h-screen bg-background p-6 text-foreground md:p-10">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-xl font-black uppercase tracking-wider text-foreground">Baseline — Site Deck</h1>
+          <h1 className="text-lg md:text-xl font-black tracking-tight text-foreground uppercase">Baseline <span className="text-xs font-normal text-muted-foreground ml-2">Deck</span></h1>
           <button onClick={() => setIsGrid(false)} className="text-foreground/60 transition-colors hover:text-foreground">
             <X className="h-6 w-6" />
           </button>
@@ -136,8 +137,8 @@ const Deck = () => {
     <div className="dark flex h-screen w-screen flex-col overflow-hidden bg-background text-foreground">
       <div className="flex flex-shrink-0 items-center justify-between border-b border-border/60 bg-background px-4 py-3 md:px-6">
         <div className="flex items-center gap-4">
-          <span className="text-sm font-black uppercase tracking-wider text-foreground">Baseline</span>
-          <span className="text-xs text-muted-foreground">Site Deck</span>
+          <Link to="/" className="text-lg md:text-xl font-black tracking-tight text-foreground uppercase">Baseline</Link>
+          <span className="text-xs text-muted-foreground">Deck</span>
         </div>
         <div className="flex items-center gap-1 md:gap-2">
           <span className="mr-2 hidden text-xs text-muted-foreground sm:inline md:mr-4">
