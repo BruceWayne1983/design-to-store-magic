@@ -74,7 +74,7 @@ const PreLaunch = () => {
           </form>
         ) : (
           <div className="flex flex-col items-center gap-3 px-8 py-6 border border-primary/30 bg-primary/5 backdrop-blur-sm rounded-lg">
-            <span className="text-2xl">🎉</span>
+            <span className="text-2xl">✓</span>
             <p className="text-base font-semibold text-white">You're on the list!</p>
             <p className="text-sm text-white/50">We'll notify you with your exclusive 20% discount code at launch.</p>
           </div>
