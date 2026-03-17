@@ -9,6 +9,7 @@ import ProductDetail from "./pages/ProductDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PerformanceCategory from "./pages/PerformanceCategory.tsx";
 import PreLaunch from "./pages/PreLaunch.tsx";
+import Deck from "./pages/Deck.tsx";
 
 const queryClient = new QueryClient();
 
