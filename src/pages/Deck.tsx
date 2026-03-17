@@ -13,45 +13,40 @@ const Deck = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [showSafariPrompt, setShowSafariPrompt] = useState(false);
 
-  const exportDeck = useCallback((mode: ExportMode = "download", preferPopup = true) => {
+  const exportDeck = useCallback(async (mode: ExportMode = "download", preferPopup = true, triggeredByQuery = false) => {
     if (isDownloading) return;
 
-    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const fileName = "baseline-site-deck.pdf";
-    const shouldOpenPreview = mode === "preview" || isIos;
-    const popup = shouldOpenPreview && preferPopup ? window.open("", "_blank", "noopener,noreferrer") : null;
+    const safariBrowser = isSafariBrowser();
 
     setIsDownloading(true);
 
     try {
-      const pdf = createDeckPdf();
-      const blob = pdf.output("blob");
-      const blobUrl = URL.createObjectURL(blob);
+      const pdf = createDeckPdf(slides);
 
-      if (shouldOpenPreview) {
-        if (popup) {
-          popup.location.href = blobUrl;
-        } else {
-          window.location.href = blobUrl;
-        }
-      } else {
-        const link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = fileName;
-        link.rel = "noopener noreferrer";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
+      if (mode === "preview") {
+        openPdfPreview(pdf, preferPopup);
+        setShowSafariPrompt(false);
+        return;
       }
 
-      window.setTimeout(() => URL.revokeObjectURL(blobUrl), 60_000);
+      const didDownload = await downloadPdfFile(pdf, fileName);
+
+      if (!didDownload) {
+        openPdfPreview(pdf, preferPopup);
+      }
+
+      if (triggeredByQuery && safariBrowser) {
+        setShowSafariPrompt(true);
+      } else {
+        setShowSafariPrompt(false);
+      }
     } catch (e) {
-      popup?.close();
       console.error("Export failed:", e);
     } finally {
       setIsDownloading(false);
     }
-  }, [createDeckPdf, isDownloading]);
+  }, [isDownloading, slides]);
 
   const next = useCallback(() => setCurrent((c) => Math.min(c + 1, slides.length - 1)), []);
   const prev = useCallback(() => setCurrent((c) => Math.max(c - 1, 0)), []);
