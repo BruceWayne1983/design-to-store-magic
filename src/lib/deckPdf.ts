@@ -21,18 +21,6 @@ export const deckSlides: DeckSlide[] = [
     description: "Full product detail page with supplement facts, ingredient breakdown, and mechanisms of action",
     commentary: [],
   },
-  {
-    title: "Category Page",
-    path: "/category/performance",
-    description: "Category landing page for the performance supplement range",
-    commentary: [],
-  },
-  {
-    title: "Pre-Launch",
-    path: "/launch",
-    description: "VIP early-access holding page with email signup and 20% launch discount",
-    commentary: [],
-  },
 ];
 
 const normalizePdfText = (value: string) => value.replace(/[—–]/g, "-");
