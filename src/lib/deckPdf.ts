@@ -76,9 +76,9 @@ export const deckSlides: DeckSlide[] = [
 const normalizePdfText = (value: string) => value.replace(/[—–]/g, "-");
 const CAPTURE_WIDTH = 1440;
 const FULL_PAGE_MAX_HEIGHT = 12000;
-const PDF_WIDTH = 297;
-const PDF_HEIGHT = 210;
+const PDF_PAGE_WIDTH_MM = 297; // A4 landscape width
 const PDF_MARGIN = 10;
+const HEADER_HEIGHT = 45; // mm reserved for title/commentary header
 
 const waitForImages = async (doc: Document) => {
   const imageElements = Array.from(doc.images);
@@ -138,7 +138,7 @@ const captureFullPage = async (slide: DeckSlide) => {
 
     const canvas = await html2canvas(body, {
       backgroundColor: null,
-      scale: 1.5,
+      scale: 2,
       useCORS: true,
       width: CAPTURE_WIDTH,
       height: fullHeight,
@@ -150,159 +150,139 @@ const captureFullPage = async (slide: DeckSlide) => {
       scrollY: 0,
     });
 
-    return canvas.toDataURL("image/jpeg", 0.88);
+    return {
+      dataUrl: canvas.toDataURL("image/jpeg", 0.92),
+      width: canvas.width,
+      height: canvas.height,
+    };
   } finally {
     iframe.remove();
   }
 };
 
-// Draw a single PDF page with full-page screenshot on the left and commentary on the right
+// Draw a slide: header with commentary on top, then full-width screenshot below
+// The PDF page height is calculated dynamically to fit the image at full width
 const drawSlidePage = (
   pdf: jsPDF,
   slide: DeckSlide,
-  imageData: string,
+  capture: { dataUrl: string; width: number; height: number },
   index: number,
   total: number,
+  pageHeight: number,
 ) => {
+  const W = PDF_PAGE_WIDTH_MM;
+  const H = pageHeight;
   const title = normalizePdfText(slide.title);
   const routeLabel = normalizePdfText(slide.path === "/" ? "Route: /" : `Route: ${slide.path}`);
 
   // Background
   pdf.setFillColor(10, 22, 40);
-  pdf.rect(0, 0, PDF_WIDTH, PDF_HEIGHT, "F");
+  pdf.rect(0, 0, W, H, "F");
 
-  // Left accent bar
+  // Top accent bar
   pdf.setFillColor(37, 145, 251);
-  pdf.rect(0, 0, 3, PDF_HEIGHT, "F");
+  pdf.rect(0, 0, W, 2, "F");
 
-  // --- Left panel: full-page screenshot ---
-  const screenshotPanelWidth = 170;
-  const imgX = PDF_MARGIN;
-  const imgY = PDF_MARGIN;
-  const imgMaxWidth = screenshotPanelWidth - PDF_MARGIN;
-  const imgMaxHeight = PDF_HEIGHT - PDF_MARGIN * 2;
+  // --- Header section ---
+  let cursorY = PDF_MARGIN + 2;
 
-  // Calculate aspect-ratio-preserving dimensions (object-fit: contain)
-  const imgProps = pdf.getImageProperties(imageData);
-  const imgAspect = imgProps.width / imgProps.height;
-  const boxAspect = imgMaxWidth / imgMaxHeight;
-
-  let drawW: number, drawH: number, drawX: number, drawY: number;
-  if (imgAspect > boxAspect) {
-    // Wider than box — fit to width
-    drawW = imgMaxWidth;
-    drawH = imgMaxWidth / imgAspect;
-    drawX = imgX;
-    drawY = imgY + (imgMaxHeight - drawH) / 2;
-  } else {
-    // Taller than box — fit to height
-    drawH = imgMaxHeight;
-    drawW = imgMaxHeight * imgAspect;
-    drawX = imgX + (imgMaxWidth - drawW) / 2;
-    drawY = imgY;
-  }
-
-  pdf.addImage(imageData, "JPEG", drawX, drawY, drawW, drawH, undefined, "FAST");
-
-  // Subtle border around actual image area
-  pdf.setDrawColor(37, 145, 251);
-  pdf.setLineWidth(0.3);
-  pdf.rect(drawX, drawY, drawW, drawH);
-
-  // --- Right panel: commentary ---
-  const commentX = screenshotPanelWidth + 8;
-  const commentWidth = PDF_WIDTH - commentX - PDF_MARGIN;
-  let cursorY = PDF_MARGIN + 4;
-
-  // Slide number
+  // Slide number + title on same line
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(36);
+  pdf.setFontSize(28);
   pdf.setTextColor(37, 145, 251);
-  pdf.text(String(index + 1).padStart(2, "0"), commentX, cursorY + 10);
-  cursorY += 18;
+  pdf.text(String(index + 1).padStart(2, "0"), PDF_MARGIN, cursorY + 8);
 
-  // Title
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(18);
+  pdf.setFontSize(16);
   pdf.setTextColor(255, 255, 255);
-  const titleLines = pdf.splitTextToSize(title, commentWidth);
-  pdf.text(titleLines, commentX, cursorY);
-  cursorY += titleLines.length * 7 + 4;
+  pdf.text(title, PDF_MARGIN + 22, cursorY + 7);
 
-  // Route
+  // Route label
   pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(9);
+  pdf.setFontSize(8);
   pdf.setTextColor(37, 145, 251);
-  pdf.text(routeLabel, commentX, cursorY);
-  cursorY += 8;
+  pdf.text(routeLabel, PDF_MARGIN + 22, cursorY + 13);
 
-  // Divider
-  pdf.setDrawColor(37, 145, 251);
-  pdf.setLineWidth(0.4);
-  pdf.line(commentX, cursorY, commentX + commentWidth, cursorY);
-  cursorY += 8;
-
-  // Description
-  pdf.setFont("helvetica", "italic");
-  pdf.setFontSize(9);
-  pdf.setTextColor(160, 175, 200);
-  const descLines = pdf.splitTextToSize(normalizePdfText(slide.description), commentWidth);
-  pdf.text(descLines, commentX, cursorY);
-  cursorY += descLines.length * 4.5 + 8;
-
-  // Commentary heading
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(9);
-  pdf.setTextColor(37, 145, 251);
-  pdf.text("KEY FEATURES", commentX, cursorY);
-  cursorY += 7;
-
-  // Commentary bullets
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(8.5);
-  pdf.setTextColor(200, 210, 225);
-
-  for (const point of slide.commentary) {
-    const bulletText = normalizePdfText(point);
-    const lines = pdf.splitTextToSize(bulletText, commentWidth - 6);
-
-    // Bullet dot
-    pdf.setFillColor(37, 145, 251);
-    pdf.circle(commentX + 1.5, cursorY - 1, 0.8, "F");
-
-    pdf.text(lines, commentX + 5, cursorY);
-    cursorY += lines.length * 4 + 3;
-
-    if (cursorY > PDF_HEIGHT - PDF_MARGIN - 10) break;
-  }
-
-  // Page counter bottom right
+  // Page counter top right
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8);
   pdf.setTextColor(80, 95, 120);
-  pdf.text(`${String(index + 1).padStart(2, "0")} / ${total}`, PDF_WIDTH - PDF_MARGIN, PDF_HEIGHT - PDF_MARGIN, { align: "right" });
+  pdf.text(`${String(index + 1).padStart(2, "0")} / ${total}`, W - PDF_MARGIN, cursorY + 7, { align: "right" });
+
+  cursorY += 18;
+
+  // Description
+  pdf.setFont("helvetica", "italic");
+  pdf.setFontSize(8);
+  pdf.setTextColor(160, 175, 200);
+  const descLines = pdf.splitTextToSize(normalizePdfText(slide.description), W - PDF_MARGIN * 2);
+  pdf.text(descLines, PDF_MARGIN, cursorY);
+  cursorY += descLines.length * 3.5 + 3;
+
+  // Commentary bullets in a compact horizontal row
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(7);
+  pdf.setTextColor(180, 190, 210);
+
+  const bulletWidth = (W - PDF_MARGIN * 2) / 3;
+  slide.commentary.slice(0, 6).forEach((point, bi) => {
+    const col = bi % 3;
+    const row = Math.floor(bi / 3);
+    const bx = PDF_MARGIN + col * bulletWidth;
+    const by = cursorY + row * 8;
+
+    pdf.setFillColor(37, 145, 251);
+    pdf.circle(bx + 1, by - 0.8, 0.6, "F");
+    const lines = pdf.splitTextToSize(normalizePdfText(point), bulletWidth - 8);
+    pdf.text(lines[0], bx + 4, by);
+  });
+
+  // --- Screenshot section ---
+  const imgY = HEADER_HEIGHT;
+  const imgW = W - PDF_MARGIN * 2;
+  const imgH = H - HEADER_HEIGHT - PDF_MARGIN;
+
+  pdf.addImage(capture.dataUrl, "JPEG", PDF_MARGIN, imgY, imgW, imgH, undefined, "FAST");
+
+  // Border around screenshot
+  pdf.setDrawColor(37, 145, 251);
+  pdf.setLineWidth(0.3);
+  pdf.rect(PDF_MARGIN, imgY, imgW, imgH);
 
   // Brand bottom right
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(8);
-  pdf.setTextColor(60, 75, 100);
-  pdf.text("BASELINE", PDF_WIDTH - PDF_MARGIN, PDF_HEIGHT - PDF_MARGIN - 5, { align: "right" });
+  pdf.setFontSize(7);
+  pdf.setTextColor(40, 55, 80);
+  pdf.text("BASELINE", W - PDF_MARGIN, H - 3, { align: "right" });
 };
 
 export type ProgressCallback = (current: number, total: number, slideTitle: string) => void;
 
 export const createDeckPdf = async (slides: DeckSlide[], onProgress?: ProgressCallback) => {
-  const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+  // We'll create the PDF after capturing the first slide so we know the page dimensions
+  let pdf: jsPDF | null = null;
 
   for (const [index, slide] of slides.entries()) {
-    if (index > 0) pdf.addPage();
     onProgress?.(index + 1, slides.length, slide.title);
 
-    const imageData = await captureFullPage(slide);
-    drawSlidePage(pdf, slide, imageData, index, slides.length);
+    const capture = await captureFullPage(slide);
+
+    // Calculate page height: image fills full width minus margins, height scales proportionally
+    const imgContentWidth = PDF_PAGE_WIDTH_MM - PDF_MARGIN * 2;
+    const imgAspect = capture.width / capture.height;
+    const imgContentHeight = imgContentWidth / imgAspect;
+    const pageHeight = HEADER_HEIGHT + imgContentHeight + PDF_MARGIN;
+
+    if (!pdf) {
+      pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: [PDF_PAGE_WIDTH_MM, pageHeight] });
+    } else {
+      pdf.addPage([PDF_PAGE_WIDTH_MM, pageHeight]);
+    }
+
+    drawSlidePage(pdf, slide, capture, index, slides.length, pageHeight);
   }
 
-  return pdf;
+  return pdf!;
 };
 
 export const isSafariBrowser = () => {
