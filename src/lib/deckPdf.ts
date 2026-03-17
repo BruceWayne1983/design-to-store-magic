@@ -22,7 +22,7 @@ const CAPTURE_WIDTH = 1440;
 const FULL_PAGE_MAX_HEIGHT = 12000;
 const PDF_PAGE_WIDTH_MM = 297; // A4 landscape width
 const PDF_MARGIN = 10;
-const HEADER_HEIGHT = 45; // mm reserved for title/commentary header
+const HEADER_HEIGHT = 20; // mm reserved for title header (no commentary)
 
 const waitForImages = async (doc: Document) => {
   const imageElements = Array.from(doc.images);
