@@ -190,7 +190,7 @@ const Deck = () => {
             transition={{ duration: 0.3 }}
             className="w-full h-full max-w-[1400px] flex flex-col gap-4"
           >
-            <div ref={slideRef} className="deck-print-area flex-1 relative rounded-lg overflow-hidden border border-white/10 bg-[hsl(215,50%,8%)]">
+            <div className="deck-print-area flex-1 relative rounded-lg overflow-hidden border border-white/10 bg-[hsl(215,50%,8%)]">
               <iframe
                 src={slide.path}
                 className="w-full h-full border-0"
