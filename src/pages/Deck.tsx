@@ -93,7 +93,7 @@ const Deck = () => {
     return (
       <div className="dark min-h-screen bg-background p-6 text-foreground md:p-10">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-xl font-black uppercase tracking-wider text-foreground">Baseline — Site Deck</h1>
+          <h1 className="text-lg md:text-xl font-black tracking-tight text-foreground uppercase">Baseline <span className="text-xs font-normal text-muted-foreground ml-2">Deck</span></h1>
           <button onClick={() => setIsGrid(false)} className="text-foreground/60 transition-colors hover:text-foreground">
             <X className="h-6 w-6" />
           </button>
