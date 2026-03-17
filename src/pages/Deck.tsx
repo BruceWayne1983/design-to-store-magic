@@ -96,6 +96,14 @@ const Deck = () => {
   const prev = useCallback(() => setCurrent((c) => Math.max(c - 1, 0)), []);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("download") === "true") {
+      const timer = setTimeout(() => downloadDeck(), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [downloadDeck]);
+
+  useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); next(); }
       if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
