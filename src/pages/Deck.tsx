@@ -12,6 +12,7 @@ const Deck = () => {
   const [isGrid, setIsGrid] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [exportProgress, setExportProgress] = useState("");
   const [showSafariPrompt, setShowSafariPrompt] = useState(false);
 
   const exportDeck = useCallback(async (mode: ExportMode = "download", preferPopup = true, triggeredByQuery = false) => {
@@ -23,7 +24,9 @@ const Deck = () => {
     setIsDownloading(true);
 
     try {
-      const pdf = await createDeckPdf(slides);
+      const pdf = await createDeckPdf(slides, (current, total, title) => {
+        setExportProgress(`Capturing ${current}/${total}: ${title}`);
+      });
 
       if (mode === "preview") {
         openPdfPreview(pdf, preferPopup);
@@ -46,6 +49,7 @@ const Deck = () => {
       console.error("Export failed:", e);
     } finally {
       setIsDownloading(false);
+      setExportProgress("");
     }
   }, [isDownloading, slides]);
 
@@ -214,6 +218,16 @@ const Deck = () => {
           />
         ))}
       </div>
+
+      {isDownloading && exportProgress && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-8 shadow-lg">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+            <p className="text-sm font-semibold text-foreground">{exportProgress}</p>
+            <p className="text-xs text-muted-foreground">Full-page captures may take a moment...</p>
+          </div>
+        </div>
+      )}
 
       {showSafariPrompt && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 px-4 backdrop-blur-sm">
