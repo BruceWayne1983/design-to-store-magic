@@ -1,36 +1,54 @@
 import SectionHeader from "../SectionHeader";
 import { Link } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
 import glyco8 from "@/assets/glyco8.png";
 import fusionBlack from "@/assets/fusion-black.png";
 import vascul8 from "@/assets/vascul8.png";
 import glycoshift from "@/assets/glycoshift.png";
 
 const products = [
-  { name: "GLYCO8", slug: "glyco8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8 },
-  { name: "FUSION BLACK", slug: "fusion-black", desc: "Premium Performance PreWorkout", price: "£36.99", image: fusionBlack },
-  { name: "VASCUL8", slug: "vascul8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8 },
-  { name: "GLYCOSHIFT", slug: "glycoshift", desc: "Rapid Carb++ Hydration Fuel", price: "£29.99", image: glycoshift },
+  { name: "GLYCO8", slug: "glyco8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8, tag: "Best Seller" },
+  { name: "FUSION BLACK", slug: "fusion-black", desc: "Premium Performance Pre-Workout", price: "£36.99", image: fusionBlack, tag: "New" },
+  { name: "VASCUL8", slug: "vascul8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8, tag: null },
+  { name: "GLYCOSHIFT", slug: "glycoshift", desc: "Rapid Carb & Hydration Fuel", price: "£29.99", image: glycoshift, tag: null },
 ];
 
 const TrustedFormulas = () => (
   <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">
     <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
       <SectionHeader heading="Best Sellers" />
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {products.map((p) => (
-          <Link to={`/product/${p.slug}`} key={p.name} className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-            <div className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-6">
-              <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+          <div key={p.name} className="group flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all">
+            <Link to={`/product/${p.slug}`} className="relative w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8 overflow-hidden">
+              {p.tag && (
+                <span className="absolute top-3 left-3 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground rounded-sm z-10">
+                  {p.tag}
+                </span>
+              )}
+              <img
+                src={p.image}
+                alt={p.name}
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+              />
+            </Link>
+            <div className="p-4 md:p-5 flex flex-col gap-1 md:gap-1.5 border-t border-border">
+              <Link to={`/product/${p.slug}`}>
+                <h5 className="text-sm md:text-base font-bold text-foreground tracking-wide hover:text-primary transition-colors">{p.name}</h5>
+              </Link>
+              <p className="text-xs text-muted-foreground hidden sm:block leading-relaxed">{p.desc}</p>
+              <div className="flex items-center justify-between mt-2">
+                <span className="text-sm md:text-lg font-black text-foreground">{p.price}</span>
+                <button
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-[10px] md:text-xs font-medium uppercase tracking-wider hover:opacity-90 transition-opacity rounded-sm"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ShoppingCart className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                  <span className="hidden sm:inline">Add</span>
+                </button>
+              </div>
             </div>
-            <div className="p-4 md:p-6 flex flex-col gap-1 md:gap-2 text-center">
-              <h5 className="text-sm md:text-lg font-bold text-foreground tracking-wide">{p.name}</h5>
-              <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">{p.desc}</p>
-              <span className="text-sm md:text-lg font-bold text-foreground mt-1">{p.price}</span>
-              <button className="mt-2 md:mt-3 px-3 md:px-4 py-2 bg-primary text-primary-foreground text-xs md:text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">
-                View Product
-              </button>
-            </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
