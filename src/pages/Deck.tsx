@@ -16,7 +16,26 @@ const slides = [
 const Deck = () => {
   const [current, setCurrent] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const slideRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const downloadSlide = useCallback(async () => {
+    if (!slideRef.current || isDownloading) return;
+    setIsDownloading(true);
+    try {
+      const canvas = await html2canvas(slideRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#0a1628",
+      });
+      const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [canvas.width, canvas.height] });
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`baseline-${slides[current].title.toLowerCase().replace(/\s+/g, "-")}.pdf`);
+    } catch (e) {
+      console.error("Download failed:", e);
+    }
+    setIsDownloading(false);
+  }, [current, isDownloading]);
 
   const next = useCallback(() => setCurrent((c) => Math.min(c + 1, slides.length - 1)), []);
   const prev = useCallback(() => setCurrent((c) => Math.max(c - 1, 0)), []);
