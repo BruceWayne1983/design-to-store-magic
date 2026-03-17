@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight, Maximize, Grid, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize, Grid, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
