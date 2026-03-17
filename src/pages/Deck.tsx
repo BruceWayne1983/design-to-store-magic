@@ -1,71 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Maximize, Grid, X, Download, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import jsPDF from "jspdf";
+import { createDeckPdf, deckSlides, downloadPdfFile, isSafariBrowser, openPdfPreview } from "@/lib/deckPdf";
 
-const slides = [
-  { title: "Homepage", path: "/", description: "Main landing page with hero, trust bar, product showcase, and full brand experience" },
-  { title: "Shop All", path: "/shop", description: "Complete product catalogue with filtering and quick-add functionality" },
-  { title: "Product Detail — Glyco8", path: "/product/glyco8", description: "Full PDP with subscribe & save, ingredient breakdown, mechanisms, and FAQs" },
-  { title: "Product Detail — Fusion Black", path: "/product/fusion-black", description: "Performance pre-workout PDP showcasing clinical dosing and stack options" },
-  { title: "Performance Category", path: "/category/performance", description: "Category landing page for the performance supplement range" },
-  { title: "Pre-Launch", path: "/launch", description: "VIP early-access holding page with email signup and 20% launch discount" },
-];
-
-const normalizePdfText = (value: string) => value.replace(/[—–]/g, "-");
 type ExportMode = "download" | "preview";
 
 const Deck = () => {
+  const slides = deckSlides;
   const [current, setCurrent] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
-
-  const createDeckPdf = useCallback(() => {
-    const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-    const W = 297;
-    const H = 210;
-
-    slides.forEach((slide, i) => {
-      if (i > 0) pdf.addPage();
-
-      const title = normalizePdfText(slide.title);
-      const description = normalizePdfText(slide.description);
-      const routeLabel = normalizePdfText(slide.path === "/" ? "Route: homepage" : `Route: ${slide.path}`);
-
-      pdf.setFillColor(10, 22, 40);
-      pdf.rect(0, 0, W, H, "F");
-
-      pdf.setFillColor(37, 145, 251);
-      pdf.rect(0, 0, 4, H, "F");
-
-      pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(48);
-      pdf.setTextColor(37, 145, 251);
-      pdf.text(String(i + 1).padStart(2, "0"), 20, 50);
-
-      pdf.setFontSize(28);
-      pdf.setTextColor(255, 255, 255);
-      pdf.text(title, 20, 70);
-
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(14);
-      pdf.setTextColor(180, 190, 210);
-      const descLines = pdf.splitTextToSize(description, W - 40);
-      pdf.text(descLines, 20, 85);
-
-      pdf.setFontSize(11);
-      pdf.setTextColor(37, 145, 251);
-      pdf.text(routeLabel, 20, 105);
-
-      pdf.setFontSize(9);
-      pdf.setTextColor(100, 115, 140);
-      pdf.text("BASELINE - Site Deck", 20, H - 12);
-      pdf.text(`${i + 1} / ${slides.length}`, W - 20, H - 12, { align: "right" });
-    });
-
-    return pdf;
-  }, []);
+  const [showSafariPrompt, setShowSafariPrompt] = useState(false);
 
   const exportDeck = useCallback((mode: ExportMode = "download", preferPopup = true) => {
     if (isDownloading) return;
