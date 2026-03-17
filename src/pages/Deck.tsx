@@ -229,6 +229,7 @@ const Deck = () => {
         </div>
       )}
 
+      {showSafariPrompt && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 px-4 backdrop-blur-sm">
           <div className="w-full max-w-md rounded-lg border border-border bg-card p-6 shadow-lg">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-primary">PDF ready</p>
