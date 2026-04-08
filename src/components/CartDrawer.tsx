@@ -16,7 +16,7 @@ const demoItems = [
 ];
 
 const upsells = [
-  { name: "VASCUL8", desc: "Nitric Oxide & Pump", price: "£36.99", image: vascul8 },
+  { name: "VASCUL8™", desc: "Stimulant-Free Pump Formula", price: "£39.99", image: vascul8 },
 ];
 
 const CartDrawer = ({ open, onClose }: CartDrawerProps) => {

@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import SectionHeader from "../SectionHeader";
 import glyco8 from "@/assets/glyco8.png";
-import fusionBlack from "@/assets/fusion-black.png";
+import fusionLitePlus from "@/assets/fusion-lite-plus.png";
 import vascul8 from "@/assets/vascul8.png";
 import glycoshift from "@/assets/glycoshift.png";
 
 const stacks = [
   {
     name: "Performance Stack",
-    desc: "Fusion Black + Vascul8 for maximum pre-workout intensity, pump and endurance.",
+    desc: "Fusion Lite+ + VASCUL8 for maximum pre-workout intensity, pump and endurance.",
     price: "£64.99",
-    images: [fusionBlack, vascul8],
+    images: [fusionLitePlus, vascul8],
     tag: "Most Popular",
   },
   {
