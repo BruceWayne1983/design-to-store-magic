@@ -1,6 +1,6 @@
 import heroBg from "@/assets/hero-bg.jpg";
 import glyco8 from "@/assets/glyco8.png";
-import fusionBlack from "@/assets/fusion-black.png";
+import fusionLitePlus from "@/assets/fusion-lite-plus.png";
 import vascul8 from "@/assets/vascul8.png";
 import glycoshift from "@/assets/glycoshift.png";
 
