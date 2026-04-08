@@ -111,6 +111,9 @@ export interface ProductData {
 
   // FAQs
   faqs: ProductFAQItem[];
+
+  // Trademarked ingredient logos (optional)
+  ingredientLogos?: { image: string; name: string; caption?: string; forIngredient?: string }[];
 }
 
 export const products: Record<string, ProductData> = {
