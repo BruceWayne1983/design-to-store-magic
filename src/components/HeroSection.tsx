@@ -1,6 +1,6 @@
 import heroBg from "@/assets/hero-bg.jpg";
 import glyco8 from "@/assets/glyco8.png";
-import fusionBlack from "@/assets/fusion-black.png";
+import fusionLitePlus from "@/assets/fusion-lite-plus.png";
 import vascul8 from "@/assets/vascul8.png";
 import glycoshift from "@/assets/glycoshift.png";
 
@@ -36,7 +36,7 @@ const HeroSection = () => (
           <div className="absolute inset-0 bg-primary/5 rounded-full blur-[100px]" />
           <img src={vascul8} alt="Vascul8" className="relative z-10 h-[220px] object-contain -mr-6 translate-y-4 opacity-80" />
           <img src={glyco8} alt="Glyco8" className="relative z-20 h-[280px] object-contain -mr-4" />
-          <img src={fusionBlack} alt="Fusion Black" className="relative z-30 h-[320px] object-contain" />
+          <img src={fusionLitePlus} alt="Fusion Lite+" className="relative z-30 h-[320px] object-contain" />
           <img src={glycoshift} alt="GlycoShift" className="relative z-20 h-[260px] object-contain -ml-4 translate-y-2 opacity-90" />
         </div>
       </div>

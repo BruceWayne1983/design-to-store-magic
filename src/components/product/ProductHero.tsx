@@ -7,7 +7,6 @@ import type { ProductData } from "@/data/products";
 const ProductHero = ({ product }: { product: ProductData }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("subscribe");
-  const [frequency, setFrequency] = useState<"1" | "4" | "6">("6");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
 
@@ -63,6 +62,9 @@ const ProductHero = ({ product }: { product: ProductData }) => {
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight">{product.name}</h1>
             <p className="text-lg md:text-xl text-muted-foreground mt-1">{product.tagline}</p>
+            {product.format && (
+              <p className="text-sm text-muted-foreground mt-1">{product.format}</p>
+            )}
           </div>
 
           <ul className="flex flex-col gap-2">
@@ -75,7 +77,7 @@ const ProductHero = ({ product }: { product: ProductData }) => {
 
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-2xl font-black text-foreground">
-              {purchaseType === "subscribe" ? product.prices[frequency] : product.price}
+              {product.price}
             </span>
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-primary text-primary" />)}
@@ -88,26 +90,17 @@ const ProductHero = ({ product }: { product: ProductData }) => {
               <input type="radio" checked={purchaseType === "subscribe"} onChange={() => setPurchaseType("subscribe")} className="accent-primary" />
               <div>
                 <span className="text-sm font-semibold text-foreground">Subscribe & Save</span>
-                <span className="text-xs text-muted-foreground ml-2">Save up to 20%</span>
               </div>
             </label>
             {purchaseType === "subscribe" && (
               <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="flex flex-col gap-3 pl-6">
-                <p className="text-xs text-muted-foreground">Save up to {product.savings[frequency]}. Deliver automatically. Pause or cancel anytime.</p>
-                <div className="flex gap-2">
-                  {(["1", "4", "6"] as const).map((f) => (
-                    <button key={f} onClick={() => setFrequency(f)}
-                      className={`flex-1 py-2 text-center text-xs font-medium rounded transition-colors ${frequency === f ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"}`}>
-                      {f} week{f !== "1" ? "s" : ""}<br /><span className="text-[10px]">Save {product.savings[f]}</span>
-                    </button>
-                  ))}
-                </div>
+                <p className="text-xs text-muted-foreground">Save on every order. Delivered automatically on your schedule. Pause or cancel anytime.</p>
               </motion.div>
             )}
             <label className="flex items-center gap-2 cursor-pointer border-t border-border pt-4">
               <input type="radio" checked={purchaseType === "onetime"} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
               <div>
-                <span className="text-sm font-semibold text-foreground">One-time</span>
+                <span className="text-sm font-semibold text-foreground">One-time purchase</span>
                 <span className="text-sm text-muted-foreground ml-2">{product.price}</span>
               </div>
             </label>
