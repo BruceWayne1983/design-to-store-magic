@@ -65,7 +65,7 @@ const PreLaunch = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-5 py-3.5 bg-white/5 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-primary transition-colors backdrop-blur-sm"
+              className="flex-1 px-5 py-3.5 bg-white/[0.08] border border-white/30 rounded text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all backdrop-blur-sm"
             />
             <button
               type="submit"
