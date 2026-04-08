@@ -70,7 +70,7 @@ const SearchOverlay = ({ open, onClose }: SearchOverlayProps) => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {results.map((p) => (
                 <Link
-                  to={`/site/product/${p.slug}`}
+                  to={`/product/${p.slug}`}
                   key={p.slug}
                   onClick={onClose}
                   className="flex flex-col items-center gap-2 p-4 bg-secondary rounded-lg border border-border hover:border-primary/30 transition-colors group"

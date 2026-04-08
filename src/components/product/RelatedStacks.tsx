@@ -15,7 +15,7 @@ const RelatedStacks = ({ product }: { product: ProductData }) => {
         <StaggerContainer className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center w-full">
           {related.map((s) => (
             <StaggerItem key={s.slug}>
-              <Link to={`/site/product/${s.slug}`}>
+              <Link to={`/product/${s.slug}`}>
                 <motion.div whileHover={{ y: -4, boxShadow: "0 12px 24px -8px rgba(0,0,0,0.15)" }} transition={{ duration: 0.25 }}
                   className="w-full sm:w-[200px] flex flex-row sm:flex-col border border-border rounded-lg overflow-hidden">
                   <div className="w-24 sm:w-full aspect-square bg-secondary flex items-center justify-center p-3 sm:p-4 flex-shrink-0">

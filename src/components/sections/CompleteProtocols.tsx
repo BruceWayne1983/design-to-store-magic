@@ -49,7 +49,7 @@ const CompleteProtocols = () => (
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
               <div className="flex items-center justify-between mt-3">
                 <span className="text-lg md:text-xl font-black text-foreground">{s.price}</span>
-                <Link to="/site/shop" className="px-4 py-2 bg-primary text-primary-foreground text-xs font-medium uppercase tracking-wider hover:opacity-90 transition-opacity rounded-sm">
+                <Link to="/shop" className="px-4 py-2 bg-primary text-primary-foreground text-xs font-medium uppercase tracking-wider hover:opacity-90 transition-opacity rounded-sm">
                   View Stack
                 </Link>
               </div>

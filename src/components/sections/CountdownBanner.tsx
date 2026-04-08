@@ -21,7 +21,7 @@ function getTimeLeft(end: Date) {
 const CountdownBanner = ({
   headline = "Launch Offer — Free Shipping on All Orders",
   cta = "Shop Now",
-  link = "/site/shop",
+  link = "/shop",
   endDate = new Date(Date.now() + 3 * 86400000),
 }: CountdownBannerProps) => {
   const [time, setTime] = useState(getTimeLeft(endDate));

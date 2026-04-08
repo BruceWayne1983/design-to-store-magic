@@ -23,7 +23,7 @@ const ProductDetail = () => {
   const product = getProduct(slug || "");
   const buyButtonRef = useRef<HTMLButtonElement>(null);
 
-  if (!product) return <Navigate to="/site/shop" replace />;
+  if (!product) return <Navigate to="/shop" replace />;
 
   return (
     <div className="flex flex-col items-start w-full">
