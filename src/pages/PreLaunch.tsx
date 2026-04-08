@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import prelaunchHero from "@/assets/prelaunch-hero-v2.jpg";
+import logoLight from "@/assets/logo-light.png";
 import { Instagram, Facebook, Twitter } from "lucide-react";
 
 const PreLaunch = () => {
@@ -34,14 +35,16 @@ const PreLaunch = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-4 md:px-8 max-w-[720px] w-full gap-8 md:gap-10">
         {/* Logo / Brand */}
-        <div className="flex flex-col items-center gap-3">
-          <span className="text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-primary">
-            Coming Soon
-          </span>
-           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tight leading-[0.9] drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
-             BASE<span className="text-primary drop-shadow-[0_0_24px_hsl(var(--primary)/0.6)]">LINE</span>
-           </h1>
-        </div>
+         <div className="flex flex-col items-center gap-4">
+           <span className="text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-primary">
+             Coming Soon
+           </span>
+           <img
+             src={logoLight}
+             alt="Baseline Nutrition"
+             className="h-12 md:h-16 lg:h-20 w-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+           />
+         </div>
 
         {/* Tagline */}
          <p className="text-base md:text-lg text-white/80 max-w-[500px] leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">

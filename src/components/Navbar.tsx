@@ -3,7 +3,7 @@ import { ChevronDown, ChevronRight, Menu, X, Search, ShoppingBag, User } from "l
 import { Link } from "react-router-dom";
 import CartDrawer from "./CartDrawer";
 import SearchOverlay from "./SearchOverlay";
-import logoDark from "@/assets/logo-dark.jpg";
+import logoDark from "@/assets/logo-dark.png";
 
 const shopItems = [
   { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/category/performance" },
