@@ -20,7 +20,7 @@ const TrustedFormulas = () => (
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {products.map((p) => (
           <div key={p.name} className="group flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all">
-            <Link to={`/site/product/${p.slug}`} className="relative w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8 overflow-hidden">
+            <Link to={`/product/${p.slug}`} className="relative w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8 overflow-hidden">
               {p.tag && (
                 <span className="absolute top-3 left-3 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground rounded-sm z-10">
                   {p.tag}
@@ -33,7 +33,7 @@ const TrustedFormulas = () => (
               />
             </Link>
             <div className="p-4 md:p-5 flex flex-col gap-1 md:gap-1.5 border-t border-border">
-              <Link to={`/site/product/${p.slug}`}>
+              <Link to={`/product/${p.slug}`}>
                 <h5 className="text-sm md:text-base font-bold text-foreground tracking-wide hover:text-primary transition-colors">{p.name}</h5>
               </Link>
               <p className="text-xs text-muted-foreground hidden sm:block leading-relaxed">{p.desc}</p>

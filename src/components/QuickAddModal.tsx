@@ -42,7 +42,7 @@ const QuickAddModal = ({ open, onClose, product }: QuickAddModalProps) => {
               Add to basket
             </button>
             <Link
-              to={`/site/product/${product.slug}`}
+              to={`/product/${product.slug}`}
               onClick={onClose}
               className="text-center text-xs text-muted-foreground hover:text-primary transition-colors underline"
             >
