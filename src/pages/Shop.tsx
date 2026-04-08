@@ -5,13 +5,13 @@ import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import fusionLitePlus from "@/assets/fusion-lite-plus.png";
-import vascul8 from "@/assets/vascul8.png";
-import glyco8 from "@/assets/glyco8.png";
-import glycoshift from "@/assets/glycoshift.png";
-import electroFlow from "@/assets/electro-flow.png";
-import purestCreatine from "@/assets/purest-creatine.png";
-import h2oGo from "@/assets/h2o-go.png";
+import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
+import vascul8 from "@/assets/products/vascul8.jpg";
+import glyco8 from "@/assets/products/glyco8.jpg";
+import glycoshift from "@/assets/products/glycoshift.jpg";
+import electroFlow from "@/assets/products/electro-flow.jpg";
+import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
+import h2oGo from "@/assets/products/h2o-go.jpg";
 
 const products = [
   { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", image: fusionLitePlus },

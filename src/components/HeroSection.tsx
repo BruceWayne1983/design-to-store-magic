@@ -1,8 +1,8 @@
 import heroBg from "@/assets/hero-bg.jpg";
-import glyco8 from "@/assets/glyco8.png";
-import fusionLitePlus from "@/assets/fusion-lite-plus.png";
-import vascul8 from "@/assets/vascul8.png";
-import glycoshift from "@/assets/glycoshift.png";
+import glyco8 from "@/assets/products/glyco8.jpg";
+import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
+import vascul8 from "@/assets/products/vascul8.jpg";
+import glycoshift from "@/assets/products/glycoshift.jpg";
 
 const HeroSection = () => (
   <section className="w-full relative min-h-[400px] md:min-h-[600px] flex items-center overflow-hidden">
