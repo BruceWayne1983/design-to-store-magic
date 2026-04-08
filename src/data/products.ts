@@ -525,6 +525,9 @@ export const products: Record<string, ProductData> = {
       { name: "Rachel W.", role: "Strength Coach", quote: "I recommend Pürest Creatine to all my clients. Single ingredient, no nonsense, just results." },
     ],
     relatedSlugs: ["fusion-lite-plus", "vascul8"],
+    ingredientLogos: [
+      { image: purestCreatineLogo, name: "Pürest Creatine™", caption: "Pürest Creatine™ — ultra-purity creatine monohydrate, verified by third-party testing.", forIngredient: "NNB Creatine Monohydrate" },
+    ],
     faqs: [
       { q: "What sizes are available?", a: "300g (60 servings, £23.99) and 500g (100 servings, £34.99)." },
       { q: "Do I need a loading phase?", a: "Optional. You can load with 20g/day for 5-7 days for faster saturation, or simply take 5g daily and reach full saturation in 2-4 weeks." },
