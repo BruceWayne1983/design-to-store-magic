@@ -18,7 +18,7 @@ const PreLaunch = () => {
       <img
         src={prelaunchHero}
         alt="Baseline product family"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover brightness-[0.35] contrast-[0.9] blur-[1.5px]"
       />
       {/* Overlay — heavier to shadow out product names */}
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(215,50%,4%)/0.75] via-[hsl(215,50%,4%)/0.88] to-[hsl(215,50%,4%)/0.97]" />
