@@ -127,18 +127,26 @@ const Shop = () => {
           <SectionHeader tagline="Full Range" heading="Products" text={`Showing ${filtered.length} product${filtered.length !== 1 ? "s" : ""}`} />
           <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
             <AnimatePresence mode="popLayout">
-              {filtered.map((p) => (
+              {filtered.map((p, i) => (
                 <motion.div
                   key={p.slug}
                   layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.25 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{ duration: 0.4, delay: i * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
                   className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow group relative"
                 >
                   <Link to={`/product/${p.slug}`} className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8">
-                    <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+                    <motion.img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-contain"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </Link>
                   {/* Quick-add hover overlay */}
                   <button
@@ -167,7 +175,14 @@ const Shop = () => {
             {categoryCards.map((cat, i) => {
               const isReversed = i % 2 !== 0;
               return (
-                <div key={cat.title} className={`flex flex-col md:flex-row items-stretch border-t border-border ${i === categoryCards.length - 1 ? "border-b" : ""}`}>
+                <motion.div
+                  key={cat.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className={`flex flex-col md:flex-row items-stretch border-t border-border ${i === categoryCards.length - 1 ? "border-b" : ""}`}
+                >
                   {isReversed ? (
                     <>
                       <div className="w-full md:w-1/2 flex flex-col justify-center py-8 md:py-16 md:pr-16">
@@ -193,7 +208,7 @@ const Shop = () => {
                       </div>
                     </>
                   )}
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -205,9 +220,16 @@ const Shop = () => {
         <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
           <SectionHeader heading="Real results" text="Hear from athletes who trust Baseline" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {testimonials.map((t) => (
-              <div key={t.name} className="flex flex-col gap-6 border border-border rounded-lg p-6 md:p-8">
-                <div className="flex gap-1">{[...Array(5)].map((_, i) => <span key={i} className="text-primary">★</span>)}</div>
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={t.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: i * 0.12 }}
+                className="flex flex-col gap-6 border border-border rounded-lg p-6 md:p-8"
+              >
+                <div className="flex gap-1">{[...Array(5)].map((_, j) => <span key={j} className="text-primary">★</span>)}</div>
                 <p className="text-sm md:text-base text-foreground leading-relaxed">"{t.quote}"</p>
                 <div className="flex items-center gap-3 mt-auto">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"><span className="text-sm font-bold text-primary">{t.name[0]}</span></div>
@@ -216,7 +238,7 @@ const Shop = () => {
                     <div className="text-xs md:text-sm text-muted-foreground">{t.role}</div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -249,14 +271,20 @@ const Shop = () => {
 
       {/* CTA */}
       <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">
-        <div className="max-w-[768px] mx-auto flex flex-col items-center text-center gap-6 md:gap-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="max-w-[768px] mx-auto flex flex-col items-center text-center gap-6 md:gap-8"
+        >
           <h2 className="text-3xl md:text-5xl font-black text-foreground leading-[1.1]">Elevate your baseline</h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-[500px]">Start your journey to peak performance with science-backed nutrition protocols.</p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">Shop now</button>
             <button className="px-6 py-3 border border-border text-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Learn more</button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <Footer />
