@@ -50,7 +50,7 @@ const Footer = () => (
       <div className="flex flex-col md:flex-row md:justify-between gap-8">
         {/* Brand + social */}
         <div className="flex flex-col gap-4">
-          <span className="text-xl font-black uppercase tracking-tight">Baseline</span>
+          <span className="text-xl font-black uppercase tracking-tight">Baseline Nutrition</span>
           <p className="text-sm text-white/50 max-w-[260px] leading-relaxed">
             Performance nutrition built on real science. Clinically dosed, fully transparent.
           </p>

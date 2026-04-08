@@ -3,6 +3,7 @@ import { ChevronDown, ChevronRight, Menu, X, Search, ShoppingBag, User } from "l
 import { Link } from "react-router-dom";
 import CartDrawer from "./CartDrawer";
 import SearchOverlay from "./SearchOverlay";
+import logoDark from "@/assets/logo-dark.jpg";
 
 const shopItems = [
   { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/category/performance" },
@@ -35,7 +36,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-4 md:px-8 lg:px-16 h-[60px] md:h-[72px]">
           {/* Left */}
           <div className="flex items-center gap-4 md:gap-6">
-            <Link to="/" className="text-lg md:text-xl font-black tracking-tight text-foreground uppercase">Baseline</Link>
+            <Link to="/" className="flex items-center"><img src={logoDark} alt="Baseline Nutrition" className="h-6 md:h-8 w-auto" /></Link>
             <div className="hidden md:flex items-center gap-8">
               <Link to="/shop" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Shop</Link>
               <Link to="/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
