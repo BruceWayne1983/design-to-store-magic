@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
 import type { ProductData } from "@/data/products";
 
-const ProductHero = ({ product }: { product: ProductData }) => {
+const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("subscribe");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
