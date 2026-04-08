@@ -35,32 +35,23 @@ const mobileNavSections = [
   {
     title: "Performance",
     items: [
-      { name: "Pre-Workouts", link: "/shop" },
-      { name: "Intra-Workouts", link: "/shop" },
-      { name: "Protein & Post-Workouts", link: "/shop" },
-      { name: "Muscle Builders", link: "/shop" },
-      { name: "Nootropic & Energy Booster", link: "/shop" },
-      { name: "Carbohydrates", link: "/shop" },
+      { name: "Fusion Lite+", link: "/product/fusion-lite-plus" },
+      { name: "VASCUL8™", link: "/product/vascul8" },
+      { name: "Pürest Creatine™", link: "/product/purest-creatine" },
     ],
   },
   {
     title: "Health",
     items: [
-      { name: "Organ Health", link: "/shop" },
-      { name: "Immune Health", link: "/shop" },
-      { name: "Cognitive Health", link: "/shop" },
-      { name: "Gut Health", link: "/shop" },
-      { name: "Metabolic Health", link: "/shop" },
-      { name: "Men's Health", link: "/shop" },
+      { name: "ELECTRO FLOW", link: "/product/electro-flow" },
+      { name: "H2O GO", link: "/product/h2o-go" },
     ],
   },
   {
-    title: "Wellness",
+    title: "Metabolic",
     items: [
-      { name: "Longevity", link: "/shop" },
-      { name: "Stress Relief", link: "/shop" },
-      { name: "Weight Management", link: "/shop" },
-      { name: "Sleep Support", link: "/shop" },
+      { name: "GLYCO8™", link: "/product/glyco8" },
+      { name: "GLYCOSHIFT™", link: "/product/glycoshift" },
     ],
   },
 ];
