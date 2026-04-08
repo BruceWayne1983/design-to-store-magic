@@ -13,6 +13,7 @@ import electroFlow from "@/assets/products/electro-flow.jpg";
 const electroFlowHero = electroFlow;
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
 import h2oGo from "@/assets/products/h2o-go.jpg";
+import purestCreatineLogo from "@/assets/products/purest-creatine-logo.png";
 
 // Mechanism images
 import mechanismAmpkPathway from "@/assets/mechanism-ampk-pathway.jpg";
