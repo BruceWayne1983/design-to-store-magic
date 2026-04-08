@@ -49,12 +49,12 @@ const PreLaunch = () => {
          </p>
 
         {/* Launch discount badge */}
-        <div className="flex items-center gap-3 px-5 py-3 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-sm font-semibold text-white">
-            Sign up now and get <span className="text-primary">20% OFF</span> your first order
-          </span>
-        </div>
+         <div className="flex items-center gap-3 px-6 py-3.5 rounded-full border border-primary/40 bg-primary/10 backdrop-blur-md shadow-[0_0_20px_hsl(var(--primary)/0.15)]">
+           <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_hsl(var(--primary)/0.6)]" />
+           <span className="text-sm font-semibold text-white/90">
+             Sign up now and get <span className="text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">20% OFF</span> your first order
+           </span>
+         </div>
 
         {/* Signup form */}
         {!submitted ? (
