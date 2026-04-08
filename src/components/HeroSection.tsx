@@ -31,14 +31,6 @@ const HeroSection = () => (
           </div>
         </div>
 
-        {/* Right product lineup */}
-        <div className="flex-1 hidden lg:flex items-end justify-center gap-[-20px] relative">
-          <div className="absolute inset-0 bg-primary/5 rounded-full blur-[100px]" />
-          <img src={vascul8} alt="Vascul8" className="relative z-10 h-[220px] object-contain -mr-6 translate-y-4 opacity-80" />
-          <img src={glyco8} alt="Glyco8" className="relative z-20 h-[280px] object-contain -mr-4" />
-          <img src={fusionLitePlus} alt="Fusion Lite+" className="relative z-30 h-[320px] object-contain" />
-          <img src={glycoshift} alt="GlycoShift" className="relative z-20 h-[260px] object-contain -ml-4 translate-y-2 opacity-90" />
-        </div>
       </div>
     </div>
   </section>
