@@ -114,9 +114,9 @@ const PreLaunch = () => {
          </div>
 
          {/* Back to main site link (for demo) */}
-         <Link to="/site" className="text-sm text-white/40 hover:text-primary border border-white/15 hover:border-primary/40 px-6 py-2.5 rounded-full transition-all duration-300 mt-6 backdrop-blur-sm">
-           Enter Store →
-        </Link>
+         <Link to="/" className="text-sm text-white/40 hover:text-primary border border-white/15 hover:border-primary/40 px-6 py-2.5 rounded-full transition-all duration-300 mt-6 backdrop-blur-sm">
+            Enter Store →
+         </Link>
       </div>
     </div>
   );
