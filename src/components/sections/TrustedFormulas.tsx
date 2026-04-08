@@ -1,16 +1,16 @@
 import SectionHeader from "../SectionHeader";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
-import glyco8 from "@/assets/glyco8.png";
-import fusionBlack from "@/assets/fusion-black.png";
+import fusionLitePlus from "@/assets/fusion-lite-plus.png";
 import vascul8 from "@/assets/vascul8.png";
+import glyco8 from "@/assets/glyco8.png";
 import glycoshift from "@/assets/glycoshift.png";
 
 const products = [
-  { name: "GLYCO8", slug: "glyco8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8, tag: "Best Seller" },
-  { name: "FUSION BLACK", slug: "fusion-black", desc: "Premium Performance Pre-Workout", price: "£36.99", image: fusionBlack, tag: "New" },
-  { name: "VASCUL8", slug: "vascul8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8, tag: null },
-  { name: "GLYCOSHIFT", slug: "glycoshift", desc: "Rapid Carb & Hydration Fuel", price: "£29.99", image: glycoshift, tag: null },
+  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", image: fusionLitePlus, tag: "Best Seller" },
+  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", image: vascul8, tag: null },
+  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", image: glyco8, tag: null },
+  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", image: glycoshift, tag: null },
 ];
 
 const TrustedFormulas = () => (

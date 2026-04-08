@@ -8,14 +8,13 @@ import logoDark from "@/assets/logo-dark.jpg";
 const shopItems = [
   { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/category/performance" },
   { name: "Metabolic Support", desc: "Glucose disposal and metabolic optimisers", link: "/shop" },
-  { name: "Recovery & Sleep", desc: "Inflammation, sleep and muscle repair", link: "/shop" },
-  { name: "Health Optimisation", desc: "Immune, gut health and longevity", link: "/shop" },
+  { name: "Health & Hydration", desc: "Electrolyte and hydration support", link: "/shop" },
 ];
 
 const stackItems = [
-  { name: "Performance Stack", desc: "Fusion Black + Vascul8 for training intensity" },
-  { name: "Metabolic Stack", desc: "Glyco8 + GlycoShift for body composition" },
-  { name: "Recovery Stack", desc: "Vascul8 + Glyco8 for post-training recovery" },
+  { name: "Performance Stack", desc: "Fusion Lite+ + VASCUL8 for training intensity" },
+  { name: "Metabolic Stack", desc: "GLYCO8 + GLYCOSHIFT for body composition" },
+  { name: "Hydration Stack", desc: "Electro Flow + H2O GO for full hydration" },
 ];
 
 const scienceItems = [

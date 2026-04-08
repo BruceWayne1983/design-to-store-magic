@@ -3,10 +3,13 @@ import { Search, SlidersHorizontal, ChevronDown, FlaskConical, ShieldCheck, Fact
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import glyco8 from "@/assets/glyco8.png";
-import fusionBlack from "@/assets/fusion-black.png";
+import fusionLitePlus from "@/assets/fusion-lite-plus.png";
 import vascul8 from "@/assets/vascul8.png";
+import glyco8 from "@/assets/glyco8.png";
 import glycoshift from "@/assets/glycoshift.png";
+import electroFlow from "@/assets/electro-flow.png";
+import purestCreatine from "@/assets/purest-creatine.png";
+import h2oGo from "@/assets/h2o-go.png";
 
 const trustItems = [
   { icon: FlaskConical, label: "Clinically Dosed" },
@@ -18,26 +21,29 @@ const trustItems = [
 const categories = [
   {
     title: "PERFORMANCE",
-    desc: "Pre-workout, intra-workout and performance enhancers engineered for maximum training output.",
-    image: fusionBlack,
+    desc: "Pre-workout, pump and performance enhancers engineered for maximum training output.",
+    image: fusionLitePlus,
   },
   {
-    title: "METABOLIC & HEALTH",
+    title: "METABOLIC",
     desc: "Glucose disposal agents and metabolic optimisers built on real clinical mechanisms.",
     image: glyco8,
   },
   {
-    title: "RECOVERY & SLEEP",
-    desc: "Advanced recovery formulas targeting inflammation, sleep quality and muscle repair.",
-    image: vascul8,
+    title: "HEALTH & HYDRATION",
+    desc: "Advanced electrolyte formulas and hydration support for daily performance.",
+    image: electroFlow,
   },
 ];
 
 const products = [
-  { name: "GLYCO8", slug: "glyco8", desc: "Advanced Glucose Disposal Agent", price: "£39.99", image: glyco8, tag: "Best Seller" },
-  { name: "GLYCOSHIFT", slug: "glycoshift", desc: "Rapid Carb & Hydration Fuel", price: "£29.99", image: glycoshift, tag: null },
-  { name: "FUSION BLACK", slug: "fusion-black", desc: "Premium Performance Pre-Workout", price: "£36.99", image: fusionBlack, tag: "New" },
-  { name: "VASCUL8", slug: "vascul8", desc: "Nitric Oxide & Muscle Pump Catalyst", price: "£36.99", image: vascul8, tag: null },
+  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", image: fusionLitePlus, tag: "Best Seller" },
+  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", image: vascul8, tag: null },
+  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", image: glycoshift, tag: null },
+  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", image: glyco8, tag: null },
+  { name: "Electro Flow", slug: "electro-flow", desc: "Advanced Electrolyte Support", price: "£27.99", image: electroFlow, tag: null },
+  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", image: purestCreatine, tag: null },
+  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", image: h2oGo, tag: null },
 ];
 
 const PerformanceCategory = () => (
@@ -49,7 +55,7 @@ const PerformanceCategory = () => (
     <section className="w-full bg-[hsl(var(--hero-dark))] relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-0 px-4 md:px-8 lg:px-16 py-16 md:py-24">
         <div className="flex flex-col gap-5 md:gap-6 flex-1 z-10">
-          <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.2em]">Category</span>
+          <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.2em]">Full Range</span>
           <h1 className="text-3xl md:text-5xl lg:text-[56px] font-black text-white uppercase tracking-tight leading-[1.08]">
             Performance<br />Supplements
           </h1>
@@ -68,7 +74,7 @@ const PerformanceCategory = () => (
         <div className="flex-1 flex justify-center lg:justify-end">
           <div className="relative w-[280px] md:w-[360px] lg:w-[420px]">
             <div className="absolute inset-0 bg-primary/10 rounded-full blur-[80px]" />
-            <img src={fusionBlack} alt="Performance supplements" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl" />
+            <img src={fusionLitePlus} alt="Performance supplements" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl" />
           </div>
         </div>
       </div>
@@ -92,7 +98,6 @@ const PerformanceCategory = () => (
     <section className="w-full bg-background border-b border-border sticky top-0 z-30">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 py-3 md:py-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          {/* Search */}
           <div className="relative flex-1 max-w-xs">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
@@ -101,7 +106,6 @@ const PerformanceCategory = () => (
               className="w-full pl-9 pr-3 py-2 text-sm bg-secondary border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
-          {/* Filters */}
           <div className="flex items-center gap-2 flex-wrap">
             <button className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-foreground bg-secondary border border-border rounded-md hover:border-primary transition-colors">
               <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -109,7 +113,7 @@ const PerformanceCategory = () => (
               <ChevronDown className="w-3 h-3 text-muted-foreground" />
             </button>
             <button className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-foreground bg-secondary border border-border rounded-md hover:border-primary transition-colors">
-              Stimulant
+              Category
               <ChevronDown className="w-3 h-3 text-muted-foreground" />
             </button>
             <div className="hidden sm:block w-px h-5 bg-border mx-1" />
@@ -161,7 +165,7 @@ const PerformanceCategory = () => (
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div className="flex flex-col gap-2">
             <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.2em]">All products</span>
-            <h2 className="text-2xl md:text-4xl font-black text-foreground uppercase tracking-tight">Performance Range</h2>
+            <h2 className="text-2xl md:text-4xl font-black text-foreground uppercase tracking-tight">Full Range</h2>
           </div>
           <span className="text-sm text-muted-foreground">{products.length} products</span>
         </div>
