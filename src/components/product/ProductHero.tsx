@@ -111,6 +111,19 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
             Add to basket
           </motion.button>
 
+          {product.ingredientLogos && product.ingredientLogos.length > 0 && (
+            <div className="flex flex-col gap-3 border-t border-border pt-4">
+              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.2em]">Key Ingredients</span>
+              <div className="flex items-center gap-6">
+                {product.ingredientLogos.map((logo) => (
+                  <div key={logo.name} className="bg-[hsl(220,20%,10%)] rounded-md px-5 py-3 flex items-center justify-center">
+                    <img src={logo.image} alt={logo.name} className="h-[90px] w-auto object-contain" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="flex flex-col border-t border-border">
             <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuggestedUseOpen(!suggestedUseOpen)}>
               <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Suggested Use</span>
