@@ -220,9 +220,16 @@ const Shop = () => {
         <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
           <SectionHeader heading="Real results" text="Hear from athletes who trust Baseline" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {testimonials.map((t) => (
-              <div key={t.name} className="flex flex-col gap-6 border border-border rounded-lg p-6 md:p-8">
-                <div className="flex gap-1">{[...Array(5)].map((_, i) => <span key={i} className="text-primary">★</span>)}</div>
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={t.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: i * 0.12 }}
+                className="flex flex-col gap-6 border border-border rounded-lg p-6 md:p-8"
+              >
+                <div className="flex gap-1">{[...Array(5)].map((_, j) => <span key={j} className="text-primary">★</span>)}</div>
                 <p className="text-sm md:text-base text-foreground leading-relaxed">"{t.quote}"</p>
                 <div className="flex items-center gap-3 mt-auto">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"><span className="text-sm font-bold text-primary">{t.name[0]}</span></div>
@@ -231,7 +238,7 @@ const Shop = () => {
                     <div className="text-xs md:text-sm text-muted-foreground">{t.role}</div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
