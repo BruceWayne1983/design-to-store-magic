@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import prelaunchHero from "@/assets/prelaunch-hero-v2.jpg";
+import logoLight from "@/assets/logo-light.png";
 import { Instagram, Facebook, Twitter } from "lucide-react";
 
 const PreLaunch = () => {
