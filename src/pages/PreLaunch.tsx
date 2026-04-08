@@ -38,9 +38,9 @@ const PreLaunch = () => {
           <span className="text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-primary">
             Coming Soon
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tight leading-[0.9]">
-            BASE<span className="text-primary">LINE</span>
-          </h1>
+           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tight leading-[0.9] drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
+             BASE<span className="text-primary drop-shadow-[0_0_24px_hsl(var(--primary)/0.6)]">LINE</span>
+           </h1>
         </div>
 
         {/* Tagline */}
