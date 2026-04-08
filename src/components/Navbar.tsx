@@ -42,32 +42,34 @@ const megaColumns = [
 
 const mobileNavSections = [
   {
-    title: "Shop",
+    title: "Performance",
     items: [
-      { name: "Shop All", link: "/shop" },
-      { name: "Pre-Workouts", link: "/category/performance" },
+      { name: "Pre-Workouts", link: "/shop" },
       { name: "Intra-Workouts", link: "/shop" },
-      { name: "Pump Formulas", link: "/shop" },
-      { name: "Nootropic & Energy", link: "/shop" },
-      { name: "Creatine", link: "/shop" },
+      { name: "Protein & Post-Workouts", link: "/shop" },
+      { name: "Muscle Builders", link: "/shop" },
+      { name: "Nootropic & Energy Booster", link: "/shop" },
+      { name: "Carbohydrates", link: "/shop" },
     ],
   },
   {
     title: "Health",
     items: [
-      { name: "Hydration", link: "/shop" },
-      { name: "Metabolic Health", link: "/shop" },
-      { name: "Glucose Management", link: "/shop" },
+      { name: "Organ Health", link: "/shop" },
+      { name: "Immune Health", link: "/shop" },
+      { name: "Cognitive Health", link: "/shop" },
       { name: "Gut Health", link: "/shop" },
+      { name: "Metabolic Health", link: "/shop" },
+      { name: "Men's Health", link: "/shop" },
     ],
   },
   {
-    title: "Stacks",
+    title: "Wellness",
     items: [
-      { name: "Performance Stack", link: "/shop" },
-      { name: "Metabolic Stack", link: "/shop" },
-      { name: "Hydration Stack", link: "/shop" },
-      { name: "Complete Stack", link: "/shop" },
+      { name: "Longevity", link: "/shop" },
+      { name: "Stress Relief", link: "/shop" },
+      { name: "Weight Management", link: "/shop" },
+      { name: "Sleep Support", link: "/shop" },
     ],
   },
 ];
