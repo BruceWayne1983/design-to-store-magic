@@ -20,8 +20,10 @@ const PreLaunch = () => {
         alt="Baseline product family"
         className="absolute inset-0 w-full h-full object-cover"
       />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(215,50%,4%)/0.7] via-[hsl(215,50%,4%)/0.85] to-[hsl(215,50%,4%)/0.95]" />
+      {/* Overlay — heavier to shadow out product names */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(215,50%,4%)/0.75] via-[hsl(215,50%,4%)/0.88] to-[hsl(215,50%,4%)/0.97]" />
+      {/* Extra vignette to obscure product labels */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,hsl(215,50%,4%)_75%)]" />
 
       {/* Animated particles effect */}
       <div className="absolute inset-0 opacity-[0.04]" style={{
