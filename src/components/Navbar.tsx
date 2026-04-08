@@ -6,22 +6,35 @@ import CartDrawer from "./CartDrawer";
 import SearchOverlay from "./SearchOverlay";
 import logoDark from "@/assets/logo-dark.png";
 
-const shopItems = [
-  { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/category/performance" },
-  { name: "Metabolic Support", desc: "Glucose disposal and metabolic optimisers", link: "/shop" },
-  { name: "Health & Hydration", desc: "Electrolyte and hydration support", link: "/shop" },
-];
-
-const stackItems = [
-  { name: "Performance Stack", desc: "Fusion Lite+ + VASCUL8 for training intensity" },
-  { name: "Metabolic Stack", desc: "GLYCO8 + GLYCOSHIFT for body composition" },
-  { name: "Hydration Stack", desc: "Electro Flow + H2O GO for full hydration" },
-];
-
-const scienceItems = [
-  { name: "AMPK Activation", desc: "Cellular energy and glucose metabolism" },
-  { name: "Nitric Oxide Signalling", desc: "Vasodilation and nutrient delivery" },
-  { name: "Metabolic Partitioning", desc: "Glucose disposal and nutrient uptake" },
+const megaColumns = [
+  {
+    heading: "Performance",
+    links: [
+      { name: "Pre-Workouts", link: "/category/performance" },
+      { name: "Intra-Workouts", link: "/shop" },
+      { name: "Pump Formulas", link: "/shop" },
+      { name: "Nootropic & Energy", link: "/shop" },
+      { name: "Creatine", link: "/shop" },
+    ],
+  },
+  {
+    heading: "Health",
+    links: [
+      { name: "Hydration", link: "/shop" },
+      { name: "Metabolic Health", link: "/shop" },
+      { name: "Glucose Management", link: "/shop" },
+      { name: "Gut Health", link: "/shop" },
+    ],
+  },
+  {
+    heading: "Stacks",
+    links: [
+      { name: "Performance Stack", link: "/shop" },
+      { name: "Metabolic Stack", link: "/shop" },
+      { name: "Hydration Stack", link: "/shop" },
+      { name: "Complete Stack", link: "/shop" },
+    ],
+  },
 ];
 
 const mobileNavSections = [
