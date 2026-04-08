@@ -42,25 +42,29 @@ const mobileNavSections = [
     title: "Shop",
     items: [
       { name: "Shop All", link: "/shop" },
-      { name: "Performance", link: "/category/performance" },
-      { name: "Metabolic", link: "/shop" },
-      { name: "Health & Hydration", link: "/shop" },
+      { name: "Pre-Workouts", link: "/category/performance" },
+      { name: "Intra-Workouts", link: "/shop" },
+      { name: "Pump Formulas", link: "/shop" },
+      { name: "Nootropic & Energy", link: "/shop" },
+      { name: "Creatine", link: "/shop" },
+    ],
+  },
+  {
+    title: "Health",
+    items: [
+      { name: "Hydration", link: "/shop" },
+      { name: "Metabolic Health", link: "/shop" },
+      { name: "Glucose Management", link: "/shop" },
+      { name: "Gut Health", link: "/shop" },
     ],
   },
   {
     title: "Stacks",
     items: [
-      { name: "Performance Stack", link: "#" },
-      { name: "Metabolic Stack", link: "#" },
-      { name: "Hydration Stack", link: "#" },
-    ],
-  },
-  {
-    title: "Science",
-    items: [
-      { name: "AMPK Activation", link: "#" },
-      { name: "Nitric Oxide", link: "#" },
-      { name: "Metabolic Partitioning", link: "#" },
+      { name: "Performance Stack", link: "/shop" },
+      { name: "Metabolic Stack", link: "/shop" },
+      { name: "Hydration Stack", link: "/shop" },
+      { name: "Complete Stack", link: "/shop" },
     ],
   },
 ];
