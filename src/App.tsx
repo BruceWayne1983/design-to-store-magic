@@ -11,6 +11,7 @@ import PerformanceCategory from "./pages/PerformanceCategory.tsx";
 import PreLaunch from "./pages/PreLaunch.tsx";
 import Deck from "./pages/Deck.tsx";
 import PasswordGate from "./components/PasswordGate.tsx";
+import BackToTop from "./components/BackToTop.tsx";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/deck" element={<Deck />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <BackToTop />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

@@ -14,6 +14,7 @@ import Testimonials from "@/components/sections/Testimonials";
 import Team from "@/components/sections/Team";
 import Education from "@/components/sections/Education";
 import PromoBanner from "@/components/sections/PromoBanner";
+import CountdownBanner from "@/components/sections/CountdownBanner";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -21,6 +22,7 @@ const Index = () => (
     <AnnouncementBar />
     <Navbar />
     <HeroSection />
+    <CountdownBanner />
     <TrustBar />
     <FindWhatYouNeed />
     <TrustedFormulas />
