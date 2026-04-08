@@ -1,6 +1,6 @@
 import { X, Plus, Minus, ShoppingBag } from "lucide-react";
 import glyco8 from "@/assets/glyco8.png";
-import fusionBlack from "@/assets/fusion-black.png";
+import fusionLitePlus from "@/assets/fusion-lite-plus.png";
 import vascul8 from "@/assets/vascul8.png";
 
 interface CartDrawerProps {
@@ -11,8 +11,8 @@ interface CartDrawerProps {
 const FREE_SHIPPING_THRESHOLD = 75;
 
 const demoItems = [
-  { id: 1, name: "GLYCO8", desc: "Advanced Glucose Disposal Agent", price: 39.99, qty: 1, image: glyco8 },
-  { id: 2, name: "FUSION BLACK", desc: "Premium Performance Pre-Workout", price: 36.99, qty: 1, image: fusionBlack },
+  { id: 1, name: "GLYCO8™", desc: "Fast-Acting Nutrient Partitioning Support", price: 39.99, qty: 1, image: glyco8 },
+  { id: 2, name: "Fusion Lite+", desc: "Clinically Dosed Focus & Energy", price: 31.99, qty: 1, image: fusionLitePlus },
 ];
 
 const upsells = [
