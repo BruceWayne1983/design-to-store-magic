@@ -1,10 +1,10 @@
 import SectionHeader from "../SectionHeader";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
-import fusionLitePlus from "@/assets/fusion-lite-plus.png";
-import vascul8 from "@/assets/vascul8.png";
-import glyco8 from "@/assets/glyco8.png";
-import glycoshift from "@/assets/glycoshift.png";
+import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
+import vascul8 from "@/assets/products/vascul8.jpg";
+import glyco8 from "@/assets/products/glyco8.jpg";
+import glycoshift from "@/assets/products/glycoshift.jpg";
 
 const products = [
   { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", image: fusionLitePlus, tag: "Best Seller" },

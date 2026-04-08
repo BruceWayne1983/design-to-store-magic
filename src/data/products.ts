@@ -1,18 +1,18 @@
-// Product images
-import glyco8Hero from "@/assets/glyco8-hero.png";
-import glyco8Capsules from "@/assets/glyco8-capsules.png";
-import glyco8Label from "@/assets/glyco8-label.png";
-import glyco8 from "@/assets/glyco8.png";
-import fusionLitePlusHero from "@/assets/fusion-lite-plus-hero.png";
-import fusionLitePlus from "@/assets/fusion-lite-plus.png";
-import vascul8Hero from "@/assets/vascul8-hero.png";
-import vascul8 from "@/assets/vascul8.png";
-import glycoshiftHero from "@/assets/glycoshift-hero.png";
-import glycoshift from "@/assets/glycoshift.png";
-import electroFlowHero from "@/assets/electro-flow-hero.png";
-import electroFlow from "@/assets/electro-flow.png";
-import purestCreatine from "@/assets/purest-creatine.png";
-import h2oGo from "@/assets/h2o-go.png";
+// Product images — new mockups
+import glyco8 from "@/assets/products/glyco8.jpg";
+const glyco8Hero = glyco8;
+const glyco8Capsules = glyco8;
+const glyco8Label = glyco8;
+import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
+const fusionLitePlusHero = fusionLitePlus;
+import vascul8 from "@/assets/products/vascul8.jpg";
+const vascul8Hero = vascul8;
+import glycoshift from "@/assets/products/glycoshift.jpg";
+const glycoshiftHero = glycoshift;
+import electroFlow from "@/assets/products/electro-flow.jpg";
+const electroFlowHero = electroFlow;
+import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
+import h2oGo from "@/assets/products/h2o-go.jpg";
 
 // Mechanism images
 import mechanismAmpkPathway from "@/assets/mechanism-ampk-pathway.jpg";
