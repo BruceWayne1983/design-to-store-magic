@@ -49,12 +49,12 @@ const PreLaunch = () => {
          </p>
 
         {/* Launch discount badge */}
-        <div className="flex items-center gap-3 px-5 py-3 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-sm font-semibold text-white">
-            Sign up now and get <span className="text-primary">20% OFF</span> your first order
-          </span>
-        </div>
+         <div className="flex items-center gap-3 px-6 py-3.5 rounded-full border border-primary/40 bg-primary/10 backdrop-blur-md shadow-[0_0_20px_hsl(var(--primary)/0.15)]">
+           <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_hsl(var(--primary)/0.6)]" />
+           <span className="text-sm font-semibold text-white/90">
+             Sign up now and get <span className="text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">20% OFF</span> your first order
+           </span>
+         </div>
 
         {/* Signup form */}
         {!submitted ? (
@@ -91,28 +91,28 @@ const PreLaunch = () => {
           ].map((perk) => (
             <div
               key={perk.label}
-              className="relative flex flex-col items-center gap-2 py-5 px-3 rounded-xl border border-primary/20 bg-primary/[0.06] backdrop-blur-md overflow-hidden group hover:border-primary/40 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="text-3xl md:text-4xl font-black text-primary drop-shadow-[0_0_12px_hsl(var(--primary)/0.4)]">{perk.value}</span>
-              <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-[0.15em] font-semibold">{perk.label}</span>
+               className="relative flex flex-col items-center gap-2 py-5 px-3 rounded-xl border border-primary/30 bg-primary/[0.1] backdrop-blur-md overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-[0_0_16px_hsl(var(--primary)/0.1)]"
+             >
+               <div className="absolute inset-0 bg-gradient-to-b from-primary/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+               <span className="text-3xl md:text-4xl font-black text-primary drop-shadow-[0_0_16px_hsl(var(--primary)/0.5)]">{perk.value}</span>
+               <span className="text-[10px] md:text-xs text-white/70 uppercase tracking-[0.15em] font-semibold">{perk.label}</span>
             </div>
           ))}
         </div>
 
         {/* Social links */}
-        <div className="flex items-center gap-6 mt-4">
-          <span className="text-xs text-white/30 uppercase tracking-wider">Follow us</span>
-          <div className="flex gap-4">
-            <a href="#" className="text-white/30 hover:text-primary transition-colors"><Instagram className="w-5 h-5" /></a>
-            <a href="#" className="text-white/30 hover:text-primary transition-colors"><Facebook className="w-5 h-5" /></a>
-            <a href="#" className="text-white/30 hover:text-primary transition-colors"><Twitter className="w-5 h-5" /></a>
-          </div>
-        </div>
+         <div className="flex items-center gap-6 mt-4">
+           <span className="text-xs text-white/50 uppercase tracking-wider font-medium">Follow us</span>
+           <div className="flex gap-4">
+             <a href="#" className="text-white/50 hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)] transition-all"><Instagram className="w-5 h-5" /></a>
+             <a href="#" className="text-white/50 hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)] transition-all"><Facebook className="w-5 h-5" /></a>
+             <a href="#" className="text-white/50 hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)] transition-all"><Twitter className="w-5 h-5" /></a>
+           </div>
+         </div>
 
-        {/* Back to main site link (for demo) */}
-        <Link to="/site" className="text-xs text-white/20 hover:text-white/40 transition-colors mt-6">
-          Enter Store →
+         {/* Back to main site link (for demo) */}
+         <Link to="/site" className="text-sm text-white/40 hover:text-primary border border-white/15 hover:border-primary/40 px-6 py-2.5 rounded-full transition-all duration-300 mt-6 backdrop-blur-sm">
+           Enter Store →
         </Link>
       </div>
     </div>
