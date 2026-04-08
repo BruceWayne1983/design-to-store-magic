@@ -21,7 +21,9 @@ const PreLaunch = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
       {/* Subtle top/bottom fade */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(215,50%,4%)/0.5] via-transparent to-[hsl(215,50%,4%)/0.85]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(215,50%,4%)/0.6] via-[hsl(215,50%,4%)/0.3] to-[hsl(215,50%,4%)/0.9]" />
+      {/* Radial vignette for extra depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,hsl(215,50%,4%)_80%)]" />
 
       {/* Animated particles effect */}
       <div className="absolute inset-0 opacity-[0.04]" style={{
@@ -36,15 +38,15 @@ const PreLaunch = () => {
           <span className="text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-primary">
             Coming Soon
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tight leading-[0.9]">
-            BASE<span className="text-primary">LINE</span>
-          </h1>
+           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tight leading-[0.9] drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
+             BASE<span className="text-primary drop-shadow-[0_0_24px_hsl(var(--primary)/0.6)]">LINE</span>
+           </h1>
         </div>
 
         {/* Tagline */}
-        <p className="text-base md:text-lg text-white/60 max-w-[500px] leading-relaxed">
-          Science-backed performance nutrition is almost here. Be the first to access clinically dosed formulas engineered for results.
-        </p>
+         <p className="text-base md:text-lg text-white/80 max-w-[500px] leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+           Science-backed performance nutrition is almost here. Be the first to access clinically dosed formulas engineered for results.
+         </p>
 
         {/* Launch discount badge */}
         <div className="flex items-center gap-3 px-5 py-3 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm">
@@ -63,7 +65,7 @@ const PreLaunch = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-5 py-3.5 bg-white/5 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-primary transition-colors backdrop-blur-sm"
+              className="flex-1 px-5 py-3.5 bg-white/[0.08] border border-white/30 rounded text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all backdrop-blur-sm"
             />
             <button
               type="submit"
