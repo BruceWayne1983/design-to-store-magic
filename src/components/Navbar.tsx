@@ -7,9 +7,9 @@ import SearchOverlay from "./SearchOverlay";
 import logoDark from "@/assets/logo-dark.png";
 
 const shopItems = [
-  { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/category/performance" },
-  { name: "Metabolic Support", desc: "Glucose disposal and metabolic optimisers", link: "/shop" },
-  { name: "Health & Hydration", desc: "Electrolyte and hydration support", link: "/shop" },
+  { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/site/category/performance" },
+  { name: "Metabolic Support", desc: "Glucose disposal and metabolic optimisers", link: "/site/shop" },
+  { name: "Health & Hydration", desc: "Electrolyte and hydration support", link: "/site/shop" },
 ];
 
 const stackItems = [
