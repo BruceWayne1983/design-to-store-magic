@@ -28,10 +28,10 @@ const mobileNavSections = [
   {
     title: "Shop",
     items: [
-      { name: "Shop All", link: "/shop" },
-      { name: "Performance", link: "/category/performance" },
-      { name: "Metabolic", link: "/shop" },
-      { name: "Health & Hydration", link: "/shop" },
+      { name: "Shop All", link: "/site/shop" },
+      { name: "Performance", link: "/site/category/performance" },
+      { name: "Metabolic", link: "/site/shop" },
+      { name: "Health & Hydration", link: "/site/shop" },
     ],
   },
   {
