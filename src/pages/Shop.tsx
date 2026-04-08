@@ -127,18 +127,26 @@ const Shop = () => {
           <SectionHeader tagline="Full Range" heading="Products" text={`Showing ${filtered.length} product${filtered.length !== 1 ? "s" : ""}`} />
           <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
             <AnimatePresence mode="popLayout">
-              {filtered.map((p) => (
+              {filtered.map((p, i) => (
                 <motion.div
                   key={p.slug}
                   layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.25 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{ duration: 0.4, delay: i * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
                   className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow group relative"
                 >
                   <Link to={`/product/${p.slug}`} className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8">
-                    <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+                    <motion.img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-contain"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </Link>
                   {/* Quick-add hover overlay */}
                   <button
