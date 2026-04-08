@@ -1,4 +1,4 @@
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/products/hero-banner.jpg";
 import glyco8 from "@/assets/products/glyco8.jpg";
 import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
 import vascul8 from "@/assets/products/vascul8.jpg";
