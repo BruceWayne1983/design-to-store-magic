@@ -42,7 +42,7 @@ const PreLaunch = () => {
            <img
              src={logoLight}
              alt="Baseline Nutrition"
-             className="h-12 md:h-16 lg:h-20 w-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+             className="h-12 md:h-16 lg:h-20 w-auto drop-shadow-[0_0_24px_hsl(var(--primary)/0.5)] [filter:drop-shadow(0_0_48px_hsl(var(--primary)/0.25))_drop-shadow(0_0_12px_hsl(var(--primary)/0.4))]"
            />
          </div>
 
