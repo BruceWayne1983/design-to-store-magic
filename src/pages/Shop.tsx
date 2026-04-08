@@ -137,7 +137,7 @@ const Shop = () => {
                   transition={{ duration: 0.25 }}
                   className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow group relative"
                 >
-                  <Link to={`/product/${p.slug}`} className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8">
+                  <Link to={`/site/product/${p.slug}`} className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8">
                     <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
                   </Link>
                   {/* Quick-add hover overlay */}
@@ -147,7 +147,7 @@ const Shop = () => {
                   >
                     Quick Add
                   </button>
-                  <Link to={`/product/${p.slug}`} className="p-4 md:p-6 flex flex-col gap-1 text-center">
+                  <Link to={`/site/product/${p.slug}`} className="p-4 md:p-6 flex flex-col gap-1 text-center">
                     <h5 className="text-sm md:text-lg font-bold text-foreground tracking-wide">{p.name}</h5>
                     <p className="text-xs md:text-sm text-muted-foreground">{p.desc}</p>
                     <span className="text-sm md:text-lg font-bold text-foreground mt-1">{p.price}</span>
