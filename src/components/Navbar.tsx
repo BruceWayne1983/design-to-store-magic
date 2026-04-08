@@ -6,22 +6,35 @@ import CartDrawer from "./CartDrawer";
 import SearchOverlay from "./SearchOverlay";
 import logoDark from "@/assets/logo-dark.png";
 
-const shopItems = [
-  { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/category/performance" },
-  { name: "Metabolic Support", desc: "Glucose disposal and metabolic optimisers", link: "/shop" },
-  { name: "Health & Hydration", desc: "Electrolyte and hydration support", link: "/shop" },
-];
-
-const stackItems = [
-  { name: "Performance Stack", desc: "Fusion Lite+ + VASCUL8 for training intensity" },
-  { name: "Metabolic Stack", desc: "GLYCO8 + GLYCOSHIFT for body composition" },
-  { name: "Hydration Stack", desc: "Electro Flow + H2O GO for full hydration" },
-];
-
-const scienceItems = [
-  { name: "AMPK Activation", desc: "Cellular energy and glucose metabolism" },
-  { name: "Nitric Oxide Signalling", desc: "Vasodilation and nutrient delivery" },
-  { name: "Metabolic Partitioning", desc: "Glucose disposal and nutrient uptake" },
+const megaColumns = [
+  {
+    heading: "Performance",
+    links: [
+      { name: "Pre-Workouts", link: "/category/performance" },
+      { name: "Intra-Workouts", link: "/shop" },
+      { name: "Pump Formulas", link: "/shop" },
+      { name: "Nootropic & Energy", link: "/shop" },
+      { name: "Creatine", link: "/shop" },
+    ],
+  },
+  {
+    heading: "Health",
+    links: [
+      { name: "Hydration", link: "/shop" },
+      { name: "Metabolic Health", link: "/shop" },
+      { name: "Glucose Management", link: "/shop" },
+      { name: "Gut Health", link: "/shop" },
+    ],
+  },
+  {
+    heading: "Stacks",
+    links: [
+      { name: "Performance Stack", link: "/shop" },
+      { name: "Metabolic Stack", link: "/shop" },
+      { name: "Hydration Stack", link: "/shop" },
+      { name: "Complete Stack", link: "/shop" },
+    ],
+  },
 ];
 
 const mobileNavSections = [
@@ -29,25 +42,29 @@ const mobileNavSections = [
     title: "Shop",
     items: [
       { name: "Shop All", link: "/shop" },
-      { name: "Performance", link: "/category/performance" },
-      { name: "Metabolic", link: "/shop" },
-      { name: "Health & Hydration", link: "/shop" },
+      { name: "Pre-Workouts", link: "/category/performance" },
+      { name: "Intra-Workouts", link: "/shop" },
+      { name: "Pump Formulas", link: "/shop" },
+      { name: "Nootropic & Energy", link: "/shop" },
+      { name: "Creatine", link: "/shop" },
+    ],
+  },
+  {
+    title: "Health",
+    items: [
+      { name: "Hydration", link: "/shop" },
+      { name: "Metabolic Health", link: "/shop" },
+      { name: "Glucose Management", link: "/shop" },
+      { name: "Gut Health", link: "/shop" },
     ],
   },
   {
     title: "Stacks",
     items: [
-      { name: "Performance Stack", link: "#" },
-      { name: "Metabolic Stack", link: "#" },
-      { name: "Hydration Stack", link: "#" },
-    ],
-  },
-  {
-    title: "Science",
-    items: [
-      { name: "AMPK Activation", link: "#" },
-      { name: "Nitric Oxide", link: "#" },
-      { name: "Metabolic Partitioning", link: "#" },
+      { name: "Performance Stack", link: "/shop" },
+      { name: "Metabolic Stack", link: "/shop" },
+      { name: "Hydration Stack", link: "/shop" },
+      { name: "Complete Stack", link: "/shop" },
     ],
   },
 ];
@@ -82,16 +99,16 @@ const Navbar = () => {
               <img src={logoDark} alt="Baseline Nutrition" className={`w-auto transition-all duration-300 ${scrolled ? "h-8 md:h-8" : "h-10 md:h-12"}`} />
             </Link>
             <div className="hidden md:flex items-center gap-8">
-              <Link to="/shop" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Shop</Link>
-              <Link to="/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
-              <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Stacks</a>
-              <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Science</a>
               <button
                 className="flex items-center gap-1 text-sm text-foreground hover:text-primary transition-colors font-medium"
+                onMouseEnter={() => setMegaOpen(true)}
                 onClick={() => setMegaOpen(!megaOpen)}
               >
-                More <ChevronDown className="w-3.5 h-3.5" />
+                Shop <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen ? "rotate-180" : ""}`} />
               </button>
+              <Link to="/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
+              <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Science</a>
+              <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</a>
             </div>
           </div>
 
@@ -114,68 +131,46 @@ const Navbar = () => {
         </div>
 
         {/* Desktop mega menu */}
-        {megaOpen && (
-          <div className="hidden md:flex border-t border-border bg-background">
-            <div className="flex flex-1 gap-8 px-8 lg:px-16 py-8">
-              <div className="flex-1 flex flex-col gap-4">
-                <span className="text-xs font-semibold text-foreground uppercase tracking-wider">Shop by Category</span>
-                <div className="flex flex-col gap-3">
-                  {shopItems.map((item) => (
-                    <Link key={item.name} to={item.link} className="flex gap-3 py-1.5 group" onClick={() => setMegaOpen(false)}>
-                      <div className="w-6 h-6 bg-primary/10 rounded flex-shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{item.name}</div>
-                        <div className="text-xs text-muted-foreground">{item.desc}</div>
-                      </div>
-                    </Link>
-                  ))}
+        <AnimatePresence>
+          {megaOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.2 }}
+              className="hidden md:block absolute left-0 right-0 top-full border-t border-border bg-background shadow-lg z-50"
+              onMouseLeave={() => setMegaOpen(false)}
+            >
+              <div className="max-w-[1280px] mx-auto flex gap-16 px-8 lg:px-16 py-10">
+                {megaColumns.map((col) => (
+                  <div key={col.heading} className="flex flex-col gap-4 min-w-[180px]">
+                    <span className="text-xs font-bold text-foreground uppercase tracking-[0.2em]">{col.heading}</span>
+                    <div className="flex flex-col gap-2.5">
+                      {col.links.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.link}
+                          onClick={() => setMegaOpen(false)}
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div className="flex flex-col gap-4 min-w-[180px] ml-auto">
+                  <span className="text-xs font-bold text-foreground uppercase tracking-[0.2em]">Quick Links</span>
+                  <div className="flex flex-col gap-2.5">
+                    <Link to="/shop" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Shop All</Link>
+                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Best Sellers</a>
+                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">New Arrivals</a>
+                  </div>
                 </div>
               </div>
-              <div className="flex-1 flex flex-col gap-4">
-                <span className="text-xs font-semibold text-foreground uppercase tracking-wider">Stack Systems</span>
-                <div className="flex flex-col gap-3">
-                  {stackItems.map((item) => (
-                    <a key={item.name} href="#" className="flex gap-3 py-1.5 group">
-                      <div className="w-6 h-6 bg-primary/10 rounded flex-shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{item.name}</div>
-                        <div className="text-xs text-muted-foreground">{item.desc}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-              <div className="flex-1 flex flex-col gap-4">
-                <span className="text-xs font-semibold text-foreground uppercase tracking-wider">The Science</span>
-                <div className="flex flex-col gap-3">
-                  {scienceItems.map((item) => (
-                    <a key={item.name} href="#" className="flex gap-3 py-1.5 group">
-                      <div className="w-6 h-6 bg-primary/10 rounded flex-shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{item.name}</div>
-                        <div className="text-xs text-muted-foreground">{item.desc}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="w-[280px] border-l border-border p-8 flex flex-col gap-4">
-              <span className="text-xs font-semibold text-foreground uppercase tracking-wider">Featured Article</span>
-              <div className="flex flex-col gap-3 py-2">
-                <div className="w-full h-[100px] bg-[hsl(var(--hero-dark))] rounded" />
-                <div>
-                  <div className="text-sm font-semibold text-foreground">Understanding Glucose Disposal Agents</div>
-                  <div className="text-xs text-muted-foreground mt-1">How GDAs redirect carbohydrates toward muscle glycogen.</div>
-                </div>
-                <a href="#" className="text-xs underline text-primary">Read more</a>
-              </div>
-              <a href="#" className="flex items-center gap-2 text-sm text-foreground hover:text-primary transition-colors">
-                See all articles <ChevronRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Mobile full-screen drawer */}
