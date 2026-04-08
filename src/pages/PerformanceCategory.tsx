@@ -11,7 +11,7 @@ import glycoshift from "@/assets/glycoshift.png";
 const trustItems = [
   { icon: FlaskConical, label: "Clinically Dosed" },
   { icon: ShieldCheck, label: "Trademarked Ingredients" },
-  { icon: Factory, label: "Manufactured in UK" },
+  { icon: Factory, label: "Made in the UK" },
   { icon: FileText, label: "Transparent Formulas" },
 ];
 

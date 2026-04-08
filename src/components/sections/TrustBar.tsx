@@ -3,7 +3,7 @@ import { Sparkles, Shield, Factory, Eye } from "lucide-react";
 const items = [
   { icon: Sparkles, title: "Clinically Dosed", desc: "Every ingredient at effective doses" },
   { icon: Shield, title: "Trademarked Ingredients", desc: "Premium patented compounds" },
-  { icon: Factory, title: "Manufactured in UK", desc: "GMP certified facilities" },
+  { icon: Factory, title: "Made in the UK", desc: "GMP certified, Peterborough" },
   { icon: Eye, title: "Transparent Formulas", desc: "Full label transparency" },
 ];
 
