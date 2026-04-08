@@ -109,8 +109,8 @@ const PreLaunch = () => {
         </div>
 
         {/* Back to main site link (for demo) */}
-        <Link to="/" className="text-xs text-white/20 hover:text-white/40 transition-colors mt-6">
-          ← Back to main site
+        <Link to="/site" className="text-xs text-white/20 hover:text-white/40 transition-colors mt-6">
+          Enter Store →
         </Link>
       </div>
     </div>

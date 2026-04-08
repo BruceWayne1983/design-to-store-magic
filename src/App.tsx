@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound.tsx";
 import PerformanceCategory from "./pages/PerformanceCategory.tsx";
 import PreLaunch from "./pages/PreLaunch.tsx";
 import Deck from "./pages/Deck.tsx";
+import PasswordGate from "./components/PasswordGate.tsx";
 
 const queryClient = new QueryClient();
 
@@ -23,13 +24,14 @@ const App = () => {
         {!isDeckCapture && <Sonner />}
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/product/:slug" element={<ProductDetail />} />
-            <Route path="/category/performance" element={<PerformanceCategory />} />
-            <Route path="/launch" element={<PreLaunch />} />
+            <Route path="/" element={<PreLaunch />} />
+            <Route path="/site" element={<PasswordGate />}>
+              <Route index element={<Index />} />
+              <Route path="shop" element={<Shop />} />
+              <Route path="product/:slug" element={<ProductDetail />} />
+              <Route path="category/performance" element={<PerformanceCategory />} />
+            </Route>
             <Route path="/deck" element={<Deck />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
