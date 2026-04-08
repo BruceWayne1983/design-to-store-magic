@@ -1,7 +1,7 @@
 import { X, Plus, Minus, ShoppingBag } from "lucide-react";
-import glyco8 from "@/assets/glyco8.png";
-import fusionLitePlus from "@/assets/fusion-lite-plus.png";
-import vascul8 from "@/assets/vascul8.png";
+import glyco8 from "@/assets/products/glyco8.jpg";
+import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
+import vascul8 from "@/assets/products/vascul8.jpg";
 
 interface CartDrawerProps {
   open: boolean;
