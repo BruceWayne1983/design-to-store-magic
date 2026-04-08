@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
 import type { ProductData } from "@/data/products";
 
-const ProductHero = ({ product }: { product: ProductData }) => {
+const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("subscribe");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
@@ -106,7 +106,7 @@ const ProductHero = ({ product }: { product: ProductData }) => {
             </label>
           </div>
 
-          <motion.button whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }} whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
+          <motion.button ref={buyButtonRef as React.Ref<HTMLButtonElement>} whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }} whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
             className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded">
             Add to basket
           </motion.button>

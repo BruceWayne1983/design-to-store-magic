@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
-import { useState } from "react";
+import QuickAddModal from "@/components/QuickAddModal";
 import { ChevronDown } from "lucide-react";
 import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
 import vascul8 from "@/assets/products/vascul8.jpg";
@@ -13,35 +15,31 @@ import electroFlow from "@/assets/products/electro-flow.jpg";
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
 import h2oGo from "@/assets/products/h2o-go.jpg";
 
+type Category = "All" | "Performance" | "Metabolic" | "Health & Hydration";
+type SortKey = "featured" | "price-asc" | "price-desc" | "az";
+
 const products = [
-  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", image: fusionLitePlus },
-  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", image: vascul8 },
-  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", image: glycoshift },
-  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", image: glyco8 },
-  { name: "Electro Flow", slug: "electro-flow", desc: "Advanced Electrolyte Support", price: "£27.99", image: electroFlow },
-  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", image: purestCreatine },
-  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", image: h2oGo },
+  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, category: "Performance" as Category },
+  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", priceNum: 39.99, image: vascul8, category: "Performance" as Category },
+  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", priceNum: 39.99, image: glycoshift, category: "Metabolic" as Category },
+  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", priceNum: 39.99, image: glyco8, category: "Metabolic" as Category },
+  { name: "Electro Flow", slug: "electro-flow", desc: "Advanced Electrolyte Support", price: "£27.99", priceNum: 27.99, image: electroFlow, category: "Health & Hydration" as Category },
+  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", priceNum: 23.99, image: purestCreatine, category: "Performance" as Category },
+  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", priceNum: 0, image: h2oGo, category: "Health & Hydration" as Category },
 ];
 
-const categories = [
-  {
-    tagline: "Performance",
-    title: "Performance supplements",
-    desc: "Clinically formulated pre-workout, pump and performance enhancers designed to push your limits in every session.",
-    image: fusionLitePlus,
-  },
-  {
-    tagline: "Metabolic",
-    title: "Metabolic support",
-    desc: "Glucose disposal agents, carb management tools, and metabolic optimisers built on real clinical mechanisms.",
-    image: glyco8,
-  },
-  {
-    tagline: "Health",
-    title: "Health & Hydration",
-    desc: "Advanced electrolyte formulas and hydration support for daily performance and recovery.",
-    image: electroFlow,
-  },
+const categories: Category[] = ["All", "Performance", "Metabolic", "Health & Hydration"];
+const sortOptions: { key: SortKey; label: string }[] = [
+  { key: "featured", label: "Featured" },
+  { key: "price-asc", label: "Price: Low–High" },
+  { key: "price-desc", label: "Price: High–Low" },
+  { key: "az", label: "A–Z" },
+];
+
+const categoryCards = [
+  { tagline: "Performance", title: "Performance supplements", desc: "Clinically formulated pre-workout, pump and performance enhancers designed to push your limits in every session.", image: fusionLitePlus },
+  { tagline: "Metabolic", title: "Metabolic support", desc: "Glucose disposal agents, carb management tools, and metabolic optimisers built on real clinical mechanisms.", image: glyco8 },
+  { tagline: "Health", title: "Health & Hydration", desc: "Advanced electrolyte formulas and hydration support for daily performance and recovery.", image: electroFlow },
 ];
 
 const testimonials = [
@@ -59,6 +57,18 @@ const faqs = [
 
 const Shop = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [filter, setFilter] = useState<Category>("All");
+  const [sort, setSort] = useState<SortKey>("featured");
+  const [quickAdd, setQuickAdd] = useState<typeof products[0] | null>(null);
+
+  const filtered = products
+    .filter((p) => filter === "All" || p.category === filter)
+    .sort((a, b) => {
+      if (sort === "price-asc") return a.priceNum - b.priceNum;
+      if (sort === "price-desc") return b.priceNum - a.priceNum;
+      if (sort === "az") return a.name.localeCompare(b.name);
+      return 0;
+    });
 
   return (
     <div className="flex flex-col items-start w-full">
@@ -69,19 +79,44 @@ const Shop = () => {
       <section className="w-full bg-[hsl(215,50%,8%)] py-12 md:py-20 px-4 md:px-8 lg:px-16">
         <div className="max-w-[1280px] mx-auto flex flex-col items-center text-center gap-6">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">Performance Nutrition</span>
-          <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-[1.1]">
-            Shop all baseline
-          </h1>
-          <p className="text-base md:text-lg text-white/60 max-w-[600px]">
-            Clinically formulated supplements designed for measurable results. Every dose backed by science.
-          </p>
+          <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-[1.1]">Shop all baseline</h1>
+          <p className="text-base md:text-lg text-white/60 max-w-[600px]">Clinically formulated supplements designed for measurable results. Every dose backed by science.</p>
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <button className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">
-              Shop all
-            </button>
-            <button className="px-6 py-3 border border-white/30 text-white text-sm md:text-base font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">
-              View stacks
-            </button>
+            <button className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">Shop all</button>
+            <button className="px-6 py-3 border border-white/30 text-white text-sm md:text-base font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">View stacks</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Filter + Sort bar */}
+      <section className="w-full bg-background border-b border-border px-4 md:px-8 lg:px-16">
+        <div className="max-w-[1280px] mx-auto py-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full border transition-colors ${
+                  filter === cat
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-transparent text-foreground border-border hover:border-primary"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+          <div className="relative">
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              className="appearance-none bg-secondary border border-border rounded px-4 py-2 pr-8 text-xs font-medium text-foreground cursor-pointer"
+            >
+              {sortOptions.map((o) => (
+                <option key={o.key} value={o.key}>{o.label}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
           </div>
         </div>
       </section>
@@ -89,21 +124,38 @@ const Shop = () => {
       {/* Products Grid */}
       <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">
         <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
-          <SectionHeader tagline="Full Range" heading="Products" text="Our complete range of science-backed formulas" />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
-            {products.map((p) => (
-              <Link to={`/product/${p.slug}`} key={p.slug} className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
-                </div>
-                <div className="p-4 md:p-6 flex flex-col gap-1 text-center">
-                  <h5 className="text-sm md:text-lg font-bold text-foreground tracking-wide">{p.name}</h5>
-                  <p className="text-xs md:text-sm text-muted-foreground">{p.desc}</p>
-                  <span className="text-sm md:text-lg font-bold text-foreground mt-1">{p.price}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <SectionHeader tagline="Full Range" heading="Products" text={`Showing ${filtered.length} product${filtered.length !== 1 ? "s" : ""}`} />
+          <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((p) => (
+                <motion.div
+                  key={p.slug}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.25 }}
+                  className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow group relative"
+                >
+                  <Link to={`/product/${p.slug}`} className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8">
+                    <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+                  </Link>
+                  {/* Quick-add hover overlay */}
+                  <button
+                    onClick={() => setQuickAdd(p)}
+                    className="absolute top-2 right-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded hover:opacity-90"
+                  >
+                    Quick Add
+                  </button>
+                  <Link to={`/product/${p.slug}`} className="p-4 md:p-6 flex flex-col gap-1 text-center">
+                    <h5 className="text-sm md:text-lg font-bold text-foreground tracking-wide">{p.name}</h5>
+                    <p className="text-xs md:text-sm text-muted-foreground">{p.desc}</p>
+                    <span className="text-sm md:text-lg font-bold text-foreground mt-1">{p.price}</span>
+                  </Link>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
 
@@ -112,22 +164,17 @@ const Shop = () => {
         <div className="max-w-[1280px] mx-auto flex flex-col gap-12 md:gap-20">
           <SectionHeader heading="Find your category" text="Explore our full range by goal" />
           <div className="flex flex-col gap-0">
-            {categories.map((cat, i) => {
+            {categoryCards.map((cat, i) => {
               const isReversed = i % 2 !== 0;
               return (
-                <div
-                  key={cat.title}
-                  className={`flex flex-col md:flex-row items-stretch border-t border-border ${i === categories.length - 1 ? "border-b" : ""}`}
-                >
+                <div key={cat.title} className={`flex flex-col md:flex-row items-stretch border-t border-border ${i === categoryCards.length - 1 ? "border-b" : ""}`}>
                   {isReversed ? (
                     <>
                       <div className="w-full md:w-1/2 flex flex-col justify-center py-8 md:py-16 md:pr-16">
                         <span className="text-sm font-semibold text-primary uppercase tracking-widest">{cat.tagline}</span>
                         <h3 className="text-2xl md:text-3xl font-black text-foreground mt-2">{cat.title}</h3>
                         <p className="text-sm md:text-base text-muted-foreground mt-4 max-w-[450px]">{cat.desc}</p>
-                        <button className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">
-                          Explore
-                        </button>
+                        <button className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Explore</button>
                       </div>
                       <div className="w-full md:w-1/2 bg-secondary flex items-center justify-center p-8 md:p-12 min-h-[250px] md:min-h-[350px]">
                         <img src={cat.image} alt={cat.title} className="w-full max-w-[280px] object-contain" />
@@ -142,9 +189,7 @@ const Shop = () => {
                         <span className="text-sm font-semibold text-primary uppercase tracking-widest">{cat.tagline}</span>
                         <h3 className="text-2xl md:text-3xl font-black text-foreground mt-2">{cat.title}</h3>
                         <p className="text-sm md:text-base text-muted-foreground mt-4 max-w-[450px]">{cat.desc}</p>
-                        <button className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">
-                          Explore
-                        </button>
+                        <button className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Explore</button>
                       </div>
                     </>
                   )}
@@ -155,23 +200,17 @@ const Shop = () => {
         </div>
       </section>
 
-      {/* Real Results / Testimonials */}
+      {/* Testimonials */}
       <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">
         <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
           <SectionHeader heading="Real results" text="Hear from athletes who trust Baseline" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {testimonials.map((t) => (
               <div key={t.name} className="flex flex-col gap-6 border border-border rounded-lg p-6 md:p-8">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-primary">★</span>
-                  ))}
-                </div>
+                <div className="flex gap-1">{[...Array(5)].map((_, i) => <span key={i} className="text-primary">★</span>)}</div>
                 <p className="text-sm md:text-base text-foreground leading-relaxed">"{t.quote}"</p>
                 <div className="flex items-center gap-3 mt-auto">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-sm font-bold text-primary">{t.name[0]}</span>
-                  </div>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"><span className="text-sm font-bold text-primary">{t.name[0]}</span></div>
                   <div>
                     <div className="text-sm md:text-base font-semibold text-foreground">{t.name}</div>
                     <div className="text-xs md:text-sm text-muted-foreground">{t.role}</div>
@@ -193,24 +232,17 @@ const Shop = () => {
           <div className="flex flex-col">
             {faqs.map((faq, i) => (
               <div key={i} className="border-b border-border">
-                <button
-                  className="w-full flex items-center justify-between py-5 text-left"
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                >
+                <button className="w-full flex items-center justify-between py-5 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                   <span className="text-sm md:text-base font-semibold text-foreground">{faq.q}</span>
                   <ChevronDown className={`w-5 h-5 text-primary transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
                 </button>
-                {openFaq === i && (
-                  <div className="pb-5 text-sm md:text-base text-muted-foreground">{faq.a}</div>
-                )}
+                {openFaq === i && <div className="pb-5 text-sm md:text-base text-muted-foreground">{faq.a}</div>}
               </div>
             ))}
           </div>
           <div>
             <h4 className="text-base md:text-lg font-bold text-foreground">Need more help?</h4>
-            <p className="text-sm md:text-base text-muted-foreground mt-1">
-              Contact our <a href="#" className="text-primary underline">support team</a>.
-            </p>
+            <p className="text-sm md:text-base text-muted-foreground mt-1">Contact our <a href="#" className="text-primary underline">support team</a>.</p>
           </div>
         </div>
       </section>
@@ -218,24 +250,18 @@ const Shop = () => {
       {/* CTA */}
       <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">
         <div className="max-w-[768px] mx-auto flex flex-col items-center text-center gap-6 md:gap-8">
-          <h2 className="text-3xl md:text-5xl font-black text-foreground leading-[1.1]">
-            Elevate your baseline
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-[500px]">
-            Start your journey to peak performance with science-backed nutrition protocols.
-          </p>
+          <h2 className="text-3xl md:text-5xl font-black text-foreground leading-[1.1]">Elevate your baseline</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-[500px]">Start your journey to peak performance with science-backed nutrition protocols.</p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">
-              Shop now
-            </button>
-            <button className="px-6 py-3 border border-border text-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">
-              Learn more
-            </button>
+            <button className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">Shop now</button>
+            <button className="px-6 py-3 border border-border text-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Learn more</button>
           </div>
         </div>
       </section>
 
       <Footer />
+
+      <QuickAddModal open={!!quickAdd} onClose={() => setQuickAdd(null)} product={quickAdd} />
     </div>
   );
 };
