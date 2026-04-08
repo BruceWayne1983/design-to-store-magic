@@ -175,7 +175,14 @@ const Shop = () => {
             {categoryCards.map((cat, i) => {
               const isReversed = i % 2 !== 0;
               return (
-                <div key={cat.title} className={`flex flex-col md:flex-row items-stretch border-t border-border ${i === categoryCards.length - 1 ? "border-b" : ""}`}>
+                <motion.div
+                  key={cat.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className={`flex flex-col md:flex-row items-stretch border-t border-border ${i === categoryCards.length - 1 ? "border-b" : ""}`}
+                >
                   {isReversed ? (
                     <>
                       <div className="w-full md:w-1/2 flex flex-col justify-center py-8 md:py-16 md:pr-16">
@@ -201,7 +208,7 @@ const Shop = () => {
                       </div>
                     </>
                   )}
-                </div>
+                </motion.div>
               );
             })}
           </div>
