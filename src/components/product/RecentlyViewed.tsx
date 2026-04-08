@@ -16,7 +16,7 @@ const RecentlyViewed = ({ currentSlug }: { currentSlug: string }) => {
         <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1">
           {recentProducts.map((p) => p && (
             <Link
-              to={`/product/${p.slug}`}
+              to={`/site/product/${p.slug}`}
               key={p.slug}
               className="flex-shrink-0 w-[180px] md:w-[220px] flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-background"
             >

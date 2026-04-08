@@ -7,9 +7,9 @@ import SearchOverlay from "./SearchOverlay";
 import logoDark from "@/assets/logo-dark.png";
 
 const shopItems = [
-  { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/category/performance" },
-  { name: "Metabolic Support", desc: "Glucose disposal and metabolic optimisers", link: "/shop" },
-  { name: "Health & Hydration", desc: "Electrolyte and hydration support", link: "/shop" },
+  { name: "Performance Supplements", desc: "Pre-workout, pump and endurance formulas", link: "/site/category/performance" },
+  { name: "Metabolic Support", desc: "Glucose disposal and metabolic optimisers", link: "/site/shop" },
+  { name: "Health & Hydration", desc: "Electrolyte and hydration support", link: "/site/shop" },
 ];
 
 const stackItems = [
@@ -28,10 +28,10 @@ const mobileNavSections = [
   {
     title: "Shop",
     items: [
-      { name: "Shop All", link: "/shop" },
-      { name: "Performance", link: "/category/performance" },
-      { name: "Metabolic", link: "/shop" },
-      { name: "Health & Hydration", link: "/shop" },
+      { name: "Shop All", link: "/site/shop" },
+      { name: "Performance", link: "/site/category/performance" },
+      { name: "Metabolic", link: "/site/shop" },
+      { name: "Health & Hydration", link: "/site/shop" },
     ],
   },
   {
@@ -82,8 +82,8 @@ const Navbar = () => {
               <img src={logoDark} alt="Baseline Nutrition" className={`w-auto transition-all duration-300 ${scrolled ? "h-8 md:h-8" : "h-10 md:h-12"}`} />
             </Link>
             <div className="hidden md:flex items-center gap-8">
-              <Link to="/shop" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Shop</Link>
-              <Link to="/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
+              <Link to="/site/shop" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Shop</Link>
+              <Link to="/site/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
               <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Stacks</a>
               <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Science</a>
               <button

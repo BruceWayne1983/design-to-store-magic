@@ -63,7 +63,7 @@ const PerformanceCategory = () => (
             Clinical performance nutrition engineered for measurable training output, pump, hydration and recovery.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-2">
-            <Link to="/shop" className="px-5 md:px-6 py-3 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity text-center">
+            <Link to="/site/shop" className="px-5 md:px-6 py-3 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity text-center">
               Shop Best Sellers
             </Link>
             <button className="px-5 md:px-6 py-3 border border-white/30 text-white text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">
@@ -172,7 +172,7 @@ const PerformanceCategory = () => (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {products.map((p) => (
             <Link
-              to={`/product/${p.slug}`}
+              to={`/site/product/${p.slug}`}
               key={p.slug}
               className="group flex flex-col bg-background border border-border rounded-lg overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all"
             >
@@ -214,7 +214,7 @@ const PerformanceCategory = () => (
           Combine clinically dosed formulas for a complete training protocol tailored to your goals.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 mt-2">
-          <Link to="/shop" className="px-6 py-3 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">
+          <Link to="/site/shop" className="px-6 py-3 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">
             Shop All Products
           </Link>
           <button className="px-6 py-3 border border-white/30 text-white text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">
