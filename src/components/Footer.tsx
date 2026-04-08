@@ -54,6 +54,11 @@ const Footer = () => (
           <p className="text-sm text-white/50 max-w-[260px] leading-relaxed">
             Performance nutrition built on real science. Clinically dosed, fully transparent.
           </p>
+          <div className="text-xs text-white/30 leading-relaxed max-w-[260px]">
+            <p>Unit 16-18 Tresham Road</p>
+            <p>Peterborough, PE2 6SG</p>
+            <p>United Kingdom</p>
+          </div>
           <div className="flex items-center gap-3 mt-2">
             {socialLinks.map((s) => (
               <a
@@ -85,7 +90,7 @@ const Footer = () => (
 
       {/* Bottom */}
       <div className="border-t border-white/10 pt-6 md:pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-white/30">
-        <span>© 2026 Baseline. All rights reserved.</span>
+        <span>© 2026 Baseline Nutrition. All rights reserved.</span>
         <div className="flex gap-4 md:gap-6">
           <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
