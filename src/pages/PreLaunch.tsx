@@ -44,9 +44,9 @@ const PreLaunch = () => {
         </div>
 
         {/* Tagline */}
-        <p className="text-base md:text-lg text-white/60 max-w-[500px] leading-relaxed">
-          Science-backed performance nutrition is almost here. Be the first to access clinically dosed formulas engineered for results.
-        </p>
+         <p className="text-base md:text-lg text-white/80 max-w-[500px] leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+           Science-backed performance nutrition is almost here. Be the first to access clinically dosed formulas engineered for results.
+         </p>
 
         {/* Launch discount badge */}
         <div className="flex items-center gap-3 px-5 py-3 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm">
