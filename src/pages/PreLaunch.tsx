@@ -21,7 +21,9 @@ const PreLaunch = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
       {/* Subtle top/bottom fade */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(215,50%,4%)/0.5] via-transparent to-[hsl(215,50%,4%)/0.85]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(215,50%,4%)/0.6] via-[hsl(215,50%,4%)/0.3] to-[hsl(215,50%,4%)/0.9]" />
+      {/* Radial vignette for extra depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,hsl(215,50%,4%)_80%)]" />
 
       {/* Animated particles effect */}
       <div className="absolute inset-0 opacity-[0.04]" style={{
