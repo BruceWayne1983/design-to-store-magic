@@ -82,7 +82,7 @@ const Navbar = () => {
         <div className={`flex items-center justify-between px-4 md:px-8 lg:px-16 transition-all duration-300 ${scrolled ? "h-[52px] md:h-[56px]" : "h-[60px] md:h-[72px]"}`}>
           {/* Left */}
           <div className="flex items-center gap-4 md:gap-6">
-            <Link to="/" className="flex items-center">
+            <Link to="/home" className="flex items-center">
               <img src={logoDark} alt="Baseline Nutrition" className={`w-auto transition-all duration-300 ${scrolled ? "h-8 md:h-8" : "h-10 md:h-12"}`} />
             </Link>
             <div className="hidden md:flex items-center gap-8">
@@ -179,7 +179,7 @@ const Navbar = () => {
               className="fixed top-0 left-0 bottom-0 w-[85%] max-w-[360px] z-[70] bg-background flex flex-col md:hidden overflow-y-auto"
             >
               <div className="flex items-center justify-between p-4 border-b border-border">
-                <Link to="/" onClick={() => setMobileOpen(false)}>
+                <Link to="/home" onClick={() => setMobileOpen(false)}>
                   <img src={logoDark} alt="Baseline Nutrition" className="h-8 w-auto" />
                 </Link>
                 <button onClick={() => setMobileOpen(false)} className="p-2 text-foreground">
