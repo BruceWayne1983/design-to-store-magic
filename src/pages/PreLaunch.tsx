@@ -3,14 +3,38 @@ import { Link } from "react-router-dom";
 import prelaunchHero from "@/assets/prelaunch-hero-v2.jpg";
 import logoLight from "@/assets/logo-light.png";
 import { Instagram, Facebook, Twitter } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const PreLaunch = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (!email) return;
+    setLoading(true);
+    setError("");
+    try {
+      const { error: dbError } = await supabase
+        .from("email_signups")
+        .insert({ email: email.trim().toLowerCase(), source: "prelaunch" });
+      if (dbError) {
+        if (dbError.code === "23505") {
+          // Already signed up
+          setSubmitted(true);
+        } else {
+          throw dbError;
+        }
+      } else {
+        setSubmitted(true);
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,10 +96,12 @@ const PreLaunch = () => {
             />
             <button
               type="submit"
-              className="px-8 py-3.5 bg-primary text-primary-foreground text-sm font-semibold uppercase tracking-wider hover:opacity-90 transition-opacity whitespace-nowrap"
+              disabled={loading}
+              className="px-8 py-3.5 bg-primary text-primary-foreground text-sm font-semibold uppercase tracking-wider hover:opacity-90 transition-opacity whitespace-nowrap disabled:opacity-50"
             >
-              Get Early Access
+              {loading ? "Submitting..." : "Get Early Access"}
             </button>
+            {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
           </form>
         ) : (
           <div className="flex flex-col items-center gap-3 px-8 py-6 border border-primary/30 bg-primary/5 backdrop-blur-sm rounded-lg">
