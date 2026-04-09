@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Baseline Nutrition
 
-TODO: Document your project here
+Performance nutrition built on real science.
