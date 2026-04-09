@@ -25,12 +25,12 @@ const App = () => {
         {!isDeckCapture && <Sonner />}
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<PreLaunch />} />
             <Route element={<PasswordGate />}>
-              <Route path="/" element={<Index />} />
+              <Route path="/home" element={<Index />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/product/:slug" element={<ProductDetail />} />
               <Route path="/category/performance" element={<PerformanceCategory />} />
-              <Route path="/coming-soon" element={<PreLaunch />} />
               <Route path="/deck" element={<Deck />} />
               <Route path="*" element={<NotFound />} />
             </Route>
