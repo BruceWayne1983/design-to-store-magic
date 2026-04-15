@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const footerLinks = [
   { title: "Products", links: [{ label: "Pre-workout", href: "/shop" }, { label: "Recovery", href: "/shop" }, { label: "Daily", href: "/shop" }, { label: "Stacks", href: "/shop" }] },
-  { title: "Science", links: [{ label: "Research", href: "#" }, { label: "Articles", href: "#" }, { label: "Ingredients", href: "#" }, { label: "Testing", href: "#" }] },
-  { title: "Company", links: [{ label: "About", href: "#" }, { label: "Team", href: "#" }, { label: "Careers", href: "#" }, { label: "Press", href: "#" }] },
-  { title: "Support", links: [{ label: "FAQ", href: "#" }, { label: "Shipping", href: "#" }, { label: "Returns", href: "#" }, { label: "Contact", href: "#" }] },
+  { title: "Science", links: [{ label: "Research", href: "/about" }, { label: "Ingredients", href: "/about" }, { label: "Testing", href: "/about" }] },
+  { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Contact", href: "/contact" }] },
+  { title: "Support", links: [{ label: "FAQ", href: "/about" }, { label: "Shipping & Returns", href: "/shipping-returns" }, { label: "Contact", href: "/contact" }] },
 ];
 
 const socialLinks = [
@@ -50,7 +50,6 @@ const Footer = () => (
   <footer className="w-full bg-[hsl(var(--hero-dark))] text-white py-12 md:py-16 px-4 md:px-8 lg:px-16">
     <div className="max-w-[1280px] mx-auto flex flex-col gap-8 md:gap-12">
       <div className="flex flex-col md:flex-row md:justify-between gap-8">
-        {/* Brand + social */}
         <div className="flex flex-col gap-4">
           <span className="text-xl font-black uppercase tracking-tight">Baseline Nutrition</span>
           <p className="text-sm text-white/50 max-w-[260px] leading-relaxed">
@@ -63,19 +62,13 @@ const Footer = () => (
           </div>
           <div className="flex items-center gap-3 mt-2">
             {socialLinks.map((s) => (
-              <a
-                key={s.name}
-                href={s.href}
-                className="p-2 text-white/40 hover:text-primary transition-colors"
-                aria-label={s.name}
-              >
+              <a key={s.name} href={s.href} className="p-2 text-white/40 hover:text-primary transition-colors" aria-label={s.name}>
                 {s.icon}
               </a>
             ))}
           </div>
         </div>
 
-        {/* Link columns */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-16">
           {footerLinks.map((group) => (
             <div key={group.title} className="flex flex-col gap-3">
@@ -90,7 +83,6 @@ const Footer = () => (
         </div>
       </div>
 
-      {/* Bottom */}
       <div className="border-t border-white/10 pt-6 md:pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-white/30">
         <span>© 2026 Baseline Nutrition. All rights reserved.</span>
         <div className="flex gap-4 md:gap-6">
