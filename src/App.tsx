@@ -24,6 +24,7 @@ import About from "./pages/About.tsx";
 import ShippingReturns from "./pages/ShippingReturns.tsx";
 import Contact from "./pages/Contact.tsx";
 import KnowledgeBase from "./pages/KnowledgeBase.tsx";
+import AppLanding from "./pages/AppLanding.tsx";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ function AppContent() {
           <Route path="/shipping-returns" element={<ShippingReturns />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/knowledge-base" element={<KnowledgeBase />} />
+          <Route path="/app" element={<AppLanding />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
