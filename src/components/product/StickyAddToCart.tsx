@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
+import { useCartStore } from "@/stores/cartStore";
+import { VARIANT_MAP } from "./ProductHero";
 import type { ProductData } from "@/data/products";
 
 interface StickyAddToCartProps {
@@ -9,11 +12,11 @@ interface StickyAddToCartProps {
 
 const StickyAddToCart = ({ product, buyButtonRef }: StickyAddToCartProps) => {
   const [visible, setVisible] = useState(false);
+  const { addItem, isLoading, setCartOpen } = useCartStore();
 
   useEffect(() => {
     const el = buyButtonRef.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(!entry.isIntersecting),
       { threshold: 0 }
@@ -21,6 +24,24 @@ const StickyAddToCart = ({ product, buyButtonRef }: StickyAddToCartProps) => {
     observer.observe(el);
     return () => observer.disconnect();
   }, [buyButtonRef]);
+
+  const handleAddToCart = async () => {
+    const variantId = VARIANT_MAP[product.slug];
+    if (!variantId) return;
+    const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ""));
+    await addItem({
+      variantId,
+      variantTitle: "Default Title",
+      productTitle: product.name,
+      productSlug: product.slug,
+      productImage: product.images[0],
+      price: priceNum,
+      currencyCode: "GBP",
+      quantity: 1,
+    });
+    toast.success(`${product.name} added to cart`);
+    setCartOpen(true);
+  };
 
   return (
     <AnimatePresence>
@@ -40,8 +61,12 @@ const StickyAddToCart = ({ product, buyButtonRef }: StickyAddToCartProps) => {
                 <span className="text-sm text-muted-foreground">{product.price}</span>
               </div>
             </div>
-            <button className="px-6 py-2.5 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity rounded flex-shrink-0">
-              Add to basket
+            <button
+              onClick={handleAddToCart}
+              disabled={isLoading}
+              className="px-6 py-2.5 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity rounded flex-shrink-0 disabled:opacity-50"
+            >
+              {isLoading ? "Adding..." : "Add to basket"}
             </button>
           </div>
         </motion.div>
