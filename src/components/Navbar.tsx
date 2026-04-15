@@ -59,6 +59,7 @@ const mobileNavSections = [
 
 const Navbar = () => {
   const [megaOpen, setMegaOpen] = useState(false);
+  const [scienceOpen, setScienceOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
