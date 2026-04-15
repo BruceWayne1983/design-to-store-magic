@@ -59,6 +59,7 @@ const mobileNavSections = [
 
 const Navbar = () => {
   const [megaOpen, setMegaOpen] = useState(false);
+  const [scienceOpen, setScienceOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -94,9 +95,36 @@ const Navbar = () => {
               >
                 Shop <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen ? "rotate-180" : ""}`} />
               </button>
-              <Link to="/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
+              <div className="relative">
+                <button
+                  className="flex items-center gap-1 text-sm text-foreground hover:text-primary transition-colors font-medium"
+                  onMouseEnter={() => setScienceOpen(true)}
+                  onClick={() => setScienceOpen(!scienceOpen)}
+                >
+                  Science <ChevronDown className={`w-3.5 h-3.5 transition-transform ${scienceOpen ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {scienceOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 mt-2 w-56 bg-background border border-border rounded-lg shadow-lg py-2 z-50"
+                      onMouseLeave={() => setScienceOpen(false)}
+                    >
+                      <Link to="/blog?category=ingredient-science" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Ingredient Science</Link>
+                      <Link to="/blog?category=protocol-guides" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Protocol Guides</Link>
+                      <Link to="/blog?category=mechanisms" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Mechanisms</Link>
+                      <Link to="/blog?category=comparisons" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Comparisons</Link>
+                      <div className="border-t border-border mt-1 pt-1">
+                        <Link to="/blog" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-foreground hover:bg-secondary transition-colors">View All Articles</Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <Link to="/blog" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Blog</Link>
-              <Link to="/blog" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Knowledge Base</Link>
               <Link to="/about" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</Link>
               <Link to="/contact" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Contact</Link>
             </div>
@@ -219,10 +247,34 @@ const Navbar = () => {
                 ))}
 
                 <div className="border-b border-border">
-                  <Link to="/blog" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Blog</Link>
+                  <button
+                    className="w-full flex items-center justify-between px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider"
+                    onClick={() => setMobileAccordion(mobileAccordion === "Science" ? null : "Science")}
+                  >
+                    Science
+                    <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${mobileAccordion === "Science" ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {mobileAccordion === "Science" && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-col gap-1 px-4 pb-4">
+                          <Link to="/blog?category=ingredient-science" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">Ingredient Science</Link>
+                          <Link to="/blog?category=protocol-guides" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">Protocol Guides</Link>
+                          <Link to="/blog?category=mechanisms" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">Mechanisms</Link>
+                          <Link to="/blog?category=comparisons" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">Comparisons</Link>
+                          <Link to="/blog" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm font-medium text-foreground hover:text-primary transition-colors">View All Articles</Link>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
                 <div className="border-b border-border">
-                  <Link to="/blog" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Knowledge Base</Link>
+                  <Link to="/blog" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Blog</Link>
                 </div>
                 <div className="border-b border-border">
                   <Link to="/about" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">About</Link>
