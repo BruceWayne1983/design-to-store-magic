@@ -46,6 +46,8 @@ function AppContent() {
           <Route path="/terms" element={<TermsConditions />} />
           <Route path="/cookies" element={<CookiePolicy />} />
           <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/shipping-returns" element={<ShippingReturns />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
