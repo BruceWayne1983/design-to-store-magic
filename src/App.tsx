@@ -18,6 +18,8 @@ import CookieConsent from "./components/CookieConsent.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsConditions from "./pages/TermsConditions.tsx";
 import CookiePolicy from "./pages/CookiePolicy.tsx";
+import Blog from "./pages/Blog.tsx";
+import BlogArticle from "./pages/BlogArticle.tsx";
 import About from "./pages/About.tsx";
 import ShippingReturns from "./pages/ShippingReturns.tsx";
 import Contact from "./pages/Contact.tsx";

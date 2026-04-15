@@ -1,27 +1,5 @@
-import { BookOpen } from "lucide-react";
-
-const articles = [
-  {
-    title: "Understanding Glucose Disposal Agents",
-    desc: "How GDAs like berberine and chromium picolinate redirect carbohydrates toward muscle glycogen instead of fat storage.",
-    category: "Metabolic Science",
-  },
-  {
-    title: "Hydration Science for Athletes",
-    desc: "The role of electrolyte balance and glycerol hyperhydration in sustaining performance during high-intensity training.",
-    category: "Performance",
-  },
-  {
-    title: "Nitric Oxide and Performance",
-    desc: "How L-citrulline and nitrate supplementation increase blood flow, oxygen delivery and muscular endurance.",
-    category: "Mechanisms",
-  },
-  {
-    title: "The Science of Citrulline",
-    desc: "Why L-citrulline outperforms L-arginine for nitric oxide production and what the clinical data shows at effective doses.",
-    category: "Ingredients",
-  },
-];
+import { Link } from "react-router-dom";
+import { blogArticles } from "@/data/blog";
 
 const Education = () => (
   <section className="w-full bg-secondary py-16 md:py-28 px-4 md:px-8 lg:px-16">
@@ -36,21 +14,43 @@ const Education = () => (
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-        {articles.map((a) => (
-          <div key={a.title} className="flex flex-col bg-background border border-border rounded-lg overflow-hidden hover:shadow-md hover:border-primary/30 transition-all group">
-            <div className="w-full h-[160px] md:h-[180px] bg-[hsl(var(--hero-dark))] flex items-center justify-center">
-              <BookOpen className="w-10 h-10 text-primary/40" strokeWidth={1} />
+        {blogArticles.map((a) => (
+          <Link
+            key={a.slug}
+            to={`/blog/${a.slug}`}
+            className="flex flex-col bg-background border border-border rounded-lg overflow-hidden hover:shadow-md hover:border-primary/30 transition-all group"
+          >
+            <div className="w-full aspect-video overflow-hidden">
+              <img
+                src={a.image}
+                alt={a.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                width={1024}
+                height={576}
+              />
             </div>
             <div className="p-5 flex flex-col gap-2 flex-1">
-              <span className="text-[10px] font-bold text-primary uppercase tracking-wider">{a.category}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold text-primary uppercase tracking-wider">{a.category}</span>
+                <span className="text-[10px] text-muted-foreground">{a.readTime}</span>
+              </div>
               <h5 className="text-sm md:text-base font-bold text-foreground leading-snug">{a.title}</h5>
-              <p className="text-xs text-muted-foreground leading-relaxed flex-1">{a.desc}</p>
-              <button className="self-start mt-3 text-xs font-medium text-primary uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+              <p className="text-xs text-muted-foreground leading-relaxed flex-1">{a.description}</p>
+              <span className="self-start mt-3 text-xs font-medium text-primary uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
                 Read Article →
-              </button>
+              </span>
             </div>
-          </div>
+          </Link>
         ))}
+      </div>
+      <div className="flex justify-center">
+        <Link
+          to="/blog"
+          className="px-6 py-3 border border-border text-sm font-bold text-foreground uppercase tracking-wider rounded hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+        >
+          View All Articles
+        </Link>
       </div>
     </div>
   </section>
