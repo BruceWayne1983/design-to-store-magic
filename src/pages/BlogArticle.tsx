@@ -14,7 +14,7 @@ const BlogArticle = () => {
   if (!article) return <Navigate to="/blog" replace />;
 
   const relatedProduct = article.relatedProduct
-    ? products.find((p) => p.slug === article.relatedProduct)
+    ? getProduct(article.relatedProduct)
     : null;
 
   const jsonLd = {
