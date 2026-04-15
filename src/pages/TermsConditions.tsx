@@ -17,7 +17,7 @@ const TermsConditions = () => (
           These terms and conditions ("Terms") govern your use of the Baseline Nutrition website (baselinenutrition.co.uk) and any purchases you make from us. By using our site or placing an order, you agree to be bound by these Terms. Please read them carefully.
         </p>
         <p className="text-sm text-muted-foreground leading-relaxed mt-2">
-          Baseline Nutrition Ltd is a company registered in England and Wales. Registered address: Unit 16-18 Tresham Road, Peterborough, PE2 6SG, United Kingdom.
+          Baseline Nutrition Ltd is a company registered in England and Wales. Registered address: Unit 16-18 Tresham Road, Peterborough, PE2 6SS, United Kingdom.
         </p>
 
         <h2 className="text-lg font-bold text-foreground mt-8 mb-3">2. Products & Pricing</h2>

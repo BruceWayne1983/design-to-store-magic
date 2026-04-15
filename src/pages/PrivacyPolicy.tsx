@@ -14,7 +14,7 @@ const PrivacyPolicy = () => (
 
         <h2 className="text-lg font-bold text-foreground mt-8 mb-3">1. Who We Are</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Baseline Nutrition Ltd ("we", "us", "our") is the data controller responsible for your personal data. We are registered in England and Wales. Our registered address is Unit 16-18 Tresham Road, Peterborough, PE2 6SG, United Kingdom.
+          Baseline Nutrition Ltd ("we", "us", "our") is the data controller responsible for your personal data. We are registered in England and Wales. Our registered address is Unit 16-18 Tresham Road, Peterborough, PE2 6SS, United Kingdom.
         </p>
         <p className="text-sm text-muted-foreground leading-relaxed mt-2">
           If you have questions about this policy or your data, contact us at <a href="mailto:privacy@baselinenutrition.co.uk" className="text-primary hover:underline">privacy@baselinenutrition.co.uk</a>.

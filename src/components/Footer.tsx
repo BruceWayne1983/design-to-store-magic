@@ -58,7 +58,7 @@ const Footer = () => (
           </p>
           <div className="text-xs text-white/30 leading-relaxed max-w-[260px]">
             <p>Unit 16-18 Tresham Road</p>
-            <p>Peterborough, PE2 6SG</p>
+            <p>Peterborough, PE2 6SS</p>
             <p>United Kingdom</p>
           </div>
           <div className="flex items-center gap-3 mt-2">
