@@ -96,6 +96,7 @@ const Navbar = () => {
               </button>
               <Link to="/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
               <Link to="/blog" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Blog</Link>
+              <Link to="/blog" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Knowledge Base</Link>
               <Link to="/about" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</Link>
               <Link to="/contact" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Contact</Link>
             </div>
@@ -219,6 +220,9 @@ const Navbar = () => {
 
                 <div className="border-b border-border">
                   <Link to="/blog" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Blog</Link>
+                </div>
+                <div className="border-b border-border">
+                  <Link to="/blog" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Knowledge Base</Link>
                 </div>
                 <div className="border-b border-border">
                   <Link to="/about" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">About</Link>
