@@ -4,6 +4,7 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductHero from "@/components/product/ProductHero";
+import ProductJsonLd from "@/components/product/ProductJsonLd";
 import WhyDifferent from "@/components/product/WhyDifferent";
 import HowItWorks from "@/components/product/HowItWorks";
 import IngredientBreakdown from "@/components/product/IngredientBreakdown";
@@ -27,6 +28,7 @@ const ProductDetail = () => {
 
   return (
     <div className="flex flex-col items-start w-full">
+      <ProductJsonLd product={product} />
       <AnnouncementBar />
       <Navbar />
       <ProductHero product={product} buyButtonRef={buyButtonRef} />

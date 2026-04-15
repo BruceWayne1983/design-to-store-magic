@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import CartDrawer from "./CartDrawer";
 import SearchOverlay from "./SearchOverlay";
+import { useCartStore } from "@/stores/cartStore";
 import logoDark from "@/assets/logo-dark.png";
 
 const megaColumns = [
@@ -59,10 +60,12 @@ const mobileNavSections = [
 const Navbar = () => {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+
+  const { setCartOpen, totalItems } = useCartStore();
+  const cartCount = totalItems();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -70,7 +73,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -80,7 +82,6 @@ const Navbar = () => {
     <>
       <nav className={`w-full border-b border-border bg-background sticky top-0 z-50 transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}>
         <div className={`flex items-center justify-between px-4 md:px-8 lg:px-16 transition-all duration-300 ${scrolled ? "h-[52px] md:h-[56px]" : "h-[60px] md:h-[72px]"}`}>
-          {/* Left */}
           <div className="flex items-center gap-4 md:gap-6">
             <Link to="/home" className="flex items-center">
               <img src={logoDark} alt="Baseline Nutrition" className={`w-auto transition-all duration-300 ${scrolled ? "h-8 md:h-8" : "h-10 md:h-12"}`} />
@@ -94,22 +95,25 @@ const Navbar = () => {
                 Shop <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen ? "rotate-180" : ""}`} />
               </button>
               <Link to="/category/performance" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Performance</Link>
-              <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Science</a>
-              <a href="#" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</a>
+              <Link to="/about" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Science</Link>
+              <Link to="/about" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</Link>
             </div>
           </div>
 
-          {/* Right */}
           <div className="flex items-center gap-1 md:gap-2">
             <button onClick={() => setSearchOpen(true)} className="p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Search">
               <Search className="w-5 h-5 text-foreground" />
             </button>
-            <a href="#" className="hidden md:flex p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Account">
+            <Link to="/about" className="hidden md:flex p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Account">
               <User className="w-5 h-5 text-foreground" />
-            </a>
+            </Link>
             <button onClick={() => setCartOpen(true)} className="relative p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Cart">
               <ShoppingBag className="w-5 h-5 text-foreground" />
-              <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center leading-none">2</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center leading-none">
+                  {cartCount}
+                </span>
+              )}
             </button>
             <button className="md:hidden p-2.5 text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -117,7 +121,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Desktop mega menu */}
         <AnimatePresence>
           {megaOpen && (
             <motion.div
@@ -134,12 +137,7 @@ const Navbar = () => {
                     <span className="text-xs font-bold text-foreground uppercase tracking-[0.2em]">{col.heading}</span>
                     <div className="flex flex-col gap-2.5">
                       {col.links.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.link}
-                          onClick={() => setMegaOpen(false)}
-                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
+                        <Link key={item.name} to={item.link} onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                           {item.name}
                         </Link>
                       ))}
@@ -150,8 +148,8 @@ const Navbar = () => {
                   <span className="text-xs font-bold text-foreground uppercase tracking-[0.2em]">Quick Links</span>
                   <div className="flex flex-col gap-2.5">
                     <Link to="/shop" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Shop All</Link>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Best Sellers</a>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">New Arrivals</a>
+                    <Link to="/shop" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Best Sellers</Link>
+                    <Link to="/shop" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">New Arrivals</Link>
                   </div>
                 </div>
               </div>
@@ -207,12 +205,7 @@ const Navbar = () => {
                         >
                           <div className="flex flex-col gap-1 px-4 pb-4">
                             {section.items.map((item) => (
-                              <Link
-                                key={item.name}
-                                to={item.link}
-                                onClick={() => setMobileOpen(false)}
-                                className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors"
-                              >
+                              <Link key={item.name} to={item.link} onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">
                                 {item.name}
                               </Link>
                             ))}
@@ -222,6 +215,13 @@ const Navbar = () => {
                     </AnimatePresence>
                   </div>
                 ))}
+
+                <div className="border-b border-border">
+                  <Link to="/about" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">About</Link>
+                </div>
+                <div className="border-b border-border">
+                  <Link to="/contact" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Contact</Link>
+                </div>
               </div>
 
               <div className="p-4 border-t border-border flex flex-col gap-3">
@@ -237,7 +237,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <CartDrawer />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );

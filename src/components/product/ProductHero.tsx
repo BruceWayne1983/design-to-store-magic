@@ -1,25 +1,55 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
+import { useCartStore } from "@/stores/cartStore";
 import type { ProductData } from "@/data/products";
+
+// Map product slugs to Shopify variant GIDs
+const VARIANT_MAP: Record<string, string> = {
+  "fusion-lite-plus": "gid://shopify/ProductVariant/51487401279776",
+  "vascul8": "gid://shopify/ProductVariant/51487409275168",
+  "glycoshift": "gid://shopify/ProductVariant/51487999918368",
+  "glyco8": "gid://shopify/ProductVariant/51488010830112",
+  "electro-flow": "gid://shopify/ProductVariant/51488015941920",
+  "h2o-go": "gid://shopify/ProductVariant/51488016400672",
+  "purest-creatine": "gid://shopify/ProductVariant/51488021184800",
+};
+
+export { VARIANT_MAP };
 
 const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("subscribe");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
+  const { addItem, isLoading, setCartOpen } = useCartStore();
 
   const isStaticDeckRender = (() => {
     if (typeof window === "undefined") return false;
     const params = new URLSearchParams(window.location.search);
     if (params.get("deckCapture") === "true") return true;
-    try {
-      return window.self !== window.top;
-    } catch {
-      return false;
-    }
+    try { return window.self !== window.top; } catch { return false; }
   })();
+
+  const handleAddToCart = async () => {
+    const variantId = VARIANT_MAP[product.slug];
+    if (!variantId) return;
+    const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ""));
+    await addItem({
+      variantId,
+      variantTitle: "Default Title",
+      productTitle: product.name,
+      productSlug: product.slug,
+      productImage: product.images[0],
+      price: priceNum,
+      currencyCode: "GBP",
+      quantity: 1,
+    });
+    toast.success(`${product.name} added to cart`);
+    setCartOpen(true);
+  };
 
   return (
     <section className="w-full bg-background py-8 px-4 md:py-16 md:px-8 lg:px-16">
@@ -32,13 +62,7 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
             animate={{ opacity: 1, scale: 1 }}
             transition={isStaticDeckRender ? { duration: 0 } : { duration: 0.35 }}
           >
-            <img
-              src={product.images[selectedImage]}
-              alt={product.name}
-              className="w-full h-full object-contain"
-              loading="eager"
-              decoding="sync"
-            />
+            <img src={product.images[selectedImage]} alt={product.name} className="w-full h-full object-contain" loading="eager" decoding="sync" />
           </motion.div>
           <div className="flex gap-2 md:gap-3 overflow-x-auto">
             {product.images.map((img, i) => (
@@ -52,9 +76,6 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
                 <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain" loading="eager" decoding="sync" />
               </motion.button>
             ))}
-            <button className="w-16 h-16 md:w-20 md:h-20 rounded border-2 border-border flex items-center justify-center text-muted-foreground hover:border-primary transition-colors flex-shrink-0">
-              <ChevronRight className="w-5 h-5" />
-            </button>
           </div>
         </ScrollReveal>
 
@@ -62,9 +83,7 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight">{product.name}</h1>
             <p className="text-lg md:text-xl text-muted-foreground mt-1">{product.tagline}</p>
-            {product.format && (
-              <p className="text-sm text-muted-foreground mt-1">{product.format}</p>
-            )}
+            {product.format && <p className="text-sm text-muted-foreground mt-1">{product.format}</p>}
           </div>
 
           <ul className="flex flex-col gap-2">
@@ -76,13 +95,7 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
           </ul>
 
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-2xl font-black text-foreground">
-              {product.price}
-            </span>
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-primary text-primary" />)}
-            </div>
-            <span className="text-sm text-muted-foreground">· Reviews</span>
+            <span className="text-2xl font-black text-foreground">{product.price}</span>
           </div>
 
           <div className="border border-border rounded-lg p-4 md:p-5 flex flex-col gap-4">
@@ -90,6 +103,7 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
               <input type="radio" checked={purchaseType === "subscribe"} onChange={() => setPurchaseType("subscribe")} className="accent-primary" />
               <div>
                 <span className="text-sm font-semibold text-foreground">Subscribe & Save</span>
+                <span className="text-xs text-primary ml-2 font-bold">Save 10%</span>
               </div>
             </label>
             {purchaseType === "subscribe" && (
@@ -106,9 +120,15 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
             </label>
           </div>
 
-          <motion.button ref={buyButtonRef as React.Ref<HTMLButtonElement>} whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }} whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
-            className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded">
-            Add to basket
+          <motion.button
+            ref={buyButtonRef as React.Ref<HTMLButtonElement>}
+            whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }}
+            whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
+            onClick={handleAddToCart}
+            disabled={isLoading}
+            className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded disabled:opacity-50"
+          >
+            {isLoading ? "Adding..." : "Add to basket"}
           </motion.button>
 
           {product.ingredientLogos && product.ingredientLogos.length > 0 && (
