@@ -23,6 +23,7 @@ import BlogArticle from "./pages/BlogArticle.tsx";
 import About from "./pages/About.tsx";
 import ShippingReturns from "./pages/ShippingReturns.tsx";
 import Contact from "./pages/Contact.tsx";
+import KnowledgeBase from "./pages/KnowledgeBase.tsx";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ function AppContent() {
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/shipping-returns" element={<ShippingReturns />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/knowledge-base" element={<KnowledgeBase />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
