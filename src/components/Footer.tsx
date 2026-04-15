@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 const footerLinks = [
-  { title: "Products", links: ["Pre-workout", "Recovery", "Daily", "Stacks"] },
-  { title: "Science", links: ["Research", "Articles", "Ingredients", "Testing"] },
-  { title: "Company", links: ["About", "Team", "Careers", "Press"] },
-  { title: "Support", links: ["FAQ", "Shipping", "Returns", "Contact"] },
+  { title: "Products", links: [{ label: "Pre-workout", href: "/shop" }, { label: "Recovery", href: "/shop" }, { label: "Daily", href: "/shop" }, { label: "Stacks", href: "/shop" }] },
+  { title: "Science", links: [{ label: "Research", href: "#" }, { label: "Articles", href: "#" }, { label: "Ingredients", href: "#" }, { label: "Testing", href: "#" }] },
+  { title: "Company", links: [{ label: "About", href: "#" }, { label: "Team", href: "#" }, { label: "Careers", href: "#" }, { label: "Press", href: "#" }] },
+  { title: "Support", links: [{ label: "FAQ", href: "#" }, { label: "Shipping", href: "#" }, { label: "Returns", href: "#" }, { label: "Contact", href: "#" }] },
 ];
 
 const socialLinks = [
@@ -79,9 +81,9 @@ const Footer = () => (
             <div key={group.title} className="flex flex-col gap-3">
               <span className="text-xs font-bold uppercase tracking-wider text-white/70">{group.title}</span>
               {group.links.map((link) => (
-                <a key={link} href="#" className="text-sm text-white/40 hover:text-primary transition-colors">
-                  {link}
-                </a>
+                <Link key={link.label} to={link.href} className="text-sm text-white/40 hover:text-primary transition-colors">
+                  {link.label}
+                </Link>
               ))}
             </div>
           ))}
@@ -92,9 +94,9 @@ const Footer = () => (
       <div className="border-t border-white/10 pt-6 md:pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-white/30">
         <span>© 2026 Baseline Nutrition. All rights reserved.</span>
         <div className="flex gap-4 md:gap-6">
-          <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-          <a href="#" className="hover:text-primary transition-colors">Cookie Settings</a>
+          <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-primary transition-colors">Terms & Conditions</Link>
+          <Link to="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link>
         </div>
       </div>
     </div>
