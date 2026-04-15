@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const footerLinks = [
   { title: "Products", links: [{ label: "Pre-workout", href: "/shop" }, { label: "Recovery", href: "/shop" }, { label: "Daily", href: "/shop" }, { label: "Stacks", href: "/shop" }] },
-  { title: "Science", links: [{ label: "Research", href: "/about" }, { label: "Ingredients", href: "/about" }, { label: "Testing", href: "/about" }] },
+  { title: "Science", links: [{ label: "Research", href: "/blog" }, { label: "Ingredients", href: "/blog" }, { label: "Articles", href: "/blog" }] },
   { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Contact", href: "/contact" }] },
   { title: "Support", links: [{ label: "FAQ", href: "/about" }, { label: "Shipping & Returns", href: "/shipping-returns" }, { label: "Contact", href: "/contact" }] },
 ];

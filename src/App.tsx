@@ -18,6 +18,8 @@ import CookieConsent from "./components/CookieConsent.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsConditions from "./pages/TermsConditions.tsx";
 import CookiePolicy from "./pages/CookiePolicy.tsx";
+import Blog from "./pages/Blog.tsx";
+import BlogArticle from "./pages/BlogArticle.tsx";
 import About from "./pages/About.tsx";
 import ShippingReturns from "./pages/ShippingReturns.tsx";
 import Contact from "./pages/Contact.tsx";
@@ -44,6 +46,8 @@ function AppContent() {
           <Route path="/terms" element={<TermsConditions />} />
           <Route path="/cookies" element={<CookiePolicy />} />
           <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/shipping-returns" element={<ShippingReturns />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
