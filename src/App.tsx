@@ -12,6 +12,10 @@ import PreLaunch from "./pages/PreLaunch.tsx";
 import Deck from "./pages/Deck.tsx";
 import PasswordGate from "./components/PasswordGate.tsx";
 import BackToTop from "./components/BackToTop.tsx";
+import CookieConsent from "./components/CookieConsent.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import TermsConditions from "./pages/TermsConditions.tsx";
+import CookiePolicy from "./pages/CookiePolicy.tsx";
 
 const queryClient = new QueryClient();
 
@@ -32,10 +36,14 @@ const App = () => {
               <Route path="/product/:slug" element={<ProductDetail />} />
               <Route path="/category/performance" element={<PerformanceCategory />} />
               <Route path="/deck" element={<Deck />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsConditions />} />
+              <Route path="/cookies" element={<CookiePolicy />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
           <BackToTop />
+          <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
