@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+type ResultState = "idle" | "subscribed" | "already";
+
 const Newsletter = () => {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [result, setResult] = useState<ResultState>("idle");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || loading) return;
     setLoading(true);
     setError("");
     try {
@@ -18,12 +20,12 @@ const Newsletter = () => {
         .insert({ email: email.trim().toLowerCase(), source: "newsletter" });
       if (dbError) {
         if (dbError.code === "23505") {
-          setSubmitted(true);
+          setResult("already");
         } else {
           throw dbError;
         }
       } else {
-        setSubmitted(true);
+        setResult("subscribed");
       }
     } catch {
       setError("Something went wrong. Please try again.");
@@ -31,6 +33,8 @@ const Newsletter = () => {
       setLoading(false);
     }
   };
+
+  const submitted = result !== "idle";
 
   return (
     <section className="w-full bg-[hsl(215,50%,8%)] py-16 md:py-28 px-4 md:px-8 lg:px-16">
@@ -64,7 +68,8 @@ const Newsletter = () => {
           </form>
         ) : (
           <div className="flex items-center gap-2 text-primary font-semibold">
-            <span>✓</span> You're subscribed!
+            <span>✓</span>
+            {result === "already" ? "You're already on the list." : "You're subscribed!"}
           </div>
         )}
         <p className="text-xs md:text-sm text-white/40">By subscribing you agree to our Privacy Policy and consent to receive updates.</p>

@@ -5,9 +5,11 @@ import logoLight from "@/assets/logo-light.png";
 import { activeSocialLinks } from "@/data/brand";
 import { supabase } from "@/integrations/supabase/client";
 
+type ResultState = "idle" | "subscribed" | "already";
+
 const PreLaunch = () => {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [result, setResult] = useState<ResultState>("idle");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const socials = activeSocialLinks();
@@ -23,13 +25,12 @@ const PreLaunch = () => {
         .insert({ email: email.trim().toLowerCase(), source: "prelaunch" });
       if (dbError) {
         if (dbError.code === "23505") {
-          // Already signed up
-          setSubmitted(true);
+          setResult("already");
         } else {
           throw dbError;
         }
       } else {
-        setSubmitted(true);
+        setResult("subscribed");
       }
     } catch {
       setError("Something went wrong. Please try again.");
@@ -37,6 +38,8 @@ const PreLaunch = () => {
       setLoading(false);
     }
   };
+
+  const submitted = result !== "idle";
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -107,8 +110,14 @@ const PreLaunch = () => {
         ) : (
           <div className="flex flex-col items-center gap-3 px-8 py-6 border border-primary/30 bg-primary/5 backdrop-blur-sm rounded-lg">
             <span className="text-2xl">✓</span>
-            <p className="text-base font-semibold text-white">You're on the list!</p>
-            <p className="text-sm text-white/50">We'll notify you with your exclusive 20% discount code at launch.</p>
+            <p className="text-base font-semibold text-white">
+              {result === "already" ? "You're already on the list." : "You're on the list!"}
+            </p>
+            <p className="text-sm text-white/50">
+              {result === "already"
+                ? "Hang tight — we'll be in touch with your discount code at launch."
+                : "We'll notify you with your exclusive 20% discount code at launch."}
+            </p>
           </div>
         )}
 
