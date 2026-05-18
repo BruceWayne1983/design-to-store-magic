@@ -85,6 +85,9 @@ const CookieConsent = () => {
                 </div>
                 <button
                   onClick={() => setAnalytics(!analytics)}
+                  role="switch"
+                  aria-checked={analytics}
+                  aria-label="Analytics cookies"
                   className={`w-10 h-5 rounded-full relative transition-colors ${analytics ? "bg-primary" : "bg-border"}`}
                 >
                   <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-all ${analytics ? "right-0.5" : "left-0.5"}`} />
@@ -98,6 +101,9 @@ const CookieConsent = () => {
                 </div>
                 <button
                   onClick={() => setMarketing(!marketing)}
+                  role="switch"
+                  aria-checked={marketing}
+                  aria-label="Marketing cookies"
                   className={`w-10 h-5 rounded-full relative transition-colors ${marketing ? "bg-primary" : "bg-border"}`}
                 >
                   <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-all ${marketing ? "right-0.5" : "left-0.5"}`} />

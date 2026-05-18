@@ -57,7 +57,7 @@ const SearchOverlay = ({ open, onClose }: SearchOverlayProps) => {
               className="w-full pl-12 pr-4 py-4 text-base bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
-          <button onClick={onClose} className="p-3 hover:bg-secondary rounded-lg transition-colors">
+          <button onClick={onClose} className="p-3 hover:bg-secondary rounded-lg transition-colors" aria-label="Close search">
             <X className="w-5 h-5 text-foreground" />
           </button>
         </div>

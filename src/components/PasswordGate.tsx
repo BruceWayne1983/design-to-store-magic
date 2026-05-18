@@ -42,7 +42,7 @@ const PasswordGate = () => {
         </div>
 
         {/* Lock icon */}
-        <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center">
+        <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center" aria-hidden="true">
           <Lock className="w-6 h-6 text-primary" />
         </div>
 

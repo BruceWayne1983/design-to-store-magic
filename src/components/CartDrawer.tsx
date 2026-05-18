@@ -34,7 +34,7 @@ const CartDrawer = () => {
             <ShoppingBag className="w-5 h-5 text-foreground" />
             <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">Cart · {totalItems}</h3>
           </div>
-          <button onClick={() => setCartOpen(false)} className="p-1 hover:opacity-70 transition-opacity">
+          <button onClick={() => setCartOpen(false)} className="p-1 hover:opacity-70 transition-opacity" aria-label="Close cart">
             <X className="w-5 h-5 text-foreground" />
           </button>
         </div>
