@@ -1,27 +1,31 @@
 import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import heroBg from "@/assets/products/hero-banner.jpg";
+import heroPerformance from "@/assets/category-performance.jpg";
+import heroMetabolic from "@/assets/category-metabolic.jpg";
+import heroHealth from "@/assets/category-health.jpg";
+
+const SLIDE_INTERVAL_MS = 6000;
 
 const slides = [
   {
-    bg: heroBg,
+    bg: heroPerformance,
     tagline: "Performance Nutrition",
     headline: "Performance\nBuilt on Real Science",
     desc: "Evidence-driven supplements engineered for measurable improvements in performance, metabolism and recovery.",
-    cta1: { text: "Shop Performance", link: "/shop" },
+    cta1: { text: "Shop Performance", link: "/category/performance" },
     cta2: { text: "Explore Stack Systems", link: "/shop" },
   },
   {
-    bg: heroBg,
+    bg: heroMetabolic,
     tagline: "Metabolic Support",
     headline: "Master Your\nMetabolism",
     desc: "Clinically dosed glucose disposal agents and carb management tools built on real science.",
     cta1: { text: "Shop Metabolic", link: "/shop" },
-    cta2: { text: "Learn the Science", link: "/shop" },
+    cta2: { text: "Learn the Science", link: "/knowledge-base" },
   },
   {
-    bg: heroBg,
+    bg: heroHealth,
     tagline: "Health & Hydration",
     headline: "Hydration\nRedefined",
     desc: "Advanced electrolyte formulas and cellular hydration support for daily performance.",
@@ -38,7 +42,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(next, 6000);
+    const id = setInterval(next, SLIDE_INTERVAL_MS);
     return () => clearInterval(id);
   }, [paused, next]);
 

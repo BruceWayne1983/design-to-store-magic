@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Lock } from "lucide-react";
 
-const SITE_PASSWORD = "baseline2025";
+// Soft preview gate. The password is shipped in the client bundle either way,
+// so this offers no real protection — set VITE_SITE_PASSWORD in the deploy
+// environment so it can be rotated without a code change. For real access
+// control, gate the deploy at the platform level (Vercel/Netlify password
+// protection, Cloudflare Access).
+const SITE_PASSWORD = import.meta.env.VITE_SITE_PASSWORD || "baseline2025";
 
 const PasswordGate = () => {
   const [unlocked, setUnlocked] = useState(() => {

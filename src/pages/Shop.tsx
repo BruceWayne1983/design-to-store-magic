@@ -273,7 +273,7 @@ const Shop = () => {
                 transition={{ duration: 0.45, delay: i * 0.12 }}
                 className="flex flex-col gap-6 border border-border rounded-lg p-6 md:p-8"
               >
-                <div className="flex gap-1">{[...Array(5)].map((_, j) => <span key={j} className="text-primary">★</span>)}</div>
+                <div className="flex gap-1" role="img" aria-label="5 out of 5 stars">{[...Array(5)].map((_, j) => <span key={j} className="text-primary" aria-hidden="true">★</span>)}</div>
                 <p className="text-sm md:text-base text-foreground leading-relaxed">"{t.quote}"</p>
                 <div className="flex items-center gap-3 mt-auto">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"><span className="text-sm font-bold text-primary">{t.name[0]}</span></div>

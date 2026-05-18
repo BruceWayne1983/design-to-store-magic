@@ -13,9 +13,9 @@ const Testimonials = () => (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {testimonials.map((t) => (
           <div key={t.name} className="flex flex-col gap-4 md:gap-6 border border-border rounded-lg p-6 md:p-8 hover:shadow-lg transition-shadow">
-            <div className="flex gap-1">
+            <div className="flex gap-1" role="img" aria-label="5 out of 5 stars">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-primary">★</span>
+                <span key={i} className="text-primary" aria-hidden="true">★</span>
               ))}
             </div>
             <p className="text-sm md:text-base text-foreground leading-relaxed">"{t.quote}"</p>

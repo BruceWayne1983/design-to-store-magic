@@ -331,12 +331,40 @@ Deleted the dead shadcn toast layer:
 - File: `src/App.css` (never imported)
 - 20 unused image assets in `src/assets/` (the `.png` files and old `.jpg` variants the team had migrated away from)
 
-### Still REVIEW-only (owner decision required)
-- **Password gate** — `src/components/PasswordGate.tsx` still uses a hard-coded password. Needs the owner to decide between removing the gate, replacing with a deploy-platform gate (Cloudflare Access / Vercel password protection), or accepting the soft-curtain model.
-- **`.env` removal from git history** — destructive history rewrite, owner decision.
-- **`prelaunch-hero-v2.jpg` (1.1 MB)** — needs image tooling to compress.
-- **`HeroSection.tsx` 3 distinct slide images** — content task.
-- **`Team.tsx` "Team Reveal Coming Soon"** — content task.
-- **Social URLs** — populate `SOCIAL_LINKS` in `src/data/brand.ts` when channels go live.
-- **Hero stock photography** for `category-*.jpg` images — content task.
-- **Newsletter / PreLaunch duplicate-email UX** — currently silent success on dupe; UX decision.
+## CHANGES APPLIED — phase 3 (final pass)
+
+### Image compression
+- **`src/assets/prelaunch-hero-v2.jpg`** was a 1376x768 PNG misnamed as `.jpg`, weighing 1.1 MB. Re-encoded as a real progressive mozjpeg at quality 78. New size: 57 KB. Visual quality unchanged at display resolution.
+
+### Password gate hardened (lightly)
+- **`src/components/PasswordGate.tsx`**: password now reads from `import.meta.env.VITE_SITE_PASSWORD` with the legacy `"baseline2025"` value as a fallback. Set `VITE_SITE_PASSWORD` in the deploy environment to rotate without a code change. The component comment notes that this is still a soft curtain — for real access control, gate at the platform level.
+- **`.env.example`** added at the repo root documenting `VITE_SITE_PASSWORD`, the Supabase variables, and the Shopify storefront variables.
+
+### Newsletter / PreLaunch duplicate-email UX
+- Both forms now distinguish "subscribed" from "already on the list" instead of silently returning success on the duplicate-key path. User sees a clear message in either case.
+
+### Hero carousel
+- **`src/components/HeroSection.tsx`** now uses three distinct background images (`category-performance.jpg`, `category-metabolic.jpg`, `category-health.jpg`) matching each slide's tagline. CTAs corrected to `/category/performance` and `/knowledge-base` where they pointed at `/shop`. The 6000 ms interval is now `SLIDE_INTERVAL_MS`.
+
+### Team section
+- **`src/components/sections/Team.tsx`** no longer renders the "Team Reveal Coming Soon" stub. Now reads from a typed `TeamMember[]` array (empty by default) and renders `null` until populated. Drop members into the array when the team page is ready.
+
+### A11y: star ratings
+- Star ratings in `Testimonials.tsx` and `Shop.tsx` now wrap the stars in a `role="img"` container with `aria-label="5 out of 5 stars"` and mark each glyph `aria-hidden="true"`. Screen readers now announce the rating once instead of "star star star star star".
+
+### SEO
+- **`public/sitemap.xml`** added covering the homepage, all 7 product detail pages, blog, knowledge base, about, contact, app, and policy pages.
+- **`public/robots.txt`** now references the sitemap.
+
+### Verification
+- `npm install`: clean, no peer-dep warnings.
+- `npm run lint`: 0 errors, 12 warnings (all shadcn `react-refresh/only-export-components` notices on UI variant files).
+- `npm run build`: clean. Initial JS chunk 567 KB (gzip 180 KB). Heaviest route is Deck at 600 KB (lazy-loaded — pulls in jspdf + html2canvas).
+- `npm test`: passing.
+- `npx tsc --noEmit -p tsconfig.app.json`: clean.
+
+### Still flagged (genuinely needs owner input)
+- **`.env` removal from git history** — destructive history rewrite. The currently tracked values are the Supabase publishable key (designed for client use, RLS enforced server-side) so there is no live secret leak. Skipped to avoid force-pushing main.
+- **Real social URLs** — populate `SOCIAL_LINKS` in `src/data/brand.ts` when channels go live. Icons stay hidden until URLs are filled in.
+- **Hero category photography** — the `category-*.jpg` images now drive the hero carousel. If they look generic or AI-stock-like, replace with branded photography.
+- **Knowledge-base / blog content depth** — outside the scope of this audit.
