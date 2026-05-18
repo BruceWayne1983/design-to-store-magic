@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
 
@@ -7,7 +8,7 @@ const ProductReviews = () => (
       <div className="flex flex-col items-center gap-4 text-center">
         <h2 className="text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight">Customer Reviews</h2>
         <div className="flex items-center gap-2">
-          <div className="flex gap-0.5">
+          <div className="flex gap-0.5" role="img" aria-label="No reviews yet">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-5 h-5 text-muted-foreground/30" />
             ))}
@@ -17,9 +18,12 @@ const ProductReviews = () => (
       </div>
       <div className="flex flex-col items-center gap-4 py-8 border border-border rounded-lg w-full max-w-[500px]">
         <p className="text-sm text-muted-foreground">Be the first to write a review</p>
-        <button className="px-6 py-2.5 border border-border text-foreground text-xs font-bold uppercase tracking-[0.15em] hover:border-primary hover:text-primary transition-colors rounded">
+        <Link
+          to="/contact"
+          className="px-6 py-2.5 border border-border text-foreground text-xs font-bold uppercase tracking-[0.15em] hover:border-primary hover:text-primary transition-colors rounded"
+        >
           Write a Review
-        </button>
+        </Link>
       </div>
     </ScrollReveal>
   </section>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
@@ -32,7 +33,7 @@ const ProductFAQ = ({ product }: { product: ProductData }) => {
         <ScrollReveal>
           <div>
             <h4 className="text-base md:text-lg font-bold text-foreground">Still have questions?</h4>
-            <p className="text-sm md:text-base text-muted-foreground mt-1">Contact our <a href="#" className="text-primary underline">support team</a>.</p>
+            <p className="text-sm md:text-base text-muted-foreground mt-1">Contact our <Link to="/contact" className="text-primary underline">support team</Link>.</p>
           </div>
         </ScrollReveal>
       </div>

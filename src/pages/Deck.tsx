@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Maximize, Grid, X, Download, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import { createDeckPdf, deckSlides, downloadPdfFile, isSafariBrowser, openPdfPreview } from "@/lib/deckPdf";
 
 type ExportMode = "download" | "preview";
@@ -53,13 +54,14 @@ const Deck = () => {
       }
     } catch (e) {
       console.error("Export failed:", e);
+      toast.error("Deck export failed. Please try again.");
     } finally {
       setIsDownloading(false);
       setExportProgress("");
     }
   }, [isDownloading, slides]);
 
-  const next = useCallback(() => setCurrent((c) => Math.min(c + 1, slides.length - 1)), []);
+  const next = useCallback(() => setCurrent((c) => Math.min(c + 1, slides.length - 1)), [slides.length]);
   const prev = useCallback(() => setCurrent((c) => Math.max(c - 1, 0)), []);
 
   useEffect(() => {

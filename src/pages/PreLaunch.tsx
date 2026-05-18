@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import prelaunchHero from "@/assets/prelaunch-hero-v2.jpg";
 import logoLight from "@/assets/logo-light.png";
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { activeSocialLinks } from "@/data/brand";
 import { supabase } from "@/integrations/supabase/client";
 
 const PreLaunch = () => {
@@ -10,10 +10,11 @@ const PreLaunch = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const socials = activeSocialLinks();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || loading) return;
     setLoading(true);
     setError("");
     try {
@@ -130,14 +131,28 @@ const PreLaunch = () => {
         </div>
 
         {/* Social links */}
-         <div className="flex items-center gap-6 mt-4">
-           <span className="text-xs text-white/50 uppercase tracking-wider font-medium">Follow us</span>
-           <div className="flex gap-4">
-             <a href="#" className="text-white/50 hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)] transition-all"><Instagram className="w-5 h-5" /></a>
-             <a href="#" className="text-white/50 hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)] transition-all"><Facebook className="w-5 h-5" /></a>
-             <a href="#" className="text-white/50 hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)] transition-all"><Twitter className="w-5 h-5" /></a>
-           </div>
-         </div>
+        {socials.length > 0 && (
+          <div className="flex items-center gap-6 mt-4">
+            <span className="text-xs text-white/50 uppercase tracking-wider font-medium">Follow us</span>
+            <div className="flex gap-4">
+              {socials.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/50 hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)] transition-all"
+                    aria-label={s.name}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
          {/* Back to main site link (for demo) */}
          <Link to="/home" className="text-sm text-white/40 hover:text-primary border border-white/15 hover:border-primary/40 px-6 py-2.5 rounded-full transition-all duration-300 mt-6 backdrop-blur-sm">

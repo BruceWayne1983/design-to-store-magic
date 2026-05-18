@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useParams, Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -28,6 +29,10 @@ const ProductDetail = () => {
 
   return (
     <div className="flex flex-col items-start w-full">
+      <Helmet>
+        <title>{product.name} | Baseline Nutrition</title>
+        <meta name="description" content={product.tagline} />
+      </Helmet>
       <ProductJsonLd product={product} />
       <AnnouncementBar />
       <Navbar />

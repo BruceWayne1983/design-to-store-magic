@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { useCartStore } from "@/stores/cartStore";
-import { VARIANT_MAP } from "./ProductHero";
+import { VARIANT_MAP } from "@/lib/shopify";
 import type { ProductData } from "@/data/products";
 
 interface StickyAddToCartProps {

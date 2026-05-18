@@ -1,7 +1,6 @@
 import { X, Plus, Minus, ShoppingBag, Loader2, ExternalLink, Trash2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-
-const FREE_SHIPPING_THRESHOLD = 75;
+import { FREE_SHIPPING_THRESHOLD } from "@/data/brand";
 
 const CartDrawer = () => {
   const { items, isLoading, isSyncing, cartOpen, setCartOpen, updateQuantity, removeItem, getCheckoutUrl, syncCart, subtotal: getSubtotal, totalItems: getTotalItems } = useCartStore();
@@ -34,7 +33,7 @@ const CartDrawer = () => {
             <ShoppingBag className="w-5 h-5 text-foreground" />
             <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">Cart · {totalItems}</h3>
           </div>
-          <button onClick={() => setCartOpen(false)} className="p-1 hover:opacity-70 transition-opacity">
+          <button onClick={() => setCartOpen(false)} className="p-1 hover:opacity-70 transition-opacity" aria-label="Close cart">
             <X className="w-5 h-5 text-foreground" />
           </button>
         </div>
