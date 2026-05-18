@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -19,6 +20,10 @@ import Footer from "@/components/Footer";
 
 const Index = () => (
   <div className="flex flex-col items-start w-full">
+    <Helmet>
+      <title>Baseline Nutrition | Performance Nutrition Built on Science</title>
+      <meta name="description" content="Clinically dosed, fully transparent performance nutrition. Supplements built on real science for athletes and health optimisers." />
+    </Helmet>
     <AnnouncementBar />
     <Navbar />
     <HeroSection />

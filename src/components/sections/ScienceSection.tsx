@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Atom, Wind, BarChart3 } from "lucide-react";
 
 const mechanisms = [
@@ -42,9 +43,12 @@ const ScienceSection = () => (
         ))}
       </div>
       <div className="flex justify-center">
-        <button className="px-6 py-3 border border-white/30 text-white text-xs md:text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">
+        <Link
+          to="/knowledge-base"
+          className="px-6 py-3 border border-white/30 text-white text-xs md:text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors"
+        >
           Read the Science
-        </button>
+        </Link>
       </div>
     </div>
   </section>

@@ -90,11 +90,21 @@ const SearchOverlay = ({ open, onClose }: SearchOverlayProps) => {
 
         <div className="flex flex-col gap-3">
           <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Quick Links</h4>
-          {["Performance Supplements", "Metabolic Support", "Health & Hydration", "The Science"].map((link) => (
-            <button key={link} className="flex items-center justify-between py-2 text-sm text-foreground hover:text-primary transition-colors group">
-              {link}
+          {[
+            { label: "Performance Supplements", to: "/category/performance" },
+            { label: "Metabolic Support", to: "/shop" },
+            { label: "Health & Hydration", to: "/shop" },
+            { label: "The Science", to: "/knowledge-base" },
+          ].map((link) => (
+            <Link
+              key={link.label}
+              to={link.to}
+              onClick={onClose}
+              className="flex items-center justify-between py-2 text-sm text-foreground hover:text-primary transition-colors group"
+            >
+              {link.label}
               <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
+            </Link>
           ))}
         </div>
       </div>

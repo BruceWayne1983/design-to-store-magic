@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { useCartStore } from "@/stores/cartStore";
-import { VARIANT_MAP } from "../product/ProductHero";
+import { VARIANT_MAP } from "@/lib/shopify";
 import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
 import vascul8 from "@/assets/products/vascul8.jpg";
 import glyco8 from "@/assets/products/glyco8.jpg";

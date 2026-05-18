@@ -1,9 +1,22 @@
 import { toast } from "sonner";
 
 const SHOPIFY_API_VERSION = '2025-07';
-const SHOPIFY_STORE_PERMANENT_DOMAIN = 'design-to-store-magic-62rle.myshopify.com';
+const SHOPIFY_STORE_PERMANENT_DOMAIN =
+  import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 'design-to-store-magic-62rle.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-const SHOPIFY_STOREFRONT_TOKEN = '28979e05500b9698d34160bffc622bd0';
+const SHOPIFY_STOREFRONT_TOKEN =
+  import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || '28979e05500b9698d34160bffc622bd0';
+
+// Storefront variant IDs per product slug. Update when products change.
+export const VARIANT_MAP: Record<string, string> = {
+  "fusion-lite-plus": "gid://shopify/ProductVariant/51487401279776",
+  "vascul8": "gid://shopify/ProductVariant/51487409275168",
+  "glycoshift": "gid://shopify/ProductVariant/51487999918368",
+  "glyco8": "gid://shopify/ProductVariant/51488010830112",
+  "electro-flow": "gid://shopify/ProductVariant/51488015941920",
+  "h2o-go": "gid://shopify/ProductVariant/51488016400672",
+  "purest-creatine": "gid://shopify/ProductVariant/51488021184800",
+};
 
 export interface ShopifyProduct {
   node: {

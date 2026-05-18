@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { BarChart3, ScanLine, Layers, Bell, ShieldCheck, Zap, ArrowRight, Smartphone } from "lucide-react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { supabase } from "@/integrations/supabase/client";
 import appDashboard from "@/assets/app-mockup-dashboard.jpg";
 import appScanner from "@/assets/app-mockup-scanner.jpg";
 import appStacks from "@/assets/app-mockup-stacks.jpg";
@@ -28,7 +30,35 @@ const screenshots = [
   { img: appStacks, label: "Stack Builder", desc: "Personalised recommendations" },
 ];
 
-const AppLanding = () => (
+const AppLanding = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleWaitlist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || loading) return;
+    setLoading(true);
+    setError("");
+    try {
+      const { error: dbError } = await supabase
+        .from("email_signups")
+        .insert({ email: email.trim().toLowerCase(), source: "app-waitlist" });
+      if (dbError && dbError.code !== "23505") throw dbError;
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const scrollToWaitlist = () => {
+    document.getElementById("app-waitlist")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  return (
   <>
     <Helmet>
       <title>The App — Baseline Nutrition</title>
@@ -55,12 +85,19 @@ const AppLanding = () => (
             Track every dose, scan any label, and build clinically-backed stacks — all from your pocket. The Baseline app turns supplement science into a daily system.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-            <button className="flex items-center justify-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm">
+            <button
+              type="button"
+              onClick={scrollToWaitlist}
+              className="flex items-center justify-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm"
+            >
               <Smartphone className="w-4 h-4" /> Join the Waitlist
             </button>
-            <button className="flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 transition-colors text-sm">
+            <a
+              href="#features"
+              className="flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 transition-colors text-sm"
+            >
               Learn More <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
         </motion.div>
 
@@ -76,7 +113,7 @@ const AppLanding = () => (
     </section>
 
     {/* Features grid */}
-    <section className="w-full bg-background py-16 md:py-24 px-4 md:px-8 lg:px-16">
+    <section id="features" className="w-full bg-background py-16 md:py-24 px-4 md:px-8 lg:px-16">
       <div className="max-w-[1280px] mx-auto">
         <div className="text-center mb-14">
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3 block">Features</span>
@@ -136,29 +173,46 @@ const AppLanding = () => (
     </section>
 
     {/* CTA */}
-    <section className="w-full bg-background py-16 md:py-24 px-4 md:px-8 lg:px-16">
+    <section id="app-waitlist" className="w-full bg-background py-16 md:py-24 px-4 md:px-8 lg:px-16">
       <div className="max-w-[720px] mx-auto text-center">
         <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3 block">Early Access</span>
         <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-4">Be the First to Try It</h2>
         <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
           Join the waitlist for early access to the Baseline Nutrition app. Free for all Baseline customers at launch.
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="flex-1 px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-          />
-          <button className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm whitespace-nowrap">
-            Join Waitlist
-          </button>
-        </div>
+        {!submitted ? (
+          <form onSubmit={handleWaitlist} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" noValidate>
+            <label htmlFor="app-waitlist-email" className="sr-only">Email address</label>
+            <input
+              id="app-waitlist-email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm whitespace-nowrap disabled:opacity-50"
+            >
+              {loading ? "Submitting..." : "Join Waitlist"}
+            </button>
+          </form>
+        ) : (
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-primary/30 bg-primary/5 text-primary font-semibold">
+            <span>✓</span> You're on the waitlist!
+          </div>
+        )}
+        {error && <p className="text-red-500 text-xs mt-3">{error}</p>}
         <p className="text-xs text-muted-foreground mt-4">Available on iOS & Android. No spam, ever.</p>
       </div>
     </section>
 
     <Footer />
   </>
-);
+  );
+};
 
 export default AppLanding;

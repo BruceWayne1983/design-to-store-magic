@@ -265,7 +265,7 @@ Do NOT delete without owner sign-off. Listed for review.
 
 ---
 
-## CHANGES APPLIED (SAFE auto-fixes)
+## CHANGES APPLIED — phase 1 (safe auto-fixes)
 
 The fixes below are non-visible code hygiene changes that do not affect UI, copy, or business logic.
 
@@ -279,3 +279,64 @@ The fixes below are non-visible code hygiene changes that do not affect UI, copy
 8. **`src/components/PasswordGate.tsx:46`** — added `aria-hidden="true"` to the decorative lock icon's container so screen readers skip it.
 9. **`src/components/CookieConsent.tsx`** — added `role="switch"` and `aria-checked={analytics}` / `aria-checked={marketing}` to the toggle buttons so screen readers announce them as switches. Visual appearance unchanged.
 10. **`index.html:6,11`** — removed two leftover `<!-- TODO: ... -->` comments. No visible change.
+
+## CHANGES APPLIED — phase 2 (next-phase fixes)
+
+### Dependencies / build
+- **`package.json`**: pinned `vite` to `^7.0.0` and `@vitejs/plugin-react` to `^5.0.0` to resolve the peer-dependency conflict with `lovable-tagger`. `npm install` now succeeds without `--legacy-peer-deps`.
+- **Route code splitting**: every page is now `React.lazy()` in `src/App.tsx`. Main initial JS chunk dropped from 1.45 MB to 567 KB; heavy routes (Deck with jspdf/html2canvas) load on demand.
+
+### Wired dead CTAs
+- **`src/pages/AppLanding.tsx`**: the "Join the Waitlist" form is now a real Supabase signup (`source: "app-waitlist"`) with loading, success, and error states matching `Newsletter.tsx`. Hero "Join the Waitlist" button scrolls to the form; "Learn More" jumps to features.
+- **`src/components/QuickAddModal.tsx`**: "Add to basket" now calls `useCartStore.addItem` with the right Shopify variant, shows loading state, opens the cart drawer, and toasts errors when the variant isn't mapped or pricing is unavailable.
+- **`src/pages/PerformanceCategory.tsx`**: search, category chips, and sort dropdown now drive real filtering. Featured collection cards' "Shop Collection" buttons set the active filter and scroll to the grid. "Explore Stack Systems" and "View Stacks" turned into `Link`s to `/shop`. Added empty-state with clear-filters reset.
+- **`src/pages/Shop.tsx`**: hero "Shop all" scrolls to product grid; "View stacks" is a real link; "Explore" buttons on category cards now set the matching filter; bottom "Shop now" / "Learn more" wired to grid scroll and `/about`. Added empty state when zero products match. Added `Helmet` title/description.
+- **`src/pages/Blog.tsx`**: now reads `?category=` query param (mapped through `PILLAR_BY_SLUG` to handle the slug-style URLs already in the navbar) and filters articles by pillar. Adds dynamic page title and a "View all articles" reset link.
+- **`src/components/SearchOverlay.tsx`**: Quick Links now navigate to real routes and close the overlay.
+- **`src/components/sections/ReadyToPerform.tsx`**: "Shop now" and "Take assessment" replaced with working `Link`s (`/shop` and `/knowledge-base`).
+- **`src/components/sections/ScienceSection.tsx`**: "Read the Science" now links to `/knowledge-base`.
+- **`src/components/product/ProductReviews.tsx`**: "Write a Review" button is now a `Link` to `/contact` until reviews are wired.
+- **`src/components/AnnouncementBar.tsx`**: "Shop Now" span turned into a real `Link` to `/shop`. Threshold value pulled from the brand config.
+
+### Removed dead `href="#"` links
+- **`src/pages/Shop.tsx`**, **`src/components/sections/FAQ.tsx`**, **`src/components/product/ProductFAQ.tsx`**: all three "support team" `href="#"` anchors replaced with `<Link to="/contact">`.
+- **Social icons**: introduced `src/data/brand.ts` with a `SOCIAL_LINKS` array. Entries with empty URLs render nothing, removing the four footer + three pre-launch dead links. Real URLs can be pasted into this single file when channels go live.
+
+### Refactor / consolidation
+- **`src/lib/shopify.ts`**: `VARIANT_MAP` moved here (out of `src/components/product/ProductHero.tsx`). Both `StickyAddToCart` and `TrustedFormulas` now import from the lib file. Store domain and storefront token both read from `import.meta.env` with safe fallbacks.
+- **`src/data/brand.ts`** (new): centralised `BRAND_NAME`, `BRAND_TAGLINE`, `BRAND_EMAIL`, `BRAND_ADDRESS`, `FREE_SHIPPING_THRESHOLD`, and `SOCIAL_LINKS`. `Footer.tsx`, `AnnouncementBar.tsx`, `CartDrawer.tsx`, and `PreLaunch.tsx` now read from it.
+- **`src/components/Footer.tsx`**: link map restructured. "FAQ" no longer points at `/about`; support column now points at contact and policy pages.
+- **`src/pages/Deck.tsx`**: `useCallback` deps array includes `slides.length`; export failures now surface via Sonner toast instead of silently logging.
+
+### Cart error surfacing
+- **`src/stores/cartStore.ts`**: every `console.error` catch in `addItem`, `updateQuantity`, `removeItem` now also calls `toast.error("We couldn't update your basket. Please try again.")`.
+
+### Per-page metadata
+- Added `<Helmet>` titles and descriptions to `src/pages/Index.tsx`, `Shop.tsx`, `ProductDetail.tsx`, `PerformanceCategory.tsx`, `About.tsx`, and `Contact.tsx`. Blog now produces a category-aware title.
+
+### Newsletter / PreLaunch hardening
+- **`src/pages/PreLaunch.tsx`** `handleSubmit` now bails out when `loading` is already true (double-submit guard).
+- Newsletter dedupe path unchanged in this phase (still shows success on duplicate `23505`) — flagged for review.
+
+### Toast system consolidated to Sonner
+Deleted the dead shadcn toast layer:
+- `src/hooks/use-toast.ts`
+- `src/components/ui/use-toast.ts`
+- `src/components/ui/toaster.tsx`
+- `src/components/ui/toast.tsx`
+`App.tsx` no longer mounts the shadcn `<Toaster />`; Sonner is now the single toast surface.
+
+### Dead code removed
+- Components: `src/components/ProductCard.tsx`, `src/components/NavLink.tsx`
+- File: `src/App.css` (never imported)
+- 20 unused image assets in `src/assets/` (the `.png` files and old `.jpg` variants the team had migrated away from)
+
+### Still REVIEW-only (owner decision required)
+- **Password gate** — `src/components/PasswordGate.tsx` still uses a hard-coded password. Needs the owner to decide between removing the gate, replacing with a deploy-platform gate (Cloudflare Access / Vercel password protection), or accepting the soft-curtain model.
+- **`.env` removal from git history** — destructive history rewrite, owner decision.
+- **`prelaunch-hero-v2.jpg` (1.1 MB)** — needs image tooling to compress.
+- **`HeroSection.tsx` 3 distinct slide images** — content task.
+- **`Team.tsx` "Team Reveal Coming Soon"** — content task.
+- **Social URLs** — populate `SOCIAL_LINKS` in `src/data/brand.ts` when channels go live.
+- **Hero stock photography** for `category-*.jpg` images — content task.
+- **Newsletter / PreLaunch duplicate-email UX** — currently silent success on dupe; UX decision.

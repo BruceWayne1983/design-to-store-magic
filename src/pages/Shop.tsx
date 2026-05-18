@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { AnimatePresence, motion } from "framer-motion";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
@@ -70,8 +71,16 @@ const Shop = () => {
       return 0;
     });
 
+  const scrollToProducts = () => {
+    document.getElementById("shop-products")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="flex flex-col items-start w-full">
+      <Helmet>
+        <title>Shop All Supplements | Baseline Nutrition</title>
+        <meta name="description" content="Browse the full range of clinically dosed Baseline Nutrition supplements. Performance, metabolic, hydration and recovery formulas." />
+      </Helmet>
       <AnnouncementBar />
       <Navbar />
 
@@ -82,8 +91,19 @@ const Shop = () => {
           <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-[1.1]">Shop all baseline</h1>
           <p className="text-base md:text-lg text-white/60 max-w-[600px]">Clinically formulated supplements designed for measurable results. Every dose backed by science.</p>
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <button className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">Shop all</button>
-            <button className="px-6 py-3 border border-white/30 text-white text-sm md:text-base font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">View stacks</button>
+            <button
+              type="button"
+              onClick={scrollToProducts}
+              className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity"
+            >
+              Shop all
+            </button>
+            <Link
+              to="/category/performance"
+              className="px-6 py-3 border border-white/30 text-white text-sm md:text-base font-medium uppercase tracking-wider hover:bg-white/10 transition-colors text-center"
+            >
+              View stacks
+            </Link>
           </div>
         </div>
       </section>
@@ -122,9 +142,21 @@ const Shop = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">
+      <section id="shop-products" className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">
         <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
           <SectionHeader tagline="Full Range" heading="Products" text={`Showing ${filtered.length} product${filtered.length !== 1 ? "s" : ""}`} />
+          {filtered.length === 0 && (
+            <div className="flex flex-col items-center gap-3 py-10 text-center">
+              <p className="text-base text-foreground font-semibold">No products in this category yet.</p>
+              <button
+                type="button"
+                onClick={() => setFilter("All")}
+                className="text-sm text-primary underline hover:opacity-80"
+              >
+                View all products
+              </button>
+            </div>
+          )}
           <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
             <AnimatePresence mode="popLayout">
               {filtered.map((p, i) => (
@@ -189,7 +221,13 @@ const Shop = () => {
                         <span className="text-sm font-semibold text-primary uppercase tracking-widest">{cat.tagline}</span>
                         <h3 className="text-2xl md:text-3xl font-black text-foreground mt-2">{cat.title}</h3>
                         <p className="text-sm md:text-base text-muted-foreground mt-4 max-w-[450px]">{cat.desc}</p>
-                        <button className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Explore</button>
+                        <button
+                          type="button"
+                          onClick={() => setFilter(cat.tagline === "Health" ? "Health & Hydration" : (cat.tagline as Category))}
+                          className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors"
+                        >
+                          Explore
+                        </button>
                       </div>
                       <div className="w-full md:w-1/2 bg-secondary flex items-center justify-center p-8 md:p-12 min-h-[250px] md:min-h-[350px]">
                         <img src={cat.image} alt={cat.title} className="w-full max-w-[280px] object-contain" />
@@ -204,7 +242,13 @@ const Shop = () => {
                         <span className="text-sm font-semibold text-primary uppercase tracking-widest">{cat.tagline}</span>
                         <h3 className="text-2xl md:text-3xl font-black text-foreground mt-2">{cat.title}</h3>
                         <p className="text-sm md:text-base text-muted-foreground mt-4 max-w-[450px]">{cat.desc}</p>
-                        <button className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Explore</button>
+                        <button
+                          type="button"
+                          onClick={() => setFilter(cat.tagline === "Health" ? "Health & Hydration" : (cat.tagline as Category))}
+                          className="mt-6 self-start px-5 py-2 border border-border text-foreground text-sm font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors"
+                        >
+                          Explore
+                        </button>
                       </div>
                     </>
                   )}
@@ -264,7 +308,7 @@ const Shop = () => {
           </div>
           <div>
             <h4 className="text-base md:text-lg font-bold text-foreground">Need more help?</h4>
-            <p className="text-sm md:text-base text-muted-foreground mt-1">Contact our <a href="#" className="text-primary underline">support team</a>.</p>
+            <p className="text-sm md:text-base text-muted-foreground mt-1">Contact our <Link to="/contact" className="text-primary underline">support team</Link>.</p>
           </div>
         </div>
       </section>
@@ -281,8 +325,19 @@ const Shop = () => {
           <h2 className="text-3xl md:text-5xl font-black text-foreground leading-[1.1]">Elevate your baseline</h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-[500px]">Start your journey to peak performance with science-backed nutrition protocols.</p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">Shop now</button>
-            <button className="px-6 py-3 border border-border text-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Learn more</button>
+            <button
+              type="button"
+              onClick={scrollToProducts}
+              className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity"
+            >
+              Shop now
+            </button>
+            <Link
+              to="/about"
+              className="px-6 py-3 border border-border text-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors text-center"
+            >
+              Learn more
+            </Link>
           </div>
         </motion.div>
       </section>

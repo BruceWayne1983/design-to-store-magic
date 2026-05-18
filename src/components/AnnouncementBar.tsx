@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { X } from "lucide-react";
+import { FREE_SHIPPING_THRESHOLD } from "@/data/brand";
 
 const AnnouncementBar = () => {
   const [visible, setVisible] = useState(true);
@@ -10,7 +12,8 @@ const AnnouncementBar = () => {
     <div className="w-full bg-primary text-primary-foreground relative z-[60]">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 py-2 flex items-center justify-center">
         <p className="text-xs md:text-sm font-medium tracking-wide text-center">
-          FREE SHIPPING ON ALL UK ORDERS OVER £75 — <span className="underline cursor-pointer">Shop Now</span>
+          FREE SHIPPING ON ALL UK ORDERS OVER £{FREE_SHIPPING_THRESHOLD} —{" "}
+          <Link to="/shop" className="underline hover:opacity-80">Shop Now</Link>
         </p>
         <button
           onClick={() => setVisible(false)}

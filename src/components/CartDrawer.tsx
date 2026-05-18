@@ -1,7 +1,6 @@
 import { X, Plus, Minus, ShoppingBag, Loader2, ExternalLink, Trash2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-
-const FREE_SHIPPING_THRESHOLD = 75;
+import { FREE_SHIPPING_THRESHOLD } from "@/data/brand";
 
 const CartDrawer = () => {
   const { items, isLoading, isSyncing, cartOpen, setCartOpen, updateQuantity, removeItem, getCheckoutUrl, syncCart, subtotal: getSubtotal, totalItems: getTotalItems } = useCartStore();

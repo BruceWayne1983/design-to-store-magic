@@ -1,9 +1,14 @@
+import { Helmet } from "react-helmet-async";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const About = () => (
   <div className="flex flex-col items-start w-full">
+    <Helmet>
+      <title>About | Baseline Nutrition</title>
+      <meta name="description" content="Baseline Nutrition builds clinically dosed, fully transparent supplements backed by peer-reviewed research. UK-made and trademark-ingredient based." />
+    </Helmet>
     <AnnouncementBar />
     <Navbar />
     <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">

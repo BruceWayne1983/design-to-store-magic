@@ -1,5 +1,7 @@
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, SlidersHorizontal, ChevronDown, FlaskConical, ShieldCheck, Factory, FileText } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+import { Search, FlaskConical, ShieldCheck, Factory, FileText } from "lucide-react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,6 +13,9 @@ import electroFlow from "@/assets/products/electro-flow.jpg";
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
 import h2oGo from "@/assets/products/h2o-go.jpg";
 
+type SortKey = "featured" | "price-asc" | "price-desc" | "az";
+type CategoryFilter = "all" | "Performance" | "Metabolic" | "Health & Hydration";
+
 const trustItems = [
   { icon: FlaskConical, label: "Clinically Dosed" },
   { icon: ShieldCheck, label: "Trademarked Ingredients" },
@@ -18,36 +23,75 @@ const trustItems = [
   { icon: FileText, label: "Transparent Formulas" },
 ];
 
-const categories = [
+const categories: { title: string; key: CategoryFilter; desc: string; image: string }[] = [
   {
     title: "PERFORMANCE",
+    key: "Performance",
     desc: "Pre-workout, pump and performance enhancers engineered for maximum training output.",
     image: fusionLitePlus,
   },
   {
     title: "METABOLIC",
+    key: "Metabolic",
     desc: "Glucose disposal agents and metabolic optimisers built on real clinical mechanisms.",
     image: glyco8,
   },
   {
     title: "HEALTH & HYDRATION",
+    key: "Health & Hydration",
     desc: "Advanced electrolyte formulas and hydration support for daily performance.",
     image: electroFlow,
   },
 ];
 
 const products = [
-  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", image: fusionLitePlus, tag: "Best Seller" },
-  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", image: vascul8, tag: null },
-  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", image: glycoshift, tag: null },
-  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", image: glyco8, tag: null },
-  { name: "Electro Flow", slug: "electro-flow", desc: "Advanced Electrolyte Support", price: "£27.99", image: electroFlow, tag: null },
-  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", image: purestCreatine, tag: null },
-  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", image: h2oGo, tag: null },
+  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, tag: "Best Seller", category: "Performance" as const },
+  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", priceNum: 39.99, image: vascul8, tag: null, category: "Performance" as const },
+  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", priceNum: 39.99, image: glycoshift, tag: null, category: "Metabolic" as const },
+  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", priceNum: 39.99, image: glyco8, tag: null, category: "Metabolic" as const },
+  { name: "Electro Flow", slug: "electro-flow", desc: "Advanced Electrolyte Support", price: "£27.99", priceNum: 27.99, image: electroFlow, tag: null, category: "Health & Hydration" as const },
+  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", priceNum: 23.99, image: purestCreatine, tag: null, category: "Performance" as const },
+  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", priceNum: 0, image: h2oGo, tag: null, category: "Health & Hydration" as const },
 ];
 
-const PerformanceCategory = () => (
+const categoryFilters: { key: CategoryFilter; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "Performance", label: "Performance" },
+  { key: "Metabolic", label: "Metabolic" },
+  { key: "Health & Hydration", label: "Health & Hydration" },
+];
+
+const sortOptions: { key: SortKey; label: string }[] = [
+  { key: "featured", label: "Featured" },
+  { key: "price-asc", label: "Price: Low to High" },
+  { key: "price-desc", label: "Price: High to Low" },
+  { key: "az", label: "A-Z" },
+];
+
+const PerformanceCategory = () => {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<CategoryFilter>("all");
+  const [sort, setSort] = useState<SortKey>("featured");
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return products
+      .filter((p) => category === "all" || p.category === category)
+      .filter((p) => !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+      .sort((a, b) => {
+        if (sort === "price-asc") return a.priceNum - b.priceNum;
+        if (sort === "price-desc") return b.priceNum - a.priceNum;
+        if (sort === "az") return a.name.localeCompare(b.name);
+        return 0;
+      });
+  }, [search, category, sort]);
+
+  return (
   <div className="flex flex-col items-start w-full">
+    <Helmet>
+      <title>Performance Supplements | Baseline Nutrition</title>
+      <meta name="description" content="Clinically dosed pre-workout, pump, hydration and recovery supplements engineered for measurable training output." />
+    </Helmet>
     <AnnouncementBar />
     <Navbar />
 
@@ -66,9 +110,9 @@ const PerformanceCategory = () => (
             <Link to="/shop" className="px-5 md:px-6 py-3 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity text-center">
               Shop Best Sellers
             </Link>
-            <button className="px-5 md:px-6 py-3 border border-white/30 text-white text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">
+            <Link to="/shop" className="px-5 md:px-6 py-3 border border-white/30 text-white text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors text-center">
               Explore Stack Systems
-            </button>
+            </Link>
           </div>
         </div>
         <div className="flex-1 flex justify-center lg:justify-end">
@@ -99,28 +143,44 @@ const PerformanceCategory = () => (
       <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 py-3 md:py-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <div className="relative flex-1 max-w-xs">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <label htmlFor="perf-search" className="sr-only">Search products</label>
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
             <input
-              type="text"
+              id="perf-search"
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search products..."
               className="w-full pl-9 pr-3 py-2 text-sm bg-secondary border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
           <div className="flex items-center gap-2 flex-wrap">
-            <button className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-foreground bg-secondary border border-border rounded-md hover:border-primary transition-colors">
-              <SlidersHorizontal className="w-3.5 h-3.5" />
-              Goal
-              <ChevronDown className="w-3 h-3 text-muted-foreground" />
-            </button>
-            <button className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-foreground bg-secondary border border-border rounded-md hover:border-primary transition-colors">
-              Category
-              <ChevronDown className="w-3 h-3 text-muted-foreground" />
-            </button>
+            {categoryFilters.map((c) => (
+              <button
+                key={c.key}
+                type="button"
+                onClick={() => setCategory(c.key)}
+                className={`px-3 py-2 text-xs font-medium rounded-md border transition-colors ${
+                  category === c.key
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "text-foreground bg-secondary border-border hover:border-primary"
+                }`}
+              >
+                {c.label}
+              </button>
+            ))}
             <div className="hidden sm:block w-px h-5 bg-border mx-1" />
-            <button className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-muted-foreground bg-secondary border border-border rounded-md hover:border-primary transition-colors">
-              Sort: Best Sellers
-              <ChevronDown className="w-3 h-3" />
-            </button>
+            <label htmlFor="perf-sort" className="sr-only">Sort products</label>
+            <select
+              id="perf-sort"
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              className="px-3 py-2 text-xs font-medium text-foreground bg-secondary border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
+            >
+              {sortOptions.map((s) => (
+                <option key={s.key} value={s.key}>{`Sort: ${s.label}`}</option>
+              ))}
+            </select>
           </div>
         </div>
       </div>
@@ -149,7 +209,14 @@ const PerformanceCategory = () => (
                   <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-wider">{cat.title}</h3>
                   <p className="text-xs md:text-sm text-white/60 mt-2 max-w-[220px] leading-relaxed">{cat.desc}</p>
                 </div>
-                <button className="self-start px-4 py-2 border border-white/40 text-white text-xs font-medium uppercase tracking-wider hover:bg-white hover:text-foreground transition-colors">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCategory(cat.key);
+                    document.getElementById("perf-search")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className="self-start px-4 py-2 border border-white/40 text-white text-xs font-medium uppercase tracking-wider hover:bg-white hover:text-foreground transition-colors"
+                >
                   Shop Collection
                 </button>
               </div>
@@ -167,10 +234,22 @@ const PerformanceCategory = () => (
             <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.2em]">All products</span>
             <h2 className="text-2xl md:text-4xl font-black text-foreground uppercase tracking-tight">Full Range</h2>
           </div>
-          <span className="text-sm text-muted-foreground">{products.length} products</span>
+          <span className="text-sm text-muted-foreground">{filtered.length} {filtered.length === 1 ? "product" : "products"}</span>
         </div>
+        {filtered.length === 0 ? (
+          <div className="flex flex-col items-center gap-3 py-16 text-center">
+            <p className="text-base text-foreground font-semibold">No products match your filters.</p>
+            <button
+              type="button"
+              onClick={() => { setSearch(""); setCategory("all"); setSort("featured"); }}
+              className="text-sm text-primary underline hover:opacity-80"
+            >
+              Clear filters
+            </button>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {products.map((p) => (
+          {filtered.map((p) => (
             <Link
               to={`/product/${p.slug}`}
               key={p.slug}
@@ -201,6 +280,7 @@ const PerformanceCategory = () => (
             </Link>
           ))}
         </div>
+        )}
       </div>
     </section>
 
@@ -217,15 +297,16 @@ const PerformanceCategory = () => (
           <Link to="/shop" className="px-6 py-3 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity">
             Shop All Products
           </Link>
-          <button className="px-6 py-3 border border-white/30 text-white text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors">
+          <Link to="/shop" className="px-6 py-3 border border-white/30 text-white text-sm font-medium uppercase tracking-wider hover:bg-white/10 transition-colors text-center">
             View Stacks
-          </button>
+          </Link>
         </div>
       </div>
     </section>
 
     <Footer />
   </div>
-);
+  );
+};
 
 export default PerformanceCategory;

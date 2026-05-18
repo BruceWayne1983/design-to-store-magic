@@ -4,20 +4,8 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
 import { useCartStore } from "@/stores/cartStore";
+import { VARIANT_MAP } from "@/lib/shopify";
 import type { ProductData } from "@/data/products";
-
-// Map product slugs to Shopify variant GIDs
-const VARIANT_MAP: Record<string, string> = {
-  "fusion-lite-plus": "gid://shopify/ProductVariant/51487401279776",
-  "vascul8": "gid://shopify/ProductVariant/51487409275168",
-  "glycoshift": "gid://shopify/ProductVariant/51487999918368",
-  "glyco8": "gid://shopify/ProductVariant/51488010830112",
-  "electro-flow": "gid://shopify/ProductVariant/51488015941920",
-  "h2o-go": "gid://shopify/ProductVariant/51488016400672",
-  "purest-creatine": "gid://shopify/ProductVariant/51488021184800",
-};
-
-export { VARIANT_MAP };
 
 const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
   const [selectedImage, setSelectedImage] = useState(0);

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { toast } from 'sonner';
 import {
   createShopifyCart,
   addLineToShopifyCart,
@@ -7,6 +8,8 @@ import {
   removeLineFromShopifyCart,
   fetchCartStatus,
 } from '@/lib/shopify';
+
+const CART_ERROR_MESSAGE = "We couldn't update your basket. Please try again.";
 
 export interface CartItem {
   lineId: string | null;
@@ -90,6 +93,7 @@ export const useCartStore = create<CartStore>()(
           }
         } catch (error) {
           console.error('Failed to add item:', error);
+          toast.error(CART_ERROR_MESSAGE);
         } finally {
           set({ isLoading: false });
         }
@@ -116,6 +120,7 @@ export const useCartStore = create<CartStore>()(
           }
         } catch (error) {
           console.error('Failed to update quantity:', error);
+          toast.error(CART_ERROR_MESSAGE);
         } finally {
           set({ isLoading: false });
         }
@@ -142,6 +147,7 @@ export const useCartStore = create<CartStore>()(
           }
         } catch (error) {
           console.error('Failed to remove item:', error);
+          toast.error(CART_ERROR_MESSAGE);
         } finally {
           set({ isLoading: false });
         }

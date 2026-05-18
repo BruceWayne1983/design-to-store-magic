@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
@@ -38,7 +39,7 @@ const FAQ = () => {
         <div>
           <h4 className="text-base md:text-lg font-bold text-foreground">Need more help?</h4>
           <p className="text-sm md:text-base text-muted-foreground mt-1">
-            Contact our <a href="#" className="text-primary underline">support team</a> for personalized assistance.
+            Contact our <Link to="/contact" className="text-primary underline">support team</Link> for personalised assistance.
           </p>
         </div>
       </div>
