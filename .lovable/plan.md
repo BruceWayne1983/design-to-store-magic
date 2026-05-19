@@ -1,17 +1,20 @@
-Change the site password gate default from `baseline2025` to `38475554`.
+## Goal
+Replace all user-facing "Supplement Facts" labels with "Nutritional Information" across product pages and listings. Internal variable/component names stay as-is to avoid churn.
 
-## Change
+## Changes
 
-**File:** `src/components/PasswordGate.tsx` (line 10)
+1. **src/components/product/SupplementFacts.tsx** (line 12)
+   - Card header label: `Supplement Facts` → `Nutritional Information`
 
-```diff
-- const SITE_PASSWORD = import.meta.env.VITE_SITE_PASSWORD || "baseline2025";
-+ const SITE_PASSWORD = import.meta.env.VITE_SITE_PASSWORD || "38475554";
-```
+2. **src/components/product/ProductHero.tsx** (line 142)
+   - Pill/badge label: `Supplement Facts` → `Nutritional Information`
 
-## Notes
+3. **src/lib/deckPdf.ts** (line 15)
+   - Deck description: `...supplement facts...` → `...nutritional information...`
 
-- This is the soft password gate protecting `/home` and all storefront routes (`/shop`, `/product/*`, `/deck`, etc.).
-- Anyone with an old session (sessionStorage `site_unlocked=true`) stays unlocked until they close the tab — new visitors will need `38475554`.
-- The password ships in the client bundle, so it's a soft gate, not real access control.
-- If `VITE_SITE_PASSWORD` is set in the deploy environment, that value overrides this default. Confirm none is set on Vercel, or update it there too.
+## Not changing
+- Section heading "Clinically dosed formula" (already not "Supplement Facts").
+- Internal identifiers (`SupplementFacts` component, `supplementRows` field) — non-user-facing.
+- Code comment in `src/data/products.ts:100`.
+
+Confirm and I'll apply.

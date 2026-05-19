@@ -12,7 +12,7 @@ export const deckSlides: DeckSlide[] = [
   {
     title: "Product Page",
     path: "/product/glyco8",
-    description: "Full product detail page with supplement facts, ingredient breakdown, and mechanisms of action",
+    description: "Full product detail page with nutritional information, ingredient breakdown, and mechanisms of action",
     commentary: [],
   },
 ];

@@ -9,7 +9,7 @@ const SupplementFacts = ({ product }: { product: ProductData }) => (
       <ScrollReveal variants={scaleIn}>
         <div className="bg-background border border-border rounded-lg overflow-hidden">
           <div className="p-4 md:p-6 border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <h3 className="text-lg md:text-xl font-black text-foreground uppercase">{product.name} <span className="font-normal text-sm md:text-base text-muted-foreground">Supplement Facts</span></h3>
+            <h3 className="text-lg md:text-xl font-black text-foreground uppercase">{product.name} <span className="font-normal text-sm md:text-base text-muted-foreground">Nutritional Information</span></h3>
             <span className="text-xs text-muted-foreground">Manufactured in a GMP Certified Facility</span>
           </div>
           <div className="hidden md:block overflow-x-auto">
