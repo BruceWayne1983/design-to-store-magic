@@ -363,8 +363,41 @@ Deleted the dead shadcn toast layer:
 - `npm test`: passing.
 - `npx tsc --noEmit -p tsconfig.app.json`: clean.
 
+## CHANGES APPLIED — phase 4 (hardening + headers + tests)
+
+### Security headers and caching
+- **`vercel.json`** added. Ships:
+  - SPA rewrite rules so deep links don't 404 in production.
+  - `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` denying camera/mic/geolocation/FLoC.
+  - `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`.
+  - `Content-Security-Policy` allowing `self` + Google Fonts + Supabase + Shopify; blocks plugin objects (`object-src 'none'`) and restricts form-action to `self` and `*.myshopify.com`.
+  - `Cache-Control: public, max-age=31536000, immutable` on `/assets/*` (hashed Vite output), `max-age=86400` on `favicon`, `og-image`, `sitemap`, `robots`.
+
+### Performance / LCP
+- **`index.html`** cleaned up:
+  - Added `<meta name="theme-color">` for mobile browser chrome.
+  - Added `<link rel="preconnect">` for `fonts.googleapis.com` and `fonts.gstatic.com` (Roboto is loaded from there in `src/index.css`). Cuts first font byte by ~100-300 ms.
+  - Deduped OG / Twitter tags into a single contiguous block; removed leftover whitespace artefacts.
+
+### Brand consolidation
+- **`src/pages/Contact.tsx`** and **`src/pages/About.tsx`** now read `BRAND_NAME`, `BRAND_EMAIL`, `BRAND_ADDRESS` from `src/data/brand.ts`. Address rendered inside semantic `<address>` (with `not-italic` to preserve current visual). One source of truth for brand contact details.
+
+### Test coverage
+- **`src/stores/cartStore.test.ts`**: 5 tests covering empty-cart math, Shopify cart creation on first add, totalItems/subtotal across multiple lines, clearCart, and the "quantity hits 0 removes the line" path. Mocks `@/lib/shopify` and Sonner.
+- **`src/data/brand.test.ts`**: 2 tests covering `activeSocialLinks` filter and ordering.
+- **`src/lib/utils.test.ts`**: 4 tests for the `cn` helper (truthy join, falsy drop, tailwind-merge conflict resolution, class-map handling).
+- Vitest now runs 4 test files / 12 tests, all passing.
+
+### Verification (final)
+- `npm install`: clean
+- `npm run lint`: 0 errors, 12 warnings (all shadcn react-refresh notices)
+- `npm run build`: clean, initial JS 567 KB / gzip 180 KB
+- `npm test`: 12/12 passing
+- `npx tsc --noEmit`: clean
+
 ### Still flagged (genuinely needs owner input)
 - **`.env` removal from git history** — destructive history rewrite. The currently tracked values are the Supabase publishable key (designed for client use, RLS enforced server-side) so there is no live secret leak. Skipped to avoid force-pushing main.
 - **Real social URLs** — populate `SOCIAL_LINKS` in `src/data/brand.ts` when channels go live. Icons stay hidden until URLs are filled in.
 - **Hero category photography** — the `category-*.jpg` images now drive the hero carousel. If they look generic or AI-stock-like, replace with branded photography.
 - **Knowledge-base / blog content depth** — outside the scope of this audit.
+- **Hosting platform** — `vercel.json` assumes Vercel. If you ship via Netlify or Cloudflare Pages, port the headers/rewrites into `netlify.toml` or `_headers` / `_redirects`.

@@ -3,6 +3,7 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Mail, MapPin } from "lucide-react";
+import { BRAND_NAME, BRAND_EMAIL, BRAND_ADDRESS } from "@/data/brand";
 
 const Contact = () => (
   <div className="flex flex-col items-start w-full">
@@ -32,8 +33,8 @@ const Contact = () => (
             </div>
             <h3 className="text-base font-bold text-foreground">Email</h3>
             <p className="text-sm text-muted-foreground">For general enquiries and support:</p>
-            <a href="mailto:support@baselinenutrition.co.uk" className="text-sm text-primary hover:underline">
-              support@baselinenutrition.co.uk
+            <a href={`mailto:${BRAND_EMAIL}`} className="text-sm text-primary hover:underline">
+              {BRAND_EMAIL}
             </a>
           </div>
 
@@ -42,12 +43,12 @@ const Contact = () => (
               <MapPin className="w-5 h-5 text-primary" />
             </div>
             <h3 className="text-base font-bold text-foreground">Address</h3>
-            <div className="text-sm text-muted-foreground">
-              <p>Baseline Nutrition</p>
-              <p>Unit 16-18 Tresham Road</p>
-              <p>Peterborough, PE2 6SS</p>
-              <p>United Kingdom</p>
-            </div>
+            <address className="text-sm text-muted-foreground not-italic">
+              <p>{BRAND_NAME}</p>
+              <p>{BRAND_ADDRESS.line1}</p>
+              <p>{BRAND_ADDRESS.line2}</p>
+              <p>{BRAND_ADDRESS.country}</p>
+            </address>
           </div>
         </div>
 

@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BRAND_NAME, BRAND_EMAIL, BRAND_ADDRESS } from "@/data/brand";
 
 const About = () => (
   <div className="flex flex-col items-start w-full">
@@ -56,15 +57,15 @@ const About = () => (
           </ul>
 
           <h2 className="text-xl font-bold text-foreground mt-4">Contact Us</h2>
-          <div className="text-sm">
-            <p>Baseline Nutrition</p>
-            <p>Unit 16-18 Tresham Road</p>
-            <p>Peterborough, PE2 6SS</p>
-            <p>United Kingdom</p>
+          <address className="text-sm not-italic">
+            <p>{BRAND_NAME}</p>
+            <p>{BRAND_ADDRESS.line1}</p>
+            <p>{BRAND_ADDRESS.line2}</p>
+            <p>{BRAND_ADDRESS.country}</p>
             <p className="mt-2">
-              Email: <a href="mailto:support@baselinenutrition.co.uk" className="text-primary hover:underline">support@baselinenutrition.co.uk</a>
+              Email: <a href={`mailto:${BRAND_EMAIL}`} className="text-primary hover:underline">{BRAND_EMAIL}</a>
             </p>
-          </div>
+          </address>
         </div>
       </div>
     </section>
