@@ -30,6 +30,12 @@ const megaColumns = [
       { name: "GLYCOSHIFT™", link: "/product/glycoshift" },
     ],
   },
+  {
+    heading: "Peptides",
+    links: [
+      { name: "Shop Peptides", link: "/shop/peptides" },
+    ],
+  },
 ];
 
 const mobileNavSections = [
@@ -53,6 +59,12 @@ const mobileNavSections = [
     items: [
       { name: "GLYCO8™", link: "/product/glyco8" },
       { name: "GLYCOSHIFT™", link: "/product/glycoshift" },
+    ],
+  },
+  {
+    title: "Peptides",
+    items: [
+      { name: "Shop Peptides", link: "/shop/peptides" },
     ],
   },
 ];
@@ -124,6 +136,7 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
               </div>
+              <Link to="/shop/peptides" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Peptides</Link>
               <Link to="/blog" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Blog</Link>
               <Link to="/about" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</Link>
               <Link to="/contact" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Contact</Link>
