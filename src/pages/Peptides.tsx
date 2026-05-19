@@ -10,16 +10,16 @@ import SectionHeader from "@/components/SectionHeader";
 import glyco8 from "@/assets/products/glyco8.jpg";
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
 import glycoshift from "@/assets/products/glycoshift.jpg";
-import electroFlow from "@/assets/products/electro-flow.jpg";
 
 /* TODO: swap placeholder images when peptide product photography is ready */
+/* SKUs defined in docs/peptides/02-formulation-side-arm.md */
 const peptideProducts = [
-  { name: "PEPTI-BUILD M12™", slug: "pepti-build-m12", desc: "Muscle Synthesis Peptide Complex", price: "£69.99", priceNum: 69.99, category: "Peptides" as const, badge: "FLAGSHIP" },
-  { name: "PEPTI-LEAN G1™", slug: "pepti-lean-g1", desc: "Natural GLP-1 Pathway Support", price: "£79.99", priceNum: 79.99, category: "Peptides" as const, badge: "NEW" },
-  { name: "PEPTI-RECOVER R8™", slug: "pepti-recover-r8", desc: "Post-Workout Recovery Peptides", price: "£64.99", priceNum: 64.99, category: "Peptides" as const, badge: null },
-  { name: "PEPTI-FLOW V7™", slug: "pepti-flow-v7", desc: "Vascular & Blood Flow Peptide Blend", price: "£59.99", priceNum: 59.99, category: "Peptides" as const, badge: null },
-  { name: "PEPTI-DAILY D5™", slug: "pepti-daily-d5", desc: "Daily Bioactive Peptide Stack", price: "£54.99", priceNum: 54.99, category: "Peptides" as const, badge: null },
-  { name: "PEPTI-COLLAGEN L20™", slug: "pepti-collagen-l20", desc: "Bioactive Collagen Peptides for Joints & Skin", price: "£49.99", priceNum: 49.99, category: "Peptides" as const, badge: "BESTSELLER" },
+  { name: "PEPTI-BUILD M14", slug: "pepti-build-m14", desc: "Whey & Leucine Peptide Matrix", price: "£54.99", priceNum: 54.99, category: "Peptides" as const, badge: "FLAGSHIP" },
+  { name: "PEPTI-RECON J22", slug: "pepti-recon-j22", desc: "Tendon, Joint & Recovery Peptides", price: "£42.99", priceNum: 42.99, category: "Peptides" as const, badge: "NEW" },
+  { name: "PEPTI-GLO S30", slug: "pepti-glo-s30", desc: "Bioactive Skin & Hair Peptides", price: "£39.99", priceNum: 39.99, category: "Peptides" as const, badge: null },
+  { name: "PEPTI-LEAN E08", slug: "pepti-lean-e08", desc: "Natural GLP-1 & Satiety Stack", price: "£44.99", priceNum: 44.99, category: "Peptides" as const, badge: null },
+  { name: "PEPTI-FLOW V07", slug: "pepti-flow-v07", desc: "Vascular & Blood Pressure Peptides", price: "£36.99", priceNum: 36.99, category: "Peptides" as const, badge: null },
+  { name: "PEPTI-CALM N03", slug: "pepti-calm-n03", desc: "Casein Peptide Sleep & Stress", price: "£32.99", priceNum: 32.99, category: "Peptides" as const, badge: null },
 ];
 
 const howSteps = [
@@ -30,19 +30,19 @@ const howSteps = [
 
 const stacks = [
   {
-    name: "The Recovery Stack",
-    products: ["PEPTI-RECOVER R8™", "Pürest Creatine™"],
-    benefit: "Pair post-workout recovery peptides with clinical-dose creatine for accelerated repair and adaptation between sessions.",
-  },
-  {
     name: "The Build Stack",
-    products: ["PEPTI-BUILD M12™", "GLYCOSHIFT™ Intra-Workout"],
-    benefit: "Combine muscle-synthesis peptides with intra-workout glucose disposal to maximise nutrient partitioning during training.",
+    products: ["PEPTI-BUILD M14", "Pürest Creatine™"],
+    benefit: "Pair the post-training whey-leucine peptide matrix with clinical-dose creatine for measurable lean-mass gains across an 8-week training block.",
   },
   {
-    name: "The Daily Foundation",
-    products: ["PEPTI-COLLAGEN L20™", "Electro Flow"],
-    benefit: "Bioactive collagen peptides plus advanced electrolytes for joint resilience, skin integrity and daily hydration.",
+    name: "The Recon Stack",
+    products: ["PEPTI-RECON J22", "GLYCOSHIFT™"],
+    benefit: "Bioactive collagen peptides for tendon and joint adaptation, layered onto intra-workout carb delivery for compounding recovery under heavy training load.",
+  },
+  {
+    name: "The Lean Stack",
+    products: ["PEPTI-LEAN E08", "GLYCO8™"],
+    benefit: "Natural GLP-1 satiety modulators paired with dihydroberberine glucose disposal — appetite control and nutrient partitioning working in tandem.",
   },
 ];
 
@@ -85,9 +85,9 @@ const collectionUrl = "https://baselinenutrition.co.uk/shop/peptides";
 const collectionSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "Peptide Supplements UK | Baseline Nutrition",
+  name: "Peptide Supplements UK — Bioactive Collagen, Whey & GLP-1 | Baseline",
   description:
-    "Clinically dosed, food-grade bioactive peptide supplements formulated and shipped in the UK. Muscle synthesis, recovery, GLP-1 support, vascular flow and collagen peptides.",
+    "Clinically dosed peptide supplements made in the UK. Bioactive collagen for joints and skin, whey hydrolysate for muscle, lactotripeptides for blood pressure, natural GLP-1 modulators.",
   url: collectionUrl,
   isPartOf: {
     "@type": "WebSite",
@@ -135,8 +135,8 @@ const breadcrumbSchema = {
 
 const stackImageMap: Record<string, string> = {
   "Pürest Creatine™": purestCreatine,
-  "GLYCOSHIFT™ Intra-Workout": glycoshift,
-  "Electro Flow": electroFlow,
+  "GLYCOSHIFT™": glycoshift,
+  "GLYCO8™": glyco8,
 };
 
 const Peptides = () => {
@@ -149,17 +149,17 @@ const Peptides = () => {
   return (
     <div className="flex flex-col items-start w-full">
       <Helmet>
-        <title>Peptide Supplements UK | Clinically Dosed Bioactive Peptides | Baseline Nutrition</title>
+        <title>Peptide Supplements UK — Bioactive Collagen, Whey & GLP-1 | Baseline</title>
         <meta
           name="description"
-          content="Clinically dosed, food-grade peptide supplements formulated in the UK. Bioactive peptides for muscle, recovery, GLP-1 support, vascular flow and collagen."
+          content="Clinically dosed peptide supplements made in the UK. Bioactive collagen for joints & skin, whey hydrolysate for muscle, lactotripeptides for blood pressure, natural GLP-1 modulators. Trademarked actives at full clinical doses."
         />
         <link rel="canonical" href={collectionUrl} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Peptide Supplements UK | Clinically Dosed Bioactive Peptides | Baseline Nutrition" />
+        <meta property="og:title" content="Peptide Supplements UK — Bioactive Collagen, Whey & GLP-1 | Baseline" />
         <meta
           property="og:description"
-          content="Clinically dosed, food-grade peptide supplements formulated in the UK. Bioactive peptides for muscle, recovery, GLP-1 support, vascular flow and collagen."
+          content="Clinically dosed peptide supplements made in the UK. Bioactive collagen for joints & skin, whey hydrolysate for muscle, lactotripeptides for blood pressure, natural GLP-1 modulators."
         />
         <meta property="og:url" content={collectionUrl} />
         <script type="application/ld+json">{JSON.stringify(collectionSchema)}</script>
@@ -174,10 +174,10 @@ const Peptides = () => {
         <div className="max-w-[1280px] mx-auto flex flex-col items-center text-center gap-6">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">Peptide Science</span>
           <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-[1.1]">
-            Peptide Supplements, Clinically Dosed
+            Peptide Supplements — Bioactive, Food-Grade, Fully Disclosed
           </h1>
-          <p className="text-base md:text-lg text-white/60 max-w-[640px]">
-            Bioactive peptides are short, food-grade amino acid sequences that survive digestion and signal directly to your cells — driving muscle synthesis, recovery, vascular flow and metabolic balance.
+          <p className="text-base md:text-lg text-white/60 max-w-[680px]">
+            Six clinically validated peptide actives, dosed at or above the trial level. No proprietary blends. No prescription overlap. Legal to buy and use in the United Kingdom as a food supplement.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <button
@@ -198,8 +198,7 @@ const Peptides = () => {
         </div>
       </section>
 
-      {/* What are peptides? */}
-      {/* TODO: replace with copy from docs/peptides/00-peptide-research.md */}
+      {/* What "peptide" means at Baseline */}
       <section className="w-full bg-background py-16 md:py-24 px-4 md:px-8 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -208,15 +207,18 @@ const Peptides = () => {
           transition={{ duration: 0.5 }}
           className="max-w-[820px] mx-auto flex flex-col gap-6"
         >
-          <SectionHeader tagline="Education" heading="What are peptides?" center={false} />
+          <SectionHeader tagline="Education" heading={'What "peptide" means at Baseline'} center={false} />
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            Peptides sit between single amino acids and full proteins. Amino acids are the individual building blocks; proteins are long, folded chains of hundreds or thousands of those blocks. Peptides are the short sequences in between — typically 2 to 50 amino acids — and that size is what makes them biologically interesting. They are small enough to be absorbed intact through the gut, yet long enough to carry a specific signal once they reach the bloodstream.
+            Peptides are short chains of amino acids — between two and fifty — that act differently from intact proteins. When a whole protein is hydrolysed by food-grade enzymes, it releases di-peptide and tri-peptide fragments small enough to cross the gut barrier intact, fast enough to spike plasma amino acids within thirty minutes, and specific enough to bind receptors and modulate enzymes whole proteins cannot reach.
           </p>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            The peptides in Baseline products are food-grade and bioactive. They are produced by enzymatically hydrolysing whole proteins — collagen, whey, casein or marine sources — into specific sequences that have been characterised in human trials. Unlike injectable research peptides, food-grade peptides are orally bioavailable, fully legal under UK supplement law, and have a long safety record because they are metabolised through the same pathways as the foods they originate from.
+            The Baseline peptide range is built on six clinically validated, food-grade peptide actives — Verisol®, Fortigel®, Tendoforte®, Lacprodan® BLG-100, PepForm® Leucine Peptides, AMEALPEPTIDE® and Lactium® — each dosed at or above the trial-validated clinical level. No proprietary blends, no peptide-fairy-dust labels, no prescription overlap. Everything in this range is legal to buy and use in the United Kingdom as a food supplement.
           </p>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            Clinical dosing is the difference between a peptide blend that works and one that does nothing. Most peptide products on the UK market under-dose the active sequence — a sprinkle of collagen here, a token amount of whey hydrolysate there — and then rely on marketing to do the heavy lifting. Every Baseline peptide formula is built around the dose used in the supporting human study, then layered with complementary actives so the whole stack pulls in the same direction. No proprietary blends, no rounding down, no surprises on the label.
+            We've split the range across six roles. <span className="text-foreground font-semibold">PEPTI-BUILD M14</span> is the post-training muscle-protein-synthesis driver — whey hydrolysate plus BLG-100 plus a peptide-bonded leucine carrier, delivering more than five grams of leucine per serving. <span className="text-foreground font-semibold">PEPTI-RECON J22</span> combines Fortigel® and Tendoforte® bioactive collagen peptides at full clinical doses for joint and tendon adaptation under load. <span className="text-foreground font-semibold">PEPTI-GLO S30</span> is the bioactive skin stack — Verisol® at twice the trial dose, supported by marine collagen, hyaluronic acid and AstaReal® astaxanthin. <span className="text-foreground font-semibold">PEPTI-FLOW V07</span> is the cardiovascular maintenance capsule — AMEALPEPTIDE® lactotripeptides plus sardine peptide Val-Tyr plus ubiquinol Kaneka™. <span className="text-foreground font-semibold">PEPTI-LEAN E08</span> is the natural GLP-1 satiety stack — Eriomin® lemon flavonoid, Yerba Mate and Caralluma fimbriata, with the explicit guardrail that this is not semaglutide and contains no prescription drug. <span className="text-foreground font-semibold">PEPTI-CALM N03</span> is Lactium® alpha-casozepine for stress and sleep, dosed at the 150mg clinical-trial level.
+          </p>
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            Read the science before you buy. Choose by goal, not by marketing.
           </p>
         </motion.div>
       </section>
