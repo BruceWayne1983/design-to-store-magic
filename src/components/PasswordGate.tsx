@@ -7,7 +7,7 @@ import { Lock } from "lucide-react";
 // environment so it can be rotated without a code change. For real access
 // control, gate the deploy at the platform level (Vercel/Netlify password
 // protection, Cloudflare Access).
-const SITE_PASSWORD = import.meta.env.VITE_SITE_PASSWORD || "baseline2025";
+const SITE_PASSWORD = import.meta.env.VITE_SITE_PASSWORD || "38475554";
 
 const PasswordGate = () => {
   const [unlocked, setUnlocked] = useState(() => {
