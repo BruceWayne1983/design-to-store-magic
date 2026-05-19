@@ -139,7 +139,7 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
             </button>
             {suggestedUseOpen && <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4">{product.suggestedUse}</motion.p>}
             <button className="flex items-center justify-between py-4 border-b border-border" onClick={() => setSuppFactsOpen(!suppFactsOpen)}>
-              <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Supplement Facts</span>
+              <span className="text-xs font-bold text-foreground uppercase tracking-[0.15em]">Nutritional Information</span>
               <motion.div animate={{ rotate: suppFactsOpen ? 180 : 0 }} transition={{ duration: 0.25 }}><ChevronDown className="w-4 h-4 text-muted-foreground" /></motion.div>
             </button>
             {suppFactsOpen && <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-muted-foreground pb-4"><p>{product.supplementSummary}</p></motion.div>}
