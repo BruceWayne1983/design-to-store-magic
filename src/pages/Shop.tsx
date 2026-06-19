@@ -50,10 +50,9 @@ const testimonials = [
 
 const faqs = [
   { q: "What makes your formulas different?", a: "Our formulas are backed by peer-reviewed research and use clinically effective dosages of every ingredient." },
-  { q: "How do subscriptions work?", a: "Subscribe and save on every order. Delivered automatically on your schedule. Pause or cancel anytime." },
-  { q: "Do you offer international shipping?", a: "Yes, we ship to over 40 countries worldwide with tracked shipping options." },
-  { q: "Can I customize my protocol?", a: "Absolutely. Take our assessment to get a personalized protocol recommendation based on your goals." },
-  { q: "What is your return policy?", a: "We offer a 30-day satisfaction guarantee. If you're not happy, contact us for a full refund." },
+  { q: "Are your products clinically dosed?", a: "Yes. Every active ingredient is included at its full, research-backed dose — no proprietary blends and no under-dosing." },
+  { q: "Where do you ship?", a: "We currently ship across the UK, with free delivery on orders over £75. See our Shipping & Returns page for full details." },
+  { q: "What is your return policy?", a: "We offer a 14-day return policy on unopened products from the date of delivery. See Shipping & Returns for full details." },
 ];
 
 const Shop = () => {

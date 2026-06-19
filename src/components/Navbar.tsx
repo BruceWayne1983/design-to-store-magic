@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, ChevronRight, Menu, X, Search, ShoppingBag, User } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, X, Search, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import CartDrawer from "./CartDrawer";
@@ -134,9 +134,6 @@ const Navbar = () => {
             <button onClick={() => setSearchOpen(true)} className="p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Search">
               <Search className="w-5 h-5 text-foreground" />
             </button>
-            <Link to="/about" className="hidden md:flex p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Account">
-              <User className="w-5 h-5 text-foreground" />
-            </Link>
             <button onClick={() => setCartOpen(true)} className="relative p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Cart">
               <ShoppingBag className="w-5 h-5 text-foreground" />
               {cartCount > 0 && (

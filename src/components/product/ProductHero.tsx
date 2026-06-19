@@ -9,7 +9,6 @@ import type { ProductData } from "@/data/products";
 
 const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
   const [selectedImage, setSelectedImage] = useState(0);
-  const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("subscribe");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
   const { addItem, isLoading, setCartOpen } = useCartStore();
@@ -84,28 +83,6 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
 
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-2xl font-black text-foreground">{product.price}</span>
-          </div>
-
-          <div className="border border-border rounded-lg p-4 md:p-5 flex flex-col gap-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" checked={purchaseType === "subscribe"} onChange={() => setPurchaseType("subscribe")} className="accent-primary" />
-              <div>
-                <span className="text-sm font-semibold text-foreground">Subscribe & Save</span>
-                <span className="text-xs text-primary ml-2 font-bold">Save 10%</span>
-              </div>
-            </label>
-            {purchaseType === "subscribe" && (
-              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="flex flex-col gap-3 pl-6">
-                <p className="text-xs text-muted-foreground">Save on every order. Delivered automatically on your schedule. Pause or cancel anytime.</p>
-              </motion.div>
-            )}
-            <label className="flex items-center gap-2 cursor-pointer border-t border-border pt-4">
-              <input type="radio" checked={purchaseType === "onetime"} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
-              <div>
-                <span className="text-sm font-semibold text-foreground">One-time purchase</span>
-                <span className="text-sm text-muted-foreground ml-2">{product.price}</span>
-              </div>
-            </label>
           </div>
 
           <motion.button
