@@ -1,9 +1,14 @@
+import { Helmet } from "react-helmet-async";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const ShippingReturns = () => (
   <div className="flex flex-col items-start w-full">
+    <Helmet>
+      <title>Shipping & Returns | Baseline Nutrition</title>
+      <meta name="description" content="UK shipping options, delivery times, and our 14-day returns policy. Free UK delivery on orders over £75." />
+    </Helmet>
     <AnnouncementBar />
     <Navbar />
     <section className="w-full bg-background py-16 md:py-28 px-4 md:px-8 lg:px-16">

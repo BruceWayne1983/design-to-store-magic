@@ -6,6 +6,7 @@ const footerLinks = [
     title: "Shop",
     links: [
       { label: "All Products", href: "/shop" },
+      { label: "Stacks & Bundles", href: "/bundles" },
       { label: "Performance Range", href: "/category/performance" },
       { label: "Knowledge Base", href: "/knowledge-base" },
       { label: "The App", href: "/app" },
@@ -15,6 +16,7 @@ const footerLinks = [
     title: "Science",
     links: [
       { label: "Articles", href: "/blog" },
+      { label: "Ingredient Insights (PDF)", href: "/ingredient-insights" },
       { label: "Ingredient Science", href: "/blog?category=ingredient-science" },
       { label: "Protocol Guides", href: "/blog?category=protocol-guides" },
       { label: "Mechanisms", href: "/blog?category=mechanisms" },
@@ -90,7 +92,13 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 md:pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-white/30">
+        <p className="border-t border-white/10 pt-6 md:pt-8 text-xs text-white/30 leading-relaxed">
+          Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle.
+          Our products are not intended to diagnose, treat, cure, or prevent any disease. Consult your doctor before use
+          if you are pregnant, breastfeeding, taking medication, or have a medical condition. Keep out of reach of children.
+        </p>
+
+        <div className="flex flex-col sm:flex-row justify-between gap-4 text-xs text-white/30">
           <span>© 2026 {BRAND_NAME}. All rights reserved.</span>
           <div className="flex gap-4 md:gap-6">
             <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

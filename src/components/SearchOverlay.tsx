@@ -21,7 +21,7 @@ const allProducts = [
   { name: "GLYCOSHIFT™", slug: "glycoshift", image: glycoshift, price: "£39.99" },
   { name: "Electro Flow", slug: "electro-flow", image: electroFlow, price: "£27.99" },
   { name: "Pürest Creatine™", slug: "purest-creatine", image: purestCreatine, price: "£23.99" },
-  { name: "H2O GO", slug: "h2o-go", image: h2oGo, price: "TBC" },
+  { name: "H2O GO", slug: "h2o-go", image: h2oGo, price: "Coming Soon" },
 ];
 
 const SearchOverlay = ({ open, onClose }: SearchOverlayProps) => {

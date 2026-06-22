@@ -12,6 +12,7 @@ import CookieConsent from "./components/CookieConsent.tsx";
 
 const Index = lazy(() => import("./pages/Index.tsx"));
 const Shop = lazy(() => import("./pages/Shop.tsx"));
+const Bundles = lazy(() => import("./pages/Bundles.tsx"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const PerformanceCategory = lazy(() => import("./pages/PerformanceCategory.tsx"));
@@ -25,6 +26,7 @@ const About = lazy(() => import("./pages/About.tsx"));
 const ShippingReturns = lazy(() => import("./pages/ShippingReturns.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
 const KnowledgeBase = lazy(() => import("./pages/KnowledgeBase.tsx"));
+const IngredientInsights = lazy(() => import("./pages/IngredientInsights.tsx"));
 const AppLanding = lazy(() => import("./pages/AppLanding.tsx"));
 
 const queryClient = new QueryClient();
@@ -46,6 +48,7 @@ function AppContent() {
           <Route element={<PasswordGate />}>
             <Route path="/home" element={<Index />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/bundles" element={<Bundles />} />
             <Route path="/product/:slug" element={<ProductDetail />} />
             <Route path="/category/performance" element={<PerformanceCategory />} />
             <Route path="/deck" element={<Deck />} />
@@ -58,6 +61,7 @@ function AppContent() {
             <Route path="/shipping-returns" element={<ShippingReturns />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/knowledge-base" element={<KnowledgeBase />} />
+            <Route path="/ingredient-insights" element={<IngredientInsights />} />
             <Route path="/app" element={<AppLanding />} />
             <Route path="*" element={<NotFound />} />
           </Route>

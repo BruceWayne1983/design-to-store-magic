@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, ChevronRight, Menu, X, Search, ShoppingBag, User } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, X, Search, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import CartDrawer from "./CartDrawer";
@@ -118,12 +118,14 @@ const Navbar = () => {
                       <Link to="/blog?category=mechanisms" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Mechanisms</Link>
                       <Link to="/blog?category=comparisons" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Comparisons</Link>
                       <div className="border-t border-border mt-1 pt-1">
+                        <Link to="/ingredient-insights" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-primary hover:bg-secondary transition-colors">Ingredient Insights (PDF)</Link>
                         <Link to="/blog" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-foreground hover:bg-secondary transition-colors">View All Articles</Link>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
+              <Link to="/bundles" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Bundles</Link>
               <Link to="/blog" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Blog</Link>
               <Link to="/about" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</Link>
               <Link to="/contact" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Contact</Link>
@@ -134,9 +136,6 @@ const Navbar = () => {
             <button onClick={() => setSearchOpen(true)} className="p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Search">
               <Search className="w-5 h-5 text-foreground" />
             </button>
-            <Link to="/about" className="hidden md:flex p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Account">
-              <User className="w-5 h-5 text-foreground" />
-            </Link>
             <button onClick={() => setCartOpen(true)} className="relative p-2.5 hover:bg-secondary rounded-lg transition-colors" aria-label="Cart">
               <ShoppingBag className="w-5 h-5 text-foreground" />
               {cartCount > 0 && (
@@ -267,6 +266,7 @@ const Navbar = () => {
                           <Link to="/blog?category=protocol-guides" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">Protocol Guides</Link>
                           <Link to="/blog?category=mechanisms" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">Mechanisms</Link>
                           <Link to="/blog?category=comparisons" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm text-muted-foreground hover:text-primary transition-colors">Comparisons</Link>
+                          <Link to="/ingredient-insights" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm font-medium text-primary hover:text-primary transition-colors">Ingredient Insights (PDF)</Link>
                           <Link to="/blog" onClick={() => setMobileOpen(false)} className="py-2 pl-4 text-sm font-medium text-foreground hover:text-primary transition-colors">View All Articles</Link>
                         </div>
                       </motion.div>
@@ -274,6 +274,7 @@ const Navbar = () => {
                   </AnimatePresence>
                 </div>
                 <div className="border-b border-border">
+                  <Link to="/bundles" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Bundles</Link>
                   <Link to="/blog" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Blog</Link>
                 </div>
                 <div className="border-b border-border">

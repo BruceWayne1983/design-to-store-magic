@@ -114,12 +114,17 @@ export interface ProductData {
 
   // Trademarked ingredient logos (optional)
   ingredientLogos?: { image: string; name: string; caption?: string; forIngredient?: string }[];
+
+  // Merchandising / availability
+  comingSoon?: boolean;
+  badge?: "Best Seller" | "New";
 }
 
 export const products: Record<string, ProductData> = {
   "fusion-lite-plus": {
     slug: "fusion-lite-plus",
     name: "Fusion Lite+",
+    badge: "Best Seller",
     tagline: "Pre-Workout Stimulant",
     subtitle: "Focus that hits. Energy that lasts.",
     format: "150g Powder | 30 Servings | 5g Scoop",
@@ -196,6 +201,7 @@ export const products: Record<string, ProductData> = {
   vascul8: {
     slug: "vascul8",
     name: "VASCUL8™",
+    badge: "New",
     tagline: "Pre-Workout Pump (Non-Stimulant)",
     subtitle: "Performance",
     format: "360g Powder | 30 Servings | 12g Scoop",
@@ -350,6 +356,7 @@ export const products: Record<string, ProductData> = {
   glyco8: {
     slug: "glyco8",
     name: "GLYCO8™",
+    badge: "New",
     tagline: "Fast-Acting Nutrient Partitioning Support",
     subtitle: "Metabolic",
     format: "Capsules (90 caps / 30 servings)",
@@ -486,6 +493,7 @@ export const products: Record<string, ProductData> = {
   "purest-creatine": {
     slug: "purest-creatine",
     name: "Pürest Creatine™",
+    badge: "Best Seller",
     tagline: "Pure NNB Creatine Monohydrate",
     subtitle: "Performance",
     format: "Powder (300g / 500g)",
@@ -539,6 +547,7 @@ export const products: Record<string, ProductData> = {
   "h2o-go": {
     slug: "h2o-go",
     name: "H2O GO",
+    comingSoon: true,
     tagline: "Water Balance & Electrolyte Support",
     subtitle: "Health",
     format: "Capsules (90 caps / 30 servings)",
