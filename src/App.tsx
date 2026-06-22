@@ -26,6 +26,7 @@ const About = lazy(() => import("./pages/About.tsx"));
 const ShippingReturns = lazy(() => import("./pages/ShippingReturns.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
 const KnowledgeBase = lazy(() => import("./pages/KnowledgeBase.tsx"));
+const IngredientInsights = lazy(() => import("./pages/IngredientInsights.tsx"));
 const AppLanding = lazy(() => import("./pages/AppLanding.tsx"));
 
 const queryClient = new QueryClient();
@@ -60,6 +61,7 @@ function AppContent() {
             <Route path="/shipping-returns" element={<ShippingReturns />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/knowledge-base" element={<KnowledgeBase />} />
+            <Route path="/ingredient-insights" element={<IngredientInsights />} />
             <Route path="/app" element={<AppLanding />} />
             <Route path="*" element={<NotFound />} />
           </Route>
