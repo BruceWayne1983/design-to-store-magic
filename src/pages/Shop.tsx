@@ -18,18 +18,33 @@ import h2oGo from "@/assets/products/h2o-go.jpg";
 
 type Category = "All" | "Performance" | "Metabolic" | "Health & Hydration";
 type SortKey = "featured" | "price-asc" | "price-desc" | "az";
+type Collection = "All" | "Best Sellers" | "New In";
+type Badge = "Best Seller" | "New";
 
-const products = [
-  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, category: "Performance" as Category },
-  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", priceNum: 39.99, image: vascul8, category: "Performance" as Category },
+interface ShopProduct {
+  name: string;
+  slug: string;
+  desc: string;
+  price: string;
+  priceNum: number;
+  image: string;
+  category: Category;
+  badge?: Badge;
+  comingSoon?: boolean;
+}
+
+const products: ShopProduct[] = [
+  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, category: "Performance" as Category, badge: "Best Seller" as Badge },
+  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", priceNum: 39.99, image: vascul8, category: "Performance" as Category, badge: "New" as Badge },
   { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", priceNum: 39.99, image: glycoshift, category: "Metabolic" as Category },
-  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", priceNum: 39.99, image: glyco8, category: "Metabolic" as Category },
+  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", priceNum: 39.99, image: glyco8, category: "Metabolic" as Category, badge: "New" as Badge },
   { name: "Electro Flow", slug: "electro-flow", desc: "Advanced Electrolyte Support", price: "£27.99", priceNum: 27.99, image: electroFlow, category: "Health & Hydration" as Category },
-  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", priceNum: 23.99, image: purestCreatine, category: "Performance" as Category },
-  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", priceNum: 0, image: h2oGo, category: "Health & Hydration" as Category },
+  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", priceNum: 23.99, image: purestCreatine, category: "Performance" as Category, badge: "Best Seller" as Badge },
+  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", priceNum: 0, image: h2oGo, category: "Health & Hydration" as Category, comingSoon: true },
 ];
 
 const categories: Category[] = ["All", "Performance", "Metabolic", "Health & Hydration"];
+const collections: Collection[] = ["All", "Best Sellers", "New In"];
 const sortOptions: { key: SortKey; label: string }[] = [
   { key: "featured", label: "Featured" },
   { key: "price-asc", label: "Price: Low–High" },
@@ -58,11 +73,17 @@ const faqs = [
 const Shop = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [filter, setFilter] = useState<Category>("All");
+  const [collection, setCollection] = useState<Collection>("All");
   const [sort, setSort] = useState<SortKey>("featured");
-  const [quickAdd, setQuickAdd] = useState<typeof products[0] | null>(null);
+  const [quickAdd, setQuickAdd] = useState<ShopProduct | null>(null);
 
   const filtered = products
     .filter((p) => filter === "All" || p.category === filter)
+    .filter((p) =>
+      collection === "All" ||
+      (collection === "Best Sellers" && p.badge === "Best Seller") ||
+      (collection === "New In" && p.badge === "New")
+    )
     .sort((a, b) => {
       if (sort === "price-asc") return a.priceNum - b.priceNum;
       if (sort === "price-desc") return b.priceNum - a.priceNum;
@@ -110,20 +131,38 @@ const Shop = () => {
       {/* Filter + Sort bar */}
       <section className="w-full bg-background border-b border-border px-4 md:px-8 lg:px-16">
         <div className="max-w-[1280px] mx-auto py-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full border transition-colors ${
-                  filter === cat
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-transparent text-foreground border-border hover:border-primary"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full border transition-colors ${
+                    filter === cat
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-transparent text-foreground border-border hover:border-primary"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mr-1">Collections</span>
+              {collections.map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setCollection(c)}
+                  className={`px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-colors ${
+                    collection === c
+                      ? "bg-foreground text-background"
+                      : "bg-secondary text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="relative">
             <select
@@ -170,26 +209,38 @@ const Shop = () => {
                   viewport={{ once: true, margin: "-50px" }}
                   className="flex flex-col border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow group relative"
                 >
+                  {p.badge && !p.comingSoon && (
+                    <span className="absolute top-2 left-2 z-10 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider">
+                      {p.badge}
+                    </span>
+                  )}
+                  {p.comingSoon && (
+                    <span className="absolute top-2 left-2 z-10 px-2.5 py-1 rounded-full bg-foreground text-background text-[10px] font-bold uppercase tracking-wider">
+                      Coming Soon
+                    </span>
+                  )}
                   <Link to={`/product/${p.slug}`} className="w-full aspect-square bg-secondary flex items-center justify-center p-4 md:p-8">
                     <motion.img
                       src={p.image}
                       alt={p.name}
-                      className="w-full h-full object-contain"
-                      whileHover={{ scale: 1.05 }}
+                      className={`w-full h-full object-contain ${p.comingSoon ? "opacity-60" : ""}`}
+                      whileHover={p.comingSoon ? undefined : { scale: 1.05 }}
                       transition={{ duration: 0.3 }}
                     />
                   </Link>
                   {/* Quick-add hover overlay */}
-                  <button
-                    onClick={() => setQuickAdd(p)}
-                    className="absolute top-2 right-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded hover:opacity-90"
-                  >
-                    Quick Add
-                  </button>
+                  {!p.comingSoon && (
+                    <button
+                      onClick={() => setQuickAdd(p)}
+                      className="absolute top-2 right-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded hover:opacity-90"
+                    >
+                      Quick Add
+                    </button>
+                  )}
                   <Link to={`/product/${p.slug}`} className="p-4 md:p-6 flex flex-col gap-1 text-center">
                     <h5 className="text-sm md:text-lg font-bold text-foreground tracking-wide">{p.name}</h5>
                     <p className="text-xs md:text-sm text-muted-foreground">{p.desc}</p>
-                    <span className="text-sm md:text-lg font-bold text-foreground mt-1">{p.price}</span>
+                    <span className="text-sm md:text-lg font-bold text-foreground mt-1">{p.comingSoon ? "Coming Soon" : p.price}</span>
                   </Link>
                 </motion.div>
               ))}

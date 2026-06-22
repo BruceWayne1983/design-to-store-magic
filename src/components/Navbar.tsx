@@ -124,6 +124,7 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
               </div>
+              <Link to="/bundles" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Bundles</Link>
               <Link to="/blog" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Blog</Link>
               <Link to="/about" className="text-sm text-foreground hover:text-primary transition-colors font-medium">About</Link>
               <Link to="/contact" className="text-sm text-foreground hover:text-primary transition-colors font-medium">Contact</Link>
@@ -271,6 +272,7 @@ const Navbar = () => {
                   </AnimatePresence>
                 </div>
                 <div className="border-b border-border">
+                  <Link to="/bundles" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Bundles</Link>
                   <Link to="/blog" onClick={() => setMobileOpen(false)} className="block px-4 py-4 text-sm font-bold text-foreground uppercase tracking-wider">Blog</Link>
                 </div>
                 <div className="border-b border-border">

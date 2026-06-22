@@ -48,6 +48,16 @@ const ProductDetail = () => {
       <ProductReviews />
       <RecentlyViewed currentSlug={product.slug} />
       <ProductFAQ product={product} />
+      <section className="w-full bg-background px-4 md:px-8 lg:px-16 pb-12">
+        <div className="max-w-[1280px] mx-auto border-t border-border pt-6">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle.
+            This product is not intended to diagnose, treat, cure, or prevent any disease. Do not exceed the recommended
+            daily dose. Consult your doctor before use if you are pregnant, breastfeeding, taking medication, or have a
+            medical condition. Keep out of reach of children.
+          </p>
+        </div>
+      </section>
       <Footer />
       <StickyAddToCart product={product} buyButtonRef={buyButtonRef} />
     </div>

@@ -12,6 +12,7 @@ import CookieConsent from "./components/CookieConsent.tsx";
 
 const Index = lazy(() => import("./pages/Index.tsx"));
 const Shop = lazy(() => import("./pages/Shop.tsx"));
+const Bundles = lazy(() => import("./pages/Bundles.tsx"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const PerformanceCategory = lazy(() => import("./pages/PerformanceCategory.tsx"));
@@ -46,6 +47,7 @@ function AppContent() {
           <Route element={<PasswordGate />}>
             <Route path="/home" element={<Index />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/bundles" element={<Bundles />} />
             <Route path="/product/:slug" element={<ProductDetail />} />
             <Route path="/category/performance" element={<PerformanceCategory />} />
             <Route path="/deck" element={<Deck />} />

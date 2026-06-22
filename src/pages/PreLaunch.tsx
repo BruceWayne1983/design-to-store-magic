@@ -126,7 +126,7 @@ const PreLaunch = () => {
           {[
             { value: "20%", label: "Launch Discount" },
             { value: "VIP", label: "Early Access" },
-            { value: "Free", label: "UK Shipping" },
+            { value: "Free", label: "UK Shipping £75+" },
           ].map((perk) => (
             <div
               key={perk.label}

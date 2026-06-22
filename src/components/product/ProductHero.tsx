@@ -4,14 +4,21 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
 import { useCartStore } from "@/stores/cartStore";
-import { VARIANT_MAP } from "@/lib/shopify";
+import { VARIANT_MAP, SELLING_PLAN_MAP, SUBSCRIPTION_DISCOUNT } from "@/lib/shopify";
 import type { ProductData } from "@/data/products";
+
+const gbp = (n: number) => `£${n.toFixed(2)}`;
 
 const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
   const [selectedImage, setSelectedImage] = useState(0);
+  const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("onetime");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
   const { addItem, isLoading, setCartOpen } = useCartStore();
+
+  const basePrice = parseFloat(product.price.replace(/[^0-9.]/g, ""));
+  const subscribePrice = basePrice * (1 - SUBSCRIPTION_DISCOUNT);
+  const isSubscribe = purchaseType === "subscribe";
 
   const isStaticDeckRender = (() => {
     if (typeof window === "undefined") return false;
@@ -22,17 +29,19 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
 
   const handleAddToCart = async () => {
     const variantId = VARIANT_MAP[product.slug];
-    if (!variantId) return;
-    const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ""));
+    if (!variantId || !basePrice) return;
+    const sellingPlanId = isSubscribe ? SELLING_PLAN_MAP[product.slug] : undefined;
     await addItem({
       variantId,
-      variantTitle: "Default Title",
+      variantTitle: isSubscribe ? "Subscribe & Save" : "Default Title",
       productTitle: product.name,
       productSlug: product.slug,
       productImage: product.images[0],
-      price: priceNum,
+      price: isSubscribe ? subscribePrice : basePrice,
       currencyCode: "GBP",
       quantity: 1,
+      sellingPlanId,
+      isSubscription: isSubscribe,
     });
     toast.success(`${product.name} added to cart`);
     setCartOpen(true);
@@ -81,20 +90,69 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
             ))}
           </ul>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-2xl font-black text-foreground">{product.price}</span>
-          </div>
+          {product.comingSoon ? (
+            <>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-2xl font-black text-foreground">Coming Soon</span>
+              </div>
+              <button
+                type="button"
+                disabled
+                className="w-full py-4 bg-secondary text-muted-foreground text-sm font-bold uppercase tracking-[0.2em] rounded cursor-not-allowed"
+              >
+                Coming Soon
+              </button>
+              <p className="text-xs text-muted-foreground">
+                This product is launching soon. Join the newsletter to be notified when it goes live.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-wrap items-baseline gap-3">
+                <span className="text-2xl font-black text-foreground">
+                  {isSubscribe ? gbp(subscribePrice) : product.price}
+                </span>
+                {isSubscribe && (
+                  <span className="text-base text-muted-foreground line-through">{product.price}</span>
+                )}
+              </div>
 
-          <motion.button
-            ref={buyButtonRef as React.Ref<HTMLButtonElement>}
-            whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }}
-            whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
-            onClick={handleAddToCart}
-            disabled={isLoading}
-            className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded disabled:opacity-50"
-          >
-            {isLoading ? "Adding..." : "Add to basket"}
-          </motion.button>
+              {/* Purchase options */}
+              <div className="border border-border rounded-lg overflow-hidden">
+                <label className={`flex items-center justify-between gap-2 cursor-pointer p-4 transition-colors ${!isSubscribe ? "bg-secondary" : ""}`}>
+                  <span className="flex items-center gap-2">
+                    <input type="radio" name="purchase" checked={!isSubscribe} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
+                    <span className="text-sm font-semibold text-foreground">One-time purchase</span>
+                  </span>
+                  <span className="text-sm font-semibold text-foreground">{product.price}</span>
+                </label>
+                <label className={`flex items-center justify-between gap-2 cursor-pointer p-4 border-t border-border transition-colors ${isSubscribe ? "bg-secondary" : ""}`}>
+                  <span className="flex items-center gap-2">
+                    <input type="radio" name="purchase" checked={isSubscribe} onChange={() => setPurchaseType("subscribe")} className="accent-primary" />
+                    <span className="text-sm font-semibold text-foreground">Subscribe &amp; Save</span>
+                    <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Save {Math.round(SUBSCRIPTION_DISCOUNT * 100)}%</span>
+                  </span>
+                  <span className="text-sm font-semibold text-foreground">{gbp(subscribePrice)}</span>
+                </label>
+                {isSubscribe && (
+                  <p className="text-xs text-muted-foreground px-4 pb-4">
+                    Delivered automatically on your schedule. Skip, pause, or cancel anytime.
+                  </p>
+                )}
+              </div>
+
+              <motion.button
+                ref={buyButtonRef as React.Ref<HTMLButtonElement>}
+                whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }}
+                whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
+                onClick={handleAddToCart}
+                disabled={isLoading}
+                className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded disabled:opacity-50"
+              >
+                {isLoading ? "Adding..." : isSubscribe ? "Subscribe & Save" : "Add to basket"}
+              </motion.button>
+            </>
+          )}
 
           {product.ingredientLogos && product.ingredientLogos.length > 0 && (
             <div className="flex flex-col gap-3 border-t border-border pt-4">

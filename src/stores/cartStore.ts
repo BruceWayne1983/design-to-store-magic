@@ -21,6 +21,8 @@ export interface CartItem {
   price: number;
   currencyCode: string;
   quantity: number;
+  sellingPlanId?: string;
+  isSubscription?: boolean;
 }
 
 interface CartStore {
@@ -64,7 +66,7 @@ export const useCartStore = create<CartStore>()(
         set({ isLoading: true });
         try {
           if (!cartId) {
-            const result = await createShopifyCart({ variantId: item.variantId, quantity: item.quantity, lineId: null });
+            const result = await createShopifyCart({ variantId: item.variantId, quantity: item.quantity, lineId: null, sellingPlanId: item.sellingPlanId });
             if (result) {
               set({
                 cartId: result.cartId,
@@ -83,7 +85,7 @@ export const useCartStore = create<CartStore>()(
               clearCart();
             }
           } else {
-            const result = await addLineToShopifyCart(cartId, { variantId: item.variantId, quantity: item.quantity, lineId: null });
+            const result = await addLineToShopifyCart(cartId, { variantId: item.variantId, quantity: item.quantity, lineId: null, sellingPlanId: item.sellingPlanId });
             if (result.success) {
               const currentItems = get().items;
               set({ items: [...currentItems, { ...item, lineId: result.lineId ?? null }] });

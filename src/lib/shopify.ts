@@ -18,6 +18,17 @@ export const VARIANT_MAP: Record<string, string> = {
   "purest-creatine": "gid://shopify/ProductVariant/51488021184800",
 };
 
+// Subscribe & Save selling-plan IDs per product slug. Populate once a Shopify
+// subscription app (e.g. Shopify Subscriptions / Recharge / Seal) is installed
+// and selling plans are created. Until then the UI offers Subscribe & Save and
+// gracefully falls back to a one-time purchase (no selling plan attached).
+// Example value: "gid://shopify/SellingPlan/123456789".
+export const SELLING_PLAN_MAP: Record<string, string> = {};
+
+// Discount applied to the Subscribe & Save option, shown in the UI. Must match
+// the discount configured on the Shopify selling plan once it goes live.
+export const SUBSCRIPTION_DISCOUNT = 0.1; // 10%
+
 export interface ShopifyProduct {
   node: {
     id: string;
@@ -164,11 +175,21 @@ export interface CartItemData {
   lineId: string | null;
   variantId: string;
   quantity: number;
+  sellingPlanId?: string;
+}
+
+function buildLineInput(item: CartItemData) {
+  const line: { quantity: number; merchandiseId: string; sellingPlanId?: string } = {
+    quantity: item.quantity,
+    merchandiseId: item.variantId,
+  };
+  if (item.sellingPlanId) line.sellingPlanId = item.sellingPlanId;
+  return line;
 }
 
 export async function createShopifyCart(item: CartItemData): Promise<{ cartId: string; checkoutUrl: string; lineId: string } | null> {
   const data = await storefrontApiRequest(CART_CREATE_MUTATION, {
-    input: { lines: [{ quantity: item.quantity, merchandiseId: item.variantId }] },
+    input: { lines: [buildLineInput(item)] },
   });
 
   if (data?.data?.cartCreate?.userErrors?.length > 0) {
@@ -188,7 +209,7 @@ export async function createShopifyCart(item: CartItemData): Promise<{ cartId: s
 export async function addLineToShopifyCart(cartId: string, item: CartItemData): Promise<{ success: boolean; lineId?: string; cartNotFound?: boolean }> {
   const data = await storefrontApiRequest(CART_LINES_ADD_MUTATION, {
     cartId,
-    lines: [{ quantity: item.quantity, merchandiseId: item.variantId }],
+    lines: [buildLineInput(item)],
   });
 
   const userErrors = data?.data?.cartLinesAdd?.userErrors || [];
