@@ -14,6 +14,11 @@ const electroFlowHero = electroFlow;
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
 import h2oGo from "@/assets/products/h2o-go.jpg";
 import purestCreatineLogo from "@/assets/products/purest-creatine-logo.png";
+import hydroprimeLogo from "@/assets/ingredients/hydroprime.png";
+import oxystormLogo from "@/assets/ingredients/oxystorm.png";
+import electroprimeLogo from "@/assets/ingredients/electroprime.png";
+import aquaminLogo from "@/assets/ingredients/aquamin.png";
+import maxCatalystLogo from "@/assets/ingredients/max-catalyst.png";
 
 // Mechanism images
 import mechanismAmpkPathway from "@/assets/mechanism-ampk-pathway.jpg";
@@ -128,6 +133,9 @@ export const products: Record<string, ProductData> = {
     tagline: "Pre-Workout Stimulant",
     subtitle: "Focus that hits. Energy that lasts.",
     format: "150g Powder | 30 Servings | 5g Scoop",
+    ingredientLogos: [
+      { image: maxCatalystLogo, name: "MAX Catalyst™", forIngredient: "MAX Catalyst™" },
+    ],
     price: "£31.99",
     prices: { "1": "£31.99", "4": "TBC", "6": "TBC" },
     savings: { "1": "", "4": "TBC", "6": "TBC" },
@@ -205,6 +213,10 @@ export const products: Record<string, ProductData> = {
     tagline: "Pre-Workout Pump (Non-Stimulant)",
     subtitle: "Performance",
     format: "360g Powder | 30 Servings | 12g Scoop",
+    ingredientLogos: [
+      { image: hydroprimeLogo, name: "HydroPrime®", forIngredient: "HydroPrime®" },
+      { image: oxystormLogo, name: "OxyStorm®", forIngredient: "OxyStorm®" },
+    ],
     price: "£39.99",
     prices: { "1": "TBC", "4": "TBC", "6": "TBC" },
     savings: { "1": "TBC", "4": "TBC", "6": "TBC" },
@@ -423,6 +435,10 @@ export const products: Record<string, ProductData> = {
     tagline: "Hydration & Electrolyte Formula",
     subtitle: "Health",
     format: "210g Powder | 30 Servings | 7g Scoop",
+    ingredientLogos: [
+      { image: electroprimeLogo, name: "ElectroPrime®", forIngredient: "ElectroPrime®" },
+      { image: aquaminLogo, name: "Aquamin®", forIngredient: "Aquamin®" },
+    ],
     price: "£27.99",
     prices: { "1": "TBC", "4": "TBC", "6": "TBC" },
     savings: { "1": "TBC", "4": "TBC", "6": "TBC" },
