@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BRAND_NAME, BRAND_ADDRESS, BRAND_TAGLINE, activeSocialLinks } from "@/data/brand";
+import logoLight from "@/assets/logo-light.png";
 
 const footerLinks = [
   {
