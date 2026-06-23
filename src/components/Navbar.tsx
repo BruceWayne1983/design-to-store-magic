@@ -82,10 +82,10 @@ const Navbar = () => {
   return (
     <>
       <nav className={`w-full border-b border-border bg-background sticky top-0 z-50 transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}>
-        <div className={`flex items-center justify-between px-4 md:px-8 lg:px-16 transition-all duration-300 ${scrolled ? "h-[52px] md:h-[56px]" : "h-[60px] md:h-[72px]"}`}>
+        <div className={`flex items-center justify-between px-4 md:px-8 lg:px-16 transition-all duration-300 ${scrolled ? "h-[64px] md:h-[80px]" : "h-[76px] md:h-[96px]"}`}>
           <div className="flex items-center gap-4 md:gap-6">
             <Link to="/home" className="flex items-center">
-              <img src={logoDark} alt="Baseline Nutrition" className={`w-auto transition-all duration-300 ${scrolled ? "h-8 md:h-8" : "h-10 md:h-12"}`} />
+              <img src={logoDark} alt="Baseline Nutrition" className={`w-auto transition-all duration-300 ${scrolled ? "h-12 md:h-16" : "h-14 md:h-20"}`} />
             </Link>
             <div className="hidden md:flex items-center gap-8">
               <button
