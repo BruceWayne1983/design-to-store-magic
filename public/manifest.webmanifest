@@ -1,0 +1,21 @@
+{
+  "name": "Baseline Nutrition",
+  "short_name": "Baseline",
+  "description": "Clinically dosed, fully transparent performance nutrition.",
+  "start_url": "/home",
+  "display": "standalone",
+  "background_color": "#0a1828",
+  "theme_color": "#0a1828",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
