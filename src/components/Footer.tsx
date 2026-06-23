@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BRAND_NAME, BRAND_ADDRESS, BRAND_TAGLINE, activeSocialLinks } from "@/data/brand";
+import baselineLogo from "@/assets/baseline-logo-full.png";
 
 const footerLinks = [
   {
@@ -48,7 +49,7 @@ const Footer = () => {
       <div className="max-w-[1280px] mx-auto flex flex-col gap-8 md:gap-12">
         <div className="flex flex-col md:flex-row md:justify-between gap-8">
           <div className="flex flex-col gap-4">
-            <span className="text-xl font-black uppercase tracking-tight">{BRAND_NAME}</span>
+            <img src={baselineLogo} alt={BRAND_NAME} className="h-12 w-auto rounded-md" />
             <p className="text-sm text-white/50 max-w-[260px] leading-relaxed">
               {BRAND_TAGLINE} Clinically dosed, fully transparent.
             </p>
