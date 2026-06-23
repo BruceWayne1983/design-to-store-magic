@@ -18,7 +18,7 @@ const IngredientBreakdown = ({ product }: { product: ProductData }) => {
               <div className="flex flex-col gap-4">
                 {logo && (
                   <div className="flex flex-col items-start gap-2 mb-2">
-                    <div className="bg-[hsl(220,20%,10%)] rounded-md px-5 py-3 inline-flex items-center justify-center">
+                    <div className="bg-white border border-border rounded-md px-5 py-3 inline-flex items-center justify-center">
                       <img src={logo.image} alt={logo.name} className="h-[60px] w-auto object-contain" />
                     </div>
                     {logo.caption && (
