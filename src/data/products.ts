@@ -10,6 +10,7 @@ const vascul8Hero = vascul8;
 import glycoshift from "@/assets/products/glycoshift.jpg";
 const glycoshiftHero = glycoshift;
 import electroFlow from "@/assets/products/electro-flow.jpg";
+import electroFlowMarketing from "@/assets/products/electro-flow-marketing.jpg";
 const electroFlowHero = electroFlow;
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
 import h2oGo from "@/assets/products/h2o-go.jpg";
@@ -449,7 +450,7 @@ export const products: Record<string, ProductData> = {
       "Great taste at 500ml dilution",
       "Suitable for daily use, intra-workout, or recovery",
     ],
-    images: [electroFlowHero, electroFlow, electroFlowHero, electroFlow],
+    images: [electroFlow, electroFlowMarketing, electroFlow, electroFlowMarketing],
     suggestedUse: "Mix 1 scoop (7g) with 500ml cold water. During exercise or throughout the day. Max 2 servings/day. Best served chilled.",
     supplementSummary: "Sodium 500mg · Potassium 200mg · Magnesium 56mg · Calcium 48mg · Coconut Water 500mg · Cocomineral™ 250mg · MAX Catalyst™ TBC",
     whyDifferentHeading: "Why ELECTRO FLOW is different",
