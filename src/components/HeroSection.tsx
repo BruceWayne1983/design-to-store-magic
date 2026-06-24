@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import heroElectroFlow from "@/assets/hero-electro-flow.jpg";
 import heroPerformance from "@/assets/category-performance.jpg";
 import heroMetabolic from "@/assets/category-metabolic.jpg";
 import heroHealth from "@/assets/category-health.jpg";
@@ -8,6 +9,14 @@ import heroHealth from "@/assets/category-health.jpg";
 const SLIDE_INTERVAL_MS = 6000;
 
 const slides = [
+  {
+    bg: heroElectroFlow,
+    tagline: "New — Electro Flow",
+    headline: "Hydration\nRedefined",
+    desc: "Real-dose electrolytes powered by Cocomineral™. 500mg sodium, full mineral matrix — engineered for training that actually demands it.",
+    cta1: { text: "Shop Electro Flow", link: "/product/electro-flow" },
+    cta2: { text: "View the Science", link: "/knowledge-base" },
+  },
   {
     bg: heroPerformance,
     tagline: "Performance Nutrition",
@@ -27,9 +36,9 @@ const slides = [
   {
     bg: heroHealth,
     tagline: "Health & Hydration",
-    headline: "Hydration\nRedefined",
-    desc: "Advanced electrolyte formulas and cellular hydration support for daily performance.",
-    cta1: { text: "Shop Hydration", link: "/shop" },
+    headline: "Daily Performance\nFundamentals",
+    desc: "Advanced hydration and cellular support for everyday training and recovery.",
+    cta1: { text: "Shop All", link: "/shop" },
     cta2: { text: "View Products", link: "/shop" },
   },
 ];
