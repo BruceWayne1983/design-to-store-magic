@@ -435,10 +435,7 @@ export const products: Record<string, ProductData> = {
     tagline: "Hydration & Electrolyte Formula",
     subtitle: "Health",
     format: "210g Powder | 30 Servings | 7g Scoop",
-    ingredientLogos: [
-      { image: electroprimeLogo, name: "ElectroPrime®", forIngredient: "ElectroPrime®" },
-      { image: aquaminLogo, name: "Aquamin®", forIngredient: "Aquamin®" },
-    ],
+    ingredientLogos: [],
     price: "£27.99",
     prices: { "1": "TBC", "4": "TBC", "6": "TBC" },
     savings: { "1": "TBC", "4": "TBC", "6": "TBC" },
