@@ -450,7 +450,7 @@ export const products: Record<string, ProductData> = {
       "Great taste at 500ml dilution",
       "Suitable for daily use, intra-workout, or recovery",
     ],
-    images: [electroFlowHero, electroFlow, electroFlowHero, electroFlow],
+    images: [electroFlow, electroFlowMarketing, electroFlow, electroFlowMarketing],
     suggestedUse: "Mix 1 scoop (7g) with 500ml cold water. During exercise or throughout the day. Max 2 servings/day. Best served chilled.",
     supplementSummary: "Sodium 500mg · Potassium 200mg · Magnesium 56mg · Calcium 48mg · Coconut Water 500mg · Cocomineral™ 250mg · MAX Catalyst™ TBC",
     whyDifferentHeading: "Why ELECTRO FLOW is different",
