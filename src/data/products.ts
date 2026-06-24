@@ -453,15 +453,15 @@ export const products: Record<string, ProductData> = {
     suggestedUse: "Mix 1 scoop (7g) with 500ml cold water. During exercise or throughout the day. Max 2 servings/day. Best served chilled.",
     supplementSummary: "Sodium 500mg · Potassium 200mg · Magnesium 56mg · Calcium 48mg · Coconut Water 500mg · Cocomineral™ 250mg · MAX Catalyst™ TBC",
     whyDifferentHeading: "Why ELECTRO FLOW is different",
-    whyDifferentText: "Most electrolyte products are flavoured water with mineral dusting. Electro Flow delivers real doses. Sodium at 500mg — not the 50–100mg token found in hydration tablets. Potassium at 200mg (10% NRV). Magnesium and Calcium in bioavailable citrate forms. Plus Cocomineral® concentrated coconut water minerals. No direct Strom equivalent. Better value than Conteh Hydra Flow (£29.99) with a more comprehensive formula at £27.99.",
+    whyDifferentText: "Most electrolyte products are flavoured water with mineral dusting. Electro Flow delivers real doses. Sodium at 500mg — not the 50–100mg token found in hydration tablets. Potassium at 200mg (10% NRV). Magnesium and Calcium in bioavailable citrate forms. Plus Cocomineral™ concentrated coconut water minerals. No direct Strom equivalent. Better value than Conteh Hydra Flow (£29.99) with a more comprehensive formula at £27.99.",
     whyFeatures: [
       { title: "Real Sodium Dose — 500mg", desc: "What your body actually needs, not token amounts" },
-      { title: "Cocomineral® Complex", desc: "Concentrated coconut water minerals for trace depth" },
+      { title: "Cocomineral™ Complex", desc: "Concentrated coconut water minerals for trace depth" },
       { title: "Bioavailable Citrate Forms", desc: "Magnesium & Calcium as citrate — absorbs without food" },
     ],
     howSteps: [
       { tagline: "Step 1 — Replace What You Lose", title: "Full electrolyte replenishment", desc: "Training depletes sodium, potassium, magnesium, calcium through sweat. Electro Flow replaces all four at doses matching actual sweat losses." },
-      { tagline: "Step 2 — Enhance with Natural Minerals", title: "Broad-spectrum trace minerals", desc: "Coconut Water Powder (500mg) and Cocomineral® (250mg) provide broad-spectrum trace minerals beyond targeted electrolyte compounds." },
+      { tagline: "Step 2 — Enhance with Natural Minerals", title: "Broad-spectrum trace minerals", desc: "Coconut Water Powder (500mg) and Cocomineral™ (250mg) provide broad-spectrum trace minerals beyond targeted electrolyte compounds." },
       { tagline: "Step 3 — Maintain Fluid Balance", title: "Water where your body needs it", desc: "Sodium drives fluid retention. Potassium maintains intracellular balance. Magnesium and Calcium support muscle contraction/relaxation. Together they keep water where your body needs it." },
     ],
     ingredients: [
@@ -470,12 +470,12 @@ export const products: Record<string, ProductData> = {
       { title: "Magnesium (from Magnesium Citrate)", dosage: "56mg (15% NRV)", desc: "Involved in 300+ enzymatic reactions. Citrate form provides significantly better bioavailability than magnesium oxide.", hasImage: false },
       { title: "Calcium (from Calcium Citrate)", dosage: "48mg (6% NRV)", desc: "Supports muscle contraction and neuromuscular signalling. Citrate form absorbs without food — unlike carbonate.", hasImage: false },
       { title: "Coconut Water Powder", dosage: "500mg", desc: "Natural potassium and trace mineral source providing electrolytes in ratios that mirror human sweat composition.", hasImage: true },
-      { title: "Cocomineral®", dosage: "250mg", desc: "Concentrated coconut water mineral complex for trace mineral depth beyond targeted electrolyte compounds. TM: Coconut Water Processing.", hasImage: false },
-      { title: "MAX Catalyst®", dosage: "TBC", desc: "Proprietary absorption amplifier. TM: Protein Partners.", hasImage: false },
+      { title: "Cocomineral™", dosage: "250mg", desc: "Concentrated coconut water mineral complex for trace mineral depth beyond targeted electrolyte compounds. TM: Coconut Water Processing.", hasImage: false },
+      { title: "MAX Catalyst™", dosage: "TBC", desc: "Proprietary absorption amplifier. TM: Protein Partners.", hasImage: false },
     ],
     mechanisms: [
       { step: "01", image: mechanismGlycogenReplenish, title: "Electrolyte Replenishment", subtitle: "Sodium · Potassium · Magnesium · Calcium", desc: "All four major electrolytes at doses matching actual sweat losses — not the token amounts found in hydration tablets.", stats: [{ value: "500mg", label: "Sodium dose" }, { value: "4×", label: "Major electrolytes" }] },
-      { step: "02", image: mechanismGlycogen, title: "Trace Mineral Depth", subtitle: "Coconut Water · Cocomineral®", desc: "Natural coconut water minerals provide broad-spectrum trace elements beyond targeted electrolyte compounds.", stats: [{ value: "500mg", label: "Coconut Water Powder" }, { value: "250mg", label: "Cocomineral®" }] },
+      { step: "02", image: mechanismGlycogen, title: "Trace Mineral Depth", subtitle: "Coconut Water · Cocomineral™", desc: "Natural coconut water minerals provide broad-spectrum trace elements beyond targeted electrolyte compounds.", stats: [{ value: "500mg", label: "Coconut Water Powder" }, { value: "250mg", label: "Cocomineral™" }] },
       { step: "03", image: mechanismAmpkPathway, title: "Fluid Balance", subtitle: "Citrate mineral forms", desc: "Bioavailable citrate forms of magnesium and calcium absorb efficiently without food. Sodium drives retention, potassium maintains intracellular balance.", stats: [{ value: "15%", label: "NRV Magnesium" }, { value: "10%", label: "NRV Potassium" }] },
     ],
     supplementRows: [
@@ -484,12 +484,12 @@ export const products: Record<string, ProductData> = {
       { ingredient: "Magnesium", spec: "(from Magnesium Citrate)", dose: "56 mg", purpose: "Enzymatic & Muscle Function — 15% NRV", flag: "" },
       { ingredient: "Calcium", spec: "(from Calcium Citrate)", dose: "48 mg", purpose: "Contraction Signalling — 6% NRV", flag: "" },
       { ingredient: "Coconut Water Powder", spec: "", dose: "500 mg", purpose: "Natural Trace Mineral Source", flag: "" },
-      { ingredient: "Cocomineral®", spec: "", dose: "250 mg", purpose: "Concentrated Mineral Complex", flag: "Cocomineral®" },
-      { ingredient: "MAX Catalyst®", spec: "", dose: "TBC", purpose: "Absorption Amplifier", flag: "MAX Catalyst®" },
+      { ingredient: "Cocomineral™", spec: "", dose: "250 mg", purpose: "Concentrated Mineral Complex", flag: "Cocomineral™" },
+      { ingredient: "MAX Catalyst™", spec: "", dose: "TBC", purpose: "Absorption Amplifier", flag: "MAX Catalyst™" },
     ],
     clinicalMechanisms: [
       { title: "Real-Dose Electrolyte System", subtitle: "Sodium 500mg + Full Mineral Spectrum", image: mechanismGlycogenReplenish, badges: [{ dose: "500 MG", name: "Sodium" }, { dose: "200 MG", name: "Potassium" }], checks: ["Meaningful Doses Matching Actual Sweat Losses", "Bioavailable Citrate Mineral Forms"] },
-      { title: "Coconut Water Mineral Complex", subtitle: "Cocomineral® + Coconut Water Powder", image: mechanismGlycogen, badges: [{ dose: "500 MG", name: "Coconut Water" }, { dose: "250 MG", name: "Cocomineral®" }], checks: ["Broad-Spectrum Trace Minerals", "Natural Electrolyte Ratios Mirroring Sweat"] },
+      { title: "Coconut Water Mineral Complex", subtitle: "Cocomineral™ + Coconut Water Powder", image: mechanismGlycogen, badges: [{ dose: "500 MG", name: "Coconut Water" }, { dose: "250 MG", name: "Cocomineral™" }], checks: ["Broad-Spectrum Trace Minerals", "Natural Electrolyte Ratios Mirroring Sweat"] },
     ],
     testimonials: [
       { name: "Mike T.", role: "Marathon Runner", quote: "Electro Flow keeps me hydrated through 20+ mile runs. The sodium dose is actually real — not the token amounts in hydration tablets." },
