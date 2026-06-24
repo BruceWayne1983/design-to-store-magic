@@ -230,7 +230,7 @@ export const products: Record<string, ProductData> = {
       "Stimulant-free — stack with any stim or use for evening sessions",
       "Effects compound over consecutive days via AstraGin®",
     ],
-    images: [vascul8Hero, vascul8, vascul8Hero, vascul8],
+    images: [vascul8Hero, vascul8Marketing, vascul8, vascul8Marketing],
     suggestedUse: "Mix 1 scoop (12g) with 400–500ml cold water. 20–30 minutes before exercise. Can be stacked with Fusion Lite+.",
     supplementSummary: "L-Citrulline 6,000mg · HydroPrime® 2,500mg · Betaine Anhydrous 1,500mg · CellFlo6™ 300mg · Pycnogenol® 100mg · AstraGin® 50mg · MAX Catalyst™ 4mg",
     whyDifferentHeading: "Why VASCUL8™ is different",
