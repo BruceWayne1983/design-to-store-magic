@@ -10,6 +10,7 @@ const vascul8Hero = vascul8;
 import glycoshift from "@/assets/products/glycoshift.jpg";
 const glycoshiftHero = glycoshift;
 import electroFlow from "@/assets/products/electro-flow.jpg";
+import electroFlowMarketing from "@/assets/products/electro-flow-marketing.jpg";
 const electroFlowHero = electroFlow;
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
 import h2oGo from "@/assets/products/h2o-go.jpg";
