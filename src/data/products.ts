@@ -468,7 +468,7 @@ export const products: Record<string, ProductData> = {
       { tagline: "Step 3 — Maintain Fluid Balance", title: "Water where your body needs it", desc: "Sodium drives fluid retention. Potassium maintains intracellular balance. Magnesium and Calcium support muscle contraction/relaxation. Together they keep water where your body needs it." },
     ],
     ingredients: [
-      { title: "Sodium (from NaCl)", tagline: "Key ingredient", dosage: "500mg", desc: "Most important athletic electrolyte. Meaningful dose vs token amounts in competitors. Drives fluid retention and prevents hyponatremia during intense training.", hasImage: false },
+      { title: "Sodium (from NaCl)", tagline: "Key ingredient", dosage: "500mg", desc: "Most important athletic electrolyte. Meaningful dose vs token amounts in competitors. Drives fluid retention and prevents hyponatraemia during intense training.", hasImage: false },
       { title: "Potassium (from Potassium Citrate)", dosage: "200mg (10% NRV)", desc: "Essential for muscle contraction, nerve transmission, and intracellular fluid balance. Citrate form for optimal absorption.", hasImage: false },
       { title: "Magnesium (from Magnesium Citrate)", dosage: "56mg (15% NRV)", desc: "Involved in 300+ enzymatic reactions. Citrate form provides significantly better bioavailability than magnesium oxide.", hasImage: false },
       { title: "Calcium (from Calcium Citrate)", dosage: "48mg (6% NRV)", desc: "Supports muscle contraction and neuromuscular signalling. Citrate form absorbs without food — unlike carbonate.", hasImage: false },
@@ -578,7 +578,7 @@ export const products: Record<string, ProductData> = {
     suggestedUse: "Take 3 capsules daily with water, preferably with meals. For enhanced hydration support during training, take 3 capsules 30 minutes before exercise.",
     supplementSummary: "Comprehensive water balance and electrolyte support formula. Full ingredient panel coming soon.",
     whyDifferentHeading: "Why H2O GO is different",
-    whyDifferentText: "A capsule-based hydration optimizer that supports water balance at the cellular level — not just another electrolyte tablet.",
+    whyDifferentText: "A capsule-based hydration optimiser that supports water balance at the cellular level — not just another electrolyte tablet.",
     whyFeatures: [
       { title: "Cellular Hydration", desc: "Supports water balance at the cellular level" },
       { title: "Convenient Capsule Format", desc: "No mixing, no mess — just take and go" },
