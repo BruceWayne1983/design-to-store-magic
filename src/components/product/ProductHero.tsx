@@ -159,8 +159,8 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
               <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.2em]">Key Ingredients</span>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {product.ingredientLogos.map((logo) => (
-                  <div key={logo.name} className="bg-white border border-border rounded-md h-20 md:h-24 flex items-center justify-center p-3">
-                    <img src={logo.image} alt={logo.name} className="max-h-full max-w-full object-contain" />
+                  <div key={logo.name} className="bg-white border border-border rounded-md aspect-square flex items-center justify-center p-4 md:p-5">
+                    <img src={logo.image} alt={logo.name} className="max-h-[70%] max-w-[85%] object-contain" />
                   </div>
                 ))}
               </div>
