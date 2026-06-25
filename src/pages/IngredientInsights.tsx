@@ -69,6 +69,30 @@ const IngredientInsights = () => {
     } finally {
       setLoading(false);
     }
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail || newsletterLoading) return;
+    setNewsletterLoading(true);
+    setNewsletterError("");
+    try {
+      const { error: dbError } = await supabase
+        .from("email_signups")
+        .insert({ email: newsletterEmail.trim().toLowerCase(), source: "weekly-insights" });
+      if (dbError) {
+        if (dbError.code === "23505") {
+          setNewsletterResult("done");
+        } else {
+          throw dbError;
+        }
+      } else {
+        setNewsletterResult("done");
+      }
+    } catch {
+      setNewsletterError("Something went wrong. Please try again.");
+      setNewsletterResult("error");
+    } finally {
+      setNewsletterLoading(false);
+    }
   };
 
   return (
