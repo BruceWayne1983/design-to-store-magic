@@ -5,9 +5,8 @@ import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useCartSync } from "@/hooks/useCartSync";
-import PreLaunch from "./pages/PreLaunch.tsx";
-import PasswordGate from "./components/PasswordGate.tsx";
 import BackToTop from "./components/BackToTop.tsx";
+const PreLaunch = lazy(() => import("./pages/PreLaunch.tsx"));
 import CookieConsent from "./components/CookieConsent.tsx";
 
 const Index = lazy(() => import("./pages/Index.tsx"));
@@ -44,27 +43,26 @@ function AppContent() {
       {!isDeckCapture && <Sonner />}
       <Suspense fallback={<RouteFallback />}>
         <Routes>
-          <Route path="/" element={<PreLaunch />} />
-          <Route element={<PasswordGate />}>
-            <Route path="/home" element={<Index />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/bundles" element={<Bundles />} />
-            <Route path="/product/:slug" element={<ProductDetail />} />
-            <Route path="/category/performance" element={<PerformanceCategory />} />
-            <Route path="/deck" element={<Deck />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsConditions />} />
-            <Route path="/cookies" element={<CookiePolicy />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogArticle />} />
-            <Route path="/shipping-returns" element={<ShippingReturns />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/knowledge-base" element={<KnowledgeBase />} />
-            <Route path="/ingredient-insights" element={<IngredientInsights />} />
-            <Route path="/app" element={<AppLanding />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
+          <Route path="/" element={<Index />} />
+          <Route path="/home" element={<Index />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/bundles" element={<Bundles />} />
+          <Route path="/product/:slug" element={<ProductDetail />} />
+          <Route path="/category/performance" element={<PerformanceCategory />} />
+          <Route path="/deck" element={<Deck />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsConditions />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogArticle />} />
+          <Route path="/shipping-returns" element={<ShippingReturns />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/knowledge-base" element={<KnowledgeBase />} />
+          <Route path="/ingredient-insights" element={<IngredientInsights />} />
+          <Route path="/app" element={<AppLanding />} />
+          <Route path="/coming-soon" element={<PreLaunch />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <BackToTop />
