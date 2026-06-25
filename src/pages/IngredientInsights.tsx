@@ -40,6 +40,11 @@ const IngredientInsights = () => {
   const [result, setResult] = useState<ResultState>("idle");
   const [error, setError] = useState("");
 
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
+  const [newsletterResult, setNewsletterResult] = useState<ResultState>("idle");
+  const [newsletterError, setNewsletterError] = useState("");
+
   const generateAndDownload = async () => {
     const pdf = createIngredientPdf();
     await downloadPdfFile(pdf, PDF_FILENAME);
