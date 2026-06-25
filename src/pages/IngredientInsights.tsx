@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { FileText, Check, Download, FlaskConical } from "lucide-react";
+import { FileText, Check, Download, FlaskConical, Mail, MessageCircleQuestion } from "lucide-react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,6 +8,8 @@ import SectionHeader from "@/components/SectionHeader";
 import { supabase } from "@/integrations/supabase/client";
 import { createIngredientPdf } from "@/lib/ingredientPdf";
 import { downloadPdfFile } from "@/lib/deckPdf";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const PDF_FILENAME = "Baseline-Nutrition-Ingredient-Insights.pdf";
 
@@ -38,6 +40,11 @@ const IngredientInsights = () => {
   const [result, setResult] = useState<ResultState>("idle");
   const [error, setError] = useState("");
 
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
+  const [newsletterResult, setNewsletterResult] = useState<ResultState>("idle");
+  const [newsletterError, setNewsletterError] = useState("");
+
   const generateAndDownload = async () => {
     const pdf = createIngredientPdf();
     await downloadPdfFile(pdf, PDF_FILENAME);
@@ -61,6 +68,32 @@ const IngredientInsights = () => {
       setResult("error");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail || newsletterLoading) return;
+    setNewsletterLoading(true);
+    setNewsletterError("");
+    try {
+      const { error: dbError } = await supabase
+        .from("email_signups")
+        .insert({ email: newsletterEmail.trim().toLowerCase(), source: "weekly-insights" });
+      if (dbError) {
+        if (dbError.code === "23505") {
+          setNewsletterResult("done");
+        } else {
+          throw dbError;
+        }
+      } else {
+        setNewsletterResult("done");
+      }
+    } catch {
+      setNewsletterError("Something went wrong. Please try again.");
+      setNewsletterResult("error");
+    } finally {
+      setNewsletterLoading(false);
     }
   };
 
@@ -177,6 +210,99 @@ const IngredientInsights = () => {
           <p className="text-xs text-muted-foreground max-w-[720px]">
             Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle. Not intended to diagnose, treat, cure, or prevent any disease.
           </p>
+        </div>
+      </section>
+
+      {/* Weekly insights mailing list */}
+      <section className="w-full bg-[hsl(var(--hero-dark))] text-white py-16 md:py-24 px-4 md:px-8 lg:px-16">
+        <div className="max-w-[768px] mx-auto flex flex-col items-center text-center gap-6 md:gap-8">
+          <div className="w-14 h-14 rounded-2xl bg-primary/15 flex items-center justify-center">
+            <Mail className="w-7 h-7 text-primary" aria-hidden="true" />
+          </div>
+          <div className="flex flex-col gap-3 md:gap-4">
+            <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tight leading-[1.1]">
+              Join the weekly ingredient insights
+            </h2>
+            <p className="text-base md:text-lg text-white/70">
+              Get one clinically researched ingredient breakdown, mechanism note, or supplement myth-buster delivered to your inbox every week.
+            </p>
+          </div>
+
+          {newsletterResult !== "done" ? (
+            <form onSubmit={handleNewsletterSubmit} className="w-full max-w-md flex flex-col sm:flex-row gap-3">
+              <Input
+                type="email"
+                required
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                placeholder="you@email.com"
+                className="flex-1 bg-white/[0.06] border-white/20 text-white placeholder:text-white/40 focus-visible:ring-primary/40 focus-visible:border-primary"
+              />
+              <Button
+                type="submit"
+                disabled={newsletterLoading}
+                className="px-6 bg-primary text-primary-foreground uppercase tracking-wider font-bold hover:opacity-90 disabled:opacity-50"
+              >
+                {newsletterLoading ? "Joining…" : "Join"}
+              </Button>
+            </form>
+          ) : (
+            <div className="flex items-center gap-2 text-primary font-semibold">
+              <Check className="w-5 h-5" />
+              You're on the list — look out for your first insight.
+            </div>
+          )}
+          {newsletterError && <p className="text-red-400 text-xs">{newsletterError}</p>}
+          <p className="text-xs text-white/40">No spam. Unsubscribe anytime. Read our Privacy Policy.</p>
+        </div>
+      </section>
+
+      {/* Request an ingredient insight */}
+      <section className="w-full bg-background py-16 md:py-24 px-4 md:px-8 lg:px-16">
+        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="flex flex-col gap-6">
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-[0.25em]">
+              <MessageCircleQuestion className="w-4 h-4" /> Request an insight
+            </span>
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[1.1] text-foreground">
+              Want to know what's in your supps? Ask — we'll help you.
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground max-w-[520px]">
+              Not sure what's in your current stack, whether a dose is legit, or what an ingredient actually does? Send it to us and we'll break it down.
+            </p>
+          </div>
+
+          <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
+            <form className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="request-name" className="text-sm font-medium text-foreground">Your name</label>
+                <Input id="request-name" placeholder="e.g. Alex" />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="request-email" className="text-sm font-medium text-foreground">Email</label>
+                <Input id="request-email" type="email" placeholder="you@email.com" />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="request-product" className="text-sm font-medium text-foreground">Product or ingredient</label>
+                <Input id="request-product" placeholder="e.g. 'XYZ Pre-Workout' or 'Beta-Alanine'" />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="request-question" className="text-sm font-medium text-foreground">What do you want to know?</label>
+                <textarea
+                  id="request-question"
+                  rows={4}
+                  placeholder="Paste the label, list the ingredients, or ask a question..."
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              </div>
+              <Button type="submit" className="w-full uppercase tracking-wider font-bold">
+                Request insight
+              </Button>
+              <p className="text-xs text-muted-foreground">
+                Our team reviews every request and responds with a clear, evidence-backed breakdown.
+              </p>
+            </form>
+          </div>
         </div>
       </section>
 
