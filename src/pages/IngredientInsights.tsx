@@ -69,6 +69,8 @@ const IngredientInsights = () => {
     } finally {
       setLoading(false);
     }
+  };
+
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newsletterEmail || newsletterLoading) return;
