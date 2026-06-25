@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import heroElectroFlow from "@/assets/hero-electro-flow.jpg";
+import heroVascul8Lifestyle from "@/assets/hero-vascul8-lifestyle.jpg";
+import heroCreatineVascul8 from "@/assets/hero-creatine-vascul8.jpg";
 import heroPerformance from "@/assets/category-performance.jpg";
 import heroMetabolic from "@/assets/category-metabolic.jpg";
 import heroHealth from "@/assets/category-health.jpg";
@@ -16,6 +18,22 @@ const slides = [
     desc: "Real-dose electrolytes powered by Cocomineral™. 500mg sodium, full mineral matrix — engineered for training that actually demands it.",
     cta1: { text: "Shop Electro Flow", link: "/product/electro-flow" },
     cta2: { text: "View the Science", link: "/knowledge-base" },
+  },
+  {
+    bg: heroVascul8Lifestyle,
+    tagline: "Vascul8 — Nitric Oxide",
+    headline: "Train With\nReal Pump",
+    desc: "Patented S7™ and clinically dosed L-Citrulline drive vasodilation, blood flow and nutrient delivery — performance you can feel from rep one.",
+    cta1: { text: "Shop Vascul8", link: "/product/vascul8" },
+    cta2: { text: "How It Works", link: "/knowledge-base" },
+  },
+  {
+    bg: heroCreatineVascul8,
+    tagline: "The Performance Stack",
+    headline: "Strength\nMeets Pump",
+    desc: "Premium Creatine Monohydrate paired with Vascul8 — the foundational stack for size, strength and intra-workout output.",
+    cta1: { text: "Shop the Stack", link: "/shop" },
+    cta2: { text: "Build Your Stack", link: "/shop" },
   },
   {
     bg: heroPerformance,
@@ -42,6 +60,7 @@ const slides = [
     cta2: { text: "View Products", link: "/shop" },
   },
 ];
+
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
