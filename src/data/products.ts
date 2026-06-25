@@ -7,14 +7,11 @@ import fusionLitePlus from "@/assets/products/fusion-lite-plus.jpg";
 const fusionLitePlusHero = fusionLitePlus;
 import vascul8 from "@/assets/products/vascul8.jpg";
 const vascul8Hero = vascul8;
-import vascul8Marketing from "@/assets/products/vascul8-marketing.jpg";
 import glycoshift from "@/assets/products/glycoshift.jpg";
 const glycoshiftHero = glycoshift;
 import electroFlow from "@/assets/products/electro-flow.jpg";
-import electroFlowMarketing from "@/assets/products/electro-flow-marketing.jpg";
 const electroFlowHero = electroFlow;
 import purestCreatine from "@/assets/products/purest-creatine-300g.jpg";
-import purestCreatineMarketing from "@/assets/products/purest-creatine-vascul8-marketing.jpg";
 import h2oGo from "@/assets/products/h2o-go.jpg";
 import purestCreatineLogo from "@/assets/products/purest-creatine-logo.png";
 import hydroprimeLogo from "@/assets/ingredients/hydroprime.png";
@@ -230,7 +227,7 @@ export const products: Record<string, ProductData> = {
       "Stimulant-free — stack with any stim or use for evening sessions",
       "Effects compound over consecutive days via AstraGin®",
     ],
-    images: [vascul8Hero, vascul8Marketing, vascul8, vascul8Marketing],
+    images: [vascul8Hero, vascul8Hero, vascul8Hero, vascul8Hero],
     suggestedUse: "Mix 1 scoop (12g) with 400–500ml cold water. 20–30 minutes before exercise. Can be stacked with Fusion Lite+.",
     supplementSummary: "L-Citrulline 6,000mg · HydroPrime® 2,500mg · Betaine Anhydrous 1,500mg · CellFlo6™ 300mg · Pycnogenol® 100mg · AstraGin® 50mg · MAX Catalyst™ 4mg",
     whyDifferentHeading: "Why VASCUL8™ is different",
@@ -452,7 +449,7 @@ export const products: Record<string, ProductData> = {
       "Great taste at 500ml dilution",
       "Suitable for daily use, intra-workout, or recovery",
     ],
-    images: [electroFlow, electroFlowMarketing, electroFlow, electroFlowMarketing],
+    images: [electroFlow, electroFlow, electroFlow, electroFlow],
     suggestedUse: "Mix 1 scoop (7g) with 500ml cold water. During exercise or throughout the day. Max 2 servings/day. Best served chilled.",
     supplementSummary: "Sodium 500mg · Potassium 200mg · Magnesium 56mg · Calcium 48mg · Coconut Water 500mg · Cocomineral™ 250mg · MAX Catalyst™ TBC",
     whyDifferentHeading: "Why ELECTRO FLOW is different",
@@ -520,7 +517,7 @@ export const products: Record<string, ProductData> = {
     prices: { "1": "TBC", "4": "TBC", "6": "TBC" },
     savings: { "1": "TBC", "4": "TBC", "6": "TBC" },
     benefits: ["99.9% Pure NNB Creatine Monohydrate", "Increased Strength & Power Output", "Enhanced Muscle Recovery"],
-    images: [purestCreatine, purestCreatineMarketing, purestCreatine, purestCreatineMarketing],
+    images: [purestCreatine, purestCreatine, purestCreatine, purestCreatine],
     suggestedUse: "Mix 1 scoop (5g) with water or your favourite beverage daily. Can be taken at any time. For loading phase, take 4 scoops (20g) daily for 5-7 days, then maintain with 1 scoop.",
     supplementSummary: "NNB Creatine Monohydrate 5g per serving. 300g (60 servings) or 500g (100 servings).",
     whyDifferentHeading: "Why Pürest Creatine™ is different",
