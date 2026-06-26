@@ -114,6 +114,7 @@ const Navbar = () => {
                       onMouseLeave={() => setScienceOpen(false)}
                     >
                       <Link to="/blog?category=ingredient-science" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Ingredient Science</Link>
+                      <Link to="/training-science" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Training Science</Link>
                       <Link to="/blog?category=protocol-guides" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Protocol Guides</Link>
                       <Link to="/blog?category=mechanisms" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Mechanisms</Link>
                       <Link to="/blog?category=comparisons" onClick={() => setScienceOpen(false)} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">Comparisons</Link>
