@@ -62,6 +62,8 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/knowledge-base" element={<KnowledgeBase />} />
           <Route path="/ingredient-insights" element={<IngredientInsights />} />
+          <Route path="/training-science" element={<TrainingScience />} />
+          <Route path="/founders" element={<Founders />} />
           <Route path="/app" element={<AppLanding />} />
           <Route path="/coming-soon" element={<PreLaunch />} />
           <Route path="*" element={<NotFound />} />
