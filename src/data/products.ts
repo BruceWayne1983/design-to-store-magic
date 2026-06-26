@@ -583,7 +583,16 @@ export const products: Record<string, ProductData> = {
     prices: { "1": "TBC", "4": "TBC", "6": "TBC" },
     savings: { "1": "TBC", "4": "TBC", "6": "TBC" },
     benefits: ["99.9% Pure NNB Creatine Monohydrate", "Increased Strength & Power Output", "Enhanced Muscle Recovery"],
+    sizes: [
+      { name: "300g", price: "£23.99", servings: "60 servings", variantId: "gid://shopify/ProductVariant/51488021184800" },
+      { name: "500g", price: "£34.99", servings: "100 servings" },
+    ],
+    flavours: [
+      { name: "Apple", image: purestCreatine, available: true },
+      { name: "Unflavored", image: purestCreatine, available: true },
+    ],
     images: [purestCreatine, purestCreatine, purestCreatine, purestCreatine],
+
     suggestedUse: "Mix 1 scoop (5g) with water or your favourite beverage daily. Can be taken at any time. For loading phase, take 4 scoops (20g) daily for 5-7 days, then maintain with 1 scoop.",
     supplementSummary: "NNB Creatine Monohydrate 5g per serving. 300g (60 servings) or 500g (100 servings).",
     whyDifferentHeading: "Why Pürest Creatine™ is different",
