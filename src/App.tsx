@@ -33,6 +33,7 @@ const SupplementFeedback = lazy(() => import("./pages/SupplementFeedback.tsx"));
 const Insights = lazy(() => import("./pages/Insights.tsx"));
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Coach = lazy(() => import("./pages/Coach.tsx"));
+const Community = lazy(() => import("./pages/Community.tsx"));
 
 const queryClient = new QueryClient();
 
