@@ -2,13 +2,14 @@ import glucoseDisposal from "@/assets/blog/glucose-disposal.jpg";
 import preWorkoutTiming from "@/assets/blog/pre-workout-timing.jpg";
 import ampkActivation from "@/assets/blog/ampk-activation.jpg";
 import citrullineVsArginine from "@/assets/blog/citrulline-vs-arginine.jpg";
+import dcTraining from "@/assets/blog/dc-training.jpg";
 
 export interface BlogArticle {
   slug: string;
   title: string;
   description: string;
   category: string;
-  pillar: "Ingredient Science" | "Protocol Guides" | "Mechanism Deep Dives" | "Comparison Content";
+  pillar: "Ingredient Science" | "Protocol Guides" | "Mechanism Deep Dives" | "Comparison Content" | "Training Science";
   image: string;
   readTime: string;
   publishedAt: string;
@@ -168,6 +169,63 @@ export const blogArticles: BlogArticle[] = [
       {
         heading: "The Baseline Verdict",
         body: "We use pure L-citrulline at 6,000mg because:\n\n1. It raises plasma arginine more effectively than arginine itself\n2. It bypasses first-pass metabolism entirely\n3. It delivers the full dose without malic acid dilution\n4. The performance data at 6,000mg is robust and reproducible\n\nEvery gram on the label is the ingredient you're paying for. No filler. No dilution. No proprietary blends hiding an under-dosed formula behind a fancy name."
+      }
+    ]
+  },
+  {
+    slug: "dc-training-doggcrapp-guide",
+    title: "DC Training: The DoggCrapp Method Explained",
+    description: "A complete breakdown of Dante Trudel's high-intensity rest-pause system — heavy weights, low volume, high frequency, and extreme stretching. How it works, why it works, and how to run it.",
+    category: "Training Science",
+    pillar: "Training Science",
+    image: dcTraining,
+    readTime: "14 min read",
+    publishedAt: "2026-06-26",
+    author: "Baseline Research Team",
+    relatedProduct: "electro-flow",
+    content: [
+      {
+        body: "DoggCrapp Training — universally shortened to DC Training — is a high-intensity strength and hypertrophy system developed by Dante Trudel in the early 2000s. Despite the unserious name, it is one of the most disciplined, evidence-aligned training methods in physique sport, and it has produced a long list of advanced lifters with above-average strength-to-size ratios.\n\nThis guide explains the four pillars of DC, the full split, sample rotations, and the practical rules that make or break results."
+      },
+      {
+        heading: "The Four Pillars of DC Training",
+        body: "DC is deliberately simple. Every decision in the programme serves one of four principles:\n\n1. Heavy weights — progressive overload on big compound lifts is non-negotiable\n2. Rest-pause sets — one all-out working set taken to failure three times with short intra-set rest\n3. Low volume, high frequency — one work set per body part, trained 3x every 8 days\n4. Extreme stretching — 60-second loaded stretches after each muscle group\n\nMiss one of these and you are not running DC; you are running a generic bodybuilding split."
+      },
+      {
+        heading: "Pillar 1 — Heavy Weights",
+        body: "Trudel's position is direct: the lifters carrying the most muscle almost always lift the most weight, and the inverse is rarely true. DC therefore prioritises absolute load on compound movements — bench, row, deadlift, squat, overhead press — and treats isolation work as accessory.\n\nThe goal of every session is to beat the logbook. If you cannot add reps or load to your previous best on a given exercise, that exercise is rotated out and replaced. This forced progression keeps the stimulus honest and prevents stagnation."
+      },
+      {
+        heading: "Pillar 2 — Rest-Pause Sets",
+        body: "The rest-pause set is the signature DC method. After warm-ups, you perform one working set as follows:\n\n• Set 1: lift to genuine concentric failure\n• Rack the weight and take 12–15 deep breaths (roughly 20–30 seconds)\n• Set 2: same weight, lift to failure again\n• Another 12–15 deep breaths\n• Set 3: same weight, lift to failure one more time\n\nThe target is 11–15 total reps across all three mini-sets for most exercises (15–20 for hamstrings). If you hit the top of the rep target, increase the load next session.\n\nRest-pause is applied to most exercises. The exceptions — for safety reasons — are back-thickness work (deadlifts, rows) and quads, which use straight sets instead."
+      },
+      {
+        heading: "Pillar 3 — Low Volume, High Frequency",
+        body: "DC uses two alternating full-body sessions, trained every second day (Mon / Wed / Fri, then Sun / Tue / Thu, etc.):\n\nWorkout A — Chest, shoulders, triceps, back width, back thickness\nWorkout B — Biceps, forearms, calves, hamstrings, quads\n\nOne exercise per body part, one rest-pause working set. Because you train each muscle three times every eight days, the stimulus is frequent — but because each session is a single brutal set, total weekly volume stays low enough to recover from.\n\nYou choose three exercises per body part and rotate them. That gives you six unique sessions across a two-week block before the rotation repeats."
+      },
+      {
+        heading: "Pillar 4 — Extreme Stretching",
+        body: "After finishing each muscle group, you perform a loaded stretch held for 60 seconds. This is not a cool-down — Trudel programmes it as a hypertrophy stimulus, on the basis that loaded passive tension may promote fascial expansion and stretch-mediated growth.\n\nExamples:\n• Chest: bottom of a flat dumbbell flye\n• Triceps: deep one-arm overhead extension\n• Shoulders: hanging back from a chest-height barbell, palms up\n• Lats: dead-hang from a wide-grip pull-up bar (add weight if possible)\n• Quads: weighted sissy-squat-style stretch under a rack\n• Hamstrings: foot elevated, straight leg, hip-hinged\n\nCalves are not stretched separately — the 15-second pause at the bottom of every calf rep covers it."
+      },
+      {
+        heading: "Sample Rotation — Two Weeks of DC",
+        body: "Rotation 1\n\nWorkout A:\n• Chest — flat barbell bench, RP 11–15\n• Shoulders — seated DB press, RP 11–15\n• Triceps — reverse-grip Smith bench, RP 11–15\n• Back width — wide-grip pull-ups, RP 11–15\n• Back thickness — deadlift, 2 straight sets of 6–9\n\nWorkout B:\n• Biceps — barbell curl, RP 11–15\n• Forearms — reverse-grip EZ curl, 1×15–20\n• Calves — seated calf raise, 1×12 with 15-sec bottom hold\n• Hamstrings — lying leg curl, RP 15–20\n• Quads — back squat, 1×6–10 then 1×20\n\nRotation 2 swaps in incline hammer press, seated BB press, lying French press, close-grip pulldown and bent-over row, DB curl, pinwheel curl, standing calf raise, seated leg curl, leg press.\n\nRotation 3 swaps in flat DB press, hammer shoulder press, close-grip bench, wide pulldown, T-bar row, EZ preacher curl, reverse cable curl, leg-press calf raise, stiff-leg deadlift, hack squat.\n\nFull rotation cycle: ~2 weeks. Restart Rotation 1 with the goal of beating every previous best."
+      },
+      {
+        heading: "Who DC Is — And Isn't — For",
+        body: "DC is built for intermediate-to-advanced lifters with at least a year of structured training behind them and the technical proficiency to take compound lifts to failure safely. Beginners benefit more from straightforward linear progression (e.g. Starting Strength, 5/3/1) because their nervous system gains alone will outpace any intensity technique.\n\nDC also assumes:\n• You can recover hard between sessions (sleep, food, stress all dialled in)\n• You will keep a written log every session — no log, no DC\n• You will train through several blasts (10–14 weeks) followed by a deliberate one-to-two-week cruise at lower intensity to manage CNS fatigue"
+      },
+      {
+        heading: "Fuelling DC: Where Baseline Fits",
+        body: "Rest-pause work to failure is metabolically savage. Sessions are short — usually 35–45 minutes — but the demand on glycolytic capacity, intra-set buffering, and post-session hydration is unusually high. Three areas matter most:\n\n• Intra-workout electrolytes — you'll sweat heavily across short windows. ELECTRO FLOW™ provides full-spectrum sodium, potassium, magnesium and chloride at clinical ratios, without sugar or stimulants, to maintain plasma volume and neuromuscular signalling across the three failure attempts.\n\n• Pre-workout pump and output — citrulline at clinical dose (6,000 mg pure L-citrulline in Fusion Lite+ and VASCUL8™) supports nitric-oxide-mediated blood flow, which improves substrate delivery during rest-pause segments and dampens perceived exertion.\n\n• Glucose partitioning — because DC drives high glycogen turnover, getting carbohydrates into muscle rather than fat storage matters. GLYCO8™ supports insulin-mediated and AMPK-mediated glucose disposal in the post-training window."
+      },
+      {
+        heading: "Common DC Mistakes",
+        body: "1. Not actually going to failure. Rest-pause only works if set 1 ends when the bar genuinely stalls — not when it feels hard.\n\n2. Adding extra sets. The programme is one work set for a reason. Volume creep blunts recovery and breaks the high-frequency model.\n\n3. Refusing to rotate exercises. If you cannot beat the log, the exercise is done. Swap it out and earn progression on the next movement.\n\n4. Skipping the stretches. They are not optional. Whether or not you accept the hypertrophy claim, they restore range of motion that aggressive failure training erodes.\n\n5. Running it indefinitely. DC is a blast-and-cruise system. Plan a cruise (lighter, sub-failure work) every 10–14 weeks to keep joints and CNS intact."
+      },
+      {
+        heading: "Bottom Line",
+        body: "DC Training is one of the highest signal-to-noise hypertrophy systems ever published. Heavy compound lifts. One failure-driven set. Two alternating full-body sessions. Logged, beaten, rotated. Stretched hard. Fuelled properly.\n\nDone honestly, it produces uncommonly strong intermediate-to-advanced lifters in uncommonly short timeframes. Done dishonestly — half-effort sets, no log, no rotation — it produces nothing.\n\nThis article is an educational summary of the original DC framework popularised by Dante Trudel. It is not medical advice; consult a qualified coach or clinician before adopting any high-intensity programme."
       }
     ]
   }
