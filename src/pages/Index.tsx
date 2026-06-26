@@ -23,11 +23,7 @@ import CoachTeaser from "@/components/sections/CoachTeaser";
 import Footer from "@/components/Footer";
 import categoryPerformance from "@/assets/category-performance.jpg";
 import categoryMetabolic from "@/assets/category-metabolic.jpg";
-import categoryHealth from "@/assets/category-health.jpg";
-import productFusion from "@/assets/products/fusion-lite-plus.jpg";
-import productVascul8 from "@/assets/products/vascul8.jpg";
-import productElectroFlow from "@/assets/products/electro-flow.jpg";
-import productGlycoshift from "@/assets/products/glycoshift.jpg";
+
 
 const Index = () => (
   <div className="flex flex-col items-start w-full">
