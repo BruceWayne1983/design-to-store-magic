@@ -6,6 +6,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useCartSync } from "@/hooks/useCartSync";
 import BackToTop from "./components/BackToTop.tsx";
+import PasswordGate from "./components/PasswordGate.tsx";
 const PreLaunch = lazy(() => import("./pages/PreLaunch.tsx"));
 import CookieConsent from "./components/CookieConsent.tsx";
 
