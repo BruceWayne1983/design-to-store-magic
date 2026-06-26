@@ -76,6 +76,7 @@ function AppContent() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/coach" element={<Coach />} />
           <Route path="/coach/:threadId" element={<Coach />} />
+          <Route path="/community" element={<Community />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
