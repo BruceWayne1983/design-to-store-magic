@@ -58,6 +58,16 @@ const About = () => (
             </li>
           </ul>
 
+          <div className="mt-4 p-6 border border-border rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card">
+            <div>
+              <h2 className="text-lg font-bold text-foreground">Meet the founders</h2>
+              <p className="text-sm text-muted-foreground mt-1">The people behind Baseline and why we built it.</p>
+            </div>
+            <Link to="/founders" className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-wider rounded hover:opacity-90 transition-opacity">
+              Read their story <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
           <h2 className="text-xl font-bold text-foreground mt-4">Contact Us</h2>
           <address className="text-sm not-italic">
             <p>{BRAND_NAME}</p>
