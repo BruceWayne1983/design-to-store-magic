@@ -127,7 +127,7 @@ const SupplementSurveyForm = () => {
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor="sv-brands" className="text-sm font-medium">Which supplement brands do you currently use? <span className="text-muted-foreground font-normal">(optional)</span></label>
-          <Input id="sv-brands" value={form.current_brands} onChange={(e) => update("current_brands", e.target.value)} placeholder="e.g. Optimum Nutrition, MyProtein, Bulk…" maxLength={300} />
+          <Input id="sv-brands" value={form.current_brands} onChange={(e) => update("current_brands", e.target.value)} placeholder="List any brands you currently use…" maxLength={300} />
         </div>
 
         <SelectChips
