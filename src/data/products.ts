@@ -34,6 +34,8 @@ import mechanismBrainSynapse from "@/assets/mechanism-brain-synapse.jpg";
 import mechanismCaffeineCurve from "@/assets/mechanism-caffeine-curve.jpg";
 import mechanismCellHydration from "@/assets/mechanism-cell-hydration.jpg";
 import mechanismGutAbsorption from "@/assets/mechanism-gut-absorption.jpg";
+import mechanismGastricClearance from "@/assets/mechanisms/gastric-clearance.jpg";
+import mechanismElectrolyteMinerals from "@/assets/mechanisms/electrolyte-minerals.jpg";
 
 export interface ProductMechanism {
   step: string;
@@ -341,8 +343,8 @@ export const products: Record<string, ProductData> = {
     ],
     mechanisms: [
       { step: "01", image: mechanismGlycogenReplenish, title: "Triple-Speed Carb Delivery", subtitle: "Maltodextrin · Cluster Dextrin® · Palatinose™", desc: "Three carb sources absorbing at different speeds — fast, sustained, and slow-release — for consistent energy from start to finish.", stats: [{ value: "35g", label: "Total carbs per serving" }, { value: "3×", label: "Absorption pathways" }] },
-      { step: "02", image: mechanismGlycogen, title: "Zero-Bloat Gastric Clearance", subtitle: "Cluster Dextrin® HBCD", desc: "Cluster Dextrin's cyclic molecular structure creates near-zero osmotic pressure, enabling the fastest gastric emptying of any carbohydrate source.", stats: [{ value: "15g", label: "Cluster Dextrin® dose" }, { value: "0", label: "GI distress or bloating" }] },
-      { step: "03", image: mechanismAmpkPathway, title: "Electrolyte & Glucose Management", subtitle: "Full mineral matrix · OpunTia®", desc: "Real-dose electrolytes replace what sweat removes. OpunTia® supports glucose disposal and insulin sensitivity.", stats: [{ value: "800mg", label: "Pink Himalayan Salt" }, { value: "250mg", label: "OpunTia® dose" }] },
+      { step: "02", image: mechanismGastricClearance, title: "Zero-Bloat Gastric Clearance", subtitle: "Cluster Dextrin® HBCD", desc: "Cluster Dextrin's cyclic molecular structure creates near-zero osmotic pressure, enabling the fastest gastric emptying of any carbohydrate source.", stats: [{ value: "15g", label: "Cluster Dextrin® dose" }, { value: "<10min", label: "Gastric transit time" }] },
+      { step: "03", image: mechanismElectrolyteMinerals, title: "Electrolyte & Glucose Management", subtitle: "Full mineral matrix · OpunTia®", desc: "Real-dose electrolytes replace what sweat removes. OpunTia® supports glucose disposal and insulin sensitivity.", stats: [{ value: "800mg", label: "Pink Himalayan Salt" }, { value: "250mg", label: "OpunTia® dose" }] },
     ],
     supplementRows: [
       { ingredient: "Cluster Dextrin®", spec: "(HBCD)", dose: "15 g", purpose: "Sustained Zero-Bloat Carbohydrate", flag: "Cluster Dextrin®" },
@@ -359,7 +361,7 @@ export const products: Record<string, ProductData> = {
     ],
     clinicalMechanisms: [
       { title: "Triple-Source Carb Matrix", subtitle: "Cluster Dextrin® + Palatinose™ + Maltodextrin", image: mechanismGlycogenReplenish, badges: [{ dose: "15 G", name: "Cluster Dextrin®" }, { dose: "10 G", name: "Palatinose™" }], checks: ["Three Absorption Speeds — Immediate, Sustained, Slow-Release", "Zero Bloating via Low Osmolality HBCD"] },
-      { title: "Full Electrolyte & Glucose Management", subtitle: "Real-Dose Minerals + OpunTia®", image: mechanismGlycogen, badges: [{ dose: "800 MG", name: "Himalayan Salt" }, { dose: "250 MG", name: "OpunTia®" }], checks: ["Full Mineral Spectrum at Meaningful Doses", "Glucose Disposal Support via Prickly Pear Extract"] },
+      { title: "Full Electrolyte & Glucose Management", subtitle: "Real-Dose Minerals + OpunTia®", image: mechanismElectrolyteMinerals, badges: [{ dose: "800 MG", name: "Himalayan Salt" }, { dose: "250 MG", name: "OpunTia®" }], checks: ["Full Mineral Spectrum at Meaningful Doses", "Glucose Disposal Support via Prickly Pear Extract"] },
     ],
     testimonials: [
       { name: "Chris B.", role: "Endurance Athlete", quote: "GLYCOSHIFT is the only intra-workout carb I can use without bloating. I can train hard for 2+ hours and feel fuelled the entire time." },
