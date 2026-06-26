@@ -48,16 +48,6 @@ const Index = () => (
     />
     <FindWhatYouNeed />
     <TrustedFormulas />
-    <CinematicBand
-      label="Metabolic Line"
-      headline="Master Your Glucose Response"
-      desc="GlucoVantage®-driven nutrient partitioning. Real mechanisms, real doses, real results."
-      cta="Shop Metabolic"
-      link="/shop"
-      image={categoryMetabolic}
-      align="right"
-      accent="#F59E0B"
-    />
     <ScienceSection />
     <CompleteProtocols />
     <CoachTeaser />
