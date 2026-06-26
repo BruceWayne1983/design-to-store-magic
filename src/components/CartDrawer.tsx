@@ -129,11 +129,23 @@ const CartDrawer = () => {
 
             {/* Footer */}
             <div className="px-5 py-4 border-t border-border bg-background">
+              {savings > 0 && (
+                <div className="flex items-center justify-between mb-1.5 text-xs">
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-muted-foreground line-through">£{subtotal.toFixed(2)}</span>
+                </div>
+              )}
+              {savings > 0 && (
+                <div className="flex items-center justify-between mb-1.5 text-xs">
+                  <span className="text-primary font-bold uppercase tracking-wider">Multibuy savings</span>
+                  <span className="text-primary font-bold">−£{savings.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-muted-foreground">Subtotal</span>
-                <span className="text-lg font-black text-foreground">£{subtotal.toFixed(2)}</span>
+                <span className="text-sm text-muted-foreground">Total</span>
+                <span className="text-lg font-black text-foreground">£{discounted.toFixed(2)}</span>
               </div>
-              <p className="text-[10px] text-muted-foreground mb-3">Shipping, taxes and discounts calculated at checkout.</p>
+              <p className="text-[10px] text-muted-foreground mb-3">Shipping, taxes and final discounts confirmed at checkout.</p>
               <button
                 onClick={handleCheckout}
                 disabled={isLoading || isSyncing}
