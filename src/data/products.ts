@@ -131,7 +131,9 @@ export interface ProductData {
   shortDescription?: string;
   outcomeBullets?: string[];
   flavours?: { name: string; image?: string; available?: boolean }[];
+  sizes?: { name: string; price: string; servings?: string; variantId?: string }[];
   expectations?: { window: string; headline: string; bullets: string[]; summary: string }[];
+
 
   // Merchandising / availability
   comingSoon?: boolean;
