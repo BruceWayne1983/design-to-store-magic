@@ -282,37 +282,12 @@ const IngredientInsights = () => {
             </p>
           </div>
 
-          <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-            <form className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-name" className="text-sm font-medium text-foreground">Your name</label>
-                <Input id="request-name" placeholder="e.g. Alex" />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-email" className="text-sm font-medium text-foreground">Email</label>
-                <Input id="request-email" type="email" placeholder="you@email.com" />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-product" className="text-sm font-medium text-foreground">Product or ingredient</label>
-                <Input id="request-product" placeholder="e.g. 'XYZ Pre-Workout' or 'Beta-Alanine'" />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-question" className="text-sm font-medium text-foreground">What do you want to know?</label>
-                <textarea
-                  id="request-question"
-                  rows={4}
-                  placeholder="Paste the label, list the ingredients, or ask a question..."
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                />
-              </div>
-              <Button type="submit" className="w-full uppercase tracking-wider font-bold">
-                Request insight
-              </Button>
-              <p className="text-xs text-muted-foreground">
-                Our team reviews every request and responds with a clear, evidence-backed breakdown.
-              </p>
-            </form>
-          </div>
+          <RequestArticleForm
+            source="ingredient-insights"
+            topicLabel="Product or ingredient"
+            topicPlaceholder="e.g. 'XYZ Pre-Workout' or 'Beta-Alanine'"
+            submitLabel="Request article"
+          />
         </div>
       </section>
 
