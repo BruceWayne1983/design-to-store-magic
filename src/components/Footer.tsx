@@ -53,7 +53,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row md:justify-between gap-8">
           <div className="flex flex-col gap-4">
             <Link to="/home" className="inline-block">
-              <img src={logoLight} alt={BRAND_NAME} className="h-8 md:h-10 w-auto" />
+              <img src={logoLight} alt={BRAND_NAME} className="h-12 md:h-16 w-auto" />
             </Link>
             <p className="text-sm text-white/50 max-w-[260px] leading-relaxed">
               {BRAND_TAGLINE} Clinically dosed, fully transparent.
