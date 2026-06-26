@@ -113,6 +113,8 @@ export interface ProductData {
 
   // Supplement facts
   supplementRows: SupplementRow[];
+  servingLabel?: string;
+
 
   // Clinical mechanisms
   clinicalMechanisms: ClinicalMechanism[];
