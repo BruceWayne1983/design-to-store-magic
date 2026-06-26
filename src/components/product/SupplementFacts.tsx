@@ -9,17 +9,17 @@ const SupplementFacts = ({ product }: { product: ProductData }) => (
       <ScrollReveal variants={scaleIn}>
         <div className="bg-background border border-border rounded-lg overflow-hidden">
           <div className="p-4 md:p-6 border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <h3 className="text-lg md:text-xl font-black text-foreground uppercase">{product.name} <span className="font-normal text-sm md:text-base text-muted-foreground">Nutritional Information</span></h3>
-            <span className="text-xs text-muted-foreground">Manufactured in a GMP Certified Facility</span>
+            <h3 className="text-lg md:text-xl font-black text-foreground uppercase">{product.name} <span className="font-normal text-sm md:text-base text-muted-foreground">Nutrition Information</span></h3>
+            <span className="text-xs text-muted-foreground">Manufactured in a UK GMP-certified facility</span>
           </div>
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-secondary/50">
                   <th className="text-left p-4 font-semibold text-foreground">Ingredient</th>
-                  <th className="text-left p-4 font-semibold text-foreground">Serving</th>
-                  <th className="text-left p-4 font-semibold text-foreground">Purpose</th>
-                  <th className="text-left p-4 font-semibold text-foreground">Trademark</th>
+                  <th className="text-left p-4 font-semibold text-foreground">Per Serving</th>
+                  <th className="text-left p-4 font-semibold text-foreground">Function / %NRV*</th>
+                  <th className="text-left p-4 font-semibold text-foreground">Source</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,8 +46,11 @@ const SupplementFacts = ({ product }: { product: ProductData }) => (
               </div>
             ))}
           </div>
-          <div className="p-4 border-t border-border">
-            <p className="text-xs text-muted-foreground"><strong>Other ingredients:</strong> Vegetable Capsule, Microcrystalline Cellulose, Silicon Dioxide.</p>
+          <div className="p-4 border-t border-border space-y-2">
+            <p className="text-xs text-muted-foreground">*NRV = Nutrient Reference Value (Regulation (EU) No 1169/2011 as retained in UK law).</p>
+            <p className="text-xs text-muted-foreground"><strong className="text-foreground">Ingredients:</strong> Full ingredient declaration printed on product label in descending order of weight. Allergens highlighted in <strong>bold</strong> in line with UK FIC Regulations.</p>
+            <p className="text-xs text-muted-foreground"><strong className="text-foreground">Directions:</strong> Use as directed on label. Do not exceed the stated recommended daily dose.</p>
+            <p className="text-xs text-muted-foreground"><strong className="text-foreground">Warnings:</strong> Food supplement. Not a substitute for a varied, balanced diet and healthy lifestyle. Keep out of reach of young children. Not suitable for pregnant or breastfeeding women unless advised by a healthcare professional. Store in a cool, dry place below 25°C, out of direct sunlight.</p>
           </div>
         </div>
       </ScrollReveal>
