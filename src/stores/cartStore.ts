@@ -42,6 +42,8 @@ interface CartStore {
   getCheckoutUrl: () => string | null;
   totalItems: () => number;
   subtotal: () => number;
+  multibuySavings: () => number;
+  discountedSubtotal: () => number;
 }
 
 export const useCartStore = create<CartStore>()(
