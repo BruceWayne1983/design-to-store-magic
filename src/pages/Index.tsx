@@ -22,7 +22,7 @@ import CoachTeaser from "@/components/sections/CoachTeaser";
 
 import Footer from "@/components/Footer";
 import categoryPerformance from "@/assets/category-performance.jpg";
-import categoryMetabolic from "@/assets/category-metabolic.jpg";
+
 
 
 const Index = () => (
