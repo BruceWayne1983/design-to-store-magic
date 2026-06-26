@@ -97,6 +97,37 @@ const BlogArticle = () => {
             ))}
           </div>
 
+          {/* Downloads */}
+          {article.downloads && article.downloads.length > 0 && (
+            <div className="flex flex-col gap-3">
+              <h3 className="text-base font-bold text-foreground uppercase tracking-wider">Free Download</h3>
+              <div className="flex flex-col gap-3">
+                {article.downloads.map((d) => (
+                  <a
+                    key={d.url}
+                    href={d.url}
+                    download={d.filename}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-4 p-5 border border-border rounded-lg bg-secondary hover:border-primary/40 hover:bg-secondary/70 transition-all"
+                  >
+                    <div className="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Download className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex flex-col gap-1 flex-1 min-w-0">
+                      <span className="text-[10px] font-bold text-primary uppercase tracking-wider">PDF · Printable Template</span>
+                      <span className="text-sm font-bold text-foreground leading-snug">{d.label}</span>
+                      <span className="text-xs text-muted-foreground leading-snug">{d.description}</span>
+                    </div>
+                    <span className="hidden sm:inline-flex px-4 py-2 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-wider rounded group-hover:bg-primary/90 transition-colors whitespace-nowrap">
+                      Download{d.sizeKb ? ` · ${d.sizeKb} KB` : ""}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Related product CTA */}
           {relatedProduct && (
             <div className="border border-border rounded-lg p-6 flex flex-col sm:flex-row items-center gap-4 bg-secondary">
