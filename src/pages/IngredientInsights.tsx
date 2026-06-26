@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { FileText, Check, Download, FlaskConical, Mail, MessageCircleQuestion } from "lucide-react";
+import { Link } from "react-router-dom";
+import { FileText, Check, Download, FlaskConical, Mail, MessageCircleQuestion, ArrowRight } from "lucide-react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
+import RequestArticleForm from "@/components/forms/RequestArticleForm";
 import { supabase } from "@/integrations/supabase/client";
 import { createIngredientPdf } from "@/lib/ingredientPdf";
 import { downloadPdfFile } from "@/lib/deckPdf";
@@ -210,6 +212,14 @@ const IngredientInsights = () => {
           <p className="text-xs text-muted-foreground max-w-[720px]">
             Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle. Not intended to diagnose, treat, cure, or prevent any disease.
           </p>
+          <div className="flex justify-center pt-2">
+            <Link
+              to="/blog?category=ingredient-science"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded text-sm font-bold uppercase tracking-wider text-foreground hover:border-primary hover:text-primary transition-colors"
+            >
+              View all ingredient articles <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -272,37 +282,12 @@ const IngredientInsights = () => {
             </p>
           </div>
 
-          <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-            <form className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-name" className="text-sm font-medium text-foreground">Your name</label>
-                <Input id="request-name" placeholder="e.g. Alex" />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-email" className="text-sm font-medium text-foreground">Email</label>
-                <Input id="request-email" type="email" placeholder="you@email.com" />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-product" className="text-sm font-medium text-foreground">Product or ingredient</label>
-                <Input id="request-product" placeholder="e.g. 'XYZ Pre-Workout' or 'Beta-Alanine'" />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="request-question" className="text-sm font-medium text-foreground">What do you want to know?</label>
-                <textarea
-                  id="request-question"
-                  rows={4}
-                  placeholder="Paste the label, list the ingredients, or ask a question..."
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                />
-              </div>
-              <Button type="submit" className="w-full uppercase tracking-wider font-bold">
-                Request insight
-              </Button>
-              <p className="text-xs text-muted-foreground">
-                Our team reviews every request and responds with a clear, evidence-backed breakdown.
-              </p>
-            </form>
-          </div>
+          <RequestArticleForm
+            source="ingredient-insights"
+            topicLabel="Product or ingredient"
+            topicPlaceholder="e.g. 'XYZ Pre-Workout' or 'Beta-Alanine'"
+            submitLabel="Request article"
+          />
         </div>
       </section>
 

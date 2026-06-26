@@ -26,6 +26,8 @@ const ShippingReturns = lazy(() => import("./pages/ShippingReturns.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
 const KnowledgeBase = lazy(() => import("./pages/KnowledgeBase.tsx"));
 const IngredientInsights = lazy(() => import("./pages/IngredientInsights.tsx"));
+const TrainingScience = lazy(() => import("./pages/TrainingScience.tsx"));
+const Founders = lazy(() => import("./pages/Founders.tsx"));
 const AppLanding = lazy(() => import("./pages/AppLanding.tsx"));
 
 const queryClient = new QueryClient();
@@ -60,6 +62,8 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/knowledge-base" element={<KnowledgeBase />} />
           <Route path="/ingredient-insights" element={<IngredientInsights />} />
+          <Route path="/training-science" element={<TrainingScience />} />
+          <Route path="/founders" element={<Founders />} />
           <Route path="/app" element={<AppLanding />} />
           <Route path="/coming-soon" element={<PreLaunch />} />
           <Route path="*" element={<NotFound />} />
