@@ -193,6 +193,15 @@ export const blogArticles: BlogArticle[] = [
     publishedAt: "2026-06-26",
     author: "Baseline Research Team",
     relatedProduct: "electro-flow",
+    downloads: [
+      {
+        label: "DC Training Workout Logbook (PDF)",
+        description: "Printable 7-page logbook — 8-day rotation guide, A/B workout pages with rest-pause columns, weekly cardio and fuelling tracker, cycle review.",
+        url: dcLogbookAsset.url,
+        filename: dcLogbookAsset.original_filename,
+        sizeKb: Math.round((dcLogbookAsset.size || 0) / 1024),
+      },
+    ],
     content: [
       {
         body: "DoggCrapp Training — universally shortened to DC Training — is a high-intensity strength and hypertrophy system developed by Dante Trudel in the early 2000s. Despite the unserious name, it is one of the most disciplined, evidence-aligned training methods in physique sport, and it has produced a long list of advanced lifters with above-average strength-to-size ratios.\n\nThis guide explains the four pillars of DC, the full split, sample rotations, and the practical rules that make or break results."
