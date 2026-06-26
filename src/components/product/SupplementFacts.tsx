@@ -2,7 +2,14 @@ import SectionHeader from "@/components/SectionHeader";
 import { ScrollReveal, scaleIn } from "@/components/ui/scroll-animations";
 import type { ProductData } from "@/data/products";
 
+const nrvOf = (r: { nrv?: string; flag?: string }) => {
+  if (r.nrv) return r.nrv;
+  if (r.flag && /%|nrv/i.test(r.flag)) return r.flag;
+  return "†";
+};
+
 const SupplementFacts = ({ product }: { product: ProductData }) => (
+
   <section className="w-full bg-secondary py-16 px-4 md:py-28 md:px-8 lg:px-16">
     <div className="max-w-[1000px] mx-auto flex flex-col gap-8 md:gap-12">
       <ScrollReveal><SectionHeader heading="Clinically dosed formula" /></ScrollReveal>
@@ -26,7 +33,7 @@ const SupplementFacts = ({ product }: { product: ProductData }) => (
                   <tr key={r.ingredient} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
                     <td className="p-4"><span className="font-semibold text-foreground">{r.ingredient}</span>{r.spec && <span className="text-muted-foreground text-xs ml-1">{r.spec}</span>}</td>
                     <td className="p-4 text-right text-foreground">{r.dose}</td>
-                    <td className="p-4 text-right text-muted-foreground">{r.nrv || r.flag || "†"}</td>
+                    <td className="p-4 text-right text-muted-foreground">{nrvOf(r)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -38,7 +45,7 @@ const SupplementFacts = ({ product }: { product: ProductData }) => (
                 <div className="min-w-0"><span className="font-semibold text-foreground text-sm">{r.ingredient}</span>{r.spec && <span className="text-muted-foreground text-xs ml-1">{r.spec}</span>}</div>
                 <div className="flex items-baseline gap-3 flex-shrink-0">
                   <span className="text-sm font-semibold text-foreground">{r.dose}</span>
-                  <span className="text-xs text-muted-foreground w-10 text-right">{r.nrv || r.flag || "†"}</span>
+                  <span className="text-xs text-muted-foreground w-10 text-right">{nrvOf(r)}</span>
                 </div>
               </div>
             ))}
