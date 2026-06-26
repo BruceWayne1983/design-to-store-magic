@@ -30,10 +30,10 @@ const SocialProofBand = () => (
               <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-primary text-primary" />
             ))}
           </div>
-          <span className="text-xs md:text-sm font-bold text-foreground">Trusted by 2,400+ athletes</span>
+          <span className="text-xs md:text-sm font-bold text-foreground">Used by 2,400+ UK athletes and clinicians</span>
         </div>
         <p className="text-[11px] md:text-xs text-muted-foreground uppercase tracking-wider">
-          Coaches · Personal Trainers · Competitive Lifters
+          S&C coaches · Physiotherapists · Competitive lifters
         </p>
       </div>
     </div>

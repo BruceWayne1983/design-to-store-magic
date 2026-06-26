@@ -2,15 +2,15 @@ import SectionHeader from "../SectionHeader";
 import { Beaker, Shield, TrendingUp } from "lucide-react";
 
 const features = [
-  { icon: Beaker, title: "Clinical Dosing", desc: "Clinically proven protocols with evidence-backed ingredients." },
-  { icon: Shield, title: "Trademarked Ingredients", desc: "Premium performance compounds for optimal bioavailability." },
-  { icon: TrendingUp, title: "UK Regulatory Compliance", desc: "Stringent quality assurance and testing standards." },
+  { icon: Beaker, title: "Dosed to the Research", desc: "Every active is included at the level used in the human trials we cite — not a fractional gesture dose." },
+  { icon: Shield, title: "Trademarked Ingredients", desc: "Branded actives (Pycnogenol®, EnXtra®, Cluster Dextrin®, Aquamin™) with documented bioavailability data." },
+  { icon: TrendingUp, title: "UK Manufactured", desc: "GMP-certified UK facility, FIC-compliant labelling, third-party assay on every production run." },
 ];
 
 const HowItWorks = () => (
   <section className="w-full bg-secondary py-16 md:py-28 px-4 md:px-8 lg:px-16">
     <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
-      <SectionHeader heading="Formulated From Mechanism, Not Marketing." />
+      <SectionHeader heading="Why Baseline Reads Differently" />
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12">
         {features.map((f) => (
           <div key={f.title} className="flex flex-col items-center text-center gap-4">

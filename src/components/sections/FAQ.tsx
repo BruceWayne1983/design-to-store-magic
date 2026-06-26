@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  { q: "What makes your formulas different?", a: "Our formulas are backed by peer-reviewed research and use clinically effective dosages of every ingredient." },
-  { q: "How should I use the protocols?", a: "Each protocol comes with a detailed guide. Follow the recommended timing and dosage for optimal results." },
-  { q: "Do you offer international shipping?", a: "Yes, we ship to over 40 countries worldwide with tracked shipping options." },
-  { q: "Can I customize my protocol?", a: "Absolutely. Take our assessment to get a personalized protocol recommendation based on your goals." },
-  { q: "What is your return policy?", a: "We offer a 30-day satisfaction guarantee. If you're not happy, contact us for a full refund." },
+  { q: "What makes your formulas different from a mainstream brand?", a: "We dose every active at the level used in the human trial we reference on the product page. No proprietary blends, no fractional gesture doses, no fillers added to bulk out a label." },
+  { q: "How do I use a stack?", a: "Each product page lists timing and dose. As a default: pre-workout 20 minutes before training, intra-workout sipped through the session, capsules taken with food." },
+  { q: "Do you ship outside the UK?", a: "Yes. Tracked delivery to over 40 countries. Duties and taxes are calculated at checkout for non-UK destinations." },
+  { q: "Is there guidance for my goals?", a: "The Stack Systems page groups products by training objective. For more individual advice, the Baseline AI Coach (launching with the app) handles programming and supplementation in one place." },
+  { q: "What's the returns policy?", a: "30 days. Unopened tubs are refunded in full; opened tubs are refunded less the cost of the tub used. Contact us before returning." },
 ];
 
 const FAQ = () => {
@@ -17,8 +17,8 @@ const FAQ = () => {
     <section className="w-full bg-secondary py-16 md:py-28 px-4 md:px-8 lg:px-16">
       <div className="max-w-[768px] mx-auto flex flex-col gap-8 md:gap-12">
         <div className="flex flex-col gap-3 md:gap-4">
-          <h2 className="text-3xl md:text-5xl font-black leading-[1.1] text-foreground uppercase tracking-tight">FAQs</h2>
-          <p className="text-base md:text-lg text-muted-foreground">Everything you need to know about our products and protocols.</p>
+          <h2 className="text-3xl md:text-5xl font-black leading-[1.1] text-foreground uppercase tracking-tight">Common questions</h2>
+          <p className="text-base md:text-lg text-muted-foreground">Formulation, dosing, delivery and returns.</p>
         </div>
         <div className="flex flex-col">
           {faqs.map((faq, i) => (

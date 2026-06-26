@@ -5,10 +5,10 @@ const ReadyToPerform = () => (
     <div className="max-w-[768px] mx-auto flex flex-col items-center text-center gap-6 md:gap-8">
       <div className="flex flex-col gap-4 md:gap-6">
         <h2 className="text-3xl md:text-5xl font-black leading-[1.1] text-foreground">
-          Built For <span className="text-primary">Performance</span> Professionals
+          For the People Who <span className="text-primary">Read the Label</span>
         </h2>
         <p className="text-base md:text-lg text-muted-foreground">
-          Baseline supports blood markers, conditions for health, and metabolic optimisation to satiate performance.
+          Baseline is written for athletes, coaches and clinicians who want to know what's in the tub, how much, and what it does in the body.
         </p>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
@@ -16,13 +16,13 @@ const ReadyToPerform = () => (
           to="/shop"
           className="px-6 py-3 bg-primary text-primary-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:opacity-90 transition-opacity text-center"
         >
-          Shop now
+          Shop the range
         </Link>
         <Link
           to="/knowledge-base"
           className="px-6 py-3 border border-border text-foreground text-sm md:text-base font-medium uppercase tracking-wider hover:border-primary hover:text-primary transition-colors text-center"
         >
-          Explore the science
+          Read the science
         </Link>
       </div>
     </div>
