@@ -67,7 +67,11 @@ const CartDrawer = () => {
             {/* Cart items */}
             <div className="flex-1 overflow-y-auto px-5 py-4">
               <div className="flex flex-col gap-4">
-                {items.map((item) => (
+                {items.map((item) => {
+                  const lineTotal = item.price * item.quantity;
+                  const discount = item.isSubscription ? 0 : discountForQty(item.quantity);
+                  const lineDiscounted = lineTotal * (1 - discount);
+                  return (
                   <div key={item.variantId} className="flex gap-4 pb-4 border-b border-border">
                     <div className="w-20 h-20 bg-secondary rounded flex items-center justify-center p-2 flex-shrink-0">
                       <img src={item.productImage} alt={item.productTitle} className="w-full h-full object-contain" />
@@ -76,6 +80,11 @@ const CartDrawer = () => {
                       <h5 className="text-sm font-bold text-foreground">{item.productTitle}</h5>
                       {item.variantTitle !== "Default Title" && (
                         <p className="text-xs text-muted-foreground">{item.variantTitle}</p>
+                      )}
+                      {discount > 0 && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                          Multibuy −{Math.round(discount * 100)}%
+                        </span>
                       )}
                       <div className="flex items-center justify-between mt-auto">
                         <div className="flex items-center border border-border rounded">
@@ -96,7 +105,12 @@ const CartDrawer = () => {
                           </button>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-bold text-foreground">£{(item.price * item.quantity).toFixed(2)}</span>
+                          <div className="flex flex-col items-end">
+                            <span className="text-sm font-bold text-foreground">£{lineDiscounted.toFixed(2)}</span>
+                            {discount > 0 && (
+                              <span className="text-[10px] text-muted-foreground line-through">£{lineTotal.toFixed(2)}</span>
+                            )}
+                          </div>
                           <button
                             onClick={() => removeItem(item.variantId)}
                             disabled={isLoading}
@@ -108,7 +122,8 @@ const CartDrawer = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
