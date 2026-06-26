@@ -3,6 +3,15 @@ import preWorkoutTiming from "@/assets/blog/pre-workout-timing.jpg";
 import ampkActivation from "@/assets/blog/ampk-activation.jpg";
 import citrullineVsArginine from "@/assets/blog/citrulline-vs-arginine.jpg";
 import dcTraining from "@/assets/blog/dc-training.jpg";
+import dcLogbookAsset from "@/assets/downloads/dc-logbook.pdf.asset.json";
+
+export interface BlogDownload {
+  label: string;
+  description: string;
+  url: string;
+  filename: string;
+  sizeKb?: number;
+}
 
 export interface BlogArticle {
   slug: string;
@@ -15,6 +24,7 @@ export interface BlogArticle {
   publishedAt: string;
   author: string;
   relatedProduct?: string;
+  downloads?: BlogDownload[];
   content: BlogSection[];
 }
 
