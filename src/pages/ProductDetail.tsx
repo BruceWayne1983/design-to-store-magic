@@ -9,15 +9,11 @@ import TrustStrip from "@/components/product/TrustStrip";
 import ExpectationsTimeline from "@/components/product/ExpectationsTimeline";
 import ProductJsonLd from "@/components/product/ProductJsonLd";
 import WhyDifferent from "@/components/product/WhyDifferent";
-import HowItWorks from "@/components/product/HowItWorks";
 import IngredientBreakdown from "@/components/product/IngredientBreakdown";
-import IngredientMechanisms from "@/components/product/IngredientMechanisms";
 import SupplementFacts from "@/components/product/SupplementFacts";
-import MechanismSection from "@/components/product/MechanismSection";
-import ProductTestimonials from "@/components/product/ProductTestimonials";
+import ExpertReview from "@/components/product/ExpertReview";
 import RelatedStacks from "@/components/product/RelatedStacks";
 import ProductReviews from "@/components/product/ProductReviews";
-import RecentlyViewed from "@/components/product/RecentlyViewed";
 import ProductFAQ from "@/components/product/ProductFAQ";
 import StickyAddToCart from "@/components/product/StickyAddToCart";
 import { getProduct } from "@/data/products";
@@ -58,22 +54,16 @@ const ProductDetail = () => {
       />
 
       <TrustStrip product={product} />
-
       <WhyDifferent product={product} />
-      <HowItWorks product={product} />
-
-      <ExpectationsTimeline product={product} />
-
       <IngredientBreakdown product={product} />
-      <IngredientMechanisms product={product} />
+      <ExpertReview product={product} />
       <SupplementFacts product={product} />
-      <MechanismSection product={product} />
-      <ProductTestimonials product={product} />
-      <RelatedStacks product={product} />
+      <ExpectationsTimeline product={product} />
       <ProductReviews productSlug={product.slug} productName={product.name} />
-      <RecentlyViewed currentSlug={product.slug} />
       <ProductFAQ product={product} />
-      <section className="w-full bg-background px-4 md:px-8 lg:px-16 pb-12">
+      <RelatedStacks product={product} />
+
+      <section className="w-full bg-background px-4 md:px-8 lg:px-16 pb-12 pt-8">
         <div className="max-w-[1280px] mx-auto border-t border-border pt-6">
           <p className="text-xs text-muted-foreground leading-relaxed">
             Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle.

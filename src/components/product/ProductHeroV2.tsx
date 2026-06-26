@@ -66,12 +66,13 @@ const ProductHeroV2 = ({
   const outcomes = product.outcomeBullets ?? [];
 
   return (
-    <section className="w-full bg-background py-8 px-4 md:py-16 md:px-8 lg:px-16">
-      <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16">
+    <section className="w-full bg-background py-6 px-4 md:py-10 md:px-8 lg:px-16">
+      <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12">
+
         {/* Gallery */}
-        <ScrollReveal className="flex flex-col gap-4 w-full lg:w-1/2" variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } }}>
+        <ScrollReveal className="flex flex-col gap-4 w-full lg:w-[45%] lg:sticky lg:top-24 lg:self-start" variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } }}>
           <motion.div
-            className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-4 md:p-8 overflow-hidden"
+            className="w-full aspect-square bg-secondary rounded-lg flex items-center justify-center p-4 md:p-6 overflow-hidden max-w-[520px] mx-auto"
             key={selectedImage}
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -79,6 +80,7 @@ const ProductHeroV2 = ({
           >
             <img src={product.images[selectedImage]} alt={product.name} className="w-full h-full object-contain" loading="eager" />
           </motion.div>
+
           <div className="flex gap-2 md:gap-3 overflow-x-auto">
             {product.images.map((img, i) => (
               <button
@@ -93,7 +95,7 @@ const ProductHeroV2 = ({
         </ScrollReveal>
 
         {/* Info */}
-        <ScrollReveal className="flex flex-col gap-5 md:gap-6 w-full lg:w-1/2" variants={{ hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } }} delay={0.15}>
+        <ScrollReveal className="flex flex-col gap-5 md:gap-6 w-full lg:flex-1" variants={{ hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } }} delay={0.15}>
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight">{product.name}</h1>
             <p className="text-lg md:text-xl text-muted-foreground mt-1">{product.tagline}</p>
