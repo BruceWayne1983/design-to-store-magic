@@ -16,6 +16,8 @@ import RelatedStacks from "@/components/product/RelatedStacks";
 import ProductReviews from "@/components/product/ProductReviews";
 import ProductFAQ from "@/components/product/ProductFAQ";
 import StickyAddToCart from "@/components/product/StickyAddToCart";
+import HowItWorks from "@/components/product/HowItWorks";
+import ScienceDossierSignup from "@/components/product/ScienceDossierSignup";
 import { getProduct } from "@/data/products";
 
 const ProductDetail = () => {
