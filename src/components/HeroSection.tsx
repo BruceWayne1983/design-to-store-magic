@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import heroPerformance from "@/assets/category-performance.jpg";
 import heroMetabolic from "@/assets/category-metabolic.jpg";
 import heroHealth from "@/assets/category-health.jpg";
+import productFusion from "@/assets/products/fusion-lite-plus.jpg";
+import productVascul8 from "@/assets/products/vascul8.jpg";
+import productElectroFlow from "@/assets/products/electro-flow.jpg";
+import productGlycoshift from "@/assets/products/glycoshift.jpg";
 
 const SLIDE_INTERVAL_MS = 6000;
 
@@ -31,6 +35,38 @@ const slides = [
     desc: "Advanced hydration and cellular support for everyday training and recovery.",
     cta1: { text: "Shop All", link: "/shop" },
     cta2: { text: "View Products", link: "/shop" },
+  },
+  {
+    bg: productFusion,
+    tagline: "Fusion Lite+",
+    headline: "Dual-Phase Pre-Workout\nWithout the Crash",
+    desc: "200mg EnXtra® + 150mg Infinergy® for sustained, smooth focus and output.",
+    cta1: { text: "Shop Fusion Lite+", link: "/product/fusion-lite-plus" },
+    cta2: { text: "Compare Stacks", link: "/shop" },
+  },
+  {
+    bg: productVascul8,
+    tagline: "VASCUL8™",
+    headline: "Engineered Pump &\nVascular Performance",
+    desc: "100mg Pycnogenol® and 1,500mg Betaine for measurable blood flow and fullness.",
+    cta1: { text: "Shop VASCUL8", link: "/product/vascul8" },
+    cta2: { text: "Learn More", link: "/knowledge-base" },
+  },
+  {
+    bg: productElectroFlow,
+    tagline: "Electro Flow",
+    headline: "Performance-Grade\nElectrolytes",
+    desc: "Full-spectrum mineral matrix at real clinical doses. Built for hard training in any climate.",
+    cta1: { text: "Shop Electro Flow", link: "/product/electro-flow" },
+    cta2: { text: "Shop Health", link: "/category/health" },
+  },
+  {
+    bg: productGlycoshift,
+    tagline: "GlycoShift™",
+    headline: "Master Your\nGlucose Response",
+    desc: "Zero-bloat gastric clearance with precision electrolyte and glucose management.",
+    cta1: { text: "Shop GlycoShift", link: "/product/glycoshift" },
+    cta2: { text: "Shop Metabolic", link: "/shop" },
   },
 ];
 
@@ -100,12 +136,12 @@ const HeroSection = () => {
         </AnimatePresence>
 
         {/* Dot indicators */}
-        <div className="flex gap-2 mt-10">
+        <div className="flex flex-wrap gap-2 mt-10">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${i === current ? "bg-primary w-8" : "bg-white/40 hover:bg-white/60"}`}
+              className={`h-2.5 rounded-full transition-all ${i === current ? "bg-primary w-8" : "bg-white/40 hover:bg-white/60 w-2.5"}`}
               aria-label={`Slide ${i + 1}`}
             />
           ))}
