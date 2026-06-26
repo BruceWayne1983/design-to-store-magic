@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { X } from "lucide-react";
+import { X, Cookie } from "lucide-react";
 
 const COOKIE_KEY = "bn_cookie_consent";
+const MINIMIZED_KEY = "bn_cookie_minimized";
 
 type ConsentState = "accepted" | "rejected" | "custom" | null;
 
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
+  const [minimized, setMinimized] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [analytics, setAnalytics] = useState(true);
   const [marketing, setMarketing] = useState(false);
@@ -15,6 +17,7 @@ const CookieConsent = () => {
   useEffect(() => {
     const consent = localStorage.getItem(COOKIE_KEY);
     if (!consent) {
+      setMinimized(sessionStorage.getItem(MINIMIZED_KEY) === "1");
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
@@ -42,11 +45,28 @@ const CookieConsent = () => {
     saveConsent("custom");
   };
 
+  const handleMinimize = () => {
+    sessionStorage.setItem(MINIMIZED_KEY, "1");
+    setMinimized(true);
+  };
+
   if (!visible) return null;
 
+  if (minimized) {
+    return (
+      <button
+        onClick={() => { sessionStorage.removeItem(MINIMIZED_KEY); setMinimized(false); }}
+        aria-label="Cookie preferences"
+        className="fixed bottom-4 left-4 z-[100] bg-background border border-border rounded-full p-3 shadow-xl hover:border-primary transition-colors"
+      >
+        <Cookie className="w-4 h-4 text-primary" />
+      </button>
+    );
+  }
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6">
-      <div className="max-w-[640px] mx-auto bg-background border border-border rounded-lg shadow-2xl overflow-hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-[100] p-3 md:p-6 pointer-events-none">
+      <div className="max-w-[640px] mx-auto bg-background border border-border rounded-lg shadow-2xl overflow-hidden pointer-events-auto">
         {/* Header */}
         <div className="flex items-start justify-between p-4 pb-2">
           <div>
@@ -58,10 +78,11 @@ const CookieConsent = () => {
               </button>.
             </p>
           </div>
-          <button onClick={handleRejectAll} className="p-1 hover:opacity-70 transition-opacity flex-shrink-0">
+          <button onClick={handleMinimize} aria-label="Minimize" className="p-1 hover:opacity-70 transition-opacity flex-shrink-0">
             <X className="w-4 h-4 text-muted-foreground" />
           </button>
         </div>
+
 
         {/* Details panel */}
         {showDetails && (

@@ -27,7 +27,7 @@ export const SELLING_PLAN_MAP: Record<string, string> = {};
 
 // Discount applied to the Subscribe & Save option, shown in the UI. Must match
 // the discount configured on the Shopify selling plan once it goes live.
-export const SUBSCRIPTION_DISCOUNT = 0.1; // 10%
+export const SUBSCRIPTION_DISCOUNT = 0.15; // 15%
 
 export interface ShopifyProduct {
   node: {

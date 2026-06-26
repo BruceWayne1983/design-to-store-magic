@@ -40,7 +40,7 @@ const products: ShopProduct[] = [
   { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", priceNum: 39.99, image: glyco8, category: "Metabolic" as Category, badge: "New" as Badge },
   { name: "Electro Flow", slug: "electro-flow", desc: "Advanced Electrolyte Support", price: "£27.99", priceNum: 27.99, image: electroFlow, category: "Health & Hydration" as Category },
   { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure NNB Creatine Monohydrate", price: "From £23.99", priceNum: 23.99, image: purestCreatine, category: "Performance" as Category, badge: "Best Seller" as Badge },
-  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "TBC", priceNum: 0, image: h2oGo, category: "Health & Hydration" as Category, comingSoon: true },
+  { name: "H2O GO", slug: "h2o-go", desc: "Water Balance & Electrolyte Support", price: "£19.99", priceNum: 19.99, image: h2oGo, category: "Health & Hydration" as Category, badge: "New" as Badge },
 ];
 
 const categories: Category[] = ["All", "Performance", "Metabolic", "Health & Hydration"];
