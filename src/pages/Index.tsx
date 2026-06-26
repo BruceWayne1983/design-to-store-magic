@@ -23,11 +23,7 @@ import CoachTeaser from "@/components/sections/CoachTeaser";
 import Footer from "@/components/Footer";
 import categoryPerformance from "@/assets/category-performance.jpg";
 import categoryMetabolic from "@/assets/category-metabolic.jpg";
-import categoryHealth from "@/assets/category-health.jpg";
-import productFusion from "@/assets/products/fusion-lite-plus.jpg";
-import productVascul8 from "@/assets/products/vascul8.jpg";
-import productElectroFlow from "@/assets/products/electro-flow.jpg";
-import productGlycoshift from "@/assets/products/glycoshift.jpg";
+
 
 const Index = () => (
   <div className="flex flex-col items-start w-full">
@@ -62,47 +58,10 @@ const Index = () => (
       align="right"
       accent="#F59E0B"
     />
-    <CinematicBand
-      label="Fusion Lite+"
-      headline="Dual-Phase Pre-Workout Without the Crash"
-      desc="200mg EnXtra® + 150mg Infinergy® for sustained, smooth focus and output."
-      cta="Shop Fusion Lite+"
-      link="/product/fusion-lite-plus"
-      image={productFusion}
-      align="right"
-      accent="#3B82F6"
-    />
     <ScienceSection />
-    <CinematicBand
-      label="VASCUL8™"
-      headline="Engineered Pump & Vascular Performance"
-      desc="100mg Pycnogenol® and 1,500mg Betaine for measurable blood flow and fullness."
-      cta="Shop VASCUL8"
-      link="/product/vascul8"
-      image={productVascul8}
-      accent="#3B82F6"
-    />
     <CompleteProtocols />
     <CoachTeaser />
-    <CinematicBand
-      label="Electro Flow"
-      headline="Performance-Grade Electrolytes"
-      desc="Full-spectrum mineral matrix at real clinical doses. Built for hard training in any climate."
-      cta="Shop Electro Flow"
-      link="/product/electro-flow"
-      image={productElectroFlow}
-      accent="#10B981"
-    />
-    <CinematicBand
-      label="GlycoShift™"
-      headline="Master Your Glucose Response"
-      desc="Zero-bloat gastric clearance with precision electrolyte and glucose management."
-      cta="Shop GlycoShift"
-      link="/product/glycoshift"
-      image={productGlycoshift}
-      align="right"
-      accent="#F59E0B"
-    />
+
     <PromoBanner
       label="Premium Performance"
       headline="The Most Loaded Pre-Workouts on the Market"
