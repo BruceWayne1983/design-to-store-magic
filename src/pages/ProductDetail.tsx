@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ProductHero from "@/components/product/ProductHero";
 import ProductHeroV2 from "@/components/product/ProductHeroV2";
 import TrustStrip from "@/components/product/TrustStrip";
 import ExpectationsTimeline from "@/components/product/ExpectationsTimeline";
@@ -27,8 +26,6 @@ const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const product = getProduct(slug || "");
   const buyButtonRef = useRef<HTMLButtonElement>(null);
-  const showToggle = slug === "electro-flow";
-  const [useV2, setUseV2] = useState(true);
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0]?.name ?? "");
   const [selectedFlavor, setSelectedFlavor] = useState(product?.flavours?.[0]?.name ?? "");
 
@@ -39,22 +36,7 @@ const ProductDetail = () => {
     }
   }, [product?.slug]);
 
-  useEffect(() => {
-    if (!showToggle) return;
-    const stored = localStorage.getItem("pdp-layout");
-    if (stored === "legacy") setUseV2(false);
-  }, [showToggle]);
-
-  const toggleLayout = () => {
-    const next = !useV2;
-    setUseV2(next);
-    localStorage.setItem("pdp-layout", next ? "v2" : "legacy");
-  };
-
   if (!product) return <Navigate to="/shop" replace />;
-
-  const Hero = showToggle && useV2 ? ProductHeroV2 : ProductHero;
-
 
   return (
     <div className="flex flex-col items-start w-full">
@@ -66,23 +48,7 @@ const ProductDetail = () => {
       <AnnouncementBar />
       <Navbar />
 
-      {showToggle && (
-        <div className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-1">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground bg-background/90 px-2 py-0.5 rounded">
-            PDP Preview
-          </span>
-          <button
-            onClick={toggleLayout}
-            className="bg-foreground text-background px-4 py-2.5 rounded-full font-bold text-xs uppercase tracking-[0.15em] shadow-lg hover:opacity-90 transition-opacity flex items-center gap-2"
-          >
-            <span className={useV2 ? "opacity-50" : ""}>Before</span>
-            <span className="w-px h-3 bg-background/30" />
-            <span className={!useV2 ? "opacity-50" : ""}>After</span>
-          </button>
-        </div>
-      )}
-
-      <Hero
+      <ProductHeroV2
         product={product}
         buyButtonRef={buyButtonRef}
         selectedSize={selectedSize}
@@ -91,12 +57,12 @@ const ProductDetail = () => {
         onFlavorChange={setSelectedFlavor}
       />
 
-      {showToggle && useV2 && <TrustStrip product={product} />}
+      <TrustStrip product={product} />
 
       <WhyDifferent product={product} />
       <HowItWorks product={product} />
 
-      {showToggle && useV2 && <ExpectationsTimeline product={product} />}
+      <ExpectationsTimeline product={product} />
 
       <IngredientBreakdown product={product} />
       <IngredientMechanisms product={product} />
@@ -104,7 +70,7 @@ const ProductDetail = () => {
       <MechanismSection product={product} />
       <ProductTestimonials product={product} />
       <RelatedStacks product={product} />
-      <ProductReviews />
+      <ProductReviews productSlug={product.slug} productName={product.name} />
       <RecentlyViewed currentSlug={product.slug} />
       <ProductFAQ product={product} />
       <section className="w-full bg-background px-4 md:px-8 lg:px-16 pb-12">
@@ -124,7 +90,6 @@ const ProductDetail = () => {
         selectedSize={selectedSize}
         selectedFlavor={selectedFlavor}
       />
-
     </div>
   );
 };

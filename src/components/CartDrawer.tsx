@@ -1,13 +1,16 @@
 import { X, Plus, Minus, ShoppingBag, Loader2, ExternalLink, Trash2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { FREE_SHIPPING_THRESHOLD } from "@/data/brand";
+import { discountForQty } from "@/lib/multibuy";
 
 const CartDrawer = () => {
-  const { items, isLoading, isSyncing, cartOpen, setCartOpen, updateQuantity, removeItem, getCheckoutUrl, syncCart, subtotal: getSubtotal, totalItems: getTotalItems } = useCartStore();
+  const { items, isLoading, isSyncing, cartOpen, setCartOpen, updateQuantity, removeItem, getCheckoutUrl, subtotal: getSubtotal, multibuySavings: getSavings, discountedSubtotal: getDiscounted, totalItems: getTotalItems } = useCartStore();
   const subtotal = getSubtotal();
+  const savings = getSavings();
+  const discounted = getDiscounted();
   const totalItems = getTotalItems();
-  const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
-  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
+  const progress = Math.min((discounted / FREE_SHIPPING_THRESHOLD) * 100, 100);
+  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - discounted, 0);
 
   const handleCheckout = () => {
     const checkoutUrl = getCheckoutUrl();
@@ -64,7 +67,11 @@ const CartDrawer = () => {
             {/* Cart items */}
             <div className="flex-1 overflow-y-auto px-5 py-4">
               <div className="flex flex-col gap-4">
-                {items.map((item) => (
+                {items.map((item) => {
+                  const lineTotal = item.price * item.quantity;
+                  const discount = item.isSubscription ? 0 : discountForQty(item.quantity);
+                  const lineDiscounted = lineTotal * (1 - discount);
+                  return (
                   <div key={item.variantId} className="flex gap-4 pb-4 border-b border-border">
                     <div className="w-20 h-20 bg-secondary rounded flex items-center justify-center p-2 flex-shrink-0">
                       <img src={item.productImage} alt={item.productTitle} className="w-full h-full object-contain" />
@@ -73,6 +80,11 @@ const CartDrawer = () => {
                       <h5 className="text-sm font-bold text-foreground">{item.productTitle}</h5>
                       {item.variantTitle !== "Default Title" && (
                         <p className="text-xs text-muted-foreground">{item.variantTitle}</p>
+                      )}
+                      {discount > 0 && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                          Multibuy −{Math.round(discount * 100)}%
+                        </span>
                       )}
                       <div className="flex items-center justify-between mt-auto">
                         <div className="flex items-center border border-border rounded">
@@ -93,7 +105,12 @@ const CartDrawer = () => {
                           </button>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-bold text-foreground">£{(item.price * item.quantity).toFixed(2)}</span>
+                          <div className="flex flex-col items-end">
+                            <span className="text-sm font-bold text-foreground">£{lineDiscounted.toFixed(2)}</span>
+                            {discount > 0 && (
+                              <span className="text-[10px] text-muted-foreground line-through">£{lineTotal.toFixed(2)}</span>
+                            )}
+                          </div>
                           <button
                             onClick={() => removeItem(item.variantId)}
                             disabled={isLoading}
@@ -105,17 +122,30 @@ const CartDrawer = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
             {/* Footer */}
             <div className="px-5 py-4 border-t border-border bg-background">
+              {savings > 0 && (
+                <div className="flex items-center justify-between mb-1.5 text-xs">
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-muted-foreground line-through">£{subtotal.toFixed(2)}</span>
+                </div>
+              )}
+              {savings > 0 && (
+                <div className="flex items-center justify-between mb-1.5 text-xs">
+                  <span className="text-primary font-bold uppercase tracking-wider">Multibuy savings</span>
+                  <span className="text-primary font-bold">−£{savings.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-muted-foreground">Subtotal</span>
-                <span className="text-lg font-black text-foreground">£{subtotal.toFixed(2)}</span>
+                <span className="text-sm text-muted-foreground">Total</span>
+                <span className="text-lg font-black text-foreground">£{discounted.toFixed(2)}</span>
               </div>
-              <p className="text-[10px] text-muted-foreground mb-3">Shipping, taxes and discounts calculated at checkout.</p>
+              <p className="text-[10px] text-muted-foreground mb-3">Shipping, taxes and final discounts confirmed at checkout.</p>
               <button
                 onClick={handleCheckout}
                 disabled={isLoading || isSyncing}

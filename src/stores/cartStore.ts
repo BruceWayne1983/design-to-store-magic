@@ -8,6 +8,7 @@ import {
   removeLineFromShopifyCart,
   fetchCartStatus,
 } from '@/lib/shopify';
+import { discountForQty, lineSavings } from '@/lib/multibuy';
 
 const CART_ERROR_MESSAGE = "We couldn't update your basket. Please try again.";
 
@@ -41,6 +42,8 @@ interface CartStore {
   getCheckoutUrl: () => string | null;
   totalItems: () => number;
   subtotal: () => number;
+  multibuySavings: () => number;
+  discountedSubtotal: () => number;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -58,6 +61,17 @@ export const useCartStore = create<CartStore>()(
       totalItems: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
 
       subtotal: () => get().items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+
+      multibuySavings: () =>
+        get().items.reduce((sum, item) => {
+          if (item.isSubscription) return sum;
+          return sum + lineSavings(item.price, item.quantity);
+        }, 0),
+
+      discountedSubtotal: () => {
+        const s = get();
+        return s.subtotal() - s.multibuySavings();
+      },
 
       addItem: async (item) => {
         const { items, cartId, clearCart } = get();
