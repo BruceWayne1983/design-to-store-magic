@@ -14,10 +14,10 @@ import bgRecovery from "@/assets/category-recovery.jpg";
 import bgHealth from "@/assets/category-health.jpg";
 
 const products = [
-  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, alt: bgPerformance, tag: "#1 Trending" },
-  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", priceNum: 39.99, image: vascul8, alt: bgRecovery, tag: "Hot" },
-  { name: "Electro Flow", slug: "electro-flow", desc: "Performance Electrolyte System", price: "£24.99", priceNum: 24.99, image: electroFlow, alt: bgHealth, tag: "New" },
-  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "Pure Micronised Monohydrate", price: "£29.99", priceNum: 29.99, image: purestCreatine, alt: bgMetabolic, tag: null },
+  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Stepped-caffeine pre-workout with EnXtra® and Infinergy®", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, alt: bgPerformance, tag: "Best Seller" },
+  { name: "VASCUL8™", slug: "vascul8", desc: "Stim-free NO formula with Pycnogenol® and betaine", price: "£39.99", priceNum: 39.99, image: vascul8, alt: bgRecovery, tag: "New" },
+  { name: "Electro Flow", slug: "electro-flow", desc: "Sodium-led intra-workout electrolyte matrix", price: "£24.99", priceNum: 24.99, image: electroFlow, alt: bgHealth, tag: null },
+  { name: "Pürest Creatine™", slug: "purest-creatine", desc: "NNB micronised monohydrate, 200-mesh", price: "£29.99", priceNum: 29.99, image: purestCreatine, alt: bgMetabolic, tag: null },
 ];
 
 const TrendingBestsellers = () => {
@@ -49,9 +49,9 @@ const TrendingBestsellers = () => {
         <div className="flex flex-col items-center text-center gap-3">
           <div className="flex items-center gap-2 text-primary">
             <TrendingUp className="w-4 h-4" />
-            <span className="text-xs font-semibold uppercase tracking-[0.2em]">Trending Now</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em]">Most Reordered</span>
           </div>
-          <SectionHeader heading="Customer Favourites" />
+          <SectionHeader heading="What Customers Reorder" />
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {products.map((p) => (

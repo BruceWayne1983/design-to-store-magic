@@ -2,10 +2,10 @@ import { Truck, Leaf, ShieldCheck, FlaskConical } from "lucide-react";
 import { FREE_SHIPPING_THRESHOLD } from "@/data/brand";
 
 const items = [
-  { icon: Truck, title: "Fast UK Shipping", desc: `Free delivery on orders over £${FREE_SHIPPING_THRESHOLD}` },
-  { icon: Leaf, title: "Premium Ingredients", desc: "Clinically dosed, patented actives" },
-  { icon: FlaskConical, title: "3rd-Party Tested", desc: "Independent batch verification" },
-  { icon: ShieldCheck, title: "Satisfaction Guarantee", desc: "30-day money-back promise" },
+  { icon: Truck, title: "UK Delivery", desc: `Free over £${FREE_SHIPPING_THRESHOLD}, tracked dispatch` },
+  { icon: Leaf, title: "Trademarked Actives", desc: "Patented ingredients at label-stated doses" },
+  { icon: FlaskConical, title: "Batch Tested", desc: "Independent third-party assay per batch" },
+  { icon: ShieldCheck, title: "30-Day Returns", desc: "Unopened tubs, full refund" },
 ];
 
 const TrustBar = () => (

@@ -8,21 +8,21 @@ import glycoshift from "@/assets/products/glycoshift.jpg";
 const stacks = [
   {
     name: "Performance Stack",
-    desc: "Fusion Lite+ + VASCUL8 for maximum pre-workout intensity, pump and endurance.",
+    desc: "Fusion Lite+ with VASCUL8 — adrenergic drive paired with stim-free NO and cellular hydration.",
     price: "£64.99",
     images: [fusionLitePlus, vascul8],
     tag: "Most Popular",
   },
   {
     name: "Metabolic Stack",
-    desc: "Glyco8 + GlycoShift for optimised glucose disposal, carb utilisation and body composition.",
+    desc: "GLYCO8 with GLYCOSHIFT — insulin-sensitising co-factors plus an intra-workout carbohydrate source.",
     price: "£59.99",
     images: [glyco8, glycoshift],
     tag: "Save 15%",
   },
   {
     name: "Recovery Stack",
-    desc: "Vascul8 + Glyco8 for enhanced blood flow, nutrient delivery and post-training recovery.",
+    desc: "VASCUL8 with GLYCO8 — sustained nutrient delivery and glycogen repletion across the recovery window.",
     price: "£64.99",
     images: [vascul8, glyco8],
     tag: "New",

@@ -12,8 +12,8 @@ const AnnouncementBar = () => {
     <div className="w-full bg-primary text-primary-foreground relative z-[60]">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 py-2 flex items-center justify-center">
         <p className="text-xs md:text-sm font-medium tracking-wide text-center">
-          FREE UK SHIPPING ON ORDERS OVER £{FREE_SHIPPING_THRESHOLD} ·{" "}
-          <Link to="/shop" className="underline font-semibold hover:opacity-80">Unlock Free Shipping →</Link>
+          Free UK delivery on orders over £{FREE_SHIPPING_THRESHOLD} ·{" "}
+          <Link to="/shop" className="underline font-semibold hover:opacity-80">Shop the range →</Link>
         </p>
         <button
           onClick={() => setVisible(false)}

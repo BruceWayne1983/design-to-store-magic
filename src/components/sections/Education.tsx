@@ -5,12 +5,12 @@ const Education = () => (
   <section className="w-full bg-secondary py-16 md:py-28 px-4 md:px-8 lg:px-16">
     <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-16">
       <div className="flex flex-col gap-3 text-center max-w-[640px] mx-auto">
-        <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.2em]">Education</span>
+        <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.2em]">Reading Room</span>
         <h2 className="text-2xl md:text-4xl font-black text-foreground uppercase tracking-tight">
-          Science-Led Resources
+          Ingredient & Training Notes
         </h2>
         <p className="text-sm md:text-base text-muted-foreground">
-          Deep dives into the mechanisms, ingredients and protocols behind every Baseline formula.
+          Short, referenced write-ups on the actives we use, the protocols they sit inside, and what the trial data actually shows.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">

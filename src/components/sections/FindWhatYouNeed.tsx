@@ -9,28 +9,28 @@ import categoryHealth from "@/assets/category-health.jpg";
 const categories = [
   {
     title: "Performance",
-    desc: "Pre-workout, intra-workout and performance enhancers for maximum training output.",
+    desc: "Pre-workout, intra-workout and pump formulas dosed to the research, not to a price point.",
     image: categoryPerformance,
     link: "/category/performance",
     accent: "#3B82F6",
   },
   {
     title: "Metabolic Support",
-    desc: "Glucose disposal agents and metabolic optimisers built on clinical mechanisms.",
+    desc: "Glucose-disposal actives that bias carbohydrate toward muscle glycogen over adipose tissue.",
     image: categoryMetabolic,
     link: "/shop",
     accent: "#F59E0B",
   },
   {
     title: "Recovery & Sleep",
-    desc: "Advanced recovery formulas targeting inflammation, sleep quality and muscle repair.",
+    desc: "Formulas targeting inflammatory signalling, sleep architecture and muscle protein turnover.",
     image: categoryRecovery,
     link: "/shop",
     accent: "#8B5CF6",
   },
   {
     title: "Health Optimisation",
-    desc: "Foundational health supplements for immune function, gut health and longevity.",
+    desc: "Foundational nutrition for immune function, gut integrity and long-term metabolic health.",
     image: categoryHealth,
     link: "/shop",
     accent: "#10B981",

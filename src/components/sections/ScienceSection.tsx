@@ -5,17 +5,17 @@ const mechanisms = [
   {
     icon: Atom,
     title: "AMPK Activation",
-    desc: "Targeted activation of AMP-activated protein kinase to enhance cellular energy metabolism, glucose uptake and fat oxidation pathways.",
+    desc: "AMP-activated protein kinase regulates substrate selection. Targeted activation upregulates GLUT4 translocation and supports fatty-acid oxidation in skeletal muscle.",
   },
   {
     icon: Wind,
-    title: "Nitric Oxide Signalling",
-    desc: "Clinically dosed precursors drive endothelial nitric oxide production for vasodilation, blood flow and nutrient delivery to working muscle.",
+    title: "Endothelial NO Production",
+    desc: "Pycnogenol® and L-citrulline raise plasma nitric oxide via the eNOS pathway, increasing arterial diameter and intramuscular blood flow during work.",
   },
   {
     icon: BarChart3,
-    title: "Metabolic Partitioning",
-    desc: "Precision glucose disposal and nutrient partitioning agents direct carbohydrates toward glycogen storage rather than adipose tissue.",
+    title: "Glucose Partitioning",
+    desc: "Chromium, berberine and Glucovantage® improve insulin sensitivity, biasing post-meal glucose toward muscle glycogen rather than de novo lipogenesis.",
   },
 ];
 
@@ -25,10 +25,10 @@ const ScienceSection = () => (
       <div className="flex flex-col gap-3 text-center max-w-[640px] mx-auto">
         <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.2em]">The Science</span>
         <h2 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tight">
-          Formulated for Mechanism — Not Marketing
+          Formulated to a Pathway
         </h2>
         <p className="text-sm md:text-base text-white/60">
-          Every formula targets a specific biological pathway backed by peer-reviewed research and clinical dosing protocols.
+          Each product targets a defined biological mechanism. Doses match those used in the human trials cited on the product page.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

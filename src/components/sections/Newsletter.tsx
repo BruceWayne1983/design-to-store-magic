@@ -41,10 +41,10 @@ const Newsletter = () => {
       <div className="max-w-[768px] mx-auto flex flex-col items-center text-center gap-6 md:gap-8">
         <div className="flex flex-col gap-4 md:gap-6">
           <h2 className="text-3xl md:text-5xl font-black leading-[1.1] text-white uppercase tracking-tight">
-            Stay informed on performance
+            Ingredient briefings, by email
           </h2>
           <p className="text-base md:text-lg text-white/70">
-            Subscribe to get the latest research, product launches, and performance tips.
+            A short read every other Sunday: one active, the trial data behind it, and how we use it in our formulas. No sales emails between.
           </p>
         </div>
         {!submitted ? (

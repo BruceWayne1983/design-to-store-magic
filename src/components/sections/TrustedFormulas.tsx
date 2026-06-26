@@ -10,10 +10,10 @@ import glyco8 from "@/assets/products/glyco8.jpg";
 import glycoshift from "@/assets/products/glycoshift.jpg";
 
 const products = [
-  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Clinically Dosed Focus & Energy", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, tag: "Best Seller" },
-  { name: "VASCUL8™", slug: "vascul8", desc: "Stimulant-Free Pump Formula", price: "£39.99", priceNum: 39.99, image: vascul8, tag: null },
-  { name: "GLYCO8™", slug: "glyco8", desc: "Fast-Acting Nutrient Partitioning Support", price: "£39.99", priceNum: 39.99, image: glyco8, tag: null },
-  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-Workout Fuel & GDA", price: "£39.99", priceNum: 39.99, image: glycoshift, tag: null },
+  { name: "Fusion Lite+", slug: "fusion-lite-plus", desc: "Stepped-caffeine pre-workout, EnXtra® + Infinergy®", price: "£31.99", priceNum: 31.99, image: fusionLitePlus, tag: "Best Seller" },
+  { name: "VASCUL8™", slug: "vascul8", desc: "Stim-free NO precursor with Pycnogenol® 100mg", price: "£39.99", priceNum: 39.99, image: vascul8, tag: null },
+  { name: "GLYCO8™", slug: "glyco8", desc: "Eight-pathway glucose-disposal stack", price: "£39.99", priceNum: 39.99, image: glyco8, tag: null },
+  { name: "GLYCOSHIFT™", slug: "glycoshift", desc: "Intra-workout Cluster Dextrin® with insulin co-factors", price: "£39.99", priceNum: 39.99, image: glycoshift, tag: null },
 ];
 
 const TrustedFormulas = () => {
