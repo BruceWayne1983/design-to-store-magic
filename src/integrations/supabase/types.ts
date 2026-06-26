@@ -35,6 +35,36 @@ export type Database = {
         }
         Relationships: []
       }
+      product_feedback: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          kind: string
+          name: string | null
+          payload: Json
+          source: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          kind: string
+          name?: string | null
+          payload?: Json
+          source?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          kind?: string
+          name?: string | null
+          payload?: Json
+          source?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
