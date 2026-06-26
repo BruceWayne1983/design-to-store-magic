@@ -69,7 +69,16 @@ const slides = [
     cta1: { text: "Shop GlycoShift", link: "/product/glycoshift" },
     cta2: { text: "Shop Metabolic", link: "/shop" },
   },
+  {
+    bg: heroAiCoach,
+    tagline: "Baseline AI Coach",
+    headline: "Your 24/7\nPerformance Coach",
+    desc: "AI-powered bodybuilding coaching trained on real protocols. Programming, nutrition and stack guidance — on demand.",
+    cta1: { text: "Try AI Coach", link: "/coach" },
+    cta2: { text: "Learn More", link: "/coach" },
+  },
 ];
+
 
 
 const HeroSection = () => {
