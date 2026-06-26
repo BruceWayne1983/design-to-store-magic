@@ -169,7 +169,7 @@ export const products: Record<string, ProductData> = {
     suggestedUse: "Mix 1 scoop (5g) with 300–400ml cold water. 20–30 minutes before exercise. Max 1 serving/day. Not for evening use.",
     supplementSummary: "Caffeine Anhydrous 200mg · Infinergy® 150mg · L-Tyrosine 1,500mg · NeuroPEA™ 250mg · EnXtra® 200mg · Zynamite® 150mg · MAX Catalyst™ 5mg",
     whyDifferentHeading: "Why Fusion Lite+ is different",
-    whyDifferentText: "Built on three trademarked nootropic actives — EnXtra®, NeuroPEA™, and Zynamite® — that no other single pre-workout on the UK market combines at full clinical doses. The dual-phase caffeine system (Caffeine Anhydrous 200mg + Infinergy® 150mg) provides immediate onset followed by a sustained tail — total caffeine ~310–315mg. Supplement Needs PRE Stim+ contains the same three nootropics but has no pump matrix and requires a separate £39.99 purchase. Fusion Lite+ delivers everything in one scoop at £31.99.",
+    whyDifferentText: "Built on three trademarked nootropic actives — EnXtra®, NeuroPEA™, and Zynamite® — combined at full clinical doses in a single scoop. The dual-phase caffeine system (Caffeine Anhydrous 200mg + Infinergy® 150mg) delivers immediate onset followed by a sustained tail — total caffeine ~310–315mg. Stim, focus and pump matrix in one formula at £31.99.",
     whyFeatures: [
       { title: "Triple Nootropic Stack", desc: "EnXtra® · NeuroPEA™ · Zynamite®" },
       { title: "Dual-Phase Caffeine", desc: "Anhydrous + Infinergy® — no crash" },
