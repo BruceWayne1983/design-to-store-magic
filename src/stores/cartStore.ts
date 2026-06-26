@@ -62,6 +62,17 @@ export const useCartStore = create<CartStore>()(
 
       subtotal: () => get().items.reduce((sum, item) => sum + item.price * item.quantity, 0),
 
+      multibuySavings: () =>
+        get().items.reduce((sum, item) => {
+          if (item.isSubscription) return sum;
+          return sum + lineSavings(item.price, item.quantity);
+        }, 0),
+
+      discountedSubtotal: () => {
+        const s = get();
+        return s.subtotal() - s.multibuySavings();
+      },
+
       addItem: async (item) => {
         const { items, cartId, clearCart } = get();
         const existingItem = items.find(i => i.variantId === item.variantId);
