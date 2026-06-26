@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronRight, Star } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
@@ -9,16 +9,53 @@ import type { ProductData } from "@/data/products";
 
 const gbp = (n: number) => `£${n.toFixed(2)}`;
 
-const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
+interface ProductHeroProps {
+  product: ProductData;
+  buyButtonRef?: React.RefObject<HTMLButtonElement>;
+  selectedSize?: string;
+  onSizeChange?: (size: string) => void;
+  selectedFlavor?: string;
+  onFlavorChange?: (flavor: string) => void;
+}
+
+const ProductHero = ({
+  product,
+  buyButtonRef,
+  selectedSize: externalSize,
+  onSizeChange,
+  selectedFlavor: externalFlavor,
+  onFlavorChange,
+}: ProductHeroProps) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("onetime");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
   const { addItem, isLoading, setCartOpen } = useCartStore();
 
-  const basePrice = parseFloat(product.price.replace(/[^0-9.]/g, ""));
+  const [internalSize, setInternalSize] = useState(product.sizes?.[0]?.name ?? "");
+  const [internalFlavor, setInternalFlavor] = useState(product.flavours?.[0]?.name ?? "");
+
+  const selectedSize = externalSize ?? internalSize;
+  const selectedFlavor = externalFlavor ?? internalFlavor;
+
+  const handleSizeChange = (size: string) => {
+    if (onSizeChange) onSizeChange(size);
+    else setInternalSize(size);
+  };
+
+  const handleFlavorChange = (flavor: string) => {
+    if (onFlavorChange) onFlavorChange(flavor);
+    else setInternalFlavor(flavor);
+  };
+
+  const selectedSizeData = product.sizes?.find((s) => s.name === selectedSize);
+  const currentPrice = selectedSizeData?.price || product.price;
+  const basePrice = parseFloat(currentPrice.replace(/[^0-9.]/g, ""));
   const subscribePrice = basePrice * (1 - SUBSCRIPTION_DISCOUNT);
   const isSubscribe = purchaseType === "subscribe";
+
+  const selectedVariantId = selectedSizeData?.variantId || VARIANT_MAP[product.slug];
+  const canAddToCart = !!selectedVariantId && !product.comingSoon;
 
   const isStaticDeckRender = (() => {
     if (typeof window === "undefined") return false;
@@ -28,12 +65,12 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
   })();
 
   const handleAddToCart = async () => {
-    const variantId = VARIANT_MAP[product.slug];
-    if (!variantId || !basePrice) return;
+    if (!selectedVariantId || !basePrice) return;
     const sellingPlanId = isSubscribe ? SELLING_PLAN_MAP[product.slug] : undefined;
+    const variantTitle = [selectedSize, selectedFlavor].filter(Boolean).join(" • ") || "Default Title";
     await addItem({
-      variantId,
-      variantTitle: isSubscribe ? "Subscribe & Save" : "Default Title",
+      variantId: selectedVariantId,
+      variantTitle,
       productTitle: product.name,
       productSlug: product.slug,
       productImage: product.images[0],
@@ -90,6 +127,62 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
             ))}
           </ul>
 
+          {product.flavours && product.flavours.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground">Flavour</span>
+                <span className="text-xs text-muted-foreground">{selectedFlavor}</span>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {product.flavours.map((f) => {
+                  const active = f.name === selectedFlavor;
+                  return (
+                    <button
+                      key={f.name}
+                      onClick={() => handleFlavorChange(f.name)}
+                      disabled={f.available === false}
+                      className={`relative aspect-square rounded-md border-2 bg-secondary flex items-center justify-center text-xs font-bold uppercase tracking-wider transition-colors ${active ? "border-primary text-foreground" : "border-border text-muted-foreground hover:border-primary/40"} ${f.available === false ? "opacity-60 cursor-not-allowed" : ""}`}
+                    >
+                      {f.image ? (
+                        <img src={f.image} alt={f.name} className="w-full h-full object-cover rounded" />
+                      ) : (
+                        <span>{f.name}</span>
+                      )}
+                      {f.available === false && (
+                        <span className="absolute bottom-1 right-1 text-[8px] font-bold uppercase bg-background/80 text-muted-foreground px-1 py-0.5 rounded">Soon</span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {product.sizes && product.sizes.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground">Size</span>
+                <span className="text-xs text-muted-foreground">{selectedSize}</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {product.sizes.map((s) => {
+                  const active = s.name === selectedSize;
+                  return (
+                    <button
+                      key={s.name}
+                      onClick={() => handleSizeChange(s.name)}
+                      className={`flex flex-col items-start gap-1 p-3 rounded-md border-2 text-left transition-colors ${active ? "border-primary bg-secondary" : "border-border hover:border-primary/40"}`}
+                    >
+                      <span className="text-sm font-bold text-foreground">{s.name}</span>
+                      {s.servings && <span className="text-xs text-muted-foreground">{s.servings}</span>}
+                      <span className="text-sm font-semibold text-foreground">{s.price}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {product.comingSoon ? (
             <>
               <div className="flex flex-wrap items-center gap-3">
@@ -110,10 +203,10 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
             <>
               <div className="flex flex-wrap items-baseline gap-3">
                 <span className="text-2xl font-black text-foreground">
-                  {isSubscribe ? gbp(subscribePrice) : product.price}
+                  {isSubscribe ? gbp(subscribePrice) : currentPrice}
                 </span>
                 {isSubscribe && (
-                  <span className="text-base text-muted-foreground line-through">{product.price}</span>
+                  <span className="text-base text-muted-foreground line-through">{currentPrice}</span>
                 )}
               </div>
 
@@ -124,7 +217,7 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
                     <input type="radio" name="purchase" checked={!isSubscribe} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
                     <span className="text-sm font-semibold text-foreground">One-time purchase</span>
                   </span>
-                  <span className="text-sm font-semibold text-foreground">{product.price}</span>
+                  <span className="text-sm font-semibold text-foreground">{currentPrice}</span>
                 </label>
                 <label className={`flex items-center justify-between gap-2 cursor-pointer p-4 border-t border-border transition-colors ${isSubscribe ? "bg-secondary" : ""}`}>
                   <span className="flex items-center gap-2">
@@ -146,11 +239,17 @@ const ProductHero = ({ product, buyButtonRef }: { product: ProductData; buyButto
                 whileHover={isStaticDeckRender ? undefined : { scale: 1.02 }}
                 whileTap={isStaticDeckRender ? undefined : { scale: 0.98 }}
                 onClick={handleAddToCart}
-                disabled={isLoading}
+                disabled={isLoading || !canAddToCart}
                 className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded disabled:opacity-50"
               >
                 {isLoading ? "Adding..." : isSubscribe ? "Subscribe & Save" : "Add to basket"}
               </motion.button>
+
+              {!selectedSizeData?.variantId && product.sizes && product.sizes.length > 1 && (
+                <p className="text-xs text-muted-foreground">
+                  {selectedSize} checkout is coming soon. Select {product.sizes.find((s) => s.variantId)?.name || "300g"} to purchase now.
+                </p>
+              )}
             </>
           )}
 

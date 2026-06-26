@@ -8,11 +8,19 @@ import type { ProductData } from "@/data/products";
 interface StickyAddToCartProps {
   product: ProductData;
   buyButtonRef: React.RefObject<HTMLButtonElement>;
+  selectedSize?: string;
+  selectedFlavor?: string;
 }
 
-const StickyAddToCart = ({ product, buyButtonRef }: StickyAddToCartProps) => {
+const StickyAddToCart = ({ product, buyButtonRef, selectedSize, selectedFlavor }: StickyAddToCartProps) => {
   const [visible, setVisible] = useState(false);
   const { addItem, isLoading, setCartOpen } = useCartStore();
+
+  const selectedSizeData = product.sizes?.find((s) => s.name === selectedSize) || product.sizes?.[0];
+  const currentPrice = selectedSizeData?.price || product.price;
+  const priceNum = parseFloat(currentPrice.replace(/[^0-9.]/g, ""));
+  const selectedVariantId = selectedSizeData?.variantId || VARIANT_MAP[product.slug];
+  const canAddToCart = !!selectedVariantId && !product.comingSoon;
 
   useEffect(() => {
     const el = buyButtonRef.current;
@@ -26,12 +34,11 @@ const StickyAddToCart = ({ product, buyButtonRef }: StickyAddToCartProps) => {
   }, [buyButtonRef]);
 
   const handleAddToCart = async () => {
-    const variantId = VARIANT_MAP[product.slug];
-    if (!variantId) return;
-    const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ""));
+    if (!selectedVariantId) return;
+    const variantTitle = [selectedSize, selectedFlavor].filter(Boolean).join(" • ") || "Default Title";
     await addItem({
-      variantId,
-      variantTitle: "Default Title",
+      variantId: selectedVariantId,
+      variantTitle,
       productTitle: product.name,
       productSlug: product.slug,
       productImage: product.images[0],
@@ -42,6 +49,8 @@ const StickyAddToCart = ({ product, buyButtonRef }: StickyAddToCartProps) => {
     toast.success(`${product.name} added to cart`);
     setCartOpen(true);
   };
+
+  const detailLabel = [selectedSize, selectedFlavor].filter(Boolean).join(" • ");
 
   return (
     <AnimatePresence>
@@ -58,12 +67,15 @@ const StickyAddToCart = ({ product, buyButtonRef }: StickyAddToCartProps) => {
               <img src={product.images[0]} alt={product.name} className="w-10 h-10 object-contain flex-shrink-0" />
               <div className="min-w-0">
                 <h4 className="text-sm font-bold text-foreground truncate">{product.name}</h4>
-                <span className="text-sm text-muted-foreground">{product.comingSoon ? "Coming Soon" : product.price}</span>
+                <span className="text-sm text-muted-foreground">
+                  {product.comingSoon ? "Coming Soon" : currentPrice}
+                  {detailLabel && <span className="ml-1.5 text-[10px] uppercase tracking-wider">({detailLabel})</span>}
+                </span>
               </div>
             </div>
             <button
               onClick={handleAddToCart}
-              disabled={isLoading || product.comingSoon}
+              disabled={isLoading || !canAddToCart}
               className="px-6 py-2.5 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity rounded flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {product.comingSoon ? "Coming Soon" : isLoading ? "Adding..." : "Add to basket"}

@@ -10,23 +10,45 @@ import type { ProductData } from "@/data/products";
 
 const gbp = (n: number) => `£${n.toFixed(2)}`;
 
-const ProductHeroV2 = ({ product, buyButtonRef }: { product: ProductData; buyButtonRef?: React.RefObject<HTMLButtonElement> }) => {
+interface ProductHeroV2Props {
+  product: ProductData;
+  buyButtonRef?: React.RefObject<HTMLButtonElement>;
+  selectedSize?: string;
+  onSizeChange?: (size: string) => void;
+  selectedFlavor?: string;
+  onFlavorChange?: (flavor: string) => void;
+}
+
+const ProductHeroV2 = ({
+  product,
+  buyButtonRef,
+  selectedSize: externalSize,
+  onSizeChange,
+  selectedFlavor: externalFlavor,
+  onFlavorChange,
+}: ProductHeroV2Props) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("onetime");
   const [selectedFlavour, setSelectedFlavour] = useState(product.flavours?.[0]?.name ?? "");
   const { addItem, isLoading, setCartOpen } = useCartStore();
 
-  const basePrice = parseFloat(product.price.replace(/[^0-9.]/g, ""));
+  const activeFlavour = externalFlavor ?? selectedFlavour;
+
+  const selectedSizeData = product.sizes?.find((s) => s.name === (externalSize ?? product.sizes?.[0]?.name ?? ""));
+  const currentPrice = selectedSizeData?.price || product.price;
+  const basePrice = parseFloat(currentPrice.replace(/[^0-9.]/g, ""));
   const subscribePrice = basePrice * (1 - SUBSCRIPTION_DISCOUNT);
   const isSubscribe = purchaseType === "subscribe";
 
+  const selectedVariantId = selectedSizeData?.variantId || VARIANT_MAP[product.slug];
+  const canAddToCart = !!selectedVariantId && !product.comingSoon;
+
   const handleAddToCart = async () => {
-    const variantId = VARIANT_MAP[product.slug];
-    if (!variantId || !basePrice) return;
+    if (!selectedVariantId || !basePrice) return;
     const sellingPlanId = isSubscribe ? SELLING_PLAN_MAP[product.slug] : undefined;
     await addItem({
-      variantId,
-      variantTitle: isSubscribe ? "Subscribe & Save" : "Default Title",
+      variantId: selectedVariantId,
+      variantTitle: activeFlavour ? activeFlavour : "Default Title",
       productTitle: product.name,
       productSlug: product.slug,
       productImage: product.images[0],
@@ -96,21 +118,50 @@ const ProductHeroV2 = ({ product, buyButtonRef }: { product: ProductData; buyBut
             </div>
           )}
 
+          {product.sizes && product.sizes.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground">Size</span>
+                <span className="text-xs text-muted-foreground">{externalSize ?? product.sizes[0]?.name}</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {product.sizes.map((s) => {
+                  const active = s.name === (externalSize ?? product.sizes?.[0]?.name ?? "");
+                  return (
+                    <button
+                      key={s.name}
+                      onClick={() => onSizeChange?.(s.name)}
+                      className={`flex flex-col items-start gap-1 p-3 rounded-md border-2 text-left transition-colors ${active ? "border-primary bg-secondary" : "border-border hover:border-primary/40"}`}
+                    >
+                      <span className="text-sm font-bold text-foreground">{s.name}</span>
+                      {s.servings && <span className="text-xs text-muted-foreground">{s.servings}</span>}
+                      <span className="text-sm font-semibold text-foreground">{s.price}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Flavour selector */}
           {product.flavours && product.flavours.length > 0 && (
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground">Flavour</span>
-                <span className="text-xs text-muted-foreground">{selectedFlavour}</span>
+                <span className="text-xs text-muted-foreground">{activeFlavour}</span>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 {product.flavours.map((f) => {
-                  const active = f.name === selectedFlavour;
+                  const active = f.name === activeFlavour;
                   return (
                     <button
                       key={f.name}
-                      onClick={() => setSelectedFlavour(f.name)}
-                      className={`relative aspect-square rounded-md border-2 bg-secondary flex items-center justify-center text-xs font-bold uppercase tracking-wider transition-colors ${active ? "border-primary text-foreground" : "border-border text-muted-foreground hover:border-primary/40"}`}
+                      onClick={() => {
+                        if (onFlavorChange) onFlavorChange(f.name);
+                        else setSelectedFlavour(f.name);
+                      }}
+                      disabled={f.available === false}
+                      className={`relative aspect-square rounded-md border-2 bg-secondary flex items-center justify-center text-xs font-bold uppercase tracking-wider transition-colors ${active ? "border-primary text-foreground" : "border-border text-muted-foreground hover:border-primary/40"} ${f.available === false ? "opacity-60 cursor-not-allowed" : ""}`}
                     >
                       {f.image ? (
                         <img src={f.image} alt={f.name} className="w-full h-full object-cover rounded" />
@@ -140,9 +191,9 @@ const ProductHeroV2 = ({ product, buyButtonRef }: { product: ProductData; buyBut
             <>
               <div className="flex flex-wrap items-baseline gap-3">
                 <span className="text-2xl font-black text-foreground">
-                  {isSubscribe ? gbp(subscribePrice) : product.price}
+                  {isSubscribe ? gbp(subscribePrice) : currentPrice}
                 </span>
-                {isSubscribe && <span className="text-base text-muted-foreground line-through">{product.price}</span>}
+                {isSubscribe && <span className="text-base text-muted-foreground line-through">{currentPrice}</span>}
               </div>
 
               <div className="border border-border rounded-lg overflow-hidden">
@@ -151,7 +202,7 @@ const ProductHeroV2 = ({ product, buyButtonRef }: { product: ProductData; buyBut
                     <input type="radio" name="purchase-v2" checked={!isSubscribe} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
                     <span className="text-sm font-semibold text-foreground">One-time purchase</span>
                   </span>
-                  <span className="text-sm font-semibold text-foreground">{product.price}</span>
+                  <span className="text-sm font-semibold text-foreground">{currentPrice}</span>
                 </label>
                 <label className={`flex items-center justify-between gap-2 cursor-pointer p-4 border-t border-border transition-colors ${isSubscribe ? "bg-secondary" : ""}`}>
                   <span className="flex items-center gap-2">
@@ -171,11 +222,17 @@ const ProductHeroV2 = ({ product, buyButtonRef }: { product: ProductData; buyBut
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleAddToCart}
-                disabled={isLoading}
+                disabled={isLoading || !canAddToCart}
                 className="w-full py-4 bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-opacity rounded disabled:opacity-50"
               >
                 {isLoading ? "Adding..." : isSubscribe ? "Subscribe & Save" : "Add to basket"}
               </motion.button>
+
+              {!selectedSizeData?.variantId && product.sizes && product.sizes.length > 1 && (
+                <p className="text-xs text-muted-foreground">
+                  {externalSize ?? selectedSizeData?.name} checkout is coming soon. Select {product.sizes.find((s) => s.variantId)?.name || "300g"} to purchase now.
+                </p>
+              )}
             </>
           )}
 
