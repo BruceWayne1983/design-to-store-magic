@@ -16,6 +16,8 @@ import RelatedStacks from "@/components/product/RelatedStacks";
 import ProductReviews from "@/components/product/ProductReviews";
 import ProductFAQ from "@/components/product/ProductFAQ";
 import StickyAddToCart from "@/components/product/StickyAddToCart";
+import HowItWorks from "@/components/product/HowItWorks";
+import ScienceDossierSignup from "@/components/product/ScienceDossierSignup";
 import { getProduct } from "@/data/products";
 
 const ProductDetail = () => {
@@ -55,15 +57,18 @@ const ProductDetail = () => {
 
       <TrustStrip product={product} />
       <WhyDifferent product={product} />
+      <HowItWorks product={product} />
       <IngredientBreakdown product={product} />
       <ExpertReview product={product} />
       <SupplementFacts product={product} />
       <ExpectationsTimeline product={product} />
+      <ScienceDossierSignup product={product} />
       <ProductReviews productSlug={product.slug} productName={product.name} />
       <ProductFAQ product={product} />
       <RelatedStacks product={product} />
 
       <section className="w-full bg-background px-4 md:px-8 lg:px-16 pb-12 pt-8">
+
         <div className="max-w-[1280px] mx-auto border-t border-border pt-6">
           <p className="text-xs text-muted-foreground leading-relaxed">
             Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle.
