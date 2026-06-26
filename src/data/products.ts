@@ -378,6 +378,9 @@ export const products: Record<string, ProductData> = {
     savings: { "1": "TBC", "4": "TBC", "6": "TBC" },
     benefits: ["Accelerates Glucose Clearance", "Enhances Carb Partitioning", "Supports Superior Muscle Fullness"],
     images: [glyco8Hero, glyco8Capsules, glyco8Label, glyco8],
+    ingredientLogos: [
+      { image: glucovantageLogo, name: "GlucoVantage®", forIngredient: "Dihydroberberine (DHB)", caption: "Patented dihydroberberine — 5× more bioavailable than standard berberine." },
+    ],
     suggestedUse: "Take 2 capsules with your highest carbohydrate meal of the day. For enhanced results, take an additional 2 capsules with a second high-carb meal. Do not exceed 4 capsules per day.",
     supplementSummary: "Dihydroberberine 400mg · Na-R-Alpha Lipoic Acid 300mg · Cinnamon Bark Extract 300mg · Banaba Extract 330mg · Bitter Melon Extract 300mg · Chromium 300mcg · VanaBerry 2mg",
     whyDifferentHeading: "Why GLYCO8™ is different",
