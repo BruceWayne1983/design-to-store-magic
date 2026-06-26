@@ -31,6 +31,8 @@ const Founders = lazy(() => import("./pages/Founders.tsx"));
 const AppLanding = lazy(() => import("./pages/AppLanding.tsx"));
 const SupplementFeedback = lazy(() => import("./pages/SupplementFeedback.tsx"));
 const Insights = lazy(() => import("./pages/Insights.tsx"));
+const Auth = lazy(() => import("./pages/Auth.tsx"));
+const Coach = lazy(() => import("./pages/Coach.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -70,6 +72,9 @@ function AppContent() {
           <Route path="/supplement-feedback" element={<SupplementFeedback />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/coming-soon" element={<PreLaunch />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/coach" element={<Coach />} />
+          <Route path="/coach/:threadId" element={<Coach />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
