@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, Star } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
