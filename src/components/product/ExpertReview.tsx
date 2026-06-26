@@ -1,5 +1,5 @@
 import { ScrollReveal } from "@/components/ui/scroll-animations";
-import { ShieldCheck, Quote, User } from "lucide-react";
+import { ShieldCheck, Quote } from "lucide-react";
 import type { ProductData } from "@/data/products";
 import placeholderAvatar from "@/assets/placeholder-avatar.png";
 
