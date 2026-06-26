@@ -244,7 +244,7 @@ export const products: Record<string, ProductData> = {
     suggestedUse: "Mix 1 scoop (12g) with 400–500ml cold water. 20–30 minutes before exercise. Can be stacked with Fusion Lite+.",
     supplementSummary: "L-Citrulline 6,000mg · HydroPrime® 2,500mg · Betaine Anhydrous 1,500mg · CellFlo6™ 300mg · Pycnogenol® 100mg · AstraGin® 50mg · MAX Catalyst™ 4mg",
     whyDifferentHeading: "Why VASCUL8™ is different",
-    whyDifferentText: "6,000mg pure L-Citrulline — not Citrulline Malate which dilutes active dose with malic acid. HydroPrime® at 2,500mg with 65% glycerol yield — the highest-purity glycerol available. CellFlo6™ for endothelial function. Pycnogenol® pine bark for nitric oxide via a completely different pathway to citrulline. AstraGin® at the clinically validated 50mg dose building cumulative benefits over weeks. Strom VascuMAX PRO uses Citrulline Malate (lower yield), generic glycerol, and no trademarked absorption enhancer.",
+    whyDifferentText: "6,000mg pure L-Citrulline — not Citrulline Malate which dilutes active dose with malic acid. HydroPrime® at 2,500mg with 65% glycerol yield — the highest-purity glycerol available. CellFlo6™ for endothelial function. Pycnogenol® pine bark supports nitric oxide via a complementary pathway to citrulline. AstraGin® at the clinically validated 50mg dose builds cumulative benefits over weeks.",
     whyFeatures: [
       { title: "Pure L-Citrulline 6g", desc: "Full clinical dose — not diluted Citrulline Malate" },
       { title: "HydroPrime® 65% Glycerol", desc: "Highest-purity glycerol for hyperhydration" },
@@ -311,13 +311,13 @@ export const products: Record<string, ProductData> = {
       "Full electrolyte spectrum for training hydration",
       "Sustained energy without spike-and-crash",
       "Glucose management via OpunTia® prickly pear",
-      "No UK competitor combines trademarked carb sources at disclosed doses",
+      "Trademarked carb sources at fully disclosed doses",
     ],
     images: [glycoshiftHero, glycoshift, glycoshiftHero, glycoshift],
     suggestedUse: "Mix 1 scoop (45g) with 500–750ml cold water. Sip throughout training. Max 2 servings/day.",
     supplementSummary: "Cluster Dextrin® 15g · Palatinose™ 10g · Maltodextrin DE10-12 5g · Fructose 5g · Taurine 1g · Coconut Water 1g · Pink Himalayan Salt 800mg · OpunTia® 250mg · Potassium 200mg · Magnesium 70mg · Calcium 70mg",
     whyDifferentHeading: "Why GLYCOSHIFT™ is different",
-    whyDifferentText: "Strom CarbMAX is 83% Palatinose with trace electrolytes. Conteh Carb Drive uses generic carb sources. GLYCOSHIFT™ is built around Cluster Dextrin®, Palatinose™, and Maltodextrin DE10-12 — each chosen for a distinct absorption speed and metabolic pathway. A structured energy delivery system covering immediate, sustained, and slow-release windows. Plus a full electrolyte stack at real doses (Pink Himalayan Salt 800mg, Potassium, Magnesium, Calcium, Coconut Water) and OpunTia® for glucose disposal. No UK carb product combines multiple trademarked carb sources at fully disclosed doses.",
+    whyDifferentText: "GLYCOSHIFT™ is built around Cluster Dextrin®, Palatinose™, and Maltodextrin DE10-12 — each chosen for a distinct absorption speed and metabolic pathway. A structured energy delivery system covering immediate, sustained, and slow-release windows. Plus a full electrolyte stack at real doses (Pink Himalayan Salt 800mg, Potassium, Magnesium, Calcium, Coconut Water) and OpunTia® for glucose disposal.",
     whyFeatures: [
       { title: "Triple-Source Carb Matrix", desc: "Cluster Dextrin® · Palatinose™ · Maltodextrin — three speeds" },
       { title: "Full Electrolyte Stack", desc: "Real doses — Salt 800mg, K, Mg, Ca, Coconut Water" },
@@ -330,7 +330,7 @@ export const products: Record<string, ProductData> = {
     ],
     ingredients: [
       { title: "Cluster Dextrin® (HBCD)", tagline: "Key ingredient", dosage: "15g", desc: "Gold standard intra-workout carb. High molecular weight, low osmolality, rapid gastric emptying, no bloating. TM: Glico Nutrition.", hasImage: false },
-      { title: "Palatinose™ (Isomaltulose)", dosage: "10g", desc: "Low-GI, sustained-release disaccharide that promotes fat oxidation alongside glucose utilisation. Strom uses only this; we use it as one of three. TM: BENEO.", hasImage: false },
+      { title: "Palatinose™ (Isomaltulose)", dosage: "10g", desc: "Low-GI, sustained-release disaccharide that promotes fat oxidation alongside glucose utilisation. Included as one of three staged carbohydrate sources. TM: BENEO.", hasImage: false },
       { title: "Maltodextrin DE10-12", dosage: "5g", desc: "Fast-acting glucose polymer for immediate glycogen restoration at the start of training.", hasImage: false },
       { title: "Fructose Crystalline", dosage: "5g", desc: "Metabolised via liver through GLUT5 transporter. Replenishes liver glycogen — a separate pathway to muscle glycogen.", hasImage: false },
       { title: "Taurine", dosage: "1g", desc: "Cell hydration, antioxidant, and endurance support. Enhances cellular water balance during training.", hasImage: false },
@@ -372,7 +372,7 @@ export const products: Record<string, ProductData> = {
     faqs: [
       { q: "Why three carb sources?", a: "Different speeds and pathways. Fast (Maltodextrin), sustained (Cluster Dextrin®), slow/low-GI (Palatinose™). Consistent energy start to finish." },
       { q: "What is Cluster Dextrin®?", a: "Trademarked HBCD by Glico Nutrition (Japan). High molecular weight, low osmolality — passes through stomach fast with no bloating. Gold standard intra-workout carb." },
-      { q: "How does this compare to Strom CarbMAX?", a: "CarbMAX is ~83% Palatinose with trace electrolytes (Calcium 2.96mg vs our 70mg). GLYCOSHIFT™ has three carb sources including Cluster Dextrin, full electrolytes at real doses, plus OpunTia® glucose disposal." },
+      { q: "What makes this formula different?", a: "GLYCOSHIFT™ combines three carb sources including Cluster Dextrin®, full electrolytes at meaningful doses, plus OpunTia® glucose disposal support." },
       { q: "Can I use on non-training days?", a: "Yes — with high-carb meals as a carb management tool, especially paired with GLYCO8™." },
       { q: "Contains allergens?", a: "Contains coconut (tree nut). Made in a facility handling milk, egg, soya, nuts, wheat, gluten." },
     ],
@@ -517,9 +517,9 @@ export const products: Record<string, ProductData> = {
     suggestedUse: "Mix 1 scoop (7g) with 500ml cold water. During exercise or throughout the day. Max 2 servings/day. Best served chilled.",
     supplementSummary: "Sodium 500mg · Potassium 200mg · Magnesium 56mg · Calcium 48mg · Coconut Water 500mg · Cocomineral™ 250mg · MAX Catalyst™ TBC",
     whyDifferentHeading: "Why ELECTRO FLOW is different",
-    whyDifferentText: "Most electrolyte products are flavoured water with mineral dusting. Electro Flow delivers real doses. Sodium at 500mg — not the 50–100mg token found in hydration tablets. Potassium at 200mg (10% NRV). Magnesium and Calcium in bioavailable citrate forms. Plus Cocomineral™ concentrated coconut water minerals. No direct Strom equivalent. Better value than Conteh Hydra Flow (£29.99) with a more comprehensive formula at £27.99.",
+    whyDifferentText: "Electro Flow is built around meaningful electrolyte dosing for training and daily hydration. Sodium at 500mg supports fluid retention, Potassium at 200mg contributes to muscle and nerve function, and Magnesium plus Calcium are supplied in bioavailable citrate forms. Cocomineral™ concentrated coconut water minerals add trace-mineral depth for a complete, no-sugar hydration formula.",
     whyFeatures: [
-      { title: "Real Sodium Dose — 500mg", desc: "What your body actually needs, not token amounts" },
+      { title: "Real Sodium Dose — 500mg", desc: "Meaningful sodium support for training hydration" },
       { title: "Cocomineral™ Complex", desc: "Concentrated coconut water minerals for trace depth" },
       { title: "Bioavailable Citrate Forms", desc: "Magnesium & Calcium as citrate — absorbs without food" },
     ],
@@ -529,7 +529,7 @@ export const products: Record<string, ProductData> = {
       { tagline: "Step 3 — Maintain Fluid Balance", title: "Water where your body needs it", desc: "Sodium drives fluid retention. Potassium maintains intracellular balance. Magnesium and Calcium support muscle contraction/relaxation. Together they keep water where your body needs it." },
     ],
     ingredients: [
-      { title: "Sodium (from NaCl)", tagline: "Key ingredient", dosage: "500mg", desc: "Most important athletic electrolyte. Meaningful dose vs token amounts in competitors. Drives fluid retention and prevents hyponatraemia during intense training.", hasImage: false },
+      { title: "Sodium (from NaCl)", tagline: "Key ingredient", dosage: "500mg", desc: "The primary athletic electrolyte for fluid retention and hydration support during intense training.", hasImage: false },
       { title: "Potassium (from Potassium Citrate)", dosage: "200mg (10% NRV)", desc: "Essential for muscle contraction, nerve transmission, and intracellular fluid balance. Citrate form for optimal absorption.", hasImage: false },
       { title: "Magnesium (from Magnesium Citrate)", dosage: "56mg (15% NRV)", desc: "Involved in 300+ enzymatic reactions. Citrate form provides significantly better bioavailability than magnesium oxide.", hasImage: false },
       { title: "Calcium (from Calcium Citrate)", dosage: "48mg (6% NRV)", desc: "Supports muscle contraction and neuromuscular signalling. Citrate form absorbs without food — unlike carbonate.", hasImage: false },
@@ -538,9 +538,9 @@ export const products: Record<string, ProductData> = {
       { title: "MAX Catalyst™", dosage: "TBC", desc: "Proprietary absorption amplifier. TM: Protein Partners.", hasImage: false },
     ],
     mechanisms: [
-      { step: "01", image: mechanismGlycogenReplenish, title: "Electrolyte Replenishment", subtitle: "Sodium · Potassium · Magnesium · Calcium", desc: "All four major electrolytes at doses matching actual sweat losses — not the token amounts found in hydration tablets.", stats: [{ value: "500mg", label: "Sodium dose" }, { value: "4×", label: "Major electrolytes" }] },
-      { step: "02", image: mechanismGlycogen, title: "Trace Mineral Depth", subtitle: "Coconut Water · Cocomineral™", desc: "Natural coconut water minerals provide broad-spectrum trace elements beyond targeted electrolyte compounds.", stats: [{ value: "500mg", label: "Coconut Water Powder" }, { value: "250mg", label: "Cocomineral™" }] },
-      { step: "03", image: mechanismAmpkPathway, title: "Fluid Balance", subtitle: "Citrate mineral forms", desc: "Bioavailable citrate forms of magnesium and calcium absorb efficiently without food. Sodium drives retention, potassium maintains intracellular balance.", stats: [{ value: "15%", label: "NRV Magnesium" }, { value: "10%", label: "NRV Potassium" }] },
+      { step: "01", image: mechanismElectrolyteMinerals, title: "Electrolyte Replenishment", subtitle: "Sodium · Potassium · Magnesium · Calcium", desc: "A full mineral spectrum supports fluid retention, muscle contraction, nerve transmission, and hydration during hard training.", stats: [{ value: "500mg", label: "Sodium dose" }, { value: "4×", label: "Major electrolytes" }] },
+      { step: "02", image: mechanismElectrolyteMinerals, title: "Trace Mineral Depth", subtitle: "Coconut Water · Cocomineral™", desc: "Natural coconut water minerals provide broad-spectrum trace elements beyond targeted electrolyte compounds.", stats: [{ value: "500mg", label: "Coconut Water Powder" }, { value: "250mg", label: "Cocomineral™" }] },
+      { step: "03", image: mechanismCellHydration, title: "Fluid Balance", subtitle: "Citrate mineral forms", desc: "Bioavailable citrate forms of magnesium and calcium absorb efficiently without food. Sodium supports retention while potassium helps maintain intracellular balance.", stats: [{ value: "15%", label: "NRV Magnesium" }, { value: "10%", label: "NRV Potassium" }] },
     ],
     supplementRows: [
       { ingredient: "Sodium", spec: "(from NaCl)", dose: "500 mg", purpose: "Primary Athletic Electrolyte", flag: "" },
@@ -552,11 +552,11 @@ export const products: Record<string, ProductData> = {
       { ingredient: "MAX Catalyst™", spec: "", dose: "TBC", purpose: "Absorption Amplifier", flag: "MAX Catalyst™" },
     ],
     clinicalMechanisms: [
-      { title: "Real-Dose Electrolyte System", subtitle: "Sodium 500mg + Full Mineral Spectrum", image: mechanismGlycogenReplenish, badges: [{ dose: "500 MG", name: "Sodium" }, { dose: "200 MG", name: "Potassium" }], checks: ["Meaningful Doses Matching Actual Sweat Losses", "Bioavailable Citrate Mineral Forms"] },
-      { title: "Coconut Water Mineral Complex", subtitle: "Cocomineral™ + Coconut Water Powder", image: mechanismGlycogen, badges: [{ dose: "500 MG", name: "Coconut Water" }, { dose: "250 MG", name: "Cocomineral™" }], checks: ["Broad-Spectrum Trace Minerals", "Natural Electrolyte Ratios Mirroring Sweat"] },
+      { title: "Real-Dose Electrolyte System", subtitle: "Sodium 500mg + Full Mineral Spectrum", image: mechanismElectrolyteMinerals, badges: [{ dose: "500 MG", name: "Sodium" }, { dose: "200 MG", name: "Potassium" }], checks: ["Meaningful Electrolyte Dosing", "Bioavailable Citrate Mineral Forms"] },
+      { title: "Coconut Water Mineral Complex", subtitle: "Cocomineral™ + Coconut Water Powder", image: mechanismElectrolyteMinerals, badges: [{ dose: "500 MG", name: "Coconut Water" }, { dose: "250 MG", name: "Cocomineral™" }], checks: ["Broad-Spectrum Trace Minerals", "Natural Electrolyte Ratios"] },
     ],
     testimonials: [
-      { name: "Mike T.", role: "Marathon Runner", quote: "Electro Flow keeps me hydrated through 20+ mile runs. The sodium dose is actually real — not the token amounts in hydration tablets." },
+      { name: "Mike T.", role: "Marathon Runner", quote: "Electro Flow keeps me hydrated through 20+ mile runs. The sodium dose feels properly built for long sessions." },
       { name: "Sophie R.", role: "CrossFit Athlete", quote: "I drink this throughout the day and my training performance has noticeably improved. No more mid-session cramps." },
       { name: "James H.", role: "PT & Coach", quote: "Finally an electrolyte product with real doses. I recommend this to every client — training days and rest days." },
     ],
@@ -654,13 +654,13 @@ export const products: Record<string, ProductData> = {
       { title: "Water Balance Complex", tagline: "Key ingredient", dosage: "Clinical dose", desc: "A comprehensive blend of electrolytes and water-balance minerals designed to optimise cellular hydration. Full ingredient breakdown coming soon.", hasImage: false },
     ],
     mechanisms: [
-      { step: "01", image: mechanismGlycogenReplenish, title: "Cellular Hydration", subtitle: "Water Balance Complex", desc: "Supports optimal water distribution between intracellular and extracellular compartments for proper cellular hydration.", stats: [{ value: "90", label: "Capsules per tub" }, { value: "30", label: "Servings" }] },
+      { step: "01", image: mechanismCellHydration, title: "Cellular Hydration", subtitle: "Water Balance Complex", desc: "Supports optimal water distribution between intracellular and extracellular compartments for proper cellular hydration.", stats: [{ value: "90", label: "Capsules per tub" }, { value: "30", label: "Servings" }] },
     ],
     supplementRows: [
       { ingredient: "Full formula", spec: "", dose: "TBC", purpose: "Water Balance & Electrolyte Support", flag: "" },
     ],
     clinicalMechanisms: [
-      { title: "Cellular Hydration System", subtitle: "Capsule-based water balance support", image: mechanismGlycogenReplenish, badges: [{ dose: "TBC", name: "Hydration Complex" }], checks: ["Optimised Cellular Water Balance", "Convenient Capsule Format"] },
+      { title: "Cellular Hydration System", subtitle: "Capsule-based water balance support", image: mechanismCellHydration, badges: [{ dose: "TBC", name: "Hydration Complex" }], checks: ["Optimised Cellular Water Balance", "Convenient Capsule Format"] },
     ],
     testimonials: [
       { name: "Amy L.", role: "Fitness Enthusiast", quote: "H2O GO is so convenient — I just pop the capsules before training and I stay properly hydrated throughout." },
