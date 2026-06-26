@@ -29,6 +29,15 @@ const ProductDetail = () => {
   const buyButtonRef = useRef<HTMLButtonElement>(null);
   const showToggle = slug === "electro-flow";
   const [useV2, setUseV2] = useState(true);
+  const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0]?.name ?? "");
+  const [selectedFlavor, setSelectedFlavor] = useState(product?.flavours?.[0]?.name ?? "");
+
+  useEffect(() => {
+    if (product) {
+      setSelectedSize(product.sizes?.[0]?.name ?? "");
+      setSelectedFlavor(product.flavours?.[0]?.name ?? "");
+    }
+  }, [product?.slug]);
 
   useEffect(() => {
     if (!showToggle) return;
@@ -45,6 +54,7 @@ const ProductDetail = () => {
   if (!product) return <Navigate to="/shop" replace />;
 
   const Hero = showToggle && useV2 ? ProductHeroV2 : ProductHero;
+
 
   return (
     <div className="flex flex-col items-start w-full">
