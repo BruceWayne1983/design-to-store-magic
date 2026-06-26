@@ -244,7 +244,7 @@ export const products: Record<string, ProductData> = {
     suggestedUse: "Mix 1 scoop (12g) with 400–500ml cold water. 20–30 minutes before exercise. Can be stacked with Fusion Lite+.",
     supplementSummary: "L-Citrulline 6,000mg · HydroPrime® 2,500mg · Betaine Anhydrous 1,500mg · CellFlo6™ 300mg · Pycnogenol® 100mg · AstraGin® 50mg · MAX Catalyst™ 4mg",
     whyDifferentHeading: "Why VASCUL8™ is different",
-    whyDifferentText: "6,000mg pure L-Citrulline — not Citrulline Malate which dilutes active dose with malic acid. HydroPrime® at 2,500mg with 65% glycerol yield — the highest-purity glycerol available. CellFlo6™ for endothelial function. Pycnogenol® pine bark for nitric oxide via a completely different pathway to citrulline. AstraGin® at the clinically validated 50mg dose building cumulative benefits over weeks. Strom VascuMAX PRO uses Citrulline Malate (lower yield), generic glycerol, and no trademarked absorption enhancer.",
+    whyDifferentText: "6,000mg pure L-Citrulline — not Citrulline Malate which dilutes active dose with malic acid. HydroPrime® at 2,500mg with 65% glycerol yield — the highest-purity glycerol available. CellFlo6™ for endothelial function. Pycnogenol® pine bark supports nitric oxide via a complementary pathway to citrulline. AstraGin® at the clinically validated 50mg dose builds cumulative benefits over weeks.",
     whyFeatures: [
       { title: "Pure L-Citrulline 6g", desc: "Full clinical dose — not diluted Citrulline Malate" },
       { title: "HydroPrime® 65% Glycerol", desc: "Highest-purity glycerol for hyperhydration" },
