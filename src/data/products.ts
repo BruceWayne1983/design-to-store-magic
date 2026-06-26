@@ -121,6 +121,12 @@ export interface ProductData {
   // Trademarked ingredient logos (optional)
   ingredientLogos?: { image: string; name: string; caption?: string; forIngredient?: string }[];
 
+  // V2 PDP optional fields
+  shortDescription?: string;
+  outcomeBullets?: string[];
+  flavours?: { name: string; image?: string; available?: boolean }[];
+  expectations?: { window: string; headline: string; bullets: string[]; summary: string }[];
+
   // Merchandising / availability
   comingSoon?: boolean;
   badge?: "Best Seller" | "New";
