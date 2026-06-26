@@ -53,10 +53,12 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/home" element={<Index />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/bundles" element={<Bundles />} />
-          <Route path="/product/:slug" element={<ProductDetail />} />
-          <Route path="/category/performance" element={<PerformanceCategory />} />
+          <Route element={<PasswordGate />}>
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/bundles" element={<Bundles />} />
+            <Route path="/product/:slug" element={<ProductDetail />} />
+            <Route path="/category/performance" element={<PerformanceCategory />} />
+          </Route>
           <Route path="/deck" element={<Deck />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsConditions />} />
