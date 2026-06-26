@@ -82,7 +82,14 @@ const ProductDetail = () => {
         </div>
       )}
 
-      <Hero product={product} buyButtonRef={buyButtonRef} />
+      <Hero
+        product={product}
+        buyButtonRef={buyButtonRef}
+        selectedSize={selectedSize}
+        onSizeChange={setSelectedSize}
+        selectedFlavor={selectedFlavor}
+        onFlavorChange={setSelectedFlavor}
+      />
 
       {showToggle && useV2 && <TrustStrip product={product} />}
 
@@ -111,7 +118,13 @@ const ProductDetail = () => {
         </div>
       </section>
       <Footer />
-      <StickyAddToCart product={product} buyButtonRef={buyButtonRef} />
+      <StickyAddToCart
+        product={product}
+        buyButtonRef={buyButtonRef}
+        selectedSize={selectedSize}
+        selectedFlavor={selectedFlavor}
+      />
+
     </div>
   );
 };
