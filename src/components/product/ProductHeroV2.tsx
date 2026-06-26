@@ -234,6 +234,7 @@ const ProductHeroV2 = ({
                   {externalSize ?? selectedSizeData?.name} checkout is coming soon. Select {product.sizes.find((s) => s.variantId)?.name || "300g"} to purchase now.
                 </p>
               )}
+              {!isSubscribe && basePrice > 0 && <MultibuyTiers unitPrice={basePrice} />}
             </>
           )}
 
