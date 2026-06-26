@@ -1,13 +1,16 @@
 import { X, Plus, Minus, ShoppingBag, Loader2, ExternalLink, Trash2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { FREE_SHIPPING_THRESHOLD } from "@/data/brand";
+import { discountForQty } from "@/lib/multibuy";
 
 const CartDrawer = () => {
-  const { items, isLoading, isSyncing, cartOpen, setCartOpen, updateQuantity, removeItem, getCheckoutUrl, syncCart, subtotal: getSubtotal, totalItems: getTotalItems } = useCartStore();
+  const { items, isLoading, isSyncing, cartOpen, setCartOpen, updateQuantity, removeItem, getCheckoutUrl, subtotal: getSubtotal, multibuySavings: getSavings, discountedSubtotal: getDiscounted, totalItems: getTotalItems } = useCartStore();
   const subtotal = getSubtotal();
+  const savings = getSavings();
+  const discounted = getDiscounted();
   const totalItems = getTotalItems();
-  const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
-  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
+  const progress = Math.min((discounted / FREE_SHIPPING_THRESHOLD) * 100, 100);
+  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - discounted, 0);
 
   const handleCheckout = () => {
     const checkoutUrl = getCheckoutUrl();
