@@ -19,14 +19,15 @@ const footerLinks = [
       { label: "Articles", href: "/blog" },
       { label: "Ingredient Insights (PDF)", href: "/ingredient-insights" },
       { label: "Ingredient Science", href: "/blog?category=ingredient-science" },
+      { label: "Training Science", href: "/training-science" },
       { label: "Protocol Guides", href: "/blog?category=protocol-guides" },
-      { label: "Mechanisms", href: "/blog?category=mechanisms" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Founders", href: "/founders" },
       { label: "Contact", href: "/contact" },
     ],
   },
