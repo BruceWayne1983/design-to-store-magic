@@ -62,24 +62,46 @@ const Index = () => (
       align="right"
       accent="#F59E0B"
     />
-    <PromoBanner
-      label="Premium Performance"
-      headline="The Most Loaded Pre-Workouts on the Market"
-      cta="Shop Pre-Workouts"
-      link="/category/performance"
-      align="center"
+    <CinematicBand
+      label="Fusion Lite+"
+      headline="Dual-Phase Pre-Workout Without the Crash"
+      desc="200mg EnXtra® + 150mg Infinergy® for sustained, smooth focus and output."
+      cta="Shop Fusion Lite+"
+      link="/product/fusion-lite-plus"
+      image={productFusion}
+      align="right"
+      accent="#3B82F6"
     />
     <ScienceSection />
+    <CinematicBand
+      label="VASCUL8™"
+      headline="Engineered Pump & Vascular Performance"
+      desc="100mg Pycnogenol® and 1,500mg Betaine for measurable blood flow and fullness."
+      cta="Shop VASCUL8"
+      link="/product/vascul8"
+      image={productVascul8}
+      accent="#3B82F6"
+    />
     <CompleteProtocols />
     <CoachTeaser />
     <CinematicBand
-      label="Hydration Line"
+      label="Electro Flow"
       headline="Performance-Grade Electrolytes"
       desc="Full-spectrum mineral matrix at real clinical doses. Built for hard training in any climate."
-      cta="Shop Hydration"
-      link="/shop"
-      image={categoryHealth}
+      cta="Shop Electro Flow"
+      link="/product/electro-flow"
+      image={productElectroFlow}
       accent="#10B981"
+    />
+    <CinematicBand
+      label="GlycoShift™"
+      headline="Master Your Glucose Response"
+      desc="Zero-bloat gastric clearance with precision electrolyte and glucose management."
+      cta="Shop GlycoShift"
+      link="/product/glycoshift"
+      image={productGlycoshift}
+      align="right"
+      accent="#F59E0B"
     />
     <Education />
     <HowItWorks />
