@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { FileText, Check, Download, FlaskConical, Mail, MessageCircleQuestion } from "lucide-react";
+import { Link } from "react-router-dom";
+import { FileText, Check, Download, FlaskConical, Mail, MessageCircleQuestion, ArrowRight } from "lucide-react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
+import RequestArticleForm from "@/components/forms/RequestArticleForm";
 import { supabase } from "@/integrations/supabase/client";
 import { createIngredientPdf } from "@/lib/ingredientPdf";
 import { downloadPdfFile } from "@/lib/deckPdf";
