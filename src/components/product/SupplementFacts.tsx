@@ -38,7 +38,7 @@ const SupplementFacts = ({ product }: { product: ProductData }) => (
                 <div className="min-w-0"><span className="font-semibold text-foreground text-sm">{r.ingredient}</span>{r.spec && <span className="text-muted-foreground text-xs ml-1">{r.spec}</span>}</div>
                 <div className="flex items-baseline gap-3 flex-shrink-0">
                   <span className="text-sm font-semibold text-foreground">{r.dose}</span>
-                  <span className="text-xs text-muted-foreground w-10 text-right">{r.nrv || "†"}</span>
+                  <span className="text-xs text-muted-foreground w-10 text-right">{r.nrv || r.flag || "†"}</span>
                 </div>
               </div>
             ))}
