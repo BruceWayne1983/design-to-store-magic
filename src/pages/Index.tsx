@@ -82,6 +82,7 @@ const Index = () => (
     <ReadyToPerform />
     <Newsletter />
     <FAQ />
+    <CommunitySection />
     <Testimonials />
     <Team />
     <Footer />
