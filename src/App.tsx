@@ -6,6 +6,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useCartSync } from "@/hooks/useCartSync";
 import BackToTop from "./components/BackToTop.tsx";
+import PasswordGate from "./components/PasswordGate.tsx";
 const PreLaunch = lazy(() => import("./pages/PreLaunch.tsx"));
 import CookieConsent from "./components/CookieConsent.tsx";
 
@@ -52,10 +53,12 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/home" element={<Index />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/bundles" element={<Bundles />} />
-          <Route path="/product/:slug" element={<ProductDetail />} />
-          <Route path="/category/performance" element={<PerformanceCategory />} />
+          <Route element={<PasswordGate />}>
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/bundles" element={<Bundles />} />
+            <Route path="/product/:slug" element={<ProductDetail />} />
+            <Route path="/category/performance" element={<PerformanceCategory />} />
+          </Route>
           <Route path="/deck" element={<Deck />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsConditions />} />
