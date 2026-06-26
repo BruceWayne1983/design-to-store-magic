@@ -3,6 +3,9 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import TrustBar from "@/components/sections/TrustBar";
+import SocialProofBand from "@/components/sections/SocialProofBand";
+import TrendingBestsellers from "@/components/sections/TrendingBestsellers";
+import CinematicBand from "@/components/sections/CinematicBand";
 import FindWhatYouNeed from "@/components/sections/FindWhatYouNeed";
 import TrustedFormulas from "@/components/sections/TrustedFormulas";
 import ScienceSection from "@/components/sections/ScienceSection";
@@ -16,6 +19,9 @@ import Team from "@/components/sections/Team";
 import Education from "@/components/sections/Education";
 import PromoBanner from "@/components/sections/PromoBanner";
 import Footer from "@/components/Footer";
+import categoryPerformance from "@/assets/category-performance.jpg";
+import categoryMetabolic from "@/assets/category-metabolic.jpg";
+import categoryHealth from "@/assets/category-health.jpg";
 
 const Index = () => (
   <div className="flex flex-col items-start w-full">
@@ -26,9 +32,30 @@ const Index = () => (
     <AnnouncementBar />
     <Navbar />
     <HeroSection />
+    <SocialProofBand />
     <TrustBar />
+    <TrendingBestsellers />
+    <CinematicBand
+      label="Performance Line"
+      headline="Engineered for Maximum Output"
+      desc="Clinically dosed pre-workouts, pumps and intra-workout fuel built on patented actives."
+      cta="Shop Performance"
+      link="/category/performance"
+      image={categoryPerformance}
+      accent="#3B82F6"
+    />
     <FindWhatYouNeed />
     <TrustedFormulas />
+    <CinematicBand
+      label="Metabolic Line"
+      headline="Master Your Glucose Response"
+      desc="GlucoVantage®-driven nutrient partitioning. Real mechanisms, real doses, real results."
+      cta="Shop Metabolic"
+      link="/shop"
+      image={categoryMetabolic}
+      align="right"
+      accent="#F59E0B"
+    />
     <PromoBanner
       label="Premium Performance"
       headline="The Most Loaded Pre-Workouts on the Market"
@@ -38,11 +65,14 @@ const Index = () => (
     />
     <ScienceSection />
     <CompleteProtocols />
-    <PromoBanner
-      label="Clinical Health Line"
-      headline="Supplements That Actually Deliver Results"
-      cta="Shop Health Range"
+    <CinematicBand
+      label="Hydration Line"
+      headline="Performance-Grade Electrolytes"
+      desc="Full-spectrum mineral matrix at real clinical doses. Built for hard training in any climate."
+      cta="Shop Hydration"
       link="/shop"
+      image={categoryHealth}
+      accent="#10B981"
     />
     <Education />
     <HowItWorks />
