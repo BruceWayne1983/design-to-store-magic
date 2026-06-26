@@ -103,6 +103,13 @@ const Index = () => (
       align="right"
       accent="#F59E0B"
     />
+    <PromoBanner
+      label="Premium Performance"
+      headline="The Most Loaded Pre-Workouts on the Market"
+      cta="Shop Pre-Workouts"
+      link="/category/performance"
+      align="center"
+    />
     <Education />
     <HowItWorks />
     <ReadyToPerform />
