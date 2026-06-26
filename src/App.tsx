@@ -26,6 +26,8 @@ const ShippingReturns = lazy(() => import("./pages/ShippingReturns.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
 const KnowledgeBase = lazy(() => import("./pages/KnowledgeBase.tsx"));
 const IngredientInsights = lazy(() => import("./pages/IngredientInsights.tsx"));
+const TrainingScience = lazy(() => import("./pages/TrainingScience.tsx"));
+const Founders = lazy(() => import("./pages/Founders.tsx"));
 const AppLanding = lazy(() => import("./pages/AppLanding.tsx"));
 
 const queryClient = new QueryClient();
