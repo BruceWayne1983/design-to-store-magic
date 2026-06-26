@@ -26,7 +26,7 @@ const SupplementFacts = ({ product }: { product: ProductData }) => (
                   <tr key={r.ingredient} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
                     <td className="p-4"><span className="font-semibold text-foreground">{r.ingredient}</span>{r.spec && <span className="text-muted-foreground text-xs ml-1">{r.spec}</span>}</td>
                     <td className="p-4 text-right text-foreground">{r.dose}</td>
-                    <td className="p-4 text-right text-muted-foreground">{r.nrv || "†"}</td>
+                    <td className="p-4 text-right text-muted-foreground">{r.nrv || r.flag || "†"}</td>
                   </tr>
                 ))}
               </tbody>
