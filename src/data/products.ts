@@ -60,7 +60,9 @@ export interface SupplementRow {
   dose: string;
   purpose: string;
   flag: string;
+  nrv?: string;
 }
+
 
 export interface ClinicalMechanism {
   title: string;
@@ -111,6 +113,8 @@ export interface ProductData {
 
   // Supplement facts
   supplementRows: SupplementRow[];
+  servingLabel?: string;
+
 
   // Clinical mechanisms
   clinicalMechanisms: ClinicalMechanism[];
