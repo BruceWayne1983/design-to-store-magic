@@ -1,73 +1,39 @@
-# Plan: Content Expansion + Legal Rewrite
+## Scope
+Fix the "How the ingredients work" mechanism blocks for the first two products only: **Fusion Lite+** and **VASCUL8™**. Generate the missing category-specific images, remap the blocks, and tighten copy/stats. No changes to other products, no PDP layout changes.
 
-## 1. Request-an-Article (Ingredient Insights)
+## New images to generate (4 total)
+Saved under `src/assets/mechanisms/`:
+1. `brain-synapse-focus.jpg` — neuron + synapse firing, electric-blue accent, dark navy bg (for Fusion Lite+ focus block)
+2. `dual-phase-caffeine-curve.jpg` — energy curve diagram, two overlapping phases, navy/cyan (for Fusion Lite+ caffeine block)
+3. `cell-hydration.jpg` — muscle cell drawing water in, osmotic gradient arrows, navy/cyan (for VASCUL8 hyperhydration block)
+4. `gut-absorption.jpg` — intestinal villi / nutrient transporter uptake, navy/cyan (for VASCUL8 cumulative absorption block)
 
-- Add a `RequestArticleForm` component below the existing newsletter block on `/ingredient-insights`.
-- Fields: name, email, ingredient/topic, optional note. Zod validation (trim, max lengths, email format).
-- Submission: POST to a placeholder handler that fires a custom `window.dispatchEvent('klaviyo:article-request', detail)` and shows a success toast. Wired to drop into Klaviyo later — you supply list ID + key, we connect.
-- Link "View all articles" CTA on Ingredient Insights → `/blog?category=ingredient-science`.
+All match the existing clinical/molecular aesthetic (deep navy, electric blue, scientific diagram style).
 
-## 2. Training Science page (`/training-science`)
+## File edits — `src/data/products.ts`
 
-Same architectural pattern as Ingredient Insights so it feels native:
+### Fusion Lite+ (lines ~140–215)
+- Import 2 new images: `brain-synapse-focus`, `dual-phase-caffeine-curve`.
+- `mechanisms` block 01 (Focus): swap image to `brainSynapseFocus`. Replace weak stat "0 crash risk" with a dose-based stat (e.g. `300mg` Alpha-GPC or `200mg` L-Theanine).
+- `mechanisms` block 02 (Caffeine): swap image to `dualPhaseCaffeineCurve`.
+- `mechanisms` block 03 (Dopamine): swap image away from AMPK to `brainSynapseFocus` (reused) OR keep NO image — pick `brainSynapseFocus` for dopaminergic relevance.
+- Normalise subtitle separators to `·` across all 3 blocks.
+- Mirror image swaps in `clinicalMechanisms` if it reuses the same wrong assets.
 
-- **Hero band** — Bebas headline, navy gradient, sub-line on evidence-based training.
-- **Category filter rail** — Programming, Periodisation, Nutrient Timing, Recovery, Hydration Strategy.
-- **Article grid** — pulls from `src/data/articles.ts` filtered by `category: 'training-science'` (seed with 6 placeholder posts you can replace).
-- **Protocol Guides block** — 3 long-form guide cards (Programming, Periodisation, Nutrient Timing) linking to `/blog/[slug]` stubs.
-- **Featured Coaches section** — 3-up coach cards (photo, name, credentials, link to their articles). Placeholder data in `src/data/coaches.ts`.
-- **Newsletter signup + Request-an-Article** — reuse the components from Ingredient Insights.
-- **"View all training articles" CTA** → `/blog?category=training-science`.
-- Add nav entry under the Health/Performance mega menu and footer.
+### VASCUL8 (lines 261–278)
+- Import 2 new images: `cellHydration`, `gutAbsorption`.
+- `mechanisms` block 01 (Vasodilation): keep `mechanismNitricOxide`. Replace stat "2× NO pathways activated" with `100mg` Pycnogenol® clinical dose.
+- `mechanisms` block 02 (Hyperhydration): swap `mechanismGlut4Pathway` → `cellHydration`. Replace one HydroPrime stat with `1,500mg Betaine` dose.
+- `mechanisms` block 03 (Cumulative Absorption): swap `mechanismAmpkPathway` → `gutAbsorption`.
+- `clinicalMechanisms` block 02: swap `mechanismGlut4Pathway` → `cellHydration` (matches mechanisms block).
+- Line 250 howStep 3 copy: drop vague "MAX Catalyst™ adds bioavailability support" tail.
+- Line 235 benefit: change "Effects compound over consecutive days via AstraGin®" → "Effects compound over weeks of daily use via AstraGin®".
 
-## 3. Founders page (`/founders`)
+## Out of scope
+- Pricing TBC fields (separate task).
+- Other 5 products (GLYCOSHIFT, GLYCO8, Electro Flow, etc.).
+- PDP layout, V2 toggle, or any component changes.
 
-- New top-level route. Layout shell matches About:
-  - Hero with founder portrait slot + brand mission line.
-  - "Our Story" rich-text block (placeholder until you supply copy).
-  - Founder profile cards (name, role, bio, portrait, optional LinkedIn).
-  - "Why Baseline" pillars (3-up, reuses TrustBar styling).
-  - CTA band → Shop / About.
-- Linked from: main nav (under About), `/about` body, and Footer "Company" column.
-- All copy left as clearly-marked `{{PLACEHOLDER}}` blocks until you send the content.
-
-## 4. Terms & Conditions rewrite — `/terms`
-
-Rewrite to UK e-commerce best practice. Sections:
-
-1. Definitions & company info (placeholder for registered address, company no., VAT no. — you supply)
-2. Acceptance of terms
-3. Eligibility (18+, supplements disclaimer)
-4. Products, descriptions, pricing (GBP, VAT-inclusive, right to correct errors)
-5. Orders & contract formation (offer/acceptance per Consumer Contracts Regs 2013)
-6. Payment & security
-7. Delivery (UK + international, risk transfer on delivery)
-8. **Right to cancel** — 14-day cooling-off under Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013, with the sealed-goods/hygiene exemption for opened supplements
-9. Returns, refunds, faulty goods — Consumer Rights Act 2015 (satisfactory quality, fit for purpose, as described)
-10. Subscriptions (cancellation, billing cycle, price changes)
-11. Promotional codes & discounts
-12. Health disclaimer & intended use (not medical advice, consult GP)
-13. Intellectual property
-14. Acceptable use / accounts
-15. Liability (cap, statutory rights preserved, no exclusion for death/personal injury)
-16. Privacy & data → links `/privacy`
-17. Force majeure
-18. Governing law & jurisdiction — England & Wales
-19. Complaints & ADR contact
-20. Changes to terms + last-updated date
-
-Placeholders flagged in-page for: registered address, company number, VAT number, complaints email, ADR provider. You send → we drop in.
-
-## Technical notes
-
-- New routes registered in `src/App.tsx`: `/training-science`, `/founders`. T&Cs edits `src/pages/Terms.tsx`.
-- New components: `src/components/forms/RequestArticleForm.tsx`, `src/components/sections/CoachGrid.tsx`, `src/components/sections/ProtocolGuides.tsx`.
-- New data files: `src/data/coaches.ts`, extend `src/data/articles.ts` with `training-science` category + seed posts.
-- Sitemap.xml + nav/mega-menu + Footer updated to include the three new routes.
-- Zod schemas for the request form; no backend table created (Klaviyo-only as requested).
-
-## Out of scope (this round)
-
-- Klaviyo API wiring (waiting on list IDs/keys).
-- Real founder/coach copy and portraits.
-- Legal sign-off — output is a strong UK-standard draft, not solicitor-reviewed.
+## Verification
+- Visual check on `/product/fusion-lite-plus` and `/product/vascul8` mechanism section.
+- Confirm `clinicalMechanisms` strip still aligns with new images.
