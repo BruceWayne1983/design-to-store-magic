@@ -33,6 +33,8 @@ const ProductHero = ({
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("onetime");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
+  const [frequency, setFrequency] = useState<(typeof FREQUENCIES)[number]>("4 weeks");
+  const [benefitsOpen, setBenefitsOpen] = useState(false);
   const { addItem, isLoading, setCartOpen } = useCartStore();
 
   const [internalSize, setInternalSize] = useState(product.sizes?.[0]?.name ?? "");
