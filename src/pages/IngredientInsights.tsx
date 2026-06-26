@@ -212,6 +212,14 @@ const IngredientInsights = () => {
           <p className="text-xs text-muted-foreground max-w-[720px]">
             Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle. Not intended to diagnose, treat, cure, or prevent any disease.
           </p>
+          <div className="flex justify-center pt-2">
+            <Link
+              to="/blog?category=ingredient-science"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded text-sm font-bold uppercase tracking-wider text-foreground hover:border-primary hover:text-primary transition-colors"
+            >
+              View all ingredient articles <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
