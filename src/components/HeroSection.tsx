@@ -8,6 +8,7 @@ import productFusion from "@/assets/products/fusion-lite-plus.jpg";
 import productVascul8 from "@/assets/products/vascul8.jpg";
 import productElectroFlow from "@/assets/products/electro-flow.jpg";
 import productGlycoshift from "@/assets/products/glycoshift.jpg";
+import heroAiCoach from "@/assets/hero-ai-coach.jpg";
 
 const SLIDE_INTERVAL_MS = 6000;
 
@@ -68,7 +69,16 @@ const slides = [
     cta1: { text: "Shop GlycoShift", link: "/product/glycoshift" },
     cta2: { text: "Shop Metabolic", link: "/shop" },
   },
+  {
+    bg: heroAiCoach,
+    tagline: "Baseline AI Coach",
+    headline: "Your 24/7\nPerformance Coach",
+    desc: "AI-powered bodybuilding coaching trained on real protocols. Programming, nutrition and stack guidance — on demand.",
+    cta1: { text: "Try AI Coach", link: "/coach" },
+    cta2: { text: "Learn More", link: "/coach" },
+  },
 ];
+
 
 
 const HeroSection = () => {
