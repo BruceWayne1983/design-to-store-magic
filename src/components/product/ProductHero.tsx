@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
 import { useCartStore } from "@/stores/cartStore";
 import { VARIANT_MAP, SELLING_PLAN_MAP, SUBSCRIPTION_DISCOUNT } from "@/lib/shopify";
 import type { ProductData } from "@/data/products";
+import SubscribeBenefitsModal from "./SubscribeBenefitsModal";
+
+const FREQUENCIES = ["3 weeks", "4 weeks", "6 weeks"] as const;
 
 const gbp = (n: number) => `£${n.toFixed(2)}`;
 
@@ -30,6 +33,8 @@ const ProductHero = ({
   const [purchaseType, setPurchaseType] = useState<"subscribe" | "onetime">("onetime");
   const [suggestedUseOpen, setSuggestedUseOpen] = useState(false);
   const [suppFactsOpen, setSuppFactsOpen] = useState(false);
+  const [frequency, setFrequency] = useState<(typeof FREQUENCIES)[number]>("4 weeks");
+  const [benefitsOpen, setBenefitsOpen] = useState(false);
   const { addItem, isLoading, setCartOpen } = useCartStore();
 
   const [internalSize, setInternalSize] = useState(product.sizes?.[0]?.name ?? "");
@@ -212,27 +217,59 @@ const ProductHero = ({
 
               {/* Purchase options */}
               <div className="border border-border rounded-lg overflow-hidden">
-                <label className={`flex items-center justify-between gap-2 cursor-pointer p-4 transition-colors ${!isSubscribe ? "bg-secondary" : ""}`}>
+                <label className={`flex items-start gap-3 cursor-pointer p-4 transition-colors ${isSubscribe ? "bg-secondary" : ""}`}>
+                  <input type="radio" name="purchase" checked={isSubscribe} onChange={() => setPurchaseType("subscribe")} className="accent-primary mt-1" />
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <span className="text-sm font-semibold text-foreground">Subscribe &amp; save</span>
+                      <span className="text-[10px] font-bold text-primary-foreground bg-primary px-2 py-0.5 rounded-full uppercase tracking-wider">Save {Math.round(SUBSCRIPTION_DISCOUNT * 100)}%</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="text-sm text-muted-foreground line-through">{currentPrice}</span>
+                      <span className="text-sm font-bold text-foreground">{gbp(subscribePrice)}</span>
+                    </div>
+                    {isSubscribe && (
+                      <>
+                        <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground">
+                          <li className="flex items-start gap-2"><Check className="w-3.5 h-3.5 mt-0.5 text-primary flex-shrink-0" /><span>Save <strong className="text-foreground">up to {Math.round(SUBSCRIPTION_DISCOUNT * 100)}%</strong> with a subscription.</span></li>
+                          <li className="flex items-start gap-2"><Check className="w-3.5 h-3.5 mt-0.5 text-primary flex-shrink-0" /><span><strong className="text-foreground">Never run out.</strong> Delivered automatically.</span></li>
+                          <li className="flex items-start gap-2"><Check className="w-3.5 h-3.5 mt-0.5 text-primary flex-shrink-0" /><span>No commitment. <strong className="text-foreground">Cancel anytime.</strong></span></li>
+                        </ul>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.preventDefault(); setBenefitsOpen(true); }}
+                          className="mt-2 text-xs font-semibold text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+                        >
+                          Learn more
+                        </button>
+                        <div className="grid grid-cols-3 gap-2 mt-3">
+                          {FREQUENCIES.map((f) => (
+                            <button
+                              key={f}
+                              type="button"
+                              onClick={(e) => { e.preventDefault(); setFrequency(f); }}
+                              className={`py-2 px-1 text-xs font-semibold rounded border transition-colors ${frequency === f ? "bg-foreground text-background border-foreground" : "bg-background text-foreground border-border hover:border-foreground"}`}
+                            >
+                              <div>{f}</div>
+                              <div className="text-[10px] font-normal opacity-80">Save {Math.round(SUBSCRIPTION_DISCOUNT * 100)}%</div>
+                            </button>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </label>
+                <label className={`flex items-center justify-between gap-2 cursor-pointer p-4 border-t border-border transition-colors ${!isSubscribe ? "bg-secondary" : ""}`}>
                   <span className="flex items-center gap-2">
                     <input type="radio" name="purchase" checked={!isSubscribe} onChange={() => setPurchaseType("onetime")} className="accent-primary" />
-                    <span className="text-sm font-semibold text-foreground">One-time purchase</span>
+                    <span className="text-sm font-semibold text-foreground">One-time</span>
                   </span>
                   <span className="text-sm font-semibold text-foreground">{currentPrice}</span>
                 </label>
-                <label className={`flex items-center justify-between gap-2 cursor-pointer p-4 border-t border-border transition-colors ${isSubscribe ? "bg-secondary" : ""}`}>
-                  <span className="flex items-center gap-2">
-                    <input type="radio" name="purchase" checked={isSubscribe} onChange={() => setPurchaseType("subscribe")} className="accent-primary" />
-                    <span className="text-sm font-semibold text-foreground">Subscribe &amp; Save</span>
-                    <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Save {Math.round(SUBSCRIPTION_DISCOUNT * 100)}%</span>
-                  </span>
-                  <span className="text-sm font-semibold text-foreground">{gbp(subscribePrice)}</span>
-                </label>
-                {isSubscribe && (
-                  <p className="text-xs text-muted-foreground px-4 pb-4">
-                    Delivered automatically on your schedule. Skip, pause, or cancel anytime.
-                  </p>
-                )}
               </div>
+
+              <SubscribeBenefitsModal open={benefitsOpen} onClose={() => setBenefitsOpen(false)} />
+
 
               <motion.button
                 ref={buyButtonRef as React.Ref<HTMLButtonElement>}
