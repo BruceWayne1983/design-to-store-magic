@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { ScrollReveal } from "@/components/ui/scroll-animations";
 import { useCartStore } from "@/stores/cartStore";
 import { VARIANT_MAP, SELLING_PLAN_MAP, SUBSCRIPTION_DISCOUNT } from "@/lib/shopify";
 import type { ProductData } from "@/data/products";
+import SubscribeBenefitsModal from "./SubscribeBenefitsModal";
+
+const FREQUENCIES = ["3 weeks", "4 weeks", "6 weeks"] as const;
 
 const gbp = (n: number) => `£${n.toFixed(2)}`;
 
