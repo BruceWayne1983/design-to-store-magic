@@ -8,6 +8,7 @@ import {
   removeLineFromShopifyCart,
   fetchCartStatus,
 } from '@/lib/shopify';
+import { discountForQty, lineSavings } from '@/lib/multibuy';
 
 const CART_ERROR_MESSAGE = "We couldn't update your basket. Please try again.";
 
