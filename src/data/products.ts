@@ -18,7 +18,8 @@ import hydroprimeLogo from "@/assets/ingredients/hydroprime.png";
 import oxystormLogo from "@/assets/ingredients/oxystorm.png";
 import electroprimeLogo from "@/assets/ingredients/electroprime.png";
 import aquaminLogo from "@/assets/ingredients/aquamin.png";
-import maxCatalystLogo from "@/assets/ingredients/max-catalyst.png";
+import maxCatalystLogo from "@/assets/ingredients/max-catalyst.webp";
+import glucovantageLogo from "@/assets/ingredients/glucovantage.png";
 
 // Mechanism images
 import mechanismAmpkPathway from "@/assets/mechanism-ampk-pathway.jpg";
