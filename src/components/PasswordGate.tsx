@@ -77,7 +77,7 @@ const PasswordGate = () => {
 
           {/* Heading */}
           <div className="flex flex-col items-center gap-3 text-center">
-            <h1 className="font-display text-4xl md:text-5xl uppercase tracking-[0.02em] text-white leading-[0.95]">
+            <h1 className="font-black text-4xl md:text-5xl uppercase tracking-tight text-white leading-[0.95]">
               Invite-only<br />access
             </h1>
             <p className="text-sm text-white/55 max-w-[320px] leading-relaxed">
