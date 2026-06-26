@@ -30,6 +30,10 @@ import mechanismAtpEnergy from "@/assets/mechanism-atp-energy.jpg";
 import mechanismGlycogenReplenish from "@/assets/mechanism-glycogen-replenish.jpg";
 import mechanismAmpk from "@/assets/mechanism-ampk.jpg";
 import mechanismGlut4 from "@/assets/mechanism-glut4.jpg";
+import mechanismBrainSynapse from "@/assets/mechanism-brain-synapse.jpg";
+import mechanismCaffeineCurve from "@/assets/mechanism-caffeine-curve.jpg";
+import mechanismCellHydration from "@/assets/mechanism-cell-hydration.jpg";
+import mechanismGutAbsorption from "@/assets/mechanism-gut-absorption.jpg";
 
 export interface ProductMechanism {
   step: string;
@@ -180,9 +184,9 @@ export const products: Record<string, ProductData> = {
       { title: "MAX Catalyst™", dosage: "5mg", desc: "Proprietary absorption amplifier. TM: Protein Partners.", hasImage: false },
     ],
     mechanisms: [
-      { step: "01", image: mechanismAtpEnergy, title: "Nootropic Focus Activation", subtitle: "EnXtra® · NeuroPEA™ · Zynamite®", desc: "Three trademarked nootropics work synergistically — EnXtra® amplifies alertness for 5 hours, NeuroPEA™ elevates mood rapidly, and Zynamite® enhances brain energy metabolism.", stats: [{ value: "5 hrs", label: "Sustained alertness" }, { value: "3", label: "Trademarked nootropics" }] },
-      { step: "02", image: mechanismNitricOxide, title: "Dual-Phase Energy System", subtitle: "Caffeine Anhydrous · Infinergy®", desc: "Caffeine Anhydrous delivers immediate onset while Infinergy® provides a buffered, sustained tail. Total ~310–315mg caffeine with no crash.", stats: [{ value: "310mg", label: "Total caffeine" }, { value: "0", label: "Crash risk" }] },
-      { step: "03", image: mechanismAmpkPathway, title: "Dopamine & Performance Support", subtitle: "L-Tyrosine · MAX Catalyst™", desc: "L-Tyrosine at 1,500mg replenishes dopamine under stimulant load and stress. MAX Catalyst™ amplifies absorption of all active compounds.", stats: [{ value: "1,500mg", label: "L-Tyrosine dose" }, { value: "5mg", label: "MAX Catalyst™" }] },
+      { step: "01", image: mechanismBrainSynapse, title: "Nootropic Focus Activation", subtitle: "EnXtra® · NeuroPEA™ · Zynamite®", desc: "Three trademarked nootropics work synergistically — EnXtra® amplifies alertness for 5 hours, NeuroPEA™ elevates mood rapidly, and Zynamite® enhances brain energy metabolism.", stats: [{ value: "5 hrs", label: "Sustained alertness" }, { value: "200mg", label: "EnXtra® clinical dose" }] },
+      { step: "02", image: mechanismCaffeineCurve, title: "Dual-Phase Energy System", subtitle: "Caffeine Anhydrous · Infinergy®", desc: "Caffeine Anhydrous delivers immediate onset while Infinergy® provides a buffered, sustained tail. Total ~310–315mg caffeine with no crash.", stats: [{ value: "310mg", label: "Total caffeine" }, { value: "150mg", label: "Infinergy® buffered" }] },
+      { step: "03", image: mechanismBrainSynapse, title: "Dopamine & Performance Support", subtitle: "L-Tyrosine · MAX Catalyst™", desc: "L-Tyrosine at 1,500mg replenishes dopamine under stimulant load and stress. MAX Catalyst™ amplifies absorption of all active compounds.", stats: [{ value: "1,500mg", label: "L-Tyrosine dose" }, { value: "5mg", label: "MAX Catalyst™" }] },
     ],
     supplementRows: [
       { ingredient: "Caffeine Anhydrous", spec: "", dose: "200 mg", purpose: "Immediate Energy & Alertness", flag: "" },
@@ -194,8 +198,8 @@ export const products: Record<string, ProductData> = {
       { ingredient: "MAX Catalyst™", spec: "", dose: "5 mg", purpose: "Proprietary Absorption Amplifier", flag: "MAX Catalyst™" },
     ],
     clinicalMechanisms: [
-      { title: "Triple Nootropic Stack", subtitle: "EnXtra® + NeuroPEA™ + Zynamite®", image: mechanismAtpEnergy, badges: [{ dose: "200 MG", name: "EnXtra®" }, { dose: "250 MG", name: "NeuroPEA™" }], checks: ["5-Hour Sustained Alertness Without Jitters", "Rapid-Onset Mood Elevation & Brain Energy"] },
-      { title: "Dual-Phase Caffeine System", subtitle: "Caffeine Anhydrous + Infinergy®", image: mechanismNitricOxide, badges: [{ dose: "200 MG", name: "Caffeine Anhydrous" }, { dose: "150 MG", name: "Infinergy®" }], checks: ["Immediate Onset + Sustained Tail (~310–315mg Total)", "Zero Crash — Buffered Release via Malic Acid Bond"] },
+      { title: "Triple Nootropic Stack", subtitle: "EnXtra® + NeuroPEA™ + Zynamite®", image: mechanismBrainSynapse, badges: [{ dose: "200 MG", name: "EnXtra®" }, { dose: "250 MG", name: "NeuroPEA™" }], checks: ["5-Hour Sustained Alertness Without Jitters", "Rapid-Onset Mood Elevation & Brain Energy"] },
+      { title: "Dual-Phase Caffeine System", subtitle: "Caffeine Anhydrous + Infinergy®", image: mechanismCaffeineCurve, badges: [{ dose: "200 MG", name: "Caffeine Anhydrous" }, { dose: "150 MG", name: "Infinergy®" }], checks: ["Immediate Onset + Sustained Tail (~310–315mg Total)", "Zero Crash — Buffered Release via Malic Acid Bond"] },
     ],
     testimonials: [
       { name: "Jake M.", role: "Gym Enthusiast", quote: "Fusion Lite+ gives me laser focus and the energy lasts my entire session. No crash, no jitters — just clean performance." },
@@ -232,7 +236,7 @@ export const products: Record<string, ProductData> = {
       "6g L-Citrulline — full clinical vasodilation dose",
       "HydroPrime® glycerol for hyperhydration and skin-splitting pumps",
       "Stimulant-free — stack with any stim or use for evening sessions",
-      "Effects compound over consecutive days via AstraGin®",
+      "Effects compound over weeks of daily use via AstraGin®",
     ],
     images: [vascul8Hero, vascul8Hero, vascul8Hero, vascul8Hero],
     suggestedUse: "Mix 1 scoop (12g) with 400–500ml cold water. 20–30 minutes before exercise. Can be stacked with Fusion Lite+.",
@@ -247,7 +251,7 @@ export const products: Record<string, ProductData> = {
     howSteps: [
       { tagline: "Step 1 — Vasodilate", title: "Nitric oxide production", desc: "L-Citrulline (6,000mg) drives nitric oxide production. Pycnogenol® (100mg) enhances NO via endothelial NOS — a complementary pathway." },
       { tagline: "Step 2 — Hyperhydrate", title: "Cellular water & power", desc: "HydroPrime® (2,500mg, 65% glycerol) pulls water into muscle cells. Betaine Anhydrous (1,500mg) supports cellular hydration and power output." },
-      { tagline: "Step 3 — Sustain & Amplify", title: "Compounding absorption", desc: "CellFlo6™ (300mg) supports endothelial function over time. AstraGin® (50mg) enhances absorption — amino acid uptake increases up to 14% after 4 weeks. MAX Catalyst™ adds bioavailability support." },
+      { tagline: "Step 3 — Sustain & Amplify", title: "Compounding absorption", desc: "CellFlo6™ (300mg) supports endothelial function over time. AstraGin® (50mg) enhances absorption — amino acid uptake increases up to 14% after 4 weeks of daily use." },
     ],
     ingredients: [
       { title: "L-Citrulline", tagline: "Key ingredient", dosage: "6,000mg", desc: "Pure citrulline, not malate. Full clinical vasodilation dose. Converts to L-Arginine in the kidneys, providing the essential substrate for nitric oxide synthase.", hasImage: false },
@@ -259,9 +263,9 @@ export const products: Record<string, ProductData> = {
       { title: "MAX Catalyst™", dosage: "4mg", desc: "Proprietary absorption amplifier. TM: Protein Partners.", hasImage: false },
     ],
     mechanisms: [
-      { step: "01", image: mechanismNitricOxide, title: "Vasodilation", subtitle: "L-Citrulline · Pycnogenol®", desc: "L-Citrulline drives NO production while Pycnogenol® activates eNOS via a complementary pathway for dual-source vasodilation.", stats: [{ value: "6,000mg", label: "Pure L-Citrulline dose" }, { value: "2×", label: "NO pathways activated" }] },
-      { step: "02", image: mechanismGlut4Pathway, title: "Hyperhydration", subtitle: "HydroPrime® · Betaine", desc: "HydroPrime® 65% glycerol pulls water into muscle cells. Betaine supports cellular hydration and power output.", stats: [{ value: "65%", label: "Glycerol yield" }, { value: "2,500mg", label: "HydroPrime® dose" }] },
-      { step: "03", image: mechanismAmpkPathway, title: "Cumulative Absorption", subtitle: "AstraGin® · CellFlo6™ · MAX Catalyst™", desc: "AstraGin® enhances amino acid absorption up to 14% after 4 weeks. CellFlo6™ supports endothelial function over time.", stats: [{ value: "+14%", label: "Amino acid uptake at 4 weeks" }, { value: "300mg", label: "CellFlo6™ dose" }] },
+      { step: "01", image: mechanismNitricOxide, title: "Vasodilation", subtitle: "L-Citrulline · Pycnogenol®", desc: "L-Citrulline drives NO production while Pycnogenol® activates eNOS via a complementary pathway for dual-source vasodilation.", stats: [{ value: "6,000mg", label: "Pure L-Citrulline dose" }, { value: "100mg", label: "Pycnogenol® clinical dose" }] },
+      { step: "02", image: mechanismCellHydration, title: "Hyperhydration", subtitle: "HydroPrime® · Betaine", desc: "HydroPrime® 65% glycerol pulls water into muscle cells. Betaine supports cellular hydration and power output.", stats: [{ value: "2,500mg", label: "HydroPrime® dose" }, { value: "1,500mg", label: "Betaine Anhydrous" }] },
+      { step: "03", image: mechanismGutAbsorption, title: "Cumulative Absorption", subtitle: "AstraGin® · CellFlo6™ · MAX Catalyst™", desc: "AstraGin® enhances amino acid absorption up to 14% after 4 weeks. CellFlo6™ supports endothelial function over time.", stats: [{ value: "+14%", label: "Amino acid uptake at 4 weeks" }, { value: "300mg", label: "CellFlo6™ dose" }] },
     ],
     supplementRows: [
       { ingredient: "L-Citrulline", spec: "(Pure)", dose: "6,000 mg", purpose: "Vasodilation & NO Production", flag: "" },
@@ -274,7 +278,7 @@ export const products: Record<string, ProductData> = {
     ],
     clinicalMechanisms: [
       { title: "Dual-Pathway Vasodilation", subtitle: "L-Citrulline + Pycnogenol®", image: mechanismNitricOxide, badges: [{ dose: "6,000 MG", name: "L-Citrulline" }, { dose: "100 MG", name: "Pycnogenol®" }], checks: ["Full Clinical Vasodilation Dose — Pure, Not Malate", "Complementary eNOS Activation Pathway"] },
-      { title: "Hyperhydration System", subtitle: "HydroPrime® + Betaine Anhydrous", image: mechanismGlut4Pathway, badges: [{ dose: "2,500 MG", name: "HydroPrime®" }, { dose: "1,500 MG", name: "Betaine" }], checks: ["65% Glycerol Yield — Highest Purity Available", "Cellular Hydration & Power Output Support"] },
+      { title: "Hyperhydration System", subtitle: "HydroPrime® + Betaine Anhydrous", image: mechanismCellHydration, badges: [{ dose: "2,500 MG", name: "HydroPrime®" }, { dose: "1,500 MG", name: "Betaine" }], checks: ["65% Glycerol Yield — Highest Purity Available", "Cellular Hydration & Power Output Support"] },
     ],
     testimonials: [
       { name: "Ryan C.", role: "Classic Physique", quote: "The pumps from VASCUL8 are unmatched — skin-splitting fullness that lasts hours after training." },
