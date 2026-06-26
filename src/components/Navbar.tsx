@@ -180,6 +180,7 @@ const Navbar = () => {
                     <Link to="/shop" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Shop All</Link>
                     <Link to="/shop" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Best Sellers</Link>
                     <Link to="/shop" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">New Arrivals</Link>
+                    <Link to="/community" onClick={() => setMegaOpen(false)} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Community</Link>
                   </div>
                 </div>
               </div>

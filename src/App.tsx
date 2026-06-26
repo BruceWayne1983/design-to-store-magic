@@ -33,6 +33,7 @@ const SupplementFeedback = lazy(() => import("./pages/SupplementFeedback.tsx"));
 const Insights = lazy(() => import("./pages/Insights.tsx"));
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Coach = lazy(() => import("./pages/Coach.tsx"));
+const Community = lazy(() => import("./pages/Community.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,7 @@ function AppContent() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/coach" element={<Coach />} />
           <Route path="/coach/:threadId" element={<Coach />} />
+          <Route path="/community" element={<Community />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

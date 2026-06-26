@@ -29,6 +29,7 @@ const footerLinks = [
       { label: "About", href: "/about" },
       { label: "Founders", href: "/founders" },
       { label: "Shape Our Next Launch", href: "/supplement-feedback" },
+      { label: "Community", href: "/community" },
       { label: "Contact", href: "/contact" },
     ],
   },

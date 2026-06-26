@@ -19,7 +19,7 @@ import Team from "@/components/sections/Team";
 import Education from "@/components/sections/Education";
 import PromoBanner from "@/components/sections/PromoBanner";
 import CoachTeaser from "@/components/sections/CoachTeaser";
-import CommunitySection from "@/components/sections/CommunitySection";
+
 import Footer from "@/components/Footer";
 import categoryPerformance from "@/assets/category-performance.jpg";
 import categoryMetabolic from "@/assets/category-metabolic.jpg";
@@ -115,7 +115,7 @@ const Index = () => (
     <ReadyToPerform />
     <Newsletter />
     <FAQ />
-    <CommunitySection />
+    
     <Testimonials />
     <Team />
     <Footer />
