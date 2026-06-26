@@ -1,10 +1,13 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductHero from "@/components/product/ProductHero";
+import ProductHeroV2 from "@/components/product/ProductHeroV2";
+import TrustStrip from "@/components/product/TrustStrip";
+import ExpectationsTimeline from "@/components/product/ExpectationsTimeline";
 import ProductJsonLd from "@/components/product/ProductJsonLd";
 import WhyDifferent from "@/components/product/WhyDifferent";
 import HowItWorks from "@/components/product/HowItWorks";
@@ -24,8 +27,24 @@ const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const product = getProduct(slug || "");
   const buyButtonRef = useRef<HTMLButtonElement>(null);
+  const showToggle = slug === "electro-flow";
+  const [useV2, setUseV2] = useState(true);
+
+  useEffect(() => {
+    if (!showToggle) return;
+    const stored = localStorage.getItem("pdp-layout");
+    if (stored === "legacy") setUseV2(false);
+  }, [showToggle]);
+
+  const toggleLayout = () => {
+    const next = !useV2;
+    setUseV2(next);
+    localStorage.setItem("pdp-layout", next ? "v2" : "legacy");
+  };
 
   if (!product) return <Navigate to="/shop" replace />;
+
+  const Hero = showToggle && useV2 ? ProductHeroV2 : ProductHero;
 
   return (
     <div className="flex flex-col items-start w-full">
@@ -36,9 +55,32 @@ const ProductDetail = () => {
       <ProductJsonLd product={product} />
       <AnnouncementBar />
       <Navbar />
-      <ProductHero product={product} buyButtonRef={buyButtonRef} />
+
+      {showToggle && (
+        <div className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-1">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground bg-background/90 px-2 py-0.5 rounded">
+            PDP Preview
+          </span>
+          <button
+            onClick={toggleLayout}
+            className="bg-foreground text-background px-4 py-2.5 rounded-full font-bold text-xs uppercase tracking-[0.15em] shadow-lg hover:opacity-90 transition-opacity flex items-center gap-2"
+          >
+            <span className={useV2 ? "opacity-50" : ""}>Before</span>
+            <span className="w-px h-3 bg-background/30" />
+            <span className={!useV2 ? "opacity-50" : ""}>After</span>
+          </button>
+        </div>
+      )}
+
+      <Hero product={product} buyButtonRef={buyButtonRef} />
+
+      {showToggle && useV2 && <TrustStrip product={product} />}
+
       <WhyDifferent product={product} />
       <HowItWorks product={product} />
+
+      {showToggle && useV2 && <ExpectationsTimeline product={product} />}
+
       <IngredientBreakdown product={product} />
       <IngredientMechanisms product={product} />
       <SupplementFacts product={product} />

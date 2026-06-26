@@ -121,6 +121,12 @@ export interface ProductData {
   // Trademarked ingredient logos (optional)
   ingredientLogos?: { image: string; name: string; caption?: string; forIngredient?: string }[];
 
+  // V2 PDP optional fields
+  shortDescription?: string;
+  outcomeBullets?: string[];
+  flavours?: { name: string; image?: string; available?: boolean }[];
+  expectations?: { window: string; headline: string; bullets: string[]; summary: string }[];
+
   // Merchandising / availability
   comingSoon?: boolean;
   badge?: "Best Seller" | "New";
@@ -442,6 +448,54 @@ export const products: Record<string, ProductData> = {
     ingredientLogos: [
       { image: electroprimeLogo, name: "ElectroPrime™", forIngredient: "Cocomineral™" },
       { image: aquaminLogo, name: "Aquamin™", forIngredient: "MAX Catalyst™" },
+    ],
+    shortDescription: "A real-dose electrolyte and trace-mineral formula built for athletes who lose serious fluid. Sodium, potassium, magnesium and calcium at meaningful doses — backed by Cocomineral™ concentrated coconut-water minerals.",
+    outcomeBullets: [
+      "Restore cellular hydration after sweat losses",
+      "Replenish all four major electrolytes at real doses",
+      "Sustain endurance and reduce mid-session fatigue",
+      "Prevent cramping during long or hot sessions",
+      "Support cognitive sharpness when dehydration sets in",
+    ],
+    flavours: [
+      { name: "Citrus", available: false },
+      { name: "Berry", available: false },
+      { name: "Tropical", available: false },
+    ],
+    expectations: [
+      {
+        window: "Within the first serve",
+        headline: "Rapid rehydration",
+        bullets: [
+          "Sodium drives fluid uptake within minutes",
+          "Noticeable reduction in thirst and dryness",
+          "Faster recovery between training sets",
+          "Restored sense of focus and alertness",
+        ],
+        summary: "The first scoop puts real electrolytes back where your body needs them.",
+      },
+      {
+        window: "Within 2–5 days",
+        headline: "Consistent baseline",
+        bullets: [
+          "Less mid-session cramping in heat or long sessions",
+          "Steadier energy through training blocks",
+          "Improved sleep as mineral balance restores",
+          "Reduced perceived exertion at the same workload",
+        ],
+        summary: "Daily use establishes a proper electrolyte baseline beyond what diet alone provides.",
+      },
+      {
+        window: "With continued use",
+        headline: "Performance carry-over",
+        bullets: [
+          "Higher sustained output in long sessions",
+          "Better thermoregulation in hot conditions",
+          "Fewer recovery days lost to dehydration",
+          "Improved tolerance to high-volume training",
+        ],
+        summary: "Compounds over training blocks — hydration stops being the limiter.",
+      },
     ],
     price: "£27.99",
     prices: { "1": "TBC", "4": "TBC", "6": "TBC" },
