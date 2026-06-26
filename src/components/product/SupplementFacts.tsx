@@ -2,7 +2,14 @@ import SectionHeader from "@/components/SectionHeader";
 import { ScrollReveal, scaleIn } from "@/components/ui/scroll-animations";
 import type { ProductData } from "@/data/products";
 
+const nrvOf = (r: { nrv?: string; flag?: string }) => {
+  if (r.nrv) return r.nrv;
+  if (r.flag && /%|nrv/i.test(r.flag)) return r.flag;
+  return "†";
+};
+
 const SupplementFacts = ({ product }: { product: ProductData }) => (
+
   <section className="w-full bg-secondary py-16 px-4 md:py-28 md:px-8 lg:px-16">
     <div className="max-w-[1000px] mx-auto flex flex-col gap-8 md:gap-12">
       <ScrollReveal><SectionHeader heading="Clinically dosed formula" /></ScrollReveal>
