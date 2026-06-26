@@ -11,6 +11,7 @@ const PILLAR_BY_SLUG: Record<string, BlogArticle["pillar"]> = {
   "protocol-guides": "Protocol Guides",
   "mechanisms": "Mechanism Deep Dives",
   "comparisons": "Comparison Content",
+  "training-science": "Training Science",
 };
 
 const Blog = () => {
