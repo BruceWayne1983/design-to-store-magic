@@ -1,29 +1,27 @@
 import { ScrollReveal } from "@/components/ui/scroll-animations";
-import { ShieldCheck, Quote } from "lucide-react";
+import { ShieldCheck, Quote, User } from "lucide-react";
 import type { ProductData } from "@/data/products";
-import expert1 from "@/assets/experts/expert-1.jpg";
-import expert2 from "@/assets/experts/expert-2.jpg";
-import expert3 from "@/assets/experts/expert-3.jpg";
+import placeholderAvatar from "@/assets/placeholder-avatar.png";
 
 const DEFAULT_EXPERTS = [
   {
     name: "Dr. James Whitaker, MBBS",
     credentials: "Sports & Exercise Medicine · 14 yrs in practice",
-    image: expert1,
+    image: placeholderAvatar,
     quote:
       "The ingredient profile and dosing align with current peer-reviewed evidence for performance and recovery support — clinical doses, recognisable branded actives, no proprietary blends.",
   },
   {
     name: "Dr. Anya Kovac, ANutr",
     credentials: "Registered Clinical Nutritionist · 11 yrs in practice",
-    image: expert2,
+    image: placeholderAvatar,
     quote:
       "Formulated with transparency. Every active is listed with its dose and source so practitioners can assess intake against established daily reference values.",
   },
   {
     name: "Mark Beresford, MSc CSCS",
     credentials: "Performance Coach · UKAD-accredited · 17 yrs",
-    image: expert3,
+    image: placeholderAvatar,
     quote:
       "I'd recommend this to athletes I work with. It matches the format and dosing strategy I use with international-level lifters and endurance clients.",
   },
