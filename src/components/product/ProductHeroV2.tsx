@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/ui/scroll-animations";
 import { useCartStore } from "@/stores/cartStore";
 import { VARIANT_MAP, SELLING_PLAN_MAP, SUBSCRIPTION_DISCOUNT } from "@/lib/shopify";
 import ProductInfoAccordion from "./ProductInfoAccordion";
+import MultibuyTiers from "./MultibuyTiers";
 import type { ProductData } from "@/data/products";
 
 const gbp = (n: number) => `£${n.toFixed(2)}`;
