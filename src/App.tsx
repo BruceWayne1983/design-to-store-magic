@@ -51,36 +51,37 @@ function AppContent() {
       {!isDeckCapture && <Sonner />}
       <Suspense fallback={<RouteFallback />}>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/home" element={<Index />} />
+          <Route path="/coming-soon" element={<PreLaunch />} />
           <Route element={<PasswordGate />}>
+            <Route path="/" element={<Index />} />
+            <Route path="/home" element={<Index />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/bundles" element={<Bundles />} />
             <Route path="/product/:slug" element={<ProductDetail />} />
             <Route path="/category/performance" element={<PerformanceCategory />} />
+            <Route path="/deck" element={<Deck />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsConditions />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogArticle />} />
+            <Route path="/shipping-returns" element={<ShippingReturns />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/knowledge-base" element={<KnowledgeBase />} />
+            <Route path="/ingredient-insights" element={<IngredientInsights />} />
+            <Route path="/training-science" element={<TrainingScience />} />
+            <Route path="/founders" element={<Founders />} />
+            <Route path="/app" element={<AppLanding />} />
+            <Route path="/supplement-feedback" element={<SupplementFeedback />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/coach" element={<Coach />} />
+            <Route path="/coach/:threadId" element={<Coach />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="/deck" element={<Deck />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsConditions />} />
-          <Route path="/cookies" element={<CookiePolicy />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogArticle />} />
-          <Route path="/shipping-returns" element={<ShippingReturns />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/knowledge-base" element={<KnowledgeBase />} />
-          <Route path="/ingredient-insights" element={<IngredientInsights />} />
-          <Route path="/training-science" element={<TrainingScience />} />
-          <Route path="/founders" element={<Founders />} />
-          <Route path="/app" element={<AppLanding />} />
-          <Route path="/supplement-feedback" element={<SupplementFeedback />} />
-          <Route path="/insights" element={<Insights />} />
-          <Route path="/coming-soon" element={<PreLaunch />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/coach" element={<Coach />} />
-          <Route path="/coach/:threadId" element={<Coach />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="*" element={<NotFound />} />
+
         </Routes>
       </Suspense>
       <BackToTop />
